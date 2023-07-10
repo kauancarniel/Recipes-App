@@ -5,7 +5,7 @@ import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Recipes from './Pages/Recipes';
 import RecipeDetails from './Pages/RecipeDetails';
-import Logins from './Pages/Logins';
+import Login from './Pages/Logins';
 import RecipeInProgress from './Pages/RecipeInProgress';
 import DoneRecipes from './Pages/DoneRecipes';
 import FavoriteRecipes from './Pages/FavoriteRecipes';
@@ -23,7 +23,7 @@ function App() {
         Glass
       </object>
       <Switch>
-        <Route exact path="/" component={ Logins } />
+        <Route exact path="/" component={ Login } />
         <Route path="/meals" component={ Recipes } />
         <Route path="/drinks" component={ Recipes } />
         <Route path="/meals/:id-da-receita" component={ RecipeDetails } />
