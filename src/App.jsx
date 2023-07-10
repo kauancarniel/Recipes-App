@@ -1,7 +1,15 @@
 import React from 'react';
 import './App.css';
+import { Route, Switch } from 'react-router-dom/cjs/react-router-dom.min';
 import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Recipes from './Pages/Recipes';
+import RecipeDetails from './Pages/RecipeDetails';
+import Logins from './Pages/Logins';
+import RecipeInProgress from './Pages/RecipeInProgress';
+import DoneRecipes from './Pages/DoneRecipes';
+import FavoriteRecipes from './Pages/FavoriteRecipes';
+import Profile from './Pages/Profile';
 
 function App() {
   return (
@@ -14,6 +22,18 @@ function App() {
       >
         Glass
       </object>
+      <Switch>
+        <Route exact path="/" component={ Logins } />
+        <Route path="/meals" component={ Recipes } />
+        <Route path="/drinks" component={ Recipes } />
+        <Route path="/meals/:id-da-receita" component={ RecipeDetails } />
+        <Route path="/drinks/:id-da-receita" component={ RecipeDetails } />
+        <Route path="/meals/:id-da-receita/in-progress" component={ RecipeInProgress } />
+        <Route path="/drinks/:id-da-receita/in-progress" component={ RecipeInProgress } />
+        <Route path="/profile" component={ Profile } />
+        <Route path="/done-recipes" component={ DoneRecipes } />
+        <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+      </Switch>
     </div>
   );
 }
