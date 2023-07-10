@@ -5,7 +5,7 @@ import rockGlass from './images/rockGlass.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Recipes from './Pages/Recipes';
 import RecipeDetails from './Pages/RecipeDetails';
-import Login from './Pages/Logins';
+import Login from './Pages/Login';
 import RecipeInProgress from './Pages/RecipeInProgress';
 import DoneRecipes from './Pages/DoneRecipes';
 import FavoriteRecipes from './Pages/FavoriteRecipes';

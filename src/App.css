@@ -66,3 +66,12 @@
     transform: rotate(-10deg);
   }
 }
+
+footer {
+  background-color: inherit;
+  bottom: 0;
+  margin-left: -40px;
+  position: fixed;
+  width: 100%;
+
+}
