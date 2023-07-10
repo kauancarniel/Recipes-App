@@ -33,7 +33,7 @@
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat , sans-serif;
-  font-size: 3em;
+  font-size: 2em;
   font-weight: 900;
 }
 
@@ -67,6 +67,10 @@
   }
 }
 
+object {
+  width: 100px;
+}
+
 footer {
   background-color: inherit;
   bottom: 0;
@@ -74,4 +78,55 @@ footer {
   position: fixed;
   width: 100%;
 
+}
+
+img {
+  width: 100px;
+}
+
+.recipes {
+  border: 2px solid red;
+  height: inherit;
+}
+
+.recipes > h1 {
+  font-size: 30px;
+}
+
+.recipes > h2 {
+  font-size: 20px;
+}
+
+.recipes > h3 {
+  font-size: 20px;
+}
+
+.recipes > ul > li {
+  font-size: 13px;
+}
+
+.instructions {
+  font-size: 12px;
+}
+
+.caroussel {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  position: absolute;
+  width: 360px;
+}
+
+
+.caroussel > img {
+  margin-right: 10px;
+}
+
+.caroussel-drinks {
+  margin-left: 100px;
+}
+
+video {
+  width: 200px;
 }
