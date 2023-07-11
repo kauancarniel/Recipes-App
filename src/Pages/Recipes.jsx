@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import 'react-toastify/dist/ReactToastify.css';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
@@ -15,8 +16,6 @@ function Recipes() {
   const { loading, error, fetchRecipes } = useFetch();
   const { location } = useHistory();
 
-  const KEY_BASE = location.pathname === '/meals' ? 'Meal' : 'Drink';
-
   useEffect(() => {
     (async () => {
       const data = await fetchRecipes(location.pathname);
@@ -24,10 +23,15 @@ function Recipes() {
     })();
   }, []);
 
+  const KEY_BASE = location.pathname === '/meals' ? 'Meal' : 'Drink';
   return (
     <>
       <Header />
-      {loading && <div>Loading...</div>}
+      {loading && (
+        <div>
+          <h2>Loading...</h2>
+        </div>
+      )}
       {error && <div>{error}</div>}
       {!loading && !error && (
         <div>
