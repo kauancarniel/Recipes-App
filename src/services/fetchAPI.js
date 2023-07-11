@@ -5,7 +5,7 @@ const keys = {
   details: ['lookup', 'i'],
 };
 
-const fetchAPI = async (pathname, optSearch = 'name', textSearch = '') => {
+const fetchAPI = async (pathname, optSearch, textSearch) => {
   const BASE_URL = pathname === '/meals'
     ? 'https://www.themealdb.com/api/json/v1/1'
     : 'https://www.thecocktaildb.com/api/json/v1/1';

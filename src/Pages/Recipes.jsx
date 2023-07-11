@@ -6,6 +6,9 @@ import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
+import RecipeCard from '../components/RecipeCard';
+
+const MAX_RECIPES = 12;
 
 function Recipes() {
   const { recipes, setRecipes } = useContext(RecipesContext);
@@ -27,7 +30,21 @@ function Recipes() {
       {loading && <div>Loading...</div>}
       {error && <div>{error}</div>}
       {!loading && !error && (
-        <div>{recipes.map((item) => item[`str${KEY_BASE}`])}</div>
+        <div>
+          {recipes.map((item, index) => {
+            if (index < MAX_RECIPES) {
+              return (
+                <RecipeCard
+                  item={ item }
+                  key={ item[`id${KEY_BASE}`] }
+                  base={ KEY_BASE }
+                  index={ index }
+                />
+              );
+            }
+            return null;
+          })}
+        </div>
       )}
       <Footer />
     </>
