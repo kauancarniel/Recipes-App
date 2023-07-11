@@ -1,20 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function RecipeContent({ recipe }) {
+  const { location } = useHistory();
+  const nameURL = location.pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
+
   const {
-    strMealThumb,
-    strDrinkThumb,
-    strMeal,
-    strDrink,
     strCategory,
     strAlcoholic,
     strInstructions,
     strYoutube,
   } = recipe;
-
-  // variavel para quantia de medidas;
-  const measure = 13;
 
   // Filtro necessário para conseguir separar a quantia de ingredientes;
   const recipeARR = Object.entries(recipe);
@@ -26,14 +23,19 @@ function RecipeContent({ recipe }) {
     <div className="recipes-content">
       <div className="details-img">
         <img
-          src={ strMealThumb || strDrinkThumb }
+          src={ recipe[`str${nameURL}Thumb`] }
           alt="recipes"
           data-testid="recipe-photo"
         />
-        <h1 data-testid="recipe-title">{strMeal || strDrink}</h1>
-        <h2 data-testid="recipe-category">{strMeal ? strCategory : strAlcoholic}</h2>
+        <h2 data-testid="recipe-title">{recipe[`str${nameURL}`]}</h2>
+        <h3 data-testid="recipe-category">
+          {
+            nameURL === 'Meal' ? strCategory : strAlcoholic
+          }
+
+        </h3>
       </div>
-      <h3>Ingredients:</h3>
+      <h4>Ingredients:</h4>
       <ul>
         {ingredients.map(([key, value], index) => (
           <li key={ key } data-testid={ `${index}-ingredient-name-and-measure` }>
@@ -41,11 +43,11 @@ function RecipeContent({ recipe }) {
             {' '}
             -
             {' '}
-            {recipe[`strMeasure${key.slice(measure)}`]}
+            {recipe[`strMeasure${index + 1}`]}
           </li>
         ))}
       </ul>
-      <h3>Instructions:</h3>
+      <h5>Instructions:</h5>
       <p className="instructions" data-testid="instructions">
         {strInstructions}
       </p>

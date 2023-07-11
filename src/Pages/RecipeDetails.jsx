@@ -1,40 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useParams, useHistory, useLocation } from 'react-router-dom';
 import copy from 'clipboard-copy';
 import imgcompt from '../images/shareIcon.svg';
-import { fetchDrink,
-  fetchFood, fetchRecomendsDrinks, fetchRecomendsMeals } from '../api/RecipeDetais';
 import RecipeContent from '../components/RecipeData';
 import RecipeCarousel from '../components/RecipeCarousel';
 import { handleStartRecipe, handleFavoriteRecipe } from '../utils/RecipeDetailsFunctions';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './recipeDetails.css';
+import useFetch from '../hooks/useFetch';
 
 function RecipeDetails() {
-  const [foodData, setFoodData] = useState(null);
-  const [drinkData, setDrinkData] = useState(null);
-  const [recomendsMeals, setRecomendsMeals] = useState([]);
-  const [recomendsDrinks, setRecomendsDrinks] = useState([]);
-  const [recipeStatus, setRecipeStatus] = useState(false);
-  const [linkCopy, setLinkCopy] = useState(false);
+  const { fetchRecipes } = useFetch();
   const { id } = useParams();
   const history = useHistory();
+  const location = useLocation();
+
+  const [detailData, setDetailData] = useState({});
+  const [recommendedData, setRecommendedData] = useState([]);
+  const [recipeStatus, setRecipeStatus] = useState(false);
+  const [linkCopy, setLinkCopy] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const recipeType = location.pathname.includes('/meals') ? 'meal' : 'drink';
 
   useEffect(() => {
-    const fetchRecipes = async () => {
-      const food = await fetchFood(id);
-      const drink = await fetchDrink(id);
-      const recomendMeals = await fetchRecomendsMeals();
-      const recomendDrinks = await fetchRecomendsDrinks();
-      setFoodData(food);
-      setDrinkData(drink);
-      setRecomendsMeals(recomendMeals);
-      setRecomendsDrinks(recomendDrinks);
-    };
+    (async () => {
+      const nameURL = `/${location.pathname.split('/')[1]}`;
+      const tooglePathName = nameURL === '/meals' ? '/drinks' : '/meals';
+      const [dataApi] = await fetchRecipes(nameURL, 'details', id);
+      const recommendData = await fetchRecipes(tooglePathName);
+      setDetailData(dataApi);
+      setRecommendedData(recommendData);
+    })();
 
-    fetchRecipes();
-
-    // Caso queira entender melhor verificar chave inProgress no readme do projeto.
     const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (progressRecipes) {
       const { meals, drinks } = progressRecipes;
@@ -42,53 +40,33 @@ function RecipeDetails() {
         setRecipeStatus(true);
       }
     }
-  }, [id]);
 
-  // Condição necessária para ciclo de vida do componente;
-  if (!foodData && !drinkData) {
-    return <div>Loading...</div>;
-  }
-  // função para copiar link
-  const handleShareClick = () => {
-    const recipeLink = window.location.href;
-    copy(recipeLink);
-    setLinkCopy(true);
+    const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
+    const isRecipeFavorited = favoriteRecipes.some(
+      (favoriteRecipe) => favoriteRecipe.id === id && favoriteRecipe.type === recipeType,
+    );
+    setIsFavorite(isRecipeFavorited);
+  }, [id, location.pathname, fetchRecipes, recipeType]);
+
+  const handleFavorite = () => {
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+
+    handleFavoriteRecipe(detailData, id, recipeType);
   };
-
-  // const para receber a receita de comida ou bebida;
-  const recipe = foodData || drinkData;
-
-  // const para verificar se a receita é de comida ou bebida;
-  const { strMeal } = recipe;
-
-  // condição que verifica se a receita é de comida ou bebida;
-  const recipeType = strMeal ? 'meal' : 'drink';
-
-  // variavel para quantia de recomendações;
-  const QNT_RECOMMENDS = 6;
 
   return (
     <div className="recipes">
-      <RecipeContent recipe={ recipe } />
+      <RecipeContent recipe={ detailData } />
 
-      {recipeType === 'meal' && (
-        <RecipeCarousel
-          recommendations={ recomendsMeals }
-          recipeQntRecomend={ QNT_RECOMMENDS }
-          recipeType={ recipeType }
-        />
-      )}
+      <RecipeCarousel
+        recommendations={ recommendedData }
+        recipeQntRecomend={ 6 }
+        recipeType={ recipeType }
+      />
 
-      {recipeType === 'drink' && (
-        <RecipeCarousel
-          recommendations={ recomendsDrinks }
-          recipeQntRecomend={ QNT_RECOMMENDS }
-          recipeType={ recipeType }
-        />
-      )}
       <div className="btn-recipe">
         <button
-          onClick={ () => handleStartRecipe(recipeType, id, history) }
+          onClick={ () => handleStartRecipe(recipeType, id, history, detailData) }
           type="button"
           data-testid="start-recipe-btn"
         >
@@ -98,25 +76,28 @@ function RecipeDetails() {
           data-testid="share-btn"
           type="button"
           className="compartilhar"
-          onClick={ () => handleShareClick() }
+          onClick={ () => copy(window.location.href) && setLinkCopy(true) }
         >
           <img src={ imgcompt } alt="compartilhar" />
-
         </button>
         <button
           data-testid="favorite-btn"
           type="button"
-          onClick={ () => handleFavoriteRecipe(recipe, id, recipeType) }
-        >
-          Favoritar
-        </button>
+          onClick={ () => handleFavorite() }
+          src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
 
+        >
+          {
+            isFavorite ? (
+              <img src={ blackHeartIcon } alt="Favorito" />
+            ) : (
+              <img src={ whiteHeartIcon } alt="Não favorito" />
+            )
+          }
+        </button>
       </div>
       <div className="link-copy">
-        {linkCopy && (
-          <p>Link copied!</p>
-        )}
-
+        {linkCopy && <p>Link copied!</p>}
       </div>
     </div>
   );
