@@ -8,6 +8,7 @@ import { fetchDrink,
 import RecipeContent from '../components/RecipeData';
 import RecipeCarousel from '../components/RecipeCarousel';
 import { handleStartRecipe, handleFavoriteRecipe } from '../utils/RecipeDetailsFunctions';
+import './recipeDetails.css';
 
 function RecipeDetails() {
   const [foodData, setFoodData] = useState(null);

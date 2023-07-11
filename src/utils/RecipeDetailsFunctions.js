@@ -21,6 +21,7 @@ export const handleFavoriteRecipe = (recipe, id, recipeType) => {
     alcoholicOrNot: strAlcoholic || '',
     name: strMeal || strDrink || '',
     image: strMealThumb || strDrinkThumb || '',
+    test: 'vai item',
   };
 
   let favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes')) || [];
