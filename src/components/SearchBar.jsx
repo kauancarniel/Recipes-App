@@ -1,14 +1,17 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import RecipesContext from '../context/RecipesContext';
-
-const alert = 'Your search must have only 1 (one) character';
+import useFetch from '../hooks/useFetch';
 
 function SearchBar() {
   const [optSearch, setOptSearch] = useState('');
   const [textSearch, setTextSearch] = useState('');
   const { setRecipes } = useContext(RecipesContext);
-  const { location } = useHistory();
+  const { fetchRecipes } = useFetch();
+  const history = useHistory();
+
+  const { location: { pathname } } = history;
 
   const saveSearchOpt = ({ target }) => {
     if (target.name === 'search') setOptSearch(target.value);
@@ -18,10 +21,17 @@ function SearchBar() {
   const fetchingApi = async (event) => {
     event.preventDefault();
     if (optSearch === 'firstLetter' && textSearch.length > 1) {
-      global.alert(alert);
+      global.alert('Your search must have only 1 (one) character');
     } else {
-      const data = await fetchApi(location.pathname, optSearch, textSearch);
-      setRecipes(data);
+      const data = await fetchRecipes(pathname, optSearch, textSearch);
+      if (!data) global.alert('Sorry, we haven\'t found any recipes for these filters.');
+      else {
+        setRecipes(data);
+        if (data.length === 1) {
+          history.push(`${pathname}/${pathname === '/meals'
+            ? data[0].idMeal : data[0].idDrink}`);
+        }
+      }
     }
   };
 
