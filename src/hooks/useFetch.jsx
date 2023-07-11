@@ -6,9 +6,9 @@ const useFetch = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const fetchRecipes = async (pathname) => {
+  const fetchRecipes = async (pathname, optSearch = 'name', textSearch = '') => {
     try {
-      return await fetchAPI(pathname);
+      return await fetchAPI(pathname, optSearch, textSearch);
     } catch ({ message }) {
       setError(message);
     } finally {

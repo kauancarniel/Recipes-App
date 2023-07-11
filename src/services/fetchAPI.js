@@ -2,6 +2,7 @@ const keys = {
   ingredient: ['filter', 'i'],
   name: ['search', 's'],
   firstLetter: ['search', 'f'],
+  details: ['lookup', 'i'],
 };
 
 const fetchAPI = async (pathname, optSearch = 'name', textSearch = '') => {
