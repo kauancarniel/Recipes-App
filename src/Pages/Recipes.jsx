@@ -12,7 +12,7 @@ const MAX_RECIPES = 12;
 
 function Recipes() {
   const { recipes, setRecipes } = useContext(RecipesContext);
-  const { fetchRecipes } = useFetch();
+  const { loading, error, fetchRecipes } = useFetch();
   const { location } = useHistory();
 
   const KEY_BASE = location.pathname === '/meals' ? 'Meal' : 'Drink';
