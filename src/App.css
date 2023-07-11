@@ -120,6 +120,7 @@ li {
   border: 2px solid red;
   display: flex;
   flex-direction: row;
+  margin-top: 200px;
   overflow-x: scroll;
   position: absolute;
   width: 360px;
