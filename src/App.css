@@ -142,9 +142,36 @@ li {
   width: 75px;
 }
 
+.btn-recipe {
+  display: flex;
+  justify-content: space-around;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+
 
 .btn-recipe > button {
+  height: 40px;
+}
+
+
+.btn-recipe > button > img {
+  height: 40px;
+  width: 20px;
+}
+
+
+.btn-recipe > button:nth-child( 1 ) {
   border: 2px solid black;
   bottom: 0;
+  left: 0;
   position: fixed;
+}
+
+.link-copy {
+  font-size: 10px;
+  left: 0;
+  position: absolute;
+  top: 50px;
 }
