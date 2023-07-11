@@ -33,7 +33,7 @@
   animation: shake 1.5s infinite ease;
   color: aliceblue;
   font-family: Montserrat , sans-serif;
-  font-size: 2em;
+  font-size: 1em;
   font-weight: 900;
 }
 
@@ -68,7 +68,7 @@
 }
 
 object {
-  width: 100px;
+  width: 70px;
 }
 
 footer {
@@ -101,12 +101,19 @@ img {
   font-size: 20px;
 }
 
-.recipes > ul > li {
-  font-size: 13px;
+li {
+  font-size: 10px;
+}
+
+.recipes-content {
+  border: 2px solid red;
+  display: flex;
+  flex-direction: column;
+  height: 40vh;
 }
 
 .instructions {
-  font-size: 12px;
+  font-size: 8px;
 }
 
 .caroussel {
@@ -118,6 +125,9 @@ img {
   width: 360px;
 }
 
+.details-img {
+  display: flex;
+}
 
 .caroussel > img {
   margin-right: 10px;
@@ -127,6 +137,14 @@ img {
   margin-left: 100px;
 }
 
-video {
-  width: 200px;
+.video {
+  height: 75px;
+  width: 75px;
+}
+
+
+.btn-recipe > button {
+  border: 2px solid black;
+  bottom: 0;
+  position: fixed;
 }

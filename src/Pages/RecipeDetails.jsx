@@ -6,6 +6,7 @@ function RecipeDetails() {
   const [drinkData, setDrinkData] = useState(null);
   const [recomendsMeals, setRecomendsMeals] = useState([]);
   const [recomendsDrinks, setRecomendsDrinks] = useState([]);
+  const [recipeStatus, setRecipeStatus] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -37,6 +38,15 @@ function RecipeDetails() {
         .catch((error) => console.error(error));
     };
 
+    // Caso queira entender melhor verificar chave inProgress no readme do projeto.
+    const progressRecipes = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (progressRecipes) {
+      const { meals, drinks } = progressRecipes;
+      if ((meals && meals[id]) || (drinks && drinks[id])) {
+        setRecipeStatus(true);
+      }
+    }
+
     fetchFood();
     fetchDrink();
     fetchRecomends();
@@ -48,7 +58,9 @@ function RecipeDetails() {
     return <div>Loading...</div>;
   }
 
+  // const para receber a receita de comida ou bebida;
   const recipe = foodData || drinkData;
+  // desestruturação com os dados da api
   const {
     strMealThumb,
     strDrinkThumb,
@@ -60,55 +72,59 @@ function RecipeDetails() {
     strYoutube,
   } = recipe;
 
+  // condição que verifica se a receita é de comida ou bebida;
   const recipeType = strMeal ? 'meal' : 'drink';
+  // variavel para quantia de recomendações;
   const recipeRecomend = 6;
   // Filtro necessário para conseguir separar a quantia de ingredientes;
-
   const recipeARR = Object.entries(recipe);
   const ingredients = recipeARR.filter(([key, value]) => (
     key.includes('strIngredient') && value
   ));
-
+  // variavel para quantia de medidas;
   const measure = 13;
   return (
     <div className="recipes">
-      {console.log(recipe)}
-      <img
-        src={ strMealThumb || strDrinkThumb }
-        alt="recipes"
-        data-testid="recipe-photo"
-      />
-      <h1 data-testid="recipe-title">{strMeal || strDrink}</h1>
-      <h2 data-testid="recipe-category">{strMeal ? strCategory : strAlcoholic}</h2>
-      <h3>Ingredients:</h3>
-      <ul>
-        {ingredients.map(([key, value], index) => (
-          <li
-            key={ key }
-            data-testid={ `${index}-ingredient-name-and-measure` }
-          >
-            {value}
-            -
-            {recipe[`strMeasure${key.slice(measure)}`]}
-          </li>
-        ))}
-      </ul>
+      <div className="recipes-content">
+        <div className="details-img">
+          <img
+            src={ strMealThumb || strDrinkThumb }
+            alt="recipes"
+            data-testid="recipe-photo"
+          />
+          <h1 data-testid="recipe-title">{strMeal || strDrink}</h1>
+          <h2 data-testid="recipe-category">{strMeal ? strCategory : strAlcoholic}</h2>
+        </div>
+        <h3>Ingredients:</h3>
+        {console.log(recipeARR)}
+        <ul>
+          {ingredients.map(([key, value], index) => (
+            <li
+              key={ key }
+              data-testid={ `${index}-ingredient-name-and-measure` }
+            >
+              {value}
+              -
+              {recipe[`strMeasure${key.slice(measure)}`]}
+            </li>
+          ))}
+        </ul>
+      </div>
       <h3>Instructions:</h3>
       <p className="instructions" data-testid="instructions">{strInstructions}</p>
       {strYoutube && (
         <div data-testid="video">
           <iframe
+            className="video"
             src={ `https://www.youtube.com/embed/${strYoutube.split('=')[1]}` }
             title="Recipe Video"
           />
         </div>
       )}
-      {console.log(recomendsMeals)}
 
       { recipeType === 'meal'
         && (
           <div className="caroussel">
-            {console.log(recomendsMeals)}
             { recomendsMeals.slice(0, recipeRecomend).map((meals, index) => (
               <>
                 <img
@@ -130,7 +146,6 @@ function RecipeDetails() {
       {recipeType === 'drink'
       && (
         <div className="caroussel">
-          {console.log(recomendsDrinks)}
           {
             recomendsDrinks.slice(0, recipeRecomend).map((drinks, index) => (
 
@@ -150,7 +165,11 @@ function RecipeDetails() {
           }
         </div>
       )}
-
+      <div className="btn-recipe">
+        <button type="button" data-testid="start-recipe-btn">
+          {recipeStatus ? 'Continue Recipe' : 'Start Recipe'}
+        </button>
+      </div>
     </div>
   );
 }
