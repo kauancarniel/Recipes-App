@@ -1,9 +1,11 @@
 import React from 'react';
-import { Router } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
-import { render, fireEvent } from '@testing-library/react';
-import '@testing-library/jest-dom';
-import Login from '../Pages/Login';
+import { screen, waitForElementToBeRemoved } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
+
+import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
+import App from '../App';
+import { dataMeals } from './helpers/data';
 
 // Constantes para strings duplicadas
 const EMAIL_INPUT = 'email-input';
@@ -13,36 +15,51 @@ const VALID_EMAIL = 'user@example.com';
 const VALID_PASSWORD = '1234567';
 
 describe('Teste do componente Login', () => {
-  test('Verifica se o e-mail é salvo no localStorage após a submissão do formulário', () => {
-    const { getByTestId } = render(<Login />);
-    const emailInput = getByTestId(EMAIL_INPUT);
-    const passwordInput = getByTestId(PASSWORD_INPUT);
-    const submitButton = getByTestId(SUBMIT_BTN);
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
 
-    fireEvent.change(emailInput, { target: { value: VALID_EMAIL } });
-    fireEvent.change(passwordInput, { target: { value: VALID_PASSWORD } });
-    fireEvent.click(submitButton);
+  test('Verifica se o e-mail é salvo no localStorage após a submissão do formulário', async () => {
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: jest.fn().mockResolvedValue(dataMeals),
+    });
+
+    renderWithRouterAndProvider(<App />);
+
+    const emailInput = screen.getByTestId(EMAIL_INPUT);
+    const passwordInput = screen.getByTestId(PASSWORD_INPUT);
+    const submitButton = screen.getByTestId(SUBMIT_BTN);
+
+    act(() => {
+      userEvent.type(emailInput, VALID_EMAIL);
+      userEvent.type(passwordInput, VALID_PASSWORD);
+      userEvent.click(submitButton);
+    });
+
+    await waitForElementToBeRemoved(() => screen.getByText(/Loading/i));
 
     expect(JSON.parse(localStorage.getItem('user'))).toEqual({ email: VALID_EMAIL });
   });
 
-  test('Verifica se a rota muda para a tela principal de receitas de comidas após a submissão bem-sucedida', () => {
-    const history = createMemoryHistory();
-    const { getByTestId } = render(
-      <Router history={ history }>
-        <Login />
-      </Router>,
-    );
+  test('Verifica se a rota muda para a tela principal de receitas de comidas após a submissão bem-sucedida', async () => {
+    jest.spyOn(global, 'fetch').mockResolvedValue({
+      json: jest.fn().mockResolvedValue(dataMeals),
+    });
 
-    const emailInput = getByTestId(EMAIL_INPUT);
-    const passwordInput = getByTestId(PASSWORD_INPUT);
-    const submitButton = getByTestId(SUBMIT_BTN);
+    const { history } = renderWithRouterAndProvider(<App />);
 
-    fireEvent.change(emailInput, { target: { value: VALID_EMAIL } });
-    fireEvent.change(passwordInput, { target: { value: VALID_PASSWORD } });
-    fireEvent.click(submitButton);
+    const emailInput = screen.getByTestId(EMAIL_INPUT);
+    const passwordInput = screen.getByTestId(PASSWORD_INPUT);
+    const submitButton = screen.getByTestId(SUBMIT_BTN);
 
-    const { location } = history;
-    expect(location.pathname).toBe('/meals');
+    act(() => {
+      userEvent.type(emailInput, VALID_EMAIL);
+      userEvent.type(passwordInput, VALID_PASSWORD);
+      userEvent.click(submitButton);
+    });
+
+    await waitForElementToBeRemoved(() => screen.getByText(/Loading/i));
+
+    expect(history.location.pathname).toBe('/meals');
   });
 });

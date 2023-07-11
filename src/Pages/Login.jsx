@@ -1,50 +1,47 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import validator from 'validator';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [disabled, setDisabled] = useState(true);
+  const [user, setUser] = useState({ email: '', password: '' });
   const history = useHistory();
 
-  const PASSWORD_LENGTH = 6;
+  const PASSWORD_LENGTH = 7;
 
-  const validateForm = (emailValue, passwordValue) => {
-    const emailRegex = /\S+@\S+\.\S+/;
-    setDisabled(!(emailRegex.test(emailValue) && passwordValue.length > PASSWORD_LENGTH));
+  const handleChange = ({ name, value }) => {
+    setUser({ ...user, [name]: value });
   };
 
-  const handleChange = (event, callback, state) => {
-    const { value } = event.target;
-    callback(value);
-    validateForm(
-      state === 'email' ? value : email,
-      state === 'password' ? value : password,
-    );
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    localStorage.setItem('user', JSON.stringify({ email }));
+  const handleSubmit = () => {
+    localStorage.setItem('user', JSON.stringify({ email: user.email }));
     history.push('/meals');
   };
 
   return (
-    <form onSubmit={ handleSubmit }>
+    <form
+      onSubmit={ (event) => {
+        event.preventDefault();
+        handleSubmit();
+      } }
+    >
       <input
         type="email"
+        name="email"
         data-testid="email-input"
-        onChange={ (event) => handleChange(event, setEmail, 'email') }
+        onChange={ ({ target }) => handleChange(target) }
       />
       <input
+        name="password"
         type="password"
         data-testid="password-input"
-        onChange={ (event) => handleChange(event, setPassword, 'password') }
+        onChange={ ({ target }) => handleChange(target) }
       />
       <button
         type="submit"
         data-testid="login-submit-btn"
-        disabled={ disabled }
+        disabled={ !(
+          validator.isEmail(user.email) && user.password.length >= PASSWORD_LENGTH
+        ) }
       >
         Enter
       </button>

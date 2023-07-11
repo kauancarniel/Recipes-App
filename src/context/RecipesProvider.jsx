@@ -5,11 +5,14 @@ import RecipesContext from './RecipesContext';
 
 export default function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
+  const [type, setType] = useState('/meals');
 
   const store = useMemo(() => ({
     recipes,
     setRecipes,
-  }), [recipes]);
+    type,
+    setType,
+  }), [recipes, type]);
 
   return (
     <RecipesContext.Provider value={ store }>
