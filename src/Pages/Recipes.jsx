@@ -18,8 +18,14 @@ function Recipes() {
   const { recipes, setRecipes } = useContext(RecipesContext);
   const { loading, error, fetchRecipes } = useFetch();
   const { location: { pathname } } = useHistory();
+  const [, setPesquisa] = useState({
+    search: '',
+    endpoint: '',
+  });
 
   const KEY_BASE = pathname === '/meals' ? 'Meal' : 'Drink';
+  const isMeal = pathname.includes('meals');
+  const titulo = isMeal ? 'Meals' : 'Drinks';
 
   useEffect(() => {
     (async () => {
@@ -46,7 +52,12 @@ function Recipes() {
 
   return (
     <>
-      <Header />
+      <Header
+        title={ titulo }
+        iconeProfile
+        iconeSearch
+        setPesquisa={ setPesquisa }
+      />
       <main>
         <nav>
           <button

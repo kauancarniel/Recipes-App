@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-// import SearchBar from './SearchBar';
+import SearchBar from './SearchBar';
 
 function Header(props) {
   // Desestruturação das props para extrair as propriedades necessárias
-  const { title, iconeProfile = false, iconeSearch = false } = props; // setPesquisa
+  const { title, iconeProfile = false, iconeSearch = false, setPesquisa } = props;
 
   // Definindo o estado showSearchBar com o valor inicial false
   const [showSearchBar, setShowSearchBar] = useState(false);
@@ -27,7 +27,7 @@ function Header(props) {
         </Link>
       )}
 
-      {/* Verifica se iconeSearch é true */}
+      {/* // Verifica se iconeSearch é true */}
       {iconeSearch && (
         // Botão para mostrar/ocultar a barra de pesquisa
         <button
@@ -43,11 +43,11 @@ function Header(props) {
         </button>
       )}
 
-      {/* Verifica se showSearchBar é true
+      {/* Verifica se showSearchBar é true */}
       {showSearchBar && (
         // Renderiza o componente SearchBar passando a função setPesquisa como prop
         <SearchBar setPesquisa={ setPesquisa } />
-      )} */}
+      )}
     </div>
   );
 }
