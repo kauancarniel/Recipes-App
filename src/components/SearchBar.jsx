@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import RecipesContext from '../context/RecipesContext';
 
 const alert = 'Your search must have only 1 (one) character';
+const MAX_RECIPES = 12;
 
 function SearchBar() {
   const [optSearch, setOptSearch] = useState('');
@@ -21,7 +22,7 @@ function SearchBar() {
       global.alert(alert);
     } else {
       const data = await fetchApi(location.pathname, optSearch, textSearch);
-      setRecipes(data);
+      setRecipes(data.slice(0, MAX_RECIPES));
     }
   };
 

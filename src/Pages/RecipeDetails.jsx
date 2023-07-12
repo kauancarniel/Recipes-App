@@ -22,10 +22,10 @@ function RecipeDetails() {
   const [linkCopy, setLinkCopy] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const recipeType = location.pathname.includes('/meals') ? 'meal' : 'drink';
+  const nameURL = `/${location.pathname.split('/')[1]}`;
 
   useEffect(() => {
     (async () => {
-      const nameURL = `/${location.pathname.split('/')[1]}`;
       const tooglePathName = nameURL === '/meals' ? '/drinks' : '/meals';
       const [dataApi] = await fetchRecipes(nameURL, 'details', id);
       const recommendData = await fetchRecipes(tooglePathName);
@@ -46,7 +46,7 @@ function RecipeDetails() {
       (favoriteRecipe) => favoriteRecipe.id === id && favoriteRecipe.type === recipeType,
     );
     setIsFavorite(isRecipeFavorited);
-  }, [id, location.pathname, fetchRecipes, recipeType]);
+  }, []);
 
   const handleFavorite = () => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
@@ -66,7 +66,7 @@ function RecipeDetails() {
 
       <div className="btn-recipe">
         <button
-          onClick={ () => handleStartRecipe(recipeType, id, history, detailData) }
+          onClick={ () => handleStartRecipe(nameURL, id, history, detailData) }
           type="button"
           data-testid="start-recipe-btn"
         >

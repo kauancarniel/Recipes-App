@@ -1,11 +1,7 @@
 // função para alterar rota
-export const handleStartRecipe = (recipeType, id, history, recipe) => {
-  if (recipeType === 'meal') {
-    history.push(`/meals/${id}/in-progress`);
-  } else if (recipeType === 'drink') {
-    history.push(`/drinks/${id}/in-progress`);
-  }
+export const handleStartRecipe = (nameURL, id, history, recipe) => {
   localStorage.setItem('inProgressRecipes', JSON.stringify(recipe));
+  history.push(`${nameURL}/${id}/in-progress`);
 };
 
 // função para favoritar receita no LS
