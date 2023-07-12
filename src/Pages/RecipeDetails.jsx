@@ -96,7 +96,7 @@ function RecipeDetails() {
           }
         </button>
       </div>
-      <div className="link-copy">
+      <div className="link-copy" data-testid="link">
         {linkCopy && <p>Link copied!</p>}
       </div>
     </div>
