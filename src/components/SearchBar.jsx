@@ -4,6 +4,9 @@ import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 
+const alert = 'Your search must have only 1 (one) character';
+const MAX_RECIPES = 12;
+
 function SearchBar() {
   const [optSearch, setOptSearch] = useState('');
   const [textSearch, setTextSearch] = useState('');
@@ -26,7 +29,7 @@ function SearchBar() {
       const data = await fetchRecipes(pathname, optSearch, textSearch);
       if (!data) global.alert('Sorry, we haven\'t found any recipes for these filters.');
       else {
-        setRecipes(data);
+        setRecipes(data.slice(0, MAX_RECIPES));
         if (data.length === 1) {
           history.push(`${pathname}/${pathname === '/meals'
             ? data[0].idMeal : data[0].idDrink}`);
