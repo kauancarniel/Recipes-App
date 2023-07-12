@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,46 +10,82 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 
 const MAX_RECIPES = 12;
+const MAX_CATEGORIES = 5;
 
 function Recipes() {
+  const [categories, setCategories] = useState([]);
+  const [categorySelected, setCategorySelected] = useState('All');
   const { recipes, setRecipes } = useContext(RecipesContext);
   const { loading, error, fetchRecipes } = useFetch();
-  const { location } = useHistory();
+  const { location: { pathname } } = useHistory();
+
+  const KEY_BASE = pathname === '/meals' ? 'Meal' : 'Drink';
 
   useEffect(() => {
     (async () => {
-      const data = await fetchRecipes(location.pathname);
-      setRecipes(data);
+      const recipesData = await fetchRecipes(pathname);
+      const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
+      if (!recipesData && !categoriesData) return;
+      setCategories([...categoriesData].slice(0, MAX_CATEGORIES));
+      setRecipes([...recipesData].slice(0, MAX_RECIPES));
     })();
   }, []);
 
-  const KEY_BASE = location.pathname === '/meals' ? 'Meal' : 'Drink';
+  const handleClick = async (strCategory) => {
+    const allCondition = (strCategory === 'All' && categorySelected !== 'All');
+    if (allCondition || categorySelected === strCategory) {
+      const recipesDataAll = await fetchRecipes(pathname);
+      setRecipes(recipesDataAll.slice(0, MAX_RECIPES));
+      setCategorySelected(strCategory);
+    } else if (strCategory !== 'All') {
+      const recipesData = await fetchRecipes(pathname, 'category', strCategory);
+      setRecipes(recipesData.slice(0, MAX_RECIPES));
+      setCategorySelected(strCategory);
+    }
+  };
+
   return (
     <>
       <Header />
-      {loading && (
-        <div>
-          <h2>Loading...</h2>
-        </div>
-      )}
-      {error && <div>{error}</div>}
-      {!loading && !error && (
-        <div>
-          {recipes.map((item, index) => {
-            if (index < MAX_RECIPES) {
-              return (
-                <RecipeCard
-                  item={ item }
-                  key={ item[`id${KEY_BASE}`] }
-                  base={ KEY_BASE }
-                  index={ index }
-                />
-              );
-            }
-            return null;
-          })}
-        </div>
-      )}
+      <main>
+        <nav>
+          <button
+            type="button"
+            data-testid="All-category-filter"
+            onClick={ () => handleClick('All') }
+          >
+            All
+          </button>
+          {categories.map(({ strCategory }, index) => (
+            <button
+              type="button"
+              key={ index }
+              data-testid={ `${strCategory}-category-filter` }
+              onClick={ () => handleClick(strCategory) }
+            >
+              { strCategory }
+            </button>
+          ))}
+        </nav>
+        {loading && (
+          <div>
+            <h2>Loading...</h2>
+          </div>
+        )}
+        {error && <div>{error}</div>}
+        {!loading && !error && (
+          <div>
+            {recipes.map((item, index) => (
+              <RecipeCard
+                item={ item }
+                key={ item[`id${KEY_BASE}`] }
+                base={ KEY_BASE }
+                index={ index }
+              />
+            ))}
+          </div>
+        )}
+      </main>
       <Footer />
     </>
   );

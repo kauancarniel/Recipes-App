@@ -3,6 +3,8 @@ const keys = {
   name: ['search', 's'],
   firstLetter: ['search', 'f'],
   details: ['lookup', 'i'],
+  categoriesList: ['list', 'c'],
+  category: ['filter', 'c'],
 };
 
 const fetchAPI = async (pathname, optSearch, textSearch) => {

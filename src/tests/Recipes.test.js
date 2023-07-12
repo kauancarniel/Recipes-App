@@ -32,7 +32,7 @@ describe('Teste do componente Recipes', () => {
     }
   });
 
-  test('Te, é redirecionado para a página de detalhes', async () => {
+  test('Teste se houver erro no fetch um erro aparece na tela', async () => {
     jest.spyOn(global, 'fetch').mockRejectedValue(new Error('Failed to fetch'));
 
     renderWithRouterAndProvider(<App />, '/meals');
