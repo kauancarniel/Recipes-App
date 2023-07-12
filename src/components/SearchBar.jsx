@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 
-const alert = 'Your search must have only 1 (one) character';
 const MAX_RECIPES = 12;
 
 function SearchBar() {
