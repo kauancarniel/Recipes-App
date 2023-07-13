@@ -59,4 +59,4 @@ Header.propTypes = {
 }.isRequired;
 
 // Exporta o componente Header utilizando React.memo para otimização de renderização
-export default React.memo(Header);
+export default Header;

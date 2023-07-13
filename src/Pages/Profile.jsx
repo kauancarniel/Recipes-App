@@ -16,6 +16,7 @@ function Profile() {
   return (
     <>
       <div>
+
         <Header title="Profile" iconeProfile />
         <p data-testid="profile-email">{email}</p>
         <button

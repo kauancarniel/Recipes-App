@@ -16,6 +16,10 @@ function Recipes() {
   const { setRecipes, categories, loading, error } = useContext(RecipesContext);
   const { fetchRecipes, initialFetch } = useFetch();
   const { location: { pathname } } = useHistory();
+  const [, setPesquisa] = useState({
+    search: '',
+    endpoint: '',
+  });
 
   useEffect(() => {
     (async () => {
