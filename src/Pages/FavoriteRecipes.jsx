@@ -39,7 +39,7 @@ function FavoriteRecipes() {
 
   return (
     <div>
-      <Header title="Profile" iconeProfile search={ false } />
+      <Header title="Favorite Recipes" iconeProfile />
       <button data-testid="filter-by-all-btn" onClick={ filter } name="all">All</button>
       <button
         data-testid="filter-by-meal-btn"

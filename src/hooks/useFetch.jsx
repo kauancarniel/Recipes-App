@@ -4,8 +4,7 @@ import fetchAPI from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 
 const useFetch = () => {
-  const { setRecipes, setCategories, loading,
-    setLoading, error, setError } = useContext(RecipesContext);
+  const { setRecipes, setCategories, setLoading, setError } = useContext(RecipesContext);
 
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
@@ -29,7 +28,7 @@ const useFetch = () => {
     setCategories(categoriesData.slice(0, MAX_CATEGORIES));
   };
 
-  return { loading, error, fetchRecipes, initialFetch };
+  return { fetchRecipes, initialFetch };
 };
 
 export default useFetch;

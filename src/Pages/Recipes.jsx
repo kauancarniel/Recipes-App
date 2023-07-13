@@ -38,7 +38,11 @@ function Recipes() {
 
   return (
     <>
-      <Header />
+      <Header
+        title={ pathname === '/meals' ? 'Meals' : 'Drinks' }
+        iconeSearch
+        iconeProfile
+      />
       <main>
         <nav>
           <button

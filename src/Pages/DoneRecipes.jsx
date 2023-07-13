@@ -22,10 +22,9 @@ function DoneRecipes() {
 
   return (
     <div>
-      <Header title="Profile" iconeProfile search={ false } />
+      <Header title="Done Recipes" iconeProfile />
       {filteredRecipes.length === 0 && <p>Nenhuma receita favorita encontrada.</p>}
       <div>
-        {console.log(filteredRecipes)}
         { filteredRecipes.length > 0 && buttonFilter.map((type) => (
           <button
             key={ type }
