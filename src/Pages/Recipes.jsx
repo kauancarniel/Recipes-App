@@ -10,24 +10,16 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 
 const MAX_RECIPES = 12;
-const MAX_CATEGORIES = 5;
 
 function Recipes() {
-  const [categories, setCategories] = useState([]);
   const [categorySelected, setCategorySelected] = useState('All');
-  const { recipes, setRecipes } = useContext(RecipesContext);
-  const { loading, error, fetchRecipes } = useFetch();
+  const { setRecipes, categories, loading, error } = useContext(RecipesContext);
+  const { fetchRecipes, initialFetch } = useFetch();
   const { location: { pathname } } = useHistory();
-
-  const KEY_BASE = pathname === '/meals' ? 'Meal' : 'Drink';
 
   useEffect(() => {
     (async () => {
-      const recipesData = await fetchRecipes(pathname);
-      const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
-      if (!recipesData && !categoriesData) return;
-      setCategories([...categoriesData].slice(0, MAX_CATEGORIES));
-      setRecipes([...recipesData].slice(0, MAX_RECIPES));
+      initialFetch(pathname);
     })();
   }, []);
 
@@ -73,18 +65,11 @@ function Recipes() {
           </div>
         )}
         {error && <div>{error}</div>}
-        {!loading && !error && (
-          <div>
-            {recipes.map((item, index) => (
-              <RecipeCard
-                item={ item }
-                key={ item[`id${KEY_BASE}`] }
-                base={ KEY_BASE }
-                index={ index }
-              />
-            ))}
-          </div>
-        )}
+        <div>
+          {!loading && !error && (
+            <RecipeCard />
+          )}
+        </div>
       </main>
       <Footer />
     </>
