@@ -13,13 +13,10 @@ describe('Teste do componente RecipeDetail', () => {
     localStorage.clear();
   });
 
-  jest.spyOn(global, 'fetch').mockResolvedValueOnce({
-    json: jest.fn().mockResolvedValueOnce({ meals: recommendedDataMock }),
-  });
-
   const startBtn = 'start-recipe-btn';
 
   test('Verifica se API recommended retorna', async () => {
+    jest.fn().mockResolvedValueOnce({ meals: recommendedDataMock })
     renderWithRouterAndProvider(
       <RecipeCarousel recommendations={ recommendedDataMock } />,
     );
