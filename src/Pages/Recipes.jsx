@@ -23,7 +23,7 @@ function Recipes() {
     })();
   }, []);
 
-  const handleClick = async (strCategory) => {
+  const handleClickCategory = async (strCategory) => {
     const allCondition = (strCategory === 'All' && categorySelected !== 'All');
     if (allCondition || categorySelected === strCategory) {
       const recipesDataAll = await fetchRecipes(pathname);
@@ -48,7 +48,7 @@ function Recipes() {
           <button
             type="button"
             data-testid="All-category-filter"
-            onClick={ () => handleClick('All') }
+            onClick={ () => handleClickCategory('All') }
           >
             All
           </button>
@@ -57,7 +57,7 @@ function Recipes() {
               type="button"
               key={ index }
               data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => handleClick(strCategory) }
+              onClick={ () => handleClickCategory(strCategory) }
             >
               { strCategory }
             </button>
