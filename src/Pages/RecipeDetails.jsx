@@ -10,7 +10,6 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './recipeDetails.css';
 import useFetch from '../hooks/useFetch';
-import Header from '../components/Header';
 
 function RecipeDetails() {
   const { fetchRecipes } = useFetch();
@@ -58,7 +57,6 @@ function RecipeDetails() {
 
   return (
     <div className="recipes">
-      <Header />
       <RecipeContent recipe={ detailData } />
 
       <RecipeCarousel
