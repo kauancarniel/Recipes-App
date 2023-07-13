@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-// import SearchBar from './SearchBar';
+import SearchBar from './SearchBar';
 
 function Header(props) {
   // Desestruturação das props para extrair as propriedades necessárias
@@ -43,11 +44,11 @@ function Header(props) {
         </button>
       )}
 
-      {/* Verifica se showSearchBar é true
+      {/* Verifica se showSearchBar é true */}
       {showSearchBar && (
         // Renderiza o componente SearchBar passando a função setPesquisa como prop
         <SearchBar setPesquisa={ setPesquisa } />
-      )} */}
+      )}
     </div>
   );
 }

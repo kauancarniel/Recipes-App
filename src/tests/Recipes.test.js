@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils';
 
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import App from '../App';
-import { dataDrinks, dataMeals } from './helpers/data';
+import { categoriesListMeals, dataMeals } from './helpers/data';
 
 describe('Teste do componente Recipes', () => {
   beforeEach(() => {
@@ -14,7 +14,9 @@ describe('Teste do componente Recipes', () => {
 
   test('Ao renderizar, mostra as 12 primeira receitas retornadas', async () => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
-      json: jest.fn().mockResolvedValue(dataMeals),
+      json: jest.fn()
+        .mockResolvedValueOnce(dataMeals)
+        .mockResolvedValueOnce(categoriesListMeals),
     });
 
     renderWithRouterAndProvider(<App />, '/meals');
