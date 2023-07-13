@@ -63,7 +63,6 @@ function RecipeDetails() {
 
       <RecipeCarousel
         recommendations={ recommendedData }
-        recipeQntRecomend={ 6 }
         recipeType={ recipeType }
       />
 

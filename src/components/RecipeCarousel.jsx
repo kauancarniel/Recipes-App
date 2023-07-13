@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function RecipeCarousel({ recommendations, recipeQntRecomend, recipeType }) {
+const MAX_RECOMMENDATIONS = 6;
+
+function RecipeCarousel({ recommendations, recipeType }) {
   return (
     <div className="caroussel">
-      {recommendations.slice(0, recipeQntRecomend).map((item, index) => (
+      {recommendations.slice(0, MAX_RECOMMENDATIONS).map((item, index) => (
         <>
           <img
             src={ recipeType === 'meal' ? item.strDrinkThumb : item.strMealThumb }
@@ -30,7 +32,6 @@ RecipeCarousel.propTypes = {
       strMeal: PropTypes.string,
     }),
   ).isRequired,
-  recipeQntRecomend: PropTypes.number.isRequired,
   recipeType: PropTypes.oneOf(['meal', 'drink']).isRequired,
 };
 export default RecipeCarousel;
