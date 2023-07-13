@@ -16,7 +16,8 @@ describe('Teste do componente RecipeDetail', () => {
   const startBtn = 'start-recipe-btn';
 
   test('Verifica se API recommended retorna', async () => {
-    jest.fn().mockResolvedValueOnce({ meals: recommendedDataMock })
+    jest.fn().mockResolvedValueOnce({ meals: recommendedDataMock });
+
     renderWithRouterAndProvider(
       <RecipeCarousel recommendations={ recommendedDataMock } />,
     );
