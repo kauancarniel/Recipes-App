@@ -12,9 +12,7 @@ function DoneRecipes() {
   const URLBASE = window.location.origin;
   const history = useHistory();
 
-  const handleFilterChange = (newFilter) => {
-    setFilter(newFilter);
-  };
+  const handleFilterChange = (newFilter) => setFilter(newFilter);
 
   const filteredRecipes = filter === 'all'
     ? doneRecipes
