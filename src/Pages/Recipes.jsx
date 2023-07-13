@@ -10,34 +10,24 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 
 const MAX_RECIPES = 12;
-const MAX_CATEGORIES = 5;
 
 function Recipes() {
-  const [categories, setCategories] = useState([]);
   const [categorySelected, setCategorySelected] = useState('All');
-  const { recipes, setRecipes } = useContext(RecipesContext);
-  const { loading, error, fetchRecipes } = useFetch();
+  const { setRecipes, categories, loading, error } = useContext(RecipesContext);
+  const { fetchRecipes, initialFetch } = useFetch();
   const { location: { pathname } } = useHistory();
   const [, setPesquisa] = useState({
     search: '',
     endpoint: '',
   });
 
-  const KEY_BASE = pathname === '/meals' ? 'Meal' : 'Drink';
-  const isMeal = pathname.includes('meals');
-  const titulo = isMeal ? 'Meals' : 'Drinks';
-
   useEffect(() => {
     (async () => {
-      const recipesData = await fetchRecipes(pathname);
-      const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
-      if (!recipesData && !categoriesData) return;
-      setCategories([...categoriesData].slice(0, MAX_CATEGORIES));
-      setRecipes([...recipesData].slice(0, MAX_RECIPES));
+      initialFetch(pathname);
     })();
   }, []);
 
-  const handleClick = async (strCategory) => {
+  const handleClickCategory = async (strCategory) => {
     const allCondition = (strCategory === 'All' && categorySelected !== 'All');
     if (allCondition || categorySelected === strCategory) {
       const recipesDataAll = await fetchRecipes(pathname);
@@ -53,17 +43,16 @@ function Recipes() {
   return (
     <>
       <Header
-        title={ titulo }
-        iconeProfile
+        title={ pathname === '/meals' ? 'Meals' : 'Drinks' }
         iconeSearch
-        setPesquisa={ setPesquisa }
+        iconeProfile
       />
       <main>
         <nav>
           <button
             type="button"
             data-testid="All-category-filter"
-            onClick={ () => handleClick('All') }
+            onClick={ () => handleClickCategory('All') }
           >
             All
           </button>
@@ -72,7 +61,7 @@ function Recipes() {
               type="button"
               key={ index }
               data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => handleClick(strCategory) }
+              onClick={ () => handleClickCategory(strCategory) }
             >
               { strCategory }
             </button>
@@ -84,18 +73,11 @@ function Recipes() {
           </div>
         )}
         {error && <div>{error}</div>}
-        {!loading && !error && (
-          <div>
-            {recipes.map((item, index) => (
-              <RecipeCard
-                item={ item }
-                key={ item[`id${KEY_BASE}`] }
-                base={ KEY_BASE }
-                index={ index }
-              />
-            ))}
-          </div>
-        )}
+        <div>
+          {!loading && !error && (
+            <RecipeCard />
+          )}
+        </div>
       </main>
       <Footer />
     </>

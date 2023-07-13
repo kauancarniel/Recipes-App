@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useHistory, useLocation } from 'react-router-dom';
-import copy from 'clipboard-copy';
 import imgcompt from '../images/shareIcon.svg';
 import RecipeContent from '../components/RecipeData';
 import RecipeCarousel from '../components/RecipeCarousel';
-import { handleStartRecipe, handleFavoriteRecipe } from '../utils/RecipeDetailsFunctions';
+import { handleStartRecipe,
+  handleFavoriteRecipe } from '../utils/RecipeDetailsFunctions';
+import { copyLink } from '../utils/CopyLinkFunction';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import './recipeDetails.css';
@@ -78,7 +79,10 @@ function RecipeDetails() {
           data-testid="share-btn"
           type="button"
           className="compartilhar"
-          onClick={ () => copy(window.location.href) && setLinkCopy(true) }
+          onClick={ () => {
+            copyLink(window.location.href);
+            setLinkCopy(true);
+          } }
         >
           <img src={ imgcompt } alt="compartilhar" />
         </button>
@@ -98,7 +102,7 @@ function RecipeDetails() {
           }
         </button>
       </div>
-      <div className="link-copy">
+      <div className="link-copy" data-testid="link">
         {linkCopy && <p>Link copied!</p>}
       </div>
     </div>

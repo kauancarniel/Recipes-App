@@ -1,28 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
-export default function RecipeCard({ index, item, base }) {
-  const history = useHistory();
-  const { pathname } = history.location;
-  return (
-    <button
+import RecipesContext from '../context/RecipesContext';
+
+export default function RecipeCard() {
+  const { location: { pathname } } = useHistory();
+  const { recipes } = useContext(RecipesContext);
+
+  const KEY_BASE = pathname === '/meals' ? 'Meal' : 'Drink';
+
+  return recipes.map((item, index) => (
+    <Link
+      key={ index }
       type="button"
       data-testid={ `${index}-recipe-card` }
-      onClick={ () => history.push(`${pathname}/${item[`id${base}`]}`) }
+      to={ `${pathname}/${item[`id${KEY_BASE}`]}` }
     >
       <img
-        src={ item[`str${base}Thumb`] }
-        alt={ item[`str${base}`] }
+        src={ item[`str${KEY_BASE}Thumb`] }
+        alt={ item[`str${KEY_BASE}`] }
         data-testid={ `${index}-card-img` }
       />
-      <h2 data-testid={ `${index}-card-name` }>{ item[`str${base}`]}</h2>
-    </button>
-  );
+      <h2 data-testid={ `${index}-card-name` }>{ item[`str${KEY_BASE}`]}</h2>
+    </Link>
+  ));
 }
-
-RecipeCard.propTypes = {
-  index: PropTypes.number.isRequired,
-  item: PropTypes.instanceOf(Object).isRequired,
-  base: PropTypes.string.isRequired,
-};

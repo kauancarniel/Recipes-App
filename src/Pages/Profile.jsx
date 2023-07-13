@@ -16,7 +16,8 @@ function Profile() {
   return (
     <>
       <div>
-        <Header title="Profile" iconeProfile search={ false } />
+
+        <Header title="Profile" iconeProfile />
         <p data-testid="profile-email">{email}</p>
         <button
           data-testid="profile-done-btn"

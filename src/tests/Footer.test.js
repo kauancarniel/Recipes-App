@@ -5,10 +5,7 @@ import { act } from 'react-dom/test-utils';
 
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import App from '../App';
-import { dataDrinks, dataMeals } from './helpers/data';
-
-const VALID_EMAIL = 'user@example.com';
-const VALID_PASSWORD = '1234567';
+import { categoriesListDrinks, categoriesListMeals, dataDrinks, dataMeals } from './helpers/data';
 
 describe('Teste do componente Footer', () => {
   beforeEach(() => {
@@ -17,23 +14,18 @@ describe('Teste do componente Footer', () => {
 
   test('redireciona para a página "/drinks" ao clicar no botão de drinks a partir de "/meals"', async () => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
-      json: jest.fn().mockResolvedValueOnce(dataMeals)
-        .mockResolvedValue(dataDrinks),
+      json: jest.fn()
+        .mockResolvedValueOnce(dataMeals)
+        .mockResolvedValueOnce(categoriesListMeals)
+        .mockResolvedValueOnce(dataDrinks)
+        .mockResolvedValueOnce(categoriesListDrinks),
     });
 
-    const { history } = renderWithRouterAndProvider(<App />);
+    const { history } = renderWithRouterAndProvider(<App />, '/meals');
 
-    const emailInput = screen.getByTestId('email-input');
-    const passwordInput = screen.getByTestId('password-input');
-    const submitButton = screen.getByTestId('login-submit-btn');
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 
-    act(() => {
-      userEvent.type(emailInput, VALID_EMAIL);
-      userEvent.type(passwordInput, VALID_PASSWORD);
-      userEvent.click(submitButton);
-    });
-
-    const drinksButton = await screen.findByTestId('drinks-bottom-btn');
+    const drinksButton = screen.getByTestId('drinks-bottom-btn');
 
     act(() => {
       userEvent.click(drinksButton);
@@ -46,13 +38,18 @@ describe('Teste do componente Footer', () => {
 
   test('redireciona para a página "/meals" ao clicar no botão de meals a partir de /drinks', async () => {
     jest.spyOn(global, 'fetch').mockResolvedValue({
-      json: jest.fn().mockResolvedValueOnce(dataDrinks)
-        .mockResolvedValue(dataMeals),
+      json: jest.fn()
+        .mockResolvedValueOnce(dataDrinks)
+        .mockResolvedValueOnce(categoriesListDrinks)
+        .mockResolvedValueOnce(dataMeals)
+        .mockResolvedValueOnce(categoriesListMeals),
     });
 
     const { history } = renderWithRouterAndProvider(<App />, '/drinks');
 
-    const mealsButton = await screen.findByTestId('meals-bottom-btn');
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
+    const mealsButton = screen.getByTestId('meals-bottom-btn');
 
     act(() => {
       userEvent.click(mealsButton);
