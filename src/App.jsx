@@ -6,7 +6,8 @@ import Login from './Pages/Login';
 import DoneRecipes from './Pages/DoneRecipes';
 import FavoriteRecipes from './Pages/FavoriteRecipes';
 import Profile from './Pages/Profile';
-import RecipeInProg from './Pages/RecipeInProg';
+import RecipeInProg from './components/RecipeInProg';
+import './App.css';
 
 function App() {
   return (

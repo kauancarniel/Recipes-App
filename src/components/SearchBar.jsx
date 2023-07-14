@@ -1,13 +1,12 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 
 const MAX_RECIPES = 12;
 
-function SearchBar({ setPesquisa }) {
+function SearchBar() {
   const [optSearch, setOptSearch] = useState('');
   const [textSearch, setTextSearch] = useState('');
   const { setRecipes } = useContext(RecipesContext);
@@ -35,12 +34,11 @@ function SearchBar({ setPesquisa }) {
             ? data[0].idMeal : data[0].idDrink}`);
         }
       }
-      setPesquisa({ search: textSearch, endpoint: optSearch });
     }
   };
 
   return (
-    <div data-testid="search-top-btn">
+    <div>
       <form>
         <label htmlFor="ingredient">
           <input
@@ -87,9 +85,5 @@ function SearchBar({ setPesquisa }) {
     </div>
   );
 }
-
-SearchBar.propTypes = {
-  setPesquisa: PropTypes.func.isRequired,
-};
 
 export default SearchBar;

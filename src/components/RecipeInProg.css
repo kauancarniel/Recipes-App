@@ -1,0 +1,22 @@
+.img-recipe {
+  width: 100%;
+}
+
+.link-copied {
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.message {
+  background-color: darkgrey;
+  border-radius: 10px;
+  color: white;
+  padding: 20px 30px;
+}

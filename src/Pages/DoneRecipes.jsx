@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import copy from 'clipboard-copy';
 import { useHistory } from 'react-router-dom';
-import shareIcon from '../images/shareIcon.svg';
-import { copyLink } from '../utils/CopyLinkFunction';
-import { redirectToRecipe } from '../utils/NavigateFunction';
+
 import Header from '../components/Header';
+import shareIcon from '../images/shareIcon.svg';
+import { redirectToRecipe } from '../utils/NavigateFunction';
 
 function DoneRecipes() {
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
@@ -61,7 +62,7 @@ function DoneRecipes() {
           <p data-testid={ `${index}-horizontal-top-text` }>{recipe.alcoholicOrNot}</p>
           <button
             onClick={ () => {
-              copyLink(`${URLBASE}/${recipe.type}s/${recipe.id}`);
+              copy(`${URLBASE}/${recipe.type}s/${recipe.id}`);
               setLinkCopy(true);
             } }
             data-testid={ `${index}-horizontal-share-btn` }
