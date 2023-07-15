@@ -27,12 +27,16 @@ export default function IngredientsList({ recipe, isInProgress }) {
     >
       {
         isInProgress ? (
-          <label htmlFor={ key }>
+          <label
+            style={ { textDecoration: checkboxes[key] ? 'line-through' : 'none' } }
+            data-testid={ `${index}-ingredient-step` }
+            htmlFor={ key }
+          >
             <input
               type="checkbox"
               id={ key }
               name={ key }
-              value={ checkboxes[key] }
+              checked={ checkboxes[key] }
               onChange={ () => handleChange(key) }
             />
             {`${value} - ${recipe[`strMeasure${index + 1}`]}`}

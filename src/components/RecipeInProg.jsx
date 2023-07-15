@@ -68,7 +68,7 @@ export default function RecipeInProg() {
         <>
           <header>
             <ShareBtn />
-            <FavoriteBtn />
+            <FavoriteBtn recipe={ recipe } />
             <img
               className="img-recipe"
               src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
