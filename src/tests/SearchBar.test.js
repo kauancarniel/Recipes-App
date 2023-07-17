@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import App from '../App';
-import { categoriesListDrinks, categoriesListMeals, dataDrinks, dataMeals, mockMeal1Length, mockDrink1Length, dataMealsNull } from './helpers/data';
+import { categoriesListDrinks, categoriesListMeals, dataDrinks, dataMeals, mockMeal1Length, mockDrink1Length } from './helpers/data';
 
 describe('Teste do componente Recipes', () => {
   beforeEach(() => {
@@ -151,6 +151,8 @@ describe('Teste do componente Recipes', () => {
   });
 
   it('Testa se um alert aparece quando a busca não resulta em nenhuma receita', async () => {
+    const dataMealsNull = {};
+
     jest.spyOn(global, 'fetch').mockResolvedValue({
       json: jest.fn()
         .mockResolvedValueOnce(dataMeals)

@@ -4441,5 +4441,3 @@ export const mockDrink1Length = {
     },
   ],
 };
-
-export const dataMealsNull = {};
