@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import RecipesContext from '../context/RecipesContext';
 import './RecipeBtns.css';
+import { addInDoneRecipes, getStorage, handleRemoveInProgress } from '../utils/functions';
 
-export default function RecipeBtns({ isInProgress, setIsInProgress }) {
+export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
+  const { checkboxes } = useContext(RecipesContext);
   const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
   const history = useHistory();
   const { id } = useParams();
@@ -13,7 +16,7 @@ export default function RecipeBtns({ isInProgress, setIsInProgress }) {
   const NAME_URL = pathname.split('/')[1];
 
   useEffect(() => {
-    const recipesProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    const recipesProgress = getStorage('inProgressRecipes');
     if (recipesProgress && recipesProgress[NAME_URL]) {
       setIsRecipeInProgress(!!recipesProgress[NAME_URL][id]);
     }
@@ -21,13 +24,13 @@ export default function RecipeBtns({ isInProgress, setIsInProgress }) {
 
   const startRecipe = () => {
     setIsInProgress(!isInProgress);
-    history.push(isInProgress
-      ? '/done-recipes'
-      : `${pathname}/in-progress`);
+    history.push(`${pathname}/in-progress`);
   };
 
   const finishRecipe = () => {
     setIsInProgress(!isInProgress);
+    handleRemoveInProgress(id, NAME_URL);
+    addInDoneRecipes(recipe, NAME_URL);
     history.push('/done-recipes');
   };
 
@@ -38,7 +41,7 @@ export default function RecipeBtns({ isInProgress, setIsInProgress }) {
           className="btn"
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
-          // disabled={ !verifyChecked }
+          disabled={ !Object.values(checkboxes).every((value) => value === true) }
         >
           Finalizar Receita
         </button>
@@ -59,4 +62,5 @@ export default function RecipeBtns({ isInProgress, setIsInProgress }) {
 RecipeBtns.propTypes = {
   isInProgress: PropTypes.bool.isRequired,
   setIsInProgress: PropTypes.func.isRequired,
+  recipe: PropTypes.instanceOf(Object).isRequired,
 };

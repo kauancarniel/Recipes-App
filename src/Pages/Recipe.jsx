@@ -1,22 +1,21 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
-import ShareBtn from './ShareBtn';
-import FavoriteBtn from './FavoriteBtn';
+import ShareBtn from '../components/ShareBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
-import IngredientsList from './IngredientsList';
-import RecipeBtns from './RecipeBtns';
-import RecommendRecipes from './RecommendRecipes';
-import './RecipeInProg.css';
+import IngredientsList from '../components/IngredientsList';
+import RecipeBtns from '../components/RecipeBtns';
+import RecommendRecipes from '../components/RecommendRecipes';
+import './Recipe.css';
 
 const MAX_RECOMMENDATIONS = 6;
 
 export default function RecipeInProg() {
-  const { loading, error } = useContext(RecipesContext);
+  const { loading, error, linkCopy } = useContext(RecipesContext);
   const { id } = useParams();
   const { pathname } = useLocation();
-  const { linkCopy } = useContext(RecipesContext);
   const history = useHistory();
   const [recipe, setRecipe] = useState({});
   const [recommendRecipes, setRecommendRecipes] = useState([]);
@@ -52,14 +51,6 @@ export default function RecipeInProg() {
     strYoutube,
   } = recipe;
 
-  // const style = {
-  //   backgroundImage: `url(${recipe[`str${KEY_BASE}Thumb`]})`,
-  //   backgroundSize: 'cover',
-  //   backgroundPosition: 'center',
-  //   height: '30vh',
-  //   width: '100%',
-  // };
-
   return (
     <main>
       { loading && <div>Loading...</div> }
@@ -67,7 +58,11 @@ export default function RecipeInProg() {
       { (!loading && !error) && (
         <>
           <header>
-            <ShareBtn />
+            <ShareBtn
+              type={ NAME_URL }
+              id={ id }
+              testId="share-btn"
+            />
             <FavoriteBtn recipe={ recipe } />
             <img
               className="img-recipe"
@@ -113,7 +108,11 @@ export default function RecipeInProg() {
           { !isInProgress && (
             <RecommendRecipes recommendRecipes={ recommendRecipes } />
           )}
-          <RecipeBtns isInProgress={ isInProgress } setIsInProgress={ setIsInProgress } />
+          <RecipeBtns
+            recipe={ recipe }
+            isInProgress={ isInProgress }
+            setIsInProgress={ setIsInProgress }
+          />
         </>
       )}
       {linkCopy && (

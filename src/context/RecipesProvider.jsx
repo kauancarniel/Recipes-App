@@ -6,6 +6,7 @@ import RecipesContext from './RecipesContext';
 export default function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [checkboxes, setCheckboxes] = useState(() => ([]));
   const [linkCopy, setLinkCopy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,7 +22,9 @@ export default function RecipesProvider({ children }) {
     setError,
     linkCopy,
     setLinkCopy,
-  }), [recipes, categories, loading, error, linkCopy]);
+    checkboxes,
+    setCheckboxes,
+  }), [recipes, categories, loading, error, linkCopy, checkboxes]);
 
   return (
     <RecipesContext.Provider value={ store }>
