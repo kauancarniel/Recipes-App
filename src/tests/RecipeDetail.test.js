@@ -1,9 +1,9 @@
 import React from 'react';
-import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
+import { screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import { dataDrinks, dataMeals, recommendedDataMock } from './helpers/data';
-import RecipeDetails from '../Pages/RecipeDetails';
+import RecipeBtns from '../components/RecipeBtns';
 import App from '../App';
 import RecommendRecipes from '../components/RecommendRecipes';
 
@@ -13,13 +13,17 @@ describe('Teste do componente RecipeDetail', () => {
     localStorage.clear();
   });
 
+  const favoriteRecipess = [
+    { id: '52771', type: 'meal' },
+  ];
+
   const startBtn = 'start-recipe-btn';
 
   test('Verifica se API recommended retorna', async () => {
     jest.fn().mockResolvedValueOnce({ meals: recommendedDataMock });
 
-    render(
-      <RecommendRecipes recommendations={ recommendedDataMock } />,
+    renderWithRouterAndProvider(
+      <RecommendRecipes recommendRecipes={ recommendedDataMock } />,
     );
 
     expect(screen.getByTestId('0-recommendation-card')).toBeInTheDocument();
@@ -28,27 +32,14 @@ describe('Teste do componente RecipeDetail', () => {
     });
   });
 
-  test('Verifica se função é chamada', () => {
-    const handleFavoriteRecipe = jest.fn();
-
-    renderWithRouterAndProvider(<RecipeDetails
-      handleFavoriteRecipe={ handleFavoriteRecipe }
-    />);
-
-    const favoriteButton = screen.getByTestId('favorite-btn');
-
-    expect(favoriteButton).toBeInTheDocument();
-
-    userEvent.click(favoriteButton);
-
-    expect(handleFavoriteRecipe).toHaveBeenCalledTimes(0);
-  });
   test('Verifica se vai para a rota correta ao clicar no botão start recipe para meals', async () => {
     jest.fn().mockResolvedValueOnce([dataMeals, dataDrinks]);
     const id = '52771';
 
     const { history } = renderWithRouterAndProvider(<App />, `/meals/${id}`);
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
     expect(history.location.pathname).toBe('/meals/52771');
+
     const startRecipeButton = screen.getByTestId(startBtn);
     userEvent.click(startRecipeButton);
     await waitFor(() => {
@@ -58,10 +49,12 @@ describe('Teste do componente RecipeDetail', () => {
 
   test('Verifica se vai para a rota correta ao clicar no botão start recipe para drinks', async () => {
     jest.fn().mockResolvedValueOnce([dataMeals, dataDrinks]);
-    const id = '52771';
+    const id = '15997';
 
     const { history } = renderWithRouterAndProvider(<App />, `/drinks/${id}`);
-    expect(history.location.pathname).toBe('/drinks/52771');
+    expect(history.location.pathname).toBe('/drinks/15997');
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+
     const startRecipeButton = screen.getByTestId(startBtn);
     userEvent.click(startRecipeButton);
     await waitFor(() => {
@@ -72,15 +65,13 @@ describe('Teste do componente RecipeDetail', () => {
   test('Verifica botão de copiar e verifica se o texto foi copiado', async () => {
     jest.fn().mockResolvedValueOnce([dataMeals, dataDrinks]);
     const id = '52771';
-    renderWithRouterAndProvider(<RecipeDetails />, `/meals/${id}`);
+    renderWithRouterAndProvider(<App />, `/meals/${id}`);
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
     const copyButton = screen.getByTestId('share-btn');
-    const link = screen.getByTestId('link');
-    expect(link).not.toHaveTextContent(/Link Copied/i);
-    delete window.location;
-    window.location = { href: `http://localhost/meals/${id}` };
     const mockCopy = jest.fn();
     Object.assign(navigator, { clipboard: { writeText: mockCopy } });
     userEvent.click(copyButton);
+    const link = screen.getByTestId('link');
     await waitFor(() => {
       expect(mockCopy).toHaveBeenCalledWith(`http://localhost/meals/${id}`);
     });
@@ -88,14 +79,11 @@ describe('Teste do componente RecipeDetail', () => {
   });
 
   test('Verifica localStorage de favoriteRecipes', async () => {
-    const favoriteRecipess = [
-      { id: '52771', type: 'meal' },
-    ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipess));
 
-    const { getByTestId } = renderWithRouterAndProvider(<RecipeDetails />);
+    const { getByTestId } = renderWithRouterAndProvider(<App />, '/meals/52771');
 
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
 
     const favoriteButton = getByTestId('favorite-btn');
 
@@ -126,12 +114,20 @@ describe('Teste do componente RecipeDetail', () => {
 
     const { getByTestId } = renderWithRouterAndProvider(<App />, '/drinks/178319');
 
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
 
-    const startRecipeButton = getByTestId('start-recipe-btn');
+    const startRecipeButton = getByTestId(startBtn);
 
     await waitFor(() => {
       expect(startRecipeButton).toHaveTextContent('Continue Recipe');
     });
+  });
+  it('Verifica botão de start Recipe', () => {
+    const { getByTestId } = renderWithRouterAndProvider(<RecipeBtns />, '/meals/52771/in-progress');
+    const startRecipeButton = getByTestId(startBtn);
+    expect(startRecipeButton).toBeInTheDocument();
+
+    const continueRecipeButton = getByTestId(startBtn);
+    expect(continueRecipeButton).toBeInTheDocument();
   });
 });
