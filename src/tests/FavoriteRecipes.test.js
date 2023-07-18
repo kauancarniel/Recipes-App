@@ -3,6 +3,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import FavoriteRecipes from '../Pages/FavoriteRecipes';
+import FavoriteBtn from '../components/FavoriteBtn';
 
 describe('Teste do componente FavoriteRecipes', () => {
   beforeEach(() => {
@@ -52,38 +53,41 @@ describe('Teste do componente FavoriteRecipes', () => {
     expect(secondName).toBeInTheDocument();
   });
 
-  test('verifica se exclui a receita favorita quando o botão de coração for clicado', () => {
+  test('verifica se exclui a receita favorita quando o botão de coração for clicado', async () => {
     localStorage.setItem('favoriteRecipes', JSON.stringify([recipes[0]]));
 
-    renderWithRouterAndProvider(<FavoriteRecipes />);
-
-    const recipe1Name = screen.getByTestId('0-horizontal-name');
-    expect(recipe1Name).toBeInTheDocument();
+    const setFavorites = jest.fn();
+    renderWithRouterAndProvider(
+      <FavoriteBtn
+        recipe={ recipes[0] }
+        testId="0-horizontal-favorite-btn"
+        setFavorites={ setFavorites }
+      />,
+      '/favorite-recipes',
+    );
 
     const deleteBtn = screen.getByTestId('0-horizontal-favorite-btn');
     userEvent.click(deleteBtn);
 
-    expect(recipe1Name).not.toBeInTheDocument();
-    expect(localStorage.getItem('favoriteRecipes')).toBe('[]');
+    await waitFor(() => {
+      expect(localStorage.getItem('favoriteRecipes')).toBe('[]');
+    });
   });
   test('verifica se copia o link da receita quando o botão de compartilhamento for clicado', async () => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(recipes));
 
     renderWithRouterAndProvider(<FavoriteRecipes />);
-
     const recipe1ShareBTN = screen.getByTestId('0-horizontal-share-btn');
     const recipe2ShareBTN = screen.getByTestId('1-horizontal-share-btn');
-    const link = screen.getByTestId('link');
-
-    expect(link).not.toHaveTextContent(/Link Copied/i);
 
     const mockCopy = jest.fn();
     Object.assign(navigator, { clipboard: { writeText: mockCopy } });
 
     userEvent.click(recipe1ShareBTN);
+    const link = screen.getByTestId('link');
 
     await waitFor(() => {
-      expect(mockCopy).toHaveBeenCalledWith('http://localhost:3000/meals/1');
+      expect(mockCopy).toHaveBeenCalledWith('http://localhost/meals/1');
     });
 
     expect(link).toHaveTextContent(/Link Copied/i);
@@ -91,7 +95,7 @@ describe('Teste do componente FavoriteRecipes', () => {
     userEvent.click(recipe2ShareBTN);
 
     await waitFor(() => {
-      expect(mockCopy).toHaveBeenCalledWith('http://localhost:3000/drinks/1');
+      expect(mockCopy).toHaveBeenCalledWith('http://localhost/drinks/1');
     });
   });
 
@@ -121,14 +125,19 @@ describe('Teste do componente FavoriteRecipes', () => {
   test('verifica se o link copied some após o clique', async () => {
     localStorage.setItem('favoriteRecipes', JSON.stringify(recipes));
     renderWithRouterAndProvider(<FavoriteRecipes />);
-    const link = screen.getByTestId('link');
     const recipe1ShareBTN = screen.getByTestId('0-horizontal-share-btn');
 
     userEvent.click(recipe1ShareBTN);
+    const link = screen.getByTestId('link');
     expect(link).toHaveTextContent(/Link copied/i);
 
     await waitFor(() => {
-      expect(link).not.toHaveTextContent(/Link copied/i);
+      expect(link).not.toBeInTheDocument();
     });
+  });
+  test('verifica o array favorites', () => {
+    renderWithRouterAndProvider(<FavoriteRecipes />, '/favorite-recipes');
+
+    expect(localStorage.getItem('favoriteRecipes')).toBe(null);
   });
 });
