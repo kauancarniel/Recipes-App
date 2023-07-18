@@ -1,0 +1,12 @@
+.caroussel {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 31px;
+  overflow-x: scroll;
+  padding: 5px;
+  width: 100%;
+}
+
+.img-recommend {
+  width: 170px;
+}

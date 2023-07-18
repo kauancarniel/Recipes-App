@@ -38,7 +38,7 @@ function SearchBar() {
   };
 
   return (
-    <div data-testid="search-top-btn">
+    <div>
       <form>
         <label htmlFor="ingredient">
           <input
