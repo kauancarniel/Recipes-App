@@ -1,7 +1,10 @@
 import React from 'react';
-import { screen, fireEvent } from '@testing-library/react';
-import DoneRecipes from '../Pages/DoneRecipes';
+import { screen, fireEvent, waitFor } from '@testing-library/react';
+import copy from 'clipboard-copy';
+import { act } from 'react-dom/test-utils';
+
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
+import App from '../App';
 
 jest.mock('clipboard-copy');
 
@@ -12,7 +15,7 @@ describe('DoneRecipes', () => {
   });
 
   const recipe1 = {
-    id: 1,
+    id: '1',
     name: 'Recipe 1',
     type: 'meal',
     image: 'recipe1.jpg',
@@ -24,7 +27,7 @@ describe('DoneRecipes', () => {
     tags: ['Easy', 'Delicious'],
   };
   const recipe2 = {
-    id: 2,
+    id: '2',
     name: 'Recipe 2',
     type: 'drink',
     image: 'recipe2.jpg',
@@ -41,12 +44,12 @@ describe('DoneRecipes', () => {
   const image = '0-horizontal-image';
   const filterMealBtn = 'filter-by-meal-btn';
   const filterDrinkBtn = 'filter-by-drink-btn';
-  const shareBtn = '0-horizontal-share-btn';
+  const route = '/done-recipes';
 
-  test('Deve exibir todas as receitas favoritas quando o filtro for "all"', () => {
+  test('Deve exibir todas as receitas favoritas quando o filtro for "all"', async () => {
     localStorage.setItem('doneRecipes', JSON.stringify([recipe1, recipe2]));
 
-    renderWithRouterAndProvider(<DoneRecipes />);
+    renderWithRouterAndProvider(<App />, route);
 
     const recipe1Name = screen.getByTestId(name);
     const recipe2Name = screen.getByTestId(name2);
@@ -55,10 +58,10 @@ describe('DoneRecipes', () => {
     expect(recipe2Name).toHaveTextContent('Recipe 2');
   });
 
-  test('Deve exibir uma mensagem quando não houver receitas favoritas', () => {
+  test('Deve exibir uma mensagem quando não houver receitas favoritas', async () => {
     localStorage.removeItem('doneRecipes');
 
-    renderWithRouterAndProvider(<DoneRecipes />);
+    renderWithRouterAndProvider(<App />, route);
 
     const emptyMessage = screen.getByText('Nenhuma receita favorita encontrada.');
     expect(emptyMessage).toBeInTheDocument();
@@ -67,7 +70,7 @@ describe('DoneRecipes', () => {
   test('Deve filtrar e exibir apenas as receitas de tipo "meal" quando o filtro for "meal"', () => {
     localStorage.setItem('doneRecipes', JSON.stringify([recipe1, recipe2]));
 
-    renderWithRouterAndProvider(<DoneRecipes />);
+    renderWithRouterAndProvider(<App />, route);
 
     const filterButton = screen.getByTestId(filterMealBtn);
     fireEvent.click(filterButton);
@@ -82,7 +85,7 @@ describe('DoneRecipes', () => {
   test('Deve filtrar e exibir apenas as receitas de tipo "drink" quando o filtro for "drink"', () => {
     localStorage.setItem('doneRecipes', JSON.stringify([recipe1, recipe2]));
 
-    renderWithRouterAndProvider(<DoneRecipes />);
+    renderWithRouterAndProvider(<App />, route);
 
     const filterButton = screen.getByTestId(filterDrinkBtn);
     fireEvent.click(filterButton);
@@ -94,39 +97,42 @@ describe('DoneRecipes', () => {
     expect(recipe1Name).toBeNull();
   });
 
+  test('Verifica botão de copiar e verifica se o texto foi copiado', async () => {
+    localStorage.setItem('doneRecipes', JSON.stringify([recipe1, recipe2]));
+
+    const copyMock = copy.mockImplementation(() => {});
+
+    renderWithRouterAndProvider(<App />, route);
+
+    const copyButton = screen.getByTestId('1-horizontal-share-btn');
+    act(() => {
+      fireEvent.click(copyButton);
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId('link')).toHaveTextContent(/Link Copied/i);
+      expect(copyMock).toHaveBeenCalledWith('http://localhost/drinks/2');
+    });
+  });
+
   test('Deve redirecionar para a página correta ao clicar em nome de receita', () => {
     localStorage.setItem('doneRecipes', JSON.stringify([recipe1, recipe2]));
 
-    const { history } = renderWithRouterAndProvider(<DoneRecipes />);
+    const { history } = renderWithRouterAndProvider(<App />, route);
 
-    const recipe1Name = screen.getByTestId(name);
+    const recipe1Name = screen.getByTestId(name2);
     fireEvent.click(recipe1Name);
 
-    expect(history.location.pathname).toBe('/meals/1');
+    expect(history.location.pathname).toBe('/drinks/2');
   });
 
   test('Deve redirecionar para a página correta ao clicar na imagem de receita', () => {
     localStorage.setItem('doneRecipes', JSON.stringify([recipe1, recipe2]));
 
-    const { history } = renderWithRouterAndProvider(<DoneRecipes />);
+    const { history } = renderWithRouterAndProvider(<App />, route);
 
     const recipe1Image = screen.getByTestId(image);
     fireEvent.click(recipe1Image);
 
     expect(history.location.pathname).toBe('/meals/1');
-  });
-
-  test('Texto de link de receita deve aparecer ao clicar no botão de compartilhar', () => {
-    localStorage.setItem('doneRecipes', JSON.stringify([recipe1, recipe2]));
-
-    renderWithRouterAndProvider(<DoneRecipes />);
-
-    const link = screen.getByTestId('link');
-    expect(link).not.toHaveTextContent('Link copied!');
-
-    const btnShare = screen.getByTestId(shareBtn);
-    fireEvent.click(btnShare);
-
-    expect(link).toHaveTextContent('Link copied!');
   });
 });
