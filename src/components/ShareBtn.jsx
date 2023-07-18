@@ -5,7 +5,7 @@ import copy from 'clipboard-copy';
 import RecipesContext from '../context/RecipesContext';
 import shareIcon from '../images/shareIcon.svg';
 
-const TIME_OUT = 1500;
+const TIME_OUT = 1000;
 
 export default function ShareBtn({ type, id, testId }) {
   const { setLinkCopy } = useContext(RecipesContext);
@@ -24,7 +24,9 @@ export default function ShareBtn({ type, id, testId }) {
         setLinkCopy(true);
         setTimeout(() => setLinkCopy(false), TIME_OUT);
       } }
-    />
+    >
+      <img src={ shareIcon } alt="Share" />
+    </button>
   );
 }
 

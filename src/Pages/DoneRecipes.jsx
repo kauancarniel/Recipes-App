@@ -28,7 +28,6 @@ function DoneRecipes() {
         </main>
       ) : (
         <main>
-
           <nav>
             { buttonFilter.map((type) => (
               <button
@@ -42,7 +41,6 @@ function DoneRecipes() {
             ))}
           </nav>
           <section>
-
             { filteredRecipes.map(({
               id, type, image, name, nationality,
               category, doneDate, alcoholicOrNot, tags,
@@ -57,44 +55,46 @@ function DoneRecipes() {
                   />
                 </Link>
                 <div>
-                  <Link to={ `${type}s/${id}` }>
-                    <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
-                  </Link>
-                  <ShareBtn
-                    type={ `/${type}s` }
-                    id={ id }
-                    testId={ `${index}-horizontal-share-btn` }
-                  />
-                </div>
-                <div>
-                  <p data-testid={ `${index}-horizontal-top-text` }>
-                    { type === 'meal'
-                      ? `${nationality} - ${category}`
-                      : alcoholicOrNot }
-                  </p>
-                </div>
-                {
-
-                }
-                <p>
-                  Done In:
-                  {' '}
-                  <span data-testid={ `${index}-horizontal-done-date` }>
-                    { doneDate.toLocaleString('pt-BR', {
-                      day: '2-digit',
-                      month: '2-digit',
-                      year: 'numeric',
-                    }) }
-                  </span>
-                </p>
-                {tags.map((tag, indexTag) => (
-                  <div
-                    key={ indexTag }
-                    data-testid={ `${index}-${tag}-horizontal-tag` }
-                  >
-                    {tag}
+                  <div>
+                    <Link to={ `${type}s/${id}` }>
+                      <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
+                    </Link>
+                    <ShareBtn
+                      type={ `/${type}s` }
+                      id={ id }
+                      testId={ `${index}-horizontal-share-btn` }
+                    />
                   </div>
-                ))}
+                  <div>
+                    <p data-testid={ `${index}-horizontal-top-text` }>
+                      { type === 'meal'
+                        ? `${nationality} - ${category}`
+                        : alcoholicOrNot }
+                    </p>
+                  </div>
+                  {
+
+                  }
+                  <p>
+                    Done In:
+                    {' '}
+                    <span data-testid={ `${index}-horizontal-done-date` }>
+                      { doneDate.toLocaleString('pt-BR', {
+                        day: '2-digit',
+                        month: '2-digit',
+                        year: 'numeric',
+                      }) }
+                    </span>
+                  </p>
+                  {tags.map((tag, indexTag) => (
+                    <div
+                      key={ indexTag }
+                      data-testid={ `${index}-${tag}-horizontal-tag` }
+                    >
+                      {tag}
+                    </div>
+                  ))}
+                </div>
               </div>
             ))}
           </section>

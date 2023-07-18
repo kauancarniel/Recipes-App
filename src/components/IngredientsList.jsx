@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { useLocation } from 'react-router-dom';
-import { handleSaveProgress, getStorage } from '../utils/functions';
+import { handleSaveProgress, getStorage, initialIngredients } from '../utils/functions';
 import RecipesContext from '../context/RecipesContext';
 
 export default function IngredientsList({ recipe, isInProgress }) {
@@ -10,8 +10,7 @@ export default function IngredientsList({ recipe, isInProgress }) {
   const { pathname } = useLocation();
   const NAME_URL = pathname.split('/')[1];
   const KEY_BASE = NAME_URL === 'meals' ? 'Meal' : 'Drink';
-  const recipeARR = Object.entries(recipe);
-  const ingredients = recipeARR
+  const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') && value));
 
   useEffect(() => {
@@ -21,17 +20,13 @@ export default function IngredientsList({ recipe, isInProgress }) {
     if (recipesProgress && recipesProgress[NAME_URL] && recipesProgress[NAME_URL][id]) {
       usedIngredients = recipesProgress[NAME_URL][id];
     }
-    setCheckboxes(ingredients
-      .reduce((obj, ingredient) => ({
-        ...obj,
-        [ingredient[1]]: usedIngredients.includes(ingredient[1]),
-      }), {}));
+    setCheckboxes(initialIngredients(ingredients, usedIngredients));
   }, []);
 
-  const handleChange = (value) => {
+  const handleChange = (key, value) => {
     const newCheckboxes = {
       ...checkboxes,
-      [value]: !checkboxes[value],
+      [key]: checkboxes[key] === '' ? value : '',
     };
     setCheckboxes(newCheckboxes);
     handleSaveProgress(recipe[`id${KEY_BASE}`], NAME_URL, newCheckboxes);
@@ -46,16 +41,16 @@ export default function IngredientsList({ recipe, isInProgress }) {
       {
         isInProgress ? (
           <label
-            style={ { textDecoration: checkboxes[value] ? 'line-through' : 'none' } }
+            style={ { textDecoration: checkboxes[key] ? 'line-through' : 'none' } }
             data-testid={ `${index}-ingredient-step` }
-            htmlFor={ value }
+            htmlFor={ key }
           >
             <input
               type="checkbox"
-              id={ value }
-              name={ value }
-              checked={ checkboxes[value] }
-              onChange={ () => handleChange(value) }
+              id={ key }
+              name={ key }
+              checked={ checkboxes[key] }
+              onChange={ () => handleChange(key, value) }
             />
             {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
           </label>

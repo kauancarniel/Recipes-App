@@ -53,8 +53,8 @@ export default function RecipeInProg() {
 
   return (
     <main>
-      { loading && <div>Loading...</div> }
-      { error && <div>{ error }</div> }
+      { loading && <p>Loading...</p> }
+      { error && <p>{ error }</p> }
       { (!loading && !error) && (
         <>
           <header>
@@ -63,7 +63,7 @@ export default function RecipeInProg() {
               id={ id }
               testId="share-btn"
             />
-            <FavoriteBtn recipe={ recipe } />
+            <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
             <img
               className="img-recipe"
               src={ `${recipe[`str${KEY_BASE}Thumb`]}` }

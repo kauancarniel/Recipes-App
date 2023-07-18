@@ -1,122 +1,72 @@
-import React, { useEffect, useState } from 'react';
-import copy from 'clipboard-copy';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
-import imgcompt from '../images/shareIcon.svg';
-import Header from '../components/Header';
+import React, { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-const timeMessage = 1000;
+import Header from '../components/Header';
+import { getStorage } from '../utils/functions';
+import Filter from '../components/Filter';
+import RecipesContext from '../context/RecipesContext';
+import ShareBtn from '../components/ShareBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
+import './DoneRecipes.css';
 
 function FavoriteRecipes() {
-  const [favoritesDefault, setDefaultFavorites] = useState([]);
-  const [favorites, setFavorites] = useState(favoritesDefault);
-  const [coping, setCopy] = useState(false);
-  const history = useHistory();
+  const { filter, linkCopy } = useContext(RecipesContext);
+  const [favorites, setFavorites] = useState(() => getStorage('favoriteRecipes') || []);
 
-  useEffect(() => {
-    const storage = localStorage.getItem('favoriteRecipes');
-    setDefaultFavorites(JSON.parse(storage));
-    setFavorites(JSON.parse(storage));
-  }, []);
-
-  useEffect(() => {
-    setTimeout(() => setCopy(false), timeMessage);
-  }, [coping]);
-
-  const deleteFavorite = ({ target }) => {
-    const newFavorites = favorites.filter((recipe) => recipe.id !== target.name);
-    setFavorites(newFavorites);
-    localStorage.setItem('favoriteRecipes', JSON.stringify(newFavorites));
-  };
-
-  const filter = ({ target }) => {
-    if (target.name === 'all') setFavorites(favoritesDefault);
-    else {
-      const faFiltered = favoritesDefault.filter((recipe) => recipe.type === target.name);
-      setFavorites(faFiltered);
-    }
-  };
+  const filteredFavorites = filter === 'all'
+    ? favorites
+    : favorites.filter(({ type }) => type === filter);
 
   return (
-    <div>
+    <>
       <Header title="Favorite Recipes" iconeProfile />
-      <button data-testid="filter-by-all-btn" onClick={ filter } name="all">All</button>
-      <button
-        data-testid="filter-by-meal-btn"
-        onClick={ filter }
-        name="meal"
-      >
-        Meals
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        onClick={ filter }
-        name="drink"
-      >
-        Drinks
-      </button>
-      {coping && <p>Link copied!</p>}
-      <nav>
-        {!favorites ? <p>Sem favoritos</p> : favorites.map((recipe, index) => (
-          <div key={ index }>
-            <button
-              onClick={ deleteFavorite }
-            >
+      <Filter />
+      <main>
+        {!favorites.length ? (
+          <p>Sem favoritos</p>
+        ) : filteredFavorites.map((recipe, index) => (
+          <div key={ `${recipe.id}${recipe.type}` }>
+            <Link to={ `/${recipe.type}s/${recipe.id}` }>
               <img
-                src={ blackHeartIcon }
-                alt="Favorito"
-                name={ recipe.id }
-                data-testid={ `${index}-horizontal-favorite-btn` }
+                style={ { width: '100px' } }
+                src={ recipe.image }
+                alt={ `foto ${recipe.name}` }
+                data-testid={ `${index}-horizontal-image` }
               />
-            </button>
-            <button
-              className="compartilhar"
-              onClick={ () => {
-                setCopy(true);
-                copy(recipe.type === 'meal' ? `http://localhost:3000/meals/${recipe.id}` : `http://localhost:3000/drinks/${recipe.id}`);
-              } }
-            >
-              <img
-                src={ imgcompt }
-                alt="compartilhar"
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
-            {recipe.type === 'meal' ? (
-              <button onClick={ () => history.push(`/meals/${recipe.id}`) }>
-                <img
-                  src={ recipe.image }
-                  alt="foto da comida"
-                  data-testid={ `${index}-horizontal-image` }
+            </Link>
+            <div>
+              <div>
+                <Link to={ `/${recipe.type}s/${recipe.id}` }>
+                  <h3 data-testid={ `${index}-horizontal-name` }>{recipe.name}</h3>
+                </Link>
+                <p data-testid={ `${index}-horizontal-top-text` }>
+                  { recipe.type === 'meal'
+                    ? `${recipe.nationality} - ${recipe.category}`
+                    : recipe.alcoholicOrNot }
+                </p>
+              </div>
+              <div>
+                <ShareBtn
+                  type={ `/${recipe.type}s` }
+                  id={ recipe.id }
+                  testId={ `${index}-horizontal-share-btn` }
                 />
-                <a href={ `/meals/${recipe.id}` }>
-                  <p data-testid={ `${index}-horizontal-name` }>{ recipe.name }</p>
-                  <p data-testid={ `${index}-horizontal-top-text` }>
-                    { `${recipe.nationality} - ${recipe.category}` }
-                  </p>
-                </a>
-              </button>
-            ) : (
-              <button onClick={ () => history.push(`/drinks/${recipe.id}`) }>
-                <img
-                  src={ recipe.image }
-                  alt="Foto da bebida"
-                  data-testid={ `${index}-horizontal-image` }
+                <FavoriteBtn
+                  recipe={ recipe }
+                  testId={ `${index}-horizontal-favorite-btn` }
+                  setFavorites={ setFavorites }
                 />
-                <a href={ `/drinks/${recipe.id}` }>
-                  <p data-testid={ `${index}-horizontal-name` }>{ recipe.name }</p>
-                  <p
-                    data-testid={ `${index}-horizontal-top-text` }
-                  >
-                    { recipe.alcoholicOrNot }
-                  </p>
-                </a>
-              </button>
-            )}
+              </div>
+            </div>
           </div>
         ))}
-      </nav>
-    </div>
+      </main>
+      {linkCopy && (
+        <div className="link-copied" data-testid="link">
+          <p className="message">Link copied!</p>
+        </div>
+      )}
+    </>
   );
 }
 

@@ -41,7 +41,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
           className="btn"
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
-          disabled={ !Object.values(checkboxes).every((value) => value === true) }
+          disabled={ !Object.values(checkboxes).every((value) => value !== '') }
         >
           Finalizar Receita
         </button>
