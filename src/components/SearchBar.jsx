@@ -17,7 +17,7 @@ function SearchBar() {
 
   const saveSearchOpt = ({ target }) => {
     if (target.name === 'search') setOptSearch(target.value);
-    else if (target.name === 'textSearch') setTextSearch(target.value);
+    else setTextSearch(target.value);
   };
 
   const fetchingApi = async (event) => {
