@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 
-import ShareBtn from '../components/ShareBtn';
-import FavoriteBtn from '../components/FavoriteBtn';
+import ShareBtn from './ShareBtn';
+import FavoriteBtn from './FavoriteBtn';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
-import IngredientsList from '../components/IngredientsList';
-import RecipeBtns from '../components/RecipeBtns';
-import RecommendRecipes from '../components/RecommendRecipes';
+import IngredientsList from './IngredientsList';
+import RecipeBtns from './RecipeBtns';
+import RecommendRecipes from './RecommendRecipes';
 import './Recipe.css';
 
 const MAX_RECOMMENDATIONS = 6;
@@ -44,13 +44,6 @@ export default function RecipeInProg() {
     setIsInProgress(!isInProgress);
   };
 
-  const {
-    strCategory,
-    strAlcoholic,
-    strInstructions,
-    strYoutube,
-  } = recipe;
-
   return (
     <main>
       { loading && <p>Loading...</p> }
@@ -72,7 +65,7 @@ export default function RecipeInProg() {
             />
             <h2 data-testid="recipe-title">{recipe[`str${KEY_BASE}`]}</h2>
             <h3 data-testid="recipe-category">
-              { KEY_BASE === 'Meal' ? strCategory : strAlcoholic }
+              { KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic }
             </h3>
             <button onClick={ handleBack }>
               Voltar
@@ -91,14 +84,14 @@ export default function RecipeInProg() {
             <div>
               <h4>Instructions</h4>
               <p className="instructions" data-testid="instructions">
-                {strInstructions}
+                {recipe.strInstructions}
               </p>
-              {strYoutube && (
+              {recipe.strYoutube && (
                 <div data-testid="video">
                   <h4>Video</h4>
                   <iframe
                     className="video"
-                    src={ `https://www.youtube.com/embed/${strYoutube.split('=')[1]}` }
+                    src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
                     title="Recipe Video"
                   />
                 </div>

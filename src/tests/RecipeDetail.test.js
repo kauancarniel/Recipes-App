@@ -1,11 +1,11 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, waitForElementToBeRemoved } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import { dataDrinks, dataMeals, recommendedDataMock } from './helpers/data';
 import RecipeDetails from '../Pages/RecipeDetails';
 import App from '../App';
-import RecipeCarousel from '../components/RecipeCarousel';
+import RecommendRecipes from '../components/RecommendRecipes';
 
 describe('Teste do componente RecipeDetail', () => {
   beforeEach(() => {
@@ -18,8 +18,8 @@ describe('Teste do componente RecipeDetail', () => {
   test('Verifica se API recommended retorna', async () => {
     jest.fn().mockResolvedValueOnce({ meals: recommendedDataMock });
 
-    renderWithRouterAndProvider(
-      <RecipeCarousel recommendations={ recommendedDataMock } />,
+    render(
+      <RecommendRecipes recommendations={ recommendedDataMock } />,
     );
 
     expect(screen.getByTestId('0-recommendation-card')).toBeInTheDocument();
@@ -87,13 +87,16 @@ describe('Teste do componente RecipeDetail', () => {
     expect(link).toHaveTextContent(/Link Copied/i);
   });
 
-  test('Verifica localStorage de favoriteRecipes', () => {
+  test('Verifica localStorage de favoriteRecipes', async () => {
     const favoriteRecipess = [
       { id: '52771', type: 'meal' },
     ];
     localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipess));
 
     const { getByTestId } = renderWithRouterAndProvider(<RecipeDetails />);
+
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
     const favoriteButton = getByTestId('favorite-btn');
 
     expect(favoriteButton).toBeInTheDocument();
@@ -121,7 +124,10 @@ describe('Teste do componente RecipeDetail', () => {
     };
     localStorage.setItem('inProgressRecipes', JSON.stringify(inProgressRecipes));
 
-    const { getByTestId } = renderWithRouterAndProvider(<App />, '/drinks/178319/');
+    const { getByTestId } = renderWithRouterAndProvider(<App />, '/drinks/178319');
+
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
     const startRecipeButton = getByTestId('start-recipe-btn');
 
     await waitFor(() => {
