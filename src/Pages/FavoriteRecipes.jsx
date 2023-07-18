@@ -15,6 +15,7 @@ function FavoriteRecipes() {
 
   useEffect(() => {
     const storage = localStorage.getItem('favoriteRecipes');
+
     setDefaultFavorites(JSON.parse(storage));
     setFavorites(JSON.parse(storage));
   }, []);
@@ -55,66 +56,69 @@ function FavoriteRecipes() {
       >
         Drinks
       </button>
-      {coping && <p>Link copied!</p>}
+      <div data-testid="link">
+        {coping && <p>Link copied!</p>}
+      </div>
       <nav>
-        {!favorites ? <p>Sem favoritos</p> : favorites.map((recipe, index) => (
-          <div key={ index }>
-            <button
-              onClick={ deleteFavorite }
-            >
-              <img
-                src={ blackHeartIcon }
-                alt="Favorito"
-                name={ recipe.id }
-                data-testid={ `${index}-horizontal-favorite-btn` }
-              />
-            </button>
-            <button
-              className="compartilhar"
-              onClick={ () => {
-                setCopy(true);
-                copy(recipe.type === 'meal' ? `http://localhost:3000/meals/${recipe.id}` : `http://localhost:3000/drinks/${recipe.id}`);
-              } }
-            >
-              <img
-                src={ imgcompt }
-                alt="compartilhar"
-                data-testid={ `${index}-horizontal-share-btn` }
-              />
-            </button>
-            {recipe.type === 'meal' ? (
-              <button onClick={ () => history.push(`/meals/${recipe.id}`) }>
+        {!favorites || favorites.length === 0
+          ? <p>Sem favoritos</p> : favorites.map((recipe, index) => (
+            <div key={ index }>
+              <button
+                onClick={ deleteFavorite }
+              >
                 <img
-                  src={ recipe.image }
-                  alt="foto da comida"
-                  data-testid={ `${index}-horizontal-image` }
+                  src={ blackHeartIcon }
+                  alt="Favorito"
+                  name={ recipe.id }
+                  data-testid={ `${index}-horizontal-favorite-btn` }
                 />
-                <a href={ `/meals/${recipe.id}` }>
-                  <p data-testid={ `${index}-horizontal-name` }>{ recipe.name }</p>
-                  <p data-testid={ `${index}-horizontal-top-text` }>
-                    { `${recipe.nationality} - ${recipe.category}` }
-                  </p>
-                </a>
               </button>
-            ) : (
-              <button onClick={ () => history.push(`/drinks/${recipe.id}`) }>
+              <button
+                className="compartilhar"
+                onClick={ () => {
+                  setCopy(true);
+                  copy(recipe.type === 'meal' ? `http://localhost:3000/meals/${recipe.id}` : `http://localhost:3000/drinks/${recipe.id}`);
+                } }
+              >
                 <img
-                  src={ recipe.image }
-                  alt="Foto da bebida"
-                  data-testid={ `${index}-horizontal-image` }
+                  src={ imgcompt }
+                  alt="compartilhar"
+                  data-testid={ `${index}-horizontal-share-btn` }
                 />
-                <a href={ `/drinks/${recipe.id}` }>
-                  <p data-testid={ `${index}-horizontal-name` }>{ recipe.name }</p>
-                  <p
-                    data-testid={ `${index}-horizontal-top-text` }
-                  >
-                    { recipe.alcoholicOrNot }
-                  </p>
-                </a>
               </button>
-            )}
-          </div>
-        ))}
+              {recipe.type === 'meal' ? (
+                <button onClick={ () => history.push(`/meals/${recipe.id}`) }>
+                  <img
+                    src={ recipe.image }
+                    alt="foto da comida"
+                    data-testid={ `${index}-horizontal-image` }
+                  />
+                  <a href={ `/meals/${recipe.id}` }>
+                    <p data-testid={ `${index}-horizontal-name` }>{ recipe.name }</p>
+                    <p data-testid={ `${index}-horizontal-top-text` }>
+                      { `${recipe.nationality} - ${recipe.category}` }
+                    </p>
+                  </a>
+                </button>
+              ) : (
+                <button onClick={ () => history.push(`/drinks/${recipe.id}`) }>
+                  <img
+                    src={ recipe.image }
+                    alt="Foto da bebida"
+                    data-testid={ `${index}-horizontal-image` }
+                  />
+                  <a href={ `/drinks/${recipe.id}` }>
+                    <p data-testid={ `${index}-horizontal-name` }>{ recipe.name }</p>
+                    <p
+                      data-testid={ `${index}-horizontal-top-text` }
+                    >
+                      { recipe.alcoholicOrNot }
+                    </p>
+                  </a>
+                </button>
+              )}
+            </div>
+          ))}
       </nav>
     </div>
   );
