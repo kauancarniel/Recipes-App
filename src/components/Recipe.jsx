@@ -16,7 +16,6 @@ export default function RecipeInProg() {
   const { loading, error, linkCopy } = useContext(RecipesContext);
   const { id } = useParams();
   const { pathname } = useLocation();
-  const history = useHistory();
   const [recipe, setRecipe] = useState({});
   const [recommendRecipes, setRecommendRecipes] = useState([]);
   const [visibleInstructions, setVisibleInstructions] = useState(false);
@@ -39,11 +38,6 @@ export default function RecipeInProg() {
       }
     })();
   }, []);
-
-  const handleBack = () => {
-    history.goBack();
-    setIsInProgress(!isInProgress);
-  };
 
   return (
     <main>
