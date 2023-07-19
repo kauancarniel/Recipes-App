@@ -3,3 +3,12 @@
   margin: 0;
   padding: 0;
 }
+
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-greys {
+    @apply bg-slate-600
+  }
+}
