@@ -16,7 +16,7 @@ export default function ShareBtn({ type, id, testId }) {
     <button
       data-testid={ testId }
       type="button"
-      className="compartilhar"
+      className=" absolute top-[17em] right-4 bg-inherit border-none z-10 "
       src={ shareIcon }
       alt="compartilhar"
       onClick={ () => {
@@ -25,7 +25,7 @@ export default function ShareBtn({ type, id, testId }) {
         setTimeout(() => setLinkCopy(false), TIME_OUT);
       } }
     >
-      <img src={ shareIcon } alt="Share" />
+      <img src={ shareIcon } className="w-6 bg z-10" alt="Share" />
     </button>
   );
 }

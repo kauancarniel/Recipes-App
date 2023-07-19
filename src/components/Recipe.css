@@ -20,3 +20,15 @@
   color: white;
   padding: 20px 30px;
 }
+
+.instructions {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: opacity 0.3s ease-in, max-height 0.3s ease-in;
+}
+
+.instructions.visible {
+  opacity: 1;
+  max-height: 1000px;
+}

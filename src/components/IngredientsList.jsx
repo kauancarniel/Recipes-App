@@ -34,7 +34,7 @@ export default function IngredientsList({ recipe, isInProgress }) {
 
   return ingredients.map(([key, value], index) => (
     <li
-      style={ { listStyle: isInProgress ? 'none' : 'initial' } }
+      className="list-none"
       key={ key }
       data-testid={ `${index}-ingredient-name-and-measure` }
     >
