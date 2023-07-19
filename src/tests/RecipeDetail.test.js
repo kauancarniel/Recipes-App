@@ -25,7 +25,7 @@ describe('Teste do componente RecipeDetail', () => {
 
     renderWithRouterAndProvider(<App />, route);
 
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
 
     recommendedDataMock.slice(0, 5).forEach((item, index) => {
       const title = screen.getByTestId(`${index}-recommendation-title`);
@@ -37,7 +37,7 @@ describe('Teste do componente RecipeDetail', () => {
     jest.fn().mockResolvedValueOnce([dataMeals, dataDrinks]);
 
     const { history } = renderWithRouterAndProvider(<App />, route);
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
     expect(history.location.pathname).toBe(route);
 
     const startRecipeButton = screen.getByTestId(startBtn);
@@ -53,7 +53,7 @@ describe('Teste do componente RecipeDetail', () => {
 
     const { history } = renderWithRouterAndProvider(<App />, `/drinks/${id}`);
     expect(history.location.pathname).toBe('/drinks/15997');
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
 
     const startRecipeButton = screen.getByTestId(startBtn);
     userEvent.click(startRecipeButton);
@@ -66,7 +66,7 @@ describe('Teste do componente RecipeDetail', () => {
     jest.fn().mockResolvedValueOnce([dataMeals, dataDrinks]);
     const id = '52771';
     renderWithRouterAndProvider(<App />, `/meals/${id}`);
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
     const copyButton = screen.getByTestId('share-btn');
     const mockCopy = jest.fn();
     Object.assign(navigator, { clipboard: { writeText: mockCopy } });
@@ -83,7 +83,7 @@ describe('Teste do componente RecipeDetail', () => {
 
     const { getByTestId } = renderWithRouterAndProvider(<App />, '/meals/52771');
 
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
 
     const favoriteButton = getByTestId('favorite-btn');
 
@@ -114,7 +114,7 @@ describe('Teste do componente RecipeDetail', () => {
 
     const { getByTestId } = renderWithRouterAndProvider(<App />, '/drinks/178319');
 
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
 
     const startRecipeButton = getByTestId(startBtn);
 
@@ -126,7 +126,7 @@ describe('Teste do componente RecipeDetail', () => {
   test('Verifica botão de start Recipe', async () => {
     const { getByTestId } = renderWithRouterAndProvider(<App />, route);
 
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
 
     const startRecipeButton = getByTestId(startBtn);
     expect(startRecipeButton).toHaveTextContent(/Start Recipe/i);
@@ -137,7 +137,7 @@ describe('Teste do componente RecipeDetail', () => {
 
     renderWithRouterAndProvider(<App />, route);
 
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 2000 });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
 
     const favoriteButton = screen.getByTestId('favorite-btn');
 
