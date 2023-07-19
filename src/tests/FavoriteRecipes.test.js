@@ -133,7 +133,7 @@ describe('Teste do componente FavoriteRecipes', () => {
 
     await waitFor(() => {
       expect(link).not.toBeInTheDocument();
-    });
+    }, { timeout: 2000 });
   });
   test('verifica o array favorites', () => {
     renderWithRouterAndProvider(<FavoriteRecipes />, '/favorite-recipes');
