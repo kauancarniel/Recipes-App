@@ -1,0 +1,8 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-greys {
+    @apply bg-slate-600
+  }
+}
