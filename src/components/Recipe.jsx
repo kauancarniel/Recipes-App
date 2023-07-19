@@ -39,11 +39,6 @@ export default function RecipeInProg() {
     })();
   }, []);
 
-  const handleBack = () => {
-    history.goBack();
-    setIsInProgress(!isInProgress);
-  };
-
   return (
     <main>
       { loading && <p>Loading...</p> }
@@ -67,9 +62,6 @@ export default function RecipeInProg() {
             <h3 data-testid="recipe-category">
               { KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic }
             </h3>
-            <button onClick={ handleBack }>
-              Voltar
-            </button>
           </header>
           <section>
             <div>
