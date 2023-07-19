@@ -49,7 +49,7 @@ export default function IngredientsList({ recipe, isInProgress }) {
               type="checkbox"
               id={ key }
               name={ key }
-              checked={ checkboxes[key] }
+              checked={ !!checkboxes[key] }
               onChange={ () => handleChange(key, value) }
             />
             {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
