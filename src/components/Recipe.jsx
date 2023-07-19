@@ -106,31 +106,29 @@ export default function RecipeInProg() {
                   isInProgress={ isInProgress }
                 />
               </ul>
-            </div>
-            <div className='flex justify-end'>
-              <button
-                className="text-[40px] opacity-80 text-black bg-inherit border-none"
-                onClick={ () => setVisibleInstructions(!visibleInstructions) }
-              >
-                {IoListCircleSharp()}
-              </button>
+              <div className="flex items-center border-2 border-t-black ">
+                <button
+                  className="text-[40px] opacity-80 text-black bg-inherit border-none"
+                  onClick={ () => setVisibleInstructions(!visibleInstructions) }
+                >
+                  {IoListCircleSharp()}
+                </button>
+                <h4 className="text-xl p-2 font-epilogue">Instructions</h4>
+              </div>
             </div>
             <div
-              className={ `mt-8 border-solid border-2
+              className={ `instructions mt-6 border-solid border-2
               border-b-white
                rounded-lg p-3 flex
-                flex-col instructions ${!visibleInstructions ? 'visible' : ''}` }
+                flex-col ${!visibleInstructions ? 'visible' : ''}` }
             >
-              <div className="flex justify-between">
-                <h4 className="text-2xl font-epilogue">Instructions</h4>
-              </div>
               <p data-testid="instructions">
                 {recipe.strInstructions}
               </p>
               {recipe.strYoutube && (
-                <div data-testid="video" className="flex flex-col items-end w-[100%] ">
+                <div data-testid="video" className="flex items-end rounded-xl mt-7 w-[100%] bg-black">
                   <iframe
-                    className="video border-none rounded-xl w-[100%] mt-6 blur-lg"
+                    className="video border-none rounded-xl w-[100%] opacity-60 "
                     src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
                     title="Recipe Video"
                   />
