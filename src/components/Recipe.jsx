@@ -19,7 +19,7 @@ export default function RecipeInProg() {
   const history = useHistory();
   const [recipe, setRecipe] = useState({});
   const [recommendRecipes, setRecommendRecipes] = useState([]);
-  const [visibleInstructions, setVisibleInstructions] = useState([]);
+  const [visibleInstructions, setVisibleInstructions] = useState(false);
   const [isInProgress, setIsInProgress] = useState(
     () => pathname.includes('in-progress'),
   );
@@ -106,32 +106,39 @@ export default function RecipeInProg() {
                   isInProgress={ isInProgress }
                 />
               </ul>
-              <div className="flex items-center border-2 border-t-black ">
-                <button
-                  className="text-[40px] opacity-80 text-black bg-inherit border-none"
-                  onClick={ () => setVisibleInstructions(!visibleInstructions) }
-                >
-                  {IoListCircleSharp()}
-                </button>
-                <h4 className="text-xl p-2 font-epilogue">Instructions</h4>
-              </div>
+              <div className="flex items-center border-2 border-t-black " />
             </div>
             <div
-              className={ `instructions mt-6 border-solid border-2
+              className={ ` mt-6 border-solid border-2
               border-b-white
                rounded-lg p-3 flex
-                flex-col ${!visibleInstructions ? 'visible' : ''}` }
+                flex-col ` }
             >
-              <p data-testid="instructions">
-                {recipe.strInstructions}
-              </p>
-              {recipe.strYoutube && (
-                <div data-testid="video" className="flex items-end rounded-xl mt-7 w-[100%] bg-black">
-                  <iframe
-                    className="video border-none rounded-xl w-[100%] opacity-60 "
-                    src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
-                    title="Recipe Video"
-                  />
+              <button
+                className="text-[40px] opacity-80 text-black bg-inherit border-none"
+                onClick={ () => setVisibleInstructions(!visibleInstructions) }
+              >
+                {IoListCircleSharp()}
+                <h4 className="text-xl p-2 font-epilogue">Instructions</h4>
+              </button>
+              { visibleInstructions && (
+                <div className={ visibleInstructions ? 'animate-open' : 'h-0' }>
+                  <p data-testid="instructions">
+                    {recipe.strInstructions}
+                  </p>
+                  {recipe.strYoutube && (
+                    <div
+                      data-testid="video"
+                      className="flex items-end
+                      rounded-xl mt-7 w-[100%] bg-black"
+                    >
+                      <iframe
+                        className="video border-none rounded-xl w-[100%] opacity-60 "
+                        src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
+                        title="Recipe Video"
+                      />
+                    </div>
+                  )}
                 </div>
               )}
             </div>
