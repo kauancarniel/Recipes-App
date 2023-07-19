@@ -102,15 +102,30 @@ describe('Teste da page RecipeInProgress', () => {
     const checkIngredients = screen.getAllByTestId(/ingredient-step/i);
     const finishBtn = screen.getByTestId(/finish-recipe-btn/i);
 
-    checkIngredients.forEach(async (ingredient) => {
-      expect(ingredient.firstChild).not.toBeChecked();
-      expect(ingredient).toHaveStyle('text-decoration: none');
-      act(() => {
-        userEvent.click(ingredient.firstChild);
-      });
-      expect(ingredient.firstChild).toBeChecked();
-      expect(ingredient).toHaveStyle('text-decoration: line-through');
-    });
+    expect(checkIngredients[0].firstChild).not.toBeChecked();
+    expect(checkIngredients[0]).toHaveStyle('text-decoration: none');
+    userEvent.click(checkIngredients[0].firstChild);
+    expect(checkIngredients[0].firstChild).toBeChecked();
+    expect(checkIngredients[0]).toHaveStyle('text-decoration: line-through');
+
+    expect(checkIngredients[1].firstChild).not.toBeChecked();
+    expect(checkIngredients[1]).toHaveStyle('text-decoration: none');
+    userEvent.click(checkIngredients[1].firstChild);
+    expect(checkIngredients[1].firstChild).toBeChecked();
+    expect(checkIngredients[1]).toHaveStyle('text-decoration: line-through');
+
+    expect(checkIngredients[2].firstChild).not.toBeChecked();
+    expect(checkIngredients[2]).toHaveStyle('text-decoration: none');
+    userEvent.click(checkIngredients[2].firstChild);
+    expect(checkIngredients[2].firstChild).toBeChecked();
+    expect(checkIngredients[2]).toHaveStyle('text-decoration: line-through');
+
+    expect(checkIngredients[3].firstChild).not.toBeChecked();
+    expect(checkIngredients[3]).toHaveStyle('text-decoration: none');
+    userEvent.click(checkIngredients[3].firstChild);
+    expect(checkIngredients[3].firstChild).toBeChecked();
+    expect(checkIngredients[3]).toHaveStyle('text-decoration: line-through');
+
     expect(finishBtn).toBeEnabled();
   });
 
