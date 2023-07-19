@@ -5,7 +5,7 @@ import { act } from 'react-dom/test-utils';
 
 import renderWithRouterAndProvider from './helpers/renderWithRouterAndProvider';
 import App from '../App';
-import { categoriesListMeals, dataChicken, dataMeals } from './helpers/data';
+import { categoriesListMeals, dataBeef, dataChicken, dataMeals } from './helpers/data';
 
 describe('Teste do componente Recipes', () => {
   beforeEach(() => {
@@ -50,8 +50,8 @@ describe('Teste do componente Recipes', () => {
       json: jest.fn()
         .mockResolvedValueOnce(dataMeals)
         .mockResolvedValueOnce(categoriesListMeals)
+        .mockResolvedValueOnce(dataBeef)
         .mockResolvedValueOnce(dataChicken)
-        .mockResolvedValueOnce(dataMeals)
         .mockResolvedValueOnce(dataMeals)
         .mockResolvedValueOnce(dataChicken)
         .mockResolvedValueOnce(dataMeals),
@@ -75,11 +75,22 @@ describe('Teste do componente Recipes', () => {
     });
 
     act(() => {
-      userEvent.click(categoryBtns[3]);
+      userEvent.click(categoryBtns[1]);
     });
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 
     let recipeCards = screen.getAllByTestId(/recipe-card/i);
+    expect(recipeCards.length).toBe(12);
+    recipeCards.forEach((recipe, index) => {
+      expect(recipe).toHaveTextContent(dataBeef.meals[index].strMeal);
+    });
+
+    act(() => {
+      userEvent.click(categoryBtns[3]);
+    });
+    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
+
+    recipeCards = screen.getAllByTestId(/recipe-card/i);
     expect(recipeCards.length).toBe(12);
     recipeCards.forEach((recipe, index) => {
       expect(recipe).toHaveTextContent(dataChicken.meals[index].strMeal);
@@ -95,11 +106,6 @@ describe('Teste do componente Recipes', () => {
     recipeCards.forEach((recipe, index) => {
       expect(recipe).toHaveTextContent(dataMeals.meals[index].strMeal);
     });
-
-    act(() => {
-      userEvent.click(categoryBtns[0]);
-    });
-    await waitForElementToBeRemoved(() => screen.getByText(/loading/i));
 
     recipeCards = screen.getAllByTestId(/recipe-card/i);
     expect(recipeCards.length).toBe(12);

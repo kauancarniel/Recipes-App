@@ -29,7 +29,7 @@ function Recipes() {
       const recipesDataAll = await fetchRecipes(pathname);
       setRecipes(recipesDataAll.slice(0, MAX_RECIPES));
       setCategorySelected(strCategory);
-    } else if (strCategory !== 'All') {
+    } else {
       const recipesData = await fetchRecipes(pathname, 'category', strCategory);
       setRecipes(recipesData.slice(0, MAX_RECIPES));
       setCategorySelected(strCategory);

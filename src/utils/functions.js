@@ -31,7 +31,7 @@ export const changeFavorite = (recipe, BASE_TYPE, isFavorite) => {
     newFavoriteRecipes = [...favoriteRecipes, favoriteRecipe];
   } else {
     newFavoriteRecipes = favoriteRecipes.filter(
-      ({ id: favId, type: favType }) => favId !== id && favType !== BASE_TYPE,
+      ({ id: favId, type: favType }) => !(favId === id && favType === BASE_TYPE),
     );
   }
   setStorage('favoriteRecipes', newFavoriteRecipes);
@@ -66,19 +66,20 @@ export const addInDoneRecipes = (recipe, NAME_URL) => {
   const BASE_TYPE = NAME_URL === 'meals' ? 'meal' : 'drink';
   const { strArea, strCategory, strAlcoholic, strTags } = recipe;
   const doneRecipes = JSON.parse(localStorage.getItem('doneRecipes')) || [];
-  const isInDone = doneRecipes
-    .some(({ id, type }) => id === recipe[`id${BASE_KEY}`] && type === BASE_TYPE);
-  if (isInDone) return;
   const newRecipe = {
     id: recipe[`id${BASE_KEY}`],
     type: BASE_TYPE,
     nationality: strArea || '',
-    category: strCategory || '',
+    category: strCategory,
     alcoholicOrNot: strAlcoholic || '',
     name: recipe[`str${BASE_KEY}`],
     image: recipe[`str${BASE_KEY}Thumb`],
     doneDate: new Date().toISOString(),
     tags: strTags ? strTags.split(',').splice(0, 2) : [],
   };
-  setStorage('doneRecipes', [...doneRecipes, newRecipe]);
+  const newDoneRecipes = doneRecipes
+    .filter(({ id, type }) => !(id === recipe[`id${BASE_KEY}`]
+      && type === BASE_TYPE));
+
+  setStorage('doneRecipes', [...newDoneRecipes, newRecipe]);
 };

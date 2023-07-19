@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import ShareBtn from './ShareBtn';
 import FavoriteBtn from './FavoriteBtn';
@@ -16,7 +16,6 @@ export default function RecipeInProg() {
   const { loading, error, linkCopy } = useContext(RecipesContext);
   const { id } = useParams();
   const { pathname } = useLocation();
-  const history = useHistory();
   const [recipe, setRecipe] = useState({});
   const [recommendRecipes, setRecommendRecipes] = useState([]);
   const [isInProgress, setIsInProgress] = useState(
