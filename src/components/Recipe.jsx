@@ -10,6 +10,7 @@ import IngredientsList from './IngredientsList';
 import RecipeBtns from './RecipeBtns';
 import RecommendRecipes from './RecommendRecipes';
 import './Recipe.css';
+import FormCommentary from './FormCommentary';
 
 const MAX_RECOMMENDATIONS = 6;
 
@@ -141,6 +142,7 @@ export default function RecipeInProg() {
           { !isInProgress && (
             <RecommendRecipes recommendRecipes={ recommendRecipes } />
           )}
+          <FormCommentary />
           <RecipeBtns
             recipe={ recipe }
             isInProgress={ isInProgress }
