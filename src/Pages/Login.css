@@ -2,14 +2,11 @@
 @tailwind utilities;
 
 @layer components {
-  .bg-greys {
-    @apply bg-slate-600
-  }
   .flex-center {
     @apply flex justify-center items-center
   }
 
   .login-box {
-    @apply w-[90%] p-10
+    @apply w-[85%] p-10
   }
 }
