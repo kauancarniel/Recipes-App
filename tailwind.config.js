@@ -19,6 +19,9 @@ export const theme = {
         },
       },
     },
+    backgroundImage: {
+      'login-bg': 'url(\'/assets/images/login-bg.jpg\')',
+    },
   },
   fontFamily: {
     epilogue: ['Epilogue', 'sans-serif'],
