@@ -5,7 +5,7 @@ export const content = [
 export const theme = {
   extend: {
     animation: {
-      open: 'open 0.5s ease-in-out',
+      open: 'open 0.9s ease-in-out',
     },
     keyframes: {
       open: {
@@ -24,7 +24,6 @@ export const theme = {
     epilogue: ['Epilogue', 'sans-serif'],
   },
   screens: {
-    smm: '320px',
     sm: '394px',
     md: '768px',
     lg: '1024px',

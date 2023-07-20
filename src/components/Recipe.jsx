@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { IoChevronBackCircleSharp, IoListCircleSharp } from 'react-icons/io5';
 
 import ShareBtn from './ShareBtn';
@@ -15,6 +15,7 @@ const MAX_RECOMMENDATIONS = 6;
 
 export default function RecipeInProg() {
   const { loading, error, linkCopy } = useContext(RecipesContext);
+  const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
   const [recipe, setRecipe] = useState({});
@@ -40,6 +41,10 @@ export default function RecipeInProg() {
     })();
   }, []);
 
+  const handleBack = () => {
+    history.goBack();
+  };
+
   return (
     <main>
       { loading && <p>Loading...</p> }
@@ -53,21 +58,21 @@ export default function RecipeInProg() {
               testId="share-btn"
             />
             <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
-            <div className="bg-black h-52 absolute w-[100%] z-0">
+            <div className="bg-black absolute z-0 tam-img ">
               <img
-                className="w-[100%] h-52 opacity-40"
+                className="tam-img opacity-40"
                 src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
                 alt={ `${recipe[`str${KEY_BASE}`]}` }
                 data-testid="recipe-photo"
               />
             </div>
             <div
-              className="flex items-end p-6
-             text-white absolute top-24 left-0 h-24 w-[100%] "
+              className="flex items-end p-7
+             text-white title h-24 w-[100%] "
             >
               <h2
                 data-testid="recipe-title"
-                className="font-roboto text-2xl font-epilogue "
+                className="text-2xl font-epilogue  "
               >
                 {recipe[`str${KEY_BASE}`]}
 
@@ -76,9 +81,7 @@ export default function RecipeInProg() {
             <div>
               <h3
                 data-testid="recipe-category"
-                className="
-               absolute top-4 left-16
-                text-white font-epilogue text-sm"
+                className="title-category"
               >
                 {' '}
                 { KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic }
@@ -87,35 +90,37 @@ export default function RecipeInProg() {
             <button
               onClick={ handleBack }
               className="absolute top-2
-             left-2 text-[40px] opacity-80 text-black bg-inherit border-none"
+             left-2 text-[40px] opacity-70 btn-design"
             >
               {IoChevronBackCircleSharp()}
             </button>
           </header>
-          <section className="mt-52 rounded-[1em] p-3 ">
-            <div className=" border-solid border-2 rounded-lg p-3">
-              <h4 className="text-2xl font-epilogue">Ingredients</h4>
-              <ul className="grid grid-cols-2 gap-2 mt-4 mb-6 text-sm ">
+          <section className="mt-52 rounded-[1em] sm:p-4">
+            <div className=" mt border-div p-3 ">
+              <h4 className="tam-title">Ingredients</h4>
+              <ul className="grid grid-cols-2 gap-2 text-sm  ">
                 <IngredientsList
                   recipe={ recipe }
                   isInProgress={ isInProgress }
                 />
               </ul>
-              <div className="flex items-center border-2 border-t-black " />
             </div>
             <div
-              className={ ` mt-6 border-solid border-2
-              border-b-white
-               rounded-lg p-3 flex
+              className={ ` mt-6 border-div
+                p-3 flex
                 flex-col ` }
             >
-              <button
-                className="text-[40px] opacity-80 text-black bg-inherit border-none"
-                onClick={ () => setVisibleInstructions(!visibleInstructions) }
-              >
-                {IoListCircleSharp()}
-                <h4 className="text-xl p-2 font-epilogue">Instructions</h4>
-              </button>
+              <div>
+                <button
+                  className={ `flex text-[40px] 
+                  opacity-${visibleInstructions ? '100' : '70'} 
+                  mb-4 btn-design`}
+                  onClick={ () => setVisibleInstructions(!visibleInstructions) }
+                >
+                  {IoListCircleSharp()}
+                  <h4 className="p-2 tam-title">Instructions</h4>
+                </button>
+              </div>
               { visibleInstructions && (
                 <div className={ visibleInstructions ? 'animate-open' : 'h-0' }>
                   <p data-testid="instructions">
@@ -128,7 +133,7 @@ export default function RecipeInProg() {
                       rounded-xl mt-7 w-[100%] bg-black"
                     >
                       <iframe
-                        className="video border-none rounded-xl w-[100%] opacity-60 "
+                        className="border-none rounded-xl w-[100%] opacity-60 "
                         src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
                         title="Recipe Video"
                       />

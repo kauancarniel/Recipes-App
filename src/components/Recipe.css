@@ -1,3 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .bg-greys {
+    @apply bg-slate-600
+  }
+  .tam-img {
+    @apply w-[100%] h-52
+  }
+  .title-category {
+    @apply absolute top-4 left-14 text-xl text-white font-epilogue
+  }
+  .title {
+    @apply absolute top-24 left-0
+  }
+  .tam-title {
+    @apply text-2xl font-epilogue mb-4
+  }
+  .btn-design {
+    @apply text-black bg-inherit border-none
+  }
+  .border-div {
+    @apply border-solid border-2 rounded-lg
+  }
+}
+
 .img-recipe {
   width: 100%;
 }
@@ -21,12 +49,4 @@
   padding: 20px 30px;
 }
 
-.instructions {
 
-  transition: opacity 0.3s ease-in, max-height 0.3s ease-in;
-} 
-
-/* .instructions.visible {
-  opacity: 1;
-  max-height: 1000px;
-} */

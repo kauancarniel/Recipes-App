@@ -34,7 +34,7 @@ export default function IngredientsList({ recipe, isInProgress }) {
 
   return ingredients.map(([key, value], index) => (
     <li
-      className="list-none"
+      className="list-none w-[200px] mb-1"
       key={ key }
       data-testid={ `${index}-ingredient-name-and-measure` }
     >
