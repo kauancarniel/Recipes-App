@@ -23,6 +23,7 @@ const HIGHBALL_GLASS = 'Highball glass';
 
 const GREEK_YOGURT = 'Greek Yogurt';
 const OPTIONAL_ALCOHOL = 'Optional alcohol';
+const LINK_IMG1 = 'https://www.themealdb.com/images/media/meals/ctg8jd1585563097.jpg';
 
 export const dataMeals = {
   meals: [
@@ -1188,7 +1189,7 @@ export const dataMeals = {
       strCategory: 'Beef',
       strArea: 'Greek',
       strInstructions: 'Heat the grill to high. Brown the beef in a deep ovenproof frying pan over a high heat for 5 mins. Meanwhile, prick the aubergine with a fork, then microwave on High for 3-5 mins until soft. Mix the yogurt, egg and parmesan together, then add a little seasoning.\r\n\r\nStir the tomatoes, purée and potatoes in with the beef with some seasoning and heat through. Smooth the surface of the beef mixture with the back of a spoon, then slice the cooked aubergine and arrange on top. Pour the yogurt mixture over the aubergines, smooth out evenly, then grill until the topping has set and turned golden.',
-      strMealThumb: 'https://www.themealdb.com/images/media/meals/ctg8jd1585563097.jpg',
+      strMealThumb: LINK_IMG1,
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=8U_29i9Qp5U',
       strIngredient1: 'Beef',
@@ -4486,7 +4487,7 @@ export const dataBeef = {
     },
     {
       strMeal: 'Moussaka',
-      strMealThumb: 'https://www.themealdb.com/images/media/meals/ctg8jd1585563097.jpg',
+      strMealThumb: LINK_IMG1,
       idMeal: '53006',
     },
     {
@@ -4571,7 +4572,7 @@ export const mockMeal1Length = {
       strCategory: 'Beef',
       strArea: 'Greek',
       strInstructions: 'Heat the grill to high. Brown the beef in a deep ovenproof frying pan over a high heat for 5 mins. Meanwhile, prick the aubergine with a fork, then microwave on High for 3-5 mins until soft. Mix the yogurt, egg and parmesan together, then add a little seasoning.\r\n\r\nStir the tomatoes, purée and potatoes in with the beef with some seasoning and heat through. Smooth the surface of the beef mixture with the back of a spoon, then slice the cooked aubergine and arrange on top. Pour the yogurt mixture over the aubergines, smooth out evenly, then grill until the topping has set and turned golden.',
-      strMealThumb: 'https://www.themealdb.com/images/media/meals/ctg8jd1585563097.jpg',
+      strMealThumb: LINK_IMG1,
       strTags: null,
       strYoutube: 'https://www.youtube.com/watch?v=8U_29i9Qp5U',
       strIngredient1: 'Beef',
