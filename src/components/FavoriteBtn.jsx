@@ -46,7 +46,7 @@ export default function FavoriteBtn({ recipe, testId, setFavorites = null }) {
       data-testid={ testId }
       type="button"
       onClick={ handleClick }
-      className="absolute top-[14.5em] right-12 z-10 bg-inherit border-none"
+      className=" no-border ml-2"
       src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
     >
       {

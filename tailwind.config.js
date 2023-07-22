@@ -20,6 +20,7 @@ export const theme = {
       },
     },
   },
+
   fontFamily: {
     epilogue: ['Epilogue', 'sans-serif'],
   },

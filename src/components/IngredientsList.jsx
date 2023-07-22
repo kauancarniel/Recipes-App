@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
+import InputGroup from 'react-bootstrap/InputGroup';
 import { useLocation } from 'react-router-dom';
 import { handleSaveProgress, getStorage, initialIngredients } from '../utils/functions';
 import RecipesContext from '../context/RecipesContext';
@@ -34,7 +34,7 @@ export default function IngredientsList({ recipe, isInProgress }) {
 
   return ingredients.map(([key, value], index) => (
     <li
-      className="list-none w-[200px] mb-1"
+      className="list-none w-[100%] mb-1  "
       key={ key }
       data-testid={ `${index}-ingredient-name-and-measure` }
     >
@@ -45,14 +45,16 @@ export default function IngredientsList({ recipe, isInProgress }) {
             data-testid={ `${index}-ingredient-step` }
             htmlFor={ key }
           >
-            <input
-              type="checkbox"
-              id={ key }
-              name={ key }
-              checked={ !!checkboxes[key] }
-              onChange={ () => handleChange(key, value) }
-            />
+            <InputGroup className="mb-3 flex items-center">
+              <InputGroup.Checkbox className="m-0 w-3 h-3 "
+                type="checkbox"
+                id={ key }
+                name={ key }
+                checked={ !!checkboxes[key] }
+                onChange={ () => handleChange(key, value) }
+              />
             {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
+            </InputGroup>
           </label>
         ) : (
           `${value} - ${recipe[`strMeasure${index + 1}`]}`

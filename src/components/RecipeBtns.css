@@ -5,11 +5,11 @@
   justify-content: center;
   position: fixed;
   width: 100%;
+  z-index: 100;
 }
 
-.btn {
-  bottom: 0;
-  padding: 5px 0;
-  position: fixed;
-  width: 90%;
+
+.btns:active {
+  transition: transform 0.1s ease-in-out;
+  transform: scale(0.95);
 }

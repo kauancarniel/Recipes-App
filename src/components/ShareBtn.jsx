@@ -16,7 +16,7 @@ export default function ShareBtn({ type, id, testId }) {
     <button
       data-testid={ testId }
       type="button"
-      className=" absolute top-[14.5em] right-5 bg-inherit border-none z-10 "
+      className=" no-border "
       src={ shareIcon }
       alt="compartilhar"
       onClick={ () => {
