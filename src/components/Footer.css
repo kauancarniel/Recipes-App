@@ -1,4 +1,2 @@
-footer {
-  bottom: 0;
-  position: fixed;
-}
+@tailwind components;
+@tailwind utilities;

@@ -1,0 +1,38 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .menu-trans {
+    @apply w-10 transition transform duration-500 ease-in-out
+  }
+  .title {
+    @apply uppercase text-center font-[900] text-2xl text-[#CF5927] tracking-[4px]
+  }
+
+  .header {
+    @apply w-full flex justify-between px-3 bg-[#F9EFBB] py-1 fixed top-0 shadow-md z-10
+  }
+}
+
+.line {
+  fill: none;
+  stroke: #7D8C00;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2;
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+              stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
+}
+
+.hamburguer input:checked + svg {
+  transform: rotate(-45deg);
+}
+
+.hamburguer input:checked + svg .line-top-bottom {
+  stroke-dasharray: 20 300;
+  stroke-dashoffset: -32.42;
+}

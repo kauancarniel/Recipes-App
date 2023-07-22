@@ -66,6 +66,16 @@ export const theme = {
           bottom: '100%',
         },
       },
+      show: {
+        '0%': {
+          opacity: 0,
+          transform: 'scale(0)',
+        },
+        '100%': {
+          opacity: 1,
+          transform: 'scale(1)',
+        },
+      },
     },
   },
   fontFamily: {

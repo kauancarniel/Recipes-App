@@ -1,14 +1,33 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center
+  }
+
+  .reset-btn {
+    @apply border-none bg-transparent outline-none cursor-pointer
+  }
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-@tailwind components;
-@tailwind utilities;
+html {
+  font-family: Epilogue, sans-serif;
+}
 
-@layer components {
-  .bg-greys {
-    @apply bg-slate-600
-  }
+.glass {
+  backdrop-filter: blur(8px) saturate(20%);
+  -webkit-backdrop-filter: blur(8px) saturate(20%);
+}
+
+.bg {
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 7%, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 80%, rgba(0,0,0,0.5) 93%, rgba(0,0,0,0.8) 100%), url('./images/bg-login.png');
+  background-size: cover;
+  background-position: bottom;
 }

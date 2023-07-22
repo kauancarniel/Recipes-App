@@ -40,39 +40,6 @@ function SearchBar() {
   return (
     <div>
       <form>
-        <label htmlFor="ingredient">
-          <input
-            id="ingredient"
-            type="radio"
-            value="ingredient"
-            name="search"
-            data-testid="ingredient-search-radio"
-            onChange={ saveSearchOpt }
-          />
-          Ingredient
-        </label>
-        <label htmlFor="name">
-          <input
-            id="name"
-            type="radio"
-            value="name"
-            name="search"
-            data-testid="name-search-radio"
-            onChange={ saveSearchOpt }
-          />
-          Name
-        </label>
-        <label htmlFor="firstLetter">
-          <input
-            id="firstLetter"
-            type="radio"
-            value="firstLetter"
-            name="search"
-            data-testid="first-letter-search-radio"
-            onChange={ saveSearchOpt }
-          />
-          First letter
-        </label>
         <input
           type="text"
           onChange={ saveSearchOpt }
@@ -80,6 +47,41 @@ function SearchBar() {
           data-testid="search-input"
           placeholder="Type here"
         />
+        <div>
+          <label htmlFor="ingredient">
+            <input
+              id="ingredient"
+              type="radio"
+              value="ingredient"
+              name="search"
+              data-testid="ingredient-search-radio"
+              onChange={ saveSearchOpt }
+            />
+            Ingredient
+          </label>
+          <label htmlFor="name">
+            <input
+              id="name"
+              type="radio"
+              value="name"
+              name="search"
+              data-testid="name-search-radio"
+              onChange={ saveSearchOpt }
+            />
+            Name
+          </label>
+          <label htmlFor="firstLetter">
+            <input
+              id="firstLetter"
+              type="radio"
+              value="firstLetter"
+              name="search"
+              data-testid="first-letter-search-radio"
+              onChange={ saveSearchOpt }
+            />
+            First letter
+          </label>
+        </div>
         <button onClick={ fetchingApi } data-testid="exec-search-btn">Search</button>
       </form>
     </div>

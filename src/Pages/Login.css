@@ -2,12 +2,8 @@
 @tailwind utilities;
 
 @layer components {
-  .flex-center {
-    @apply flex justify-center items-center
-  }
-
   .login-box {
-    @apply w-[85%] p-4 transform -translate-y-1/2 rounded-lg shadow-[0_15px_25px_rgba(0,0,0,0.6)]
+    @apply w-[85%] p-4 transform -translate-y-1/2 rounded-lg shadow-[0_15px_25px_rgba(0,0,0,0.6)] max-w-[580px]
   }
 
   .bg-form {
@@ -34,6 +30,10 @@
     @apply bg-transparent outline-none
   }
 
+  .viewpass-btn {
+    @apply outline-none border-0 bg-transparent text-white font-bold text-base cursor-pointer
+  }
+
   .btn-login {
     @apply relative border-none px-5 py-2 text-base text-[#7D8C00] font-bold overflow-hidden transition-all duration-500 tracking-[4px] enabled:hover:bg-[#7D8C00] hover:rounded-md cursor-pointer z-10
   }
@@ -43,15 +43,15 @@
   }
 
   .anim2 {
-    @apply -top-full right-0 w-[2px] h-full bg-gradient-to-b from-transparent to-white animate-btnAnim2
+    @apply -top-full right-0 w-[2px] h-full animate-btnAnim2
   }
 
   .anim3 {
-    @apply bottom-0 -right-full w-full h-[2px] bg-gradient-to-l from-transparent to-white animate-btnAnim3
+    @apply bottom-0 -right-full w-full h-[2px] animate-btnAnim3
   }
 
   .anim4 {
-    @apply -bottom-full left-0 w-[2px] h-full bg-gradient-to-t from-transparent to-white animate-btnAnim4
+    @apply -bottom-full left-0 w-[2px] h-full animate-btnAnim4
   }
 }
 
@@ -87,14 +87,16 @@
   background: linear-gradient(360deg, transparent, #7D8C00);
 }
 
-.glass {
+/* .glass {
   backdrop-filter: blur(8px) saturate(20%);
   -webkit-backdrop-filter: blur(8px) saturate(20%);
 }
 
 .bg {
   background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 7%, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 80%, rgba(0,0,0,0.5) 93%, rgba(0,0,0,0.8) 100%), url('../images/bg-login.png');
-}
+  background-size: cover;
+  background-position: bottom;
+} */
 
 .shadow-hover:enabled:hover {
     box-shadow: 0 0 5px #7D8C00,
