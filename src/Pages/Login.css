@@ -1,0 +1,105 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .flex-center {
+    @apply flex justify-center items-center
+  }
+
+  .login-box {
+    @apply w-[85%] p-4 transform -translate-y-1/2 rounded-lg shadow-[0_15px_25px_rgba(0,0,0,0.6)]
+  }
+
+  .bg-form {
+    @apply bg-[rgba(0,0,0,.6)] border border-white border-opacity-10
+  }
+
+  .user-box {
+    @apply relative
+  }
+
+  .input {
+    @apply w-[100%] py-1 text-base text-white border-b border-b-white border-t-0 border-l-0 border-r-0 font-[epilogue] active:bg-transparent valid:bg-transparent
+  }
+
+  .input-select {
+    @apply -top-5 text-xs
+  }
+
+  .label {
+    @apply absolute top-0 left-0 pt-2 pb-2 text-base text-white pointer-events-none transition-all duration-500 font-[epilogue]
+  }
+
+  .reset-input {
+    @apply bg-transparent outline-none
+  }
+
+  .btn-login {
+    @apply relative border-none px-5 py-2 text-base text-[#7D8C00] font-bold overflow-hidden transition-all duration-500 tracking-[4px] enabled:hover:bg-[#7D8C00] hover:rounded-md cursor-pointer z-10
+  }
+
+  .anim1 {
+    @apply top-0 -left-full w-full h-[2px] animate-btnAnim1
+  }
+
+  .anim2 {
+    @apply -top-full right-0 w-[2px] h-full bg-gradient-to-b from-transparent to-white animate-btnAnim2
+  }
+
+  .anim3 {
+    @apply bottom-0 -right-full w-full h-[2px] bg-gradient-to-l from-transparent to-white animate-btnAnim3
+  }
+
+  .anim4 {
+    @apply -bottom-full left-0 w-[2px] h-full bg-gradient-to-t from-transparent to-white animate-btnAnim4
+  }
+}
+
+.line1 {
+  background: linear-gradient(90deg, transparent, #CF5927);
+}
+
+.line2 {
+  background: linear-gradient(180deg, transparent, #CF5927);
+}
+
+.line3 {
+  background: linear-gradient(270deg, transparent, #CF5927);
+}
+
+.line4 {
+  background: linear-gradient(360deg, transparent, #CF5927);
+}
+
+.anim-hover:enabled .line1 {
+  background: linear-gradient(90deg, transparent, #7D8C00);
+}
+
+.anim-hover:enabled .line2 {
+  background: linear-gradient(180deg, transparent, #7D8C00);
+}
+
+.anim-hover:enabled .line3 {
+  background: linear-gradient(270deg, transparent, #7D8C00);
+}
+
+.anim-hover:enabled .line4 {
+  background: linear-gradient(360deg, transparent, #7D8C00);
+}
+
+.glass {
+  backdrop-filter: blur(8px) saturate(20%);
+  -webkit-backdrop-filter: blur(8px) saturate(20%);
+}
+
+.bg {
+  background: linear-gradient(180deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.5) 7%, rgba(255,255,255,0) 20%, rgba(255,255,255,0) 80%, rgba(0,0,0,0.5) 93%, rgba(0,0,0,0.8) 100%), url('../images/bg-login.png');
+}
+
+.shadow-hover:enabled:hover {
+    box-shadow: 0 0 5px #7D8C00,
+                0 0 25px #7D8C00,
+                0 0 50px #7D8C00,
+                0 0 70px #7D8C00,
+                0 0 150px #7D8C00;
+  }
