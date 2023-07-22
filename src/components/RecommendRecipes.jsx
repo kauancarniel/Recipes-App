@@ -11,13 +11,13 @@ function RecommendRecipes({ recommendRecipes }) {
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Drink' : 'Meal';
 
   return (
-    <Carousel className="mb-10 mt-10 carousel-items">
+    <Carousel className="mb-10 carousel-items">
       {recommendRecipes.map((recipe, index) => (
         <Carousel.Item key={ `${recipe[`id${KEY_BASE}`]}${recipe[`str${KEY_BASE}`]}` }>
-          <div className="bg-black rounded-3xl">
+          <div className="bg-black ">
             <h1 className="recommend-title">Recommends</h1>
             <img
-              className="caroussel-img  rounded-3xl"
+              className="caroussel-img "
               src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
               alt={ `${recipe[`str${KEY_BASE}`]}` }
               data-testid={ `${index}-recommendation-card` }

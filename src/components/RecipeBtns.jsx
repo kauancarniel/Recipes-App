@@ -38,7 +38,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
     <div className="btn-container">
       {isInProgress ? (
         <button
-          className="btns"
+          className="btn-recipe btns"
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
           disabled={ Object.values(checkboxes).some((value) => value === '') }
@@ -47,7 +47,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
         </button>
       ) : (
         <button
-          className="w-[90%] h-10 rounded-lg btns  text-white border-white bg-lime-900   "
+          className="btn-recipe btns"
           onClick={ startRecipe }
           type="button"
           data-testid="start-recipe-btn"

@@ -34,7 +34,7 @@ export default function IngredientsList({ recipe, isInProgress }) {
 
   return ingredients.map(([key, value], index) => (
     <li
-      className="list-none w-[100%] mb-1  "
+      className="list-none w-[100%]   "
       key={ key }
       data-testid={ `${index}-ingredient-name-and-measure` }
     >
@@ -45,15 +45,16 @@ export default function IngredientsList({ recipe, isInProgress }) {
             data-testid={ `${index}-ingredient-step` }
             htmlFor={ key }
           >
-            <InputGroup className="mb-3 flex items-center">
-              <InputGroup.Checkbox className="m-0 w-3 h-3 "
+            <InputGroup className="mb-2 flex items-center">
+              <InputGroup.Checkbox
+                className="m-0 w-3 h-3 "
                 type="checkbox"
                 id={ key }
                 name={ key }
                 checked={ !!checkboxes[key] }
                 onChange={ () => handleChange(key, value) }
               />
-            {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
+              {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
             </InputGroup>
           </label>
         ) : (

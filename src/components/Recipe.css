@@ -9,16 +9,16 @@
     @apply bg-inherit border-none
   }
   .title-category {
-    @apply absolute top-3 left-14 text-xl text-white font-epilogue
+    @apply absolute top-3 left-14 text-xl text-white 
   }
   .title {
-    @apply absolute top-24 flex left-0 items-end p-[28px] text-white h-24 w-[100%]  text-[20px]
+    @apply absolute top-24 flex left-0 items-end p-[28px] text-white h-24 w-[100%]  text-[20px] 
   }
   .tam-title {
-    @apply text-2xl font-epilogue mb-4
+    @apply text-xl mb-4
   }
   .btn-design {
-    @apply text-black bg-inherit border-none text-[40px] flex
+    @apply text-[#E6C767] bg-inherit border-none text-[40px] flex 
   }
   .border-div {
     @apply border-solid border-2 rounded-lg
@@ -30,10 +30,13 @@
     @apply absolute text-white font-bold left-7 top-3 text-xl
   }
   .button-back {
-    @apply absolute top-2 left-2  opacity-70 btn-design
+    @apply absolute top-2 left-2  opacity-70 btn-design text-[#F9EFBB]
   }
   .border-grey {
     @apply border-div border-gray-300 border-[0.1px] p-3
+  }
+  .btn-recipe {
+    @apply w-[60%] h-10 rounded-md text-white border-none bg-[#7D8C00]
   }
 }
 
@@ -44,7 +47,6 @@
 
 .carousel-items{
   display: flex;
-  padding: 10px;
 }
 
 

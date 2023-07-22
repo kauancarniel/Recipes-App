@@ -13,7 +13,8 @@ import './Recipe.css';
 import FormCommentary from './FormCommentary';
 import { RenderButtons } from './RenderButtons';
 
-const MAX_RECOMMENDATIONS = 6;
+const MAX_RECOMMENDATIONS = 15;
+const INIT = 7;
 
 export default function RecipeInProg() {
   const { loading, error, linkCopy } = useContext(RecipesContext);
@@ -39,7 +40,7 @@ export default function RecipeInProg() {
       const recommendData = await fetchRecipes(tooglePathName);
       setRecipe(recipeData);
       if (!isInProgress) {
-        setRecommendRecipes(recommendData.slice(0, MAX_RECOMMENDATIONS));
+        setRecommendRecipes(recommendData.slice(INIT, MAX_RECOMMENDATIONS));
       }
     })();
   }, []);
@@ -63,7 +64,7 @@ export default function RecipeInProg() {
               />
               <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
             </div>
-            <div className="bg-black absolute z-0 tam-img ">
+            <div className="bg-black absolute tam-img ">
               <img
                 className="tam-img opacity-40"
                 src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
@@ -81,14 +82,11 @@ export default function RecipeInProg() {
                 { KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic }
               </h3>
             </div>
-            <button
-              onClick={ handleBack }
-              className="button-back"
-            >
+            <button onClick={ handleBack } className="button-back">
               {IoChevronBackCircleSharp()}
             </button>
           </header>
-          <section className="mt-52 rounded-[1em] p-3">
+          <section className="mt-52 p-3">
             <div className="border-grey mt-10 ">
               <RenderButtons
                 isVisible={ visibleIng }
@@ -102,22 +100,20 @@ export default function RecipeInProg() {
                 </ul>
               )}
             </div>
-            <div className="mt-6 border-grey flex flex-col ">
-              <div>
-                <RenderButtons
-                  isVisible={ visibleIns }
-                  setVisible={ setVisibleIns }
-                  icon={ IoListCircleSharp }
-                  title="Instructions"
-                />
-              </div>
+            <div className="mt-6 border-grey flex flex-col mb-10 ">
+              <RenderButtons
+                isVisible={ visibleIns }
+                setVisible={ setVisibleIns }
+                icon={ IoListCircleSharp }
+                title="Instructions"
+              />
               {visibleIns && (
                 <div className={ visibleIns ? 'animate-open' : 'h-0' }>
                   <p data-testid="instructions">{recipe.strInstructions}</p>
                   {recipe.strYoutube && (
                     <div
                       data-testid="video"
-                      className="flex items-end rounded-xl mt-7 w-[100%] bg-black"
+                      className="flex items-end rounded-xl mt-7 w-[100%] bg-black "
                     >
                       <iframe
                         className="border-none rounded-xl w-[100%] opacity-60 "
