@@ -1,17 +1,18 @@
 import { useHistory } from 'react-router-dom';
 
 import useFetch from '../hooks/useFetch';
-import iconFood from '../images/icon-foods.svg';
-import iconDrink from '../images/icon-drinks.svg';
 import './Footer.css';
+import IconFood from '../images/IconFood';
+import IconDrinks from '../images/IconDrinks';
 
 export default function Footer() {
   const history = useHistory();
+  const { pathname } = history.location;
   const { initialFetch } = useFetch();
 
-  const handleClick = async (pathname) => {
-    initialFetch(pathname);
-    history.push(pathname);
+  const handleClick = async (route) => {
+    initialFetch(route);
+    history.push(route);
   };
 
   return (
@@ -21,27 +22,17 @@ export default function Footer() {
     >
       <button
         className="reset-btn"
-        disabled={ history.location.pathname.includes('/drinks') }
+        disabled={ pathname.includes('/drinks') }
         onClick={ () => handleClick('/drinks') }
       >
-        <img
-          className="h-7"
-          src={ iconDrink }
-          alt="Drink"
-          data-testid="drinks-bottom-btn"
-        />
+        <IconDrinks />
       </button>
       <button
         className="reset-btn"
-        disabled={ history.location.pathname.includes('/meals') }
+        disabled={ pathname.includes('/meals') }
         onClick={ () => handleClick('/meals') }
       >
-        <img
-          className="h-7"
-          src={ iconFood }
-          alt="Meals"
-          data-testid="meals-bottom-btn"
-        />
+        <IconFood />
       </button>
     </footer>
   );

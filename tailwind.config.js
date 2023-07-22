@@ -77,14 +77,16 @@ export const theme = {
         },
       },
     },
+    gridTemplateColumns: {
+      'auto-fill': 'repeat(auto-fill, 170px)',
+    },
   },
   fontFamily: {
     epilogue: ['Epilogue', 'sans-serif'],
   },
   screens: {
-    smm: '320px',
-    sm: '394px',
-    md: '768px',
+    sm: '450px',
+    md: '800px',
     lg: '1024px',
   },
 };

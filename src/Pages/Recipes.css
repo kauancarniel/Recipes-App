@@ -1,0 +1,20 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .recipe-box {
+    @apply w-full p-4 transform -translate-y-1/2 max-w-[1000px] sm:w-[90%]
+  }
+
+  .box-bottom {
+    @apply rounded-b-lg pb-6 mb-12 sm:mb-16
+  }
+
+  .category {
+    @apply border border-solid rounded-[100%] w-[50px] h-[50px] flex items-center justify-center;
+  }
+
+  .cards-container {
+    @apply grid grid-cols-auto-fill gap-4 w-full justify-items-center justify-center
+  }
+}

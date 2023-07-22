@@ -1,0 +1,22 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .recipe-name {
+    @apply text-[20px] absolute bottom-2 left-2 no-underline text-white 
+  }
+}
+
+.card:hover {
+  transform: scale(1.2);
+  transition: all 0.2s ease-in-out;
+}
+
+.card:hover h2 {
+  display: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.shadow-name {
+  text-shadow: 0px 0px 5px rgba(0,0,0,0.8);
+};

@@ -4,20 +4,18 @@ import PropTypes from 'prop-types';
 import 'react-toastify/dist/ReactToastify.css';
 
 import RecipesContext from '../context/RecipesContext';
-import foods from '../images/icon-foods.svg';
-import noFoods from '../images/icon-no-foods.svg';
-import drinks from '../images/icon-drinks.svg';
-import noDrinks from '../images/icon-no-drinks.svg';
-import beef from '../images/icon-beef.svg';
-import noBeef from '../images/icon-no-beef.svg';
-import breakfast from '../images/breakfast-icon.svg';
-import chicken from '../images/chicken-icon.svg';
-import dessert from '../images/dessert-icon.svg';
-import goat from '../images/goat-icon.svg';
 import useFetch from '../hooks/useFetch';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
+import IconFood from '../images/IconFood';
+import IconDrink from '../images/IconDrinks';
+import IconBeef from '../images/IconBeef';
+import IconBreakfast from '../images/IconBreakfast';
+import IconChicken from '../images/IconChicken';
+import IconDessert from '../images/IconDessert';
+import IconGoat from '../images/IconGoat';
+import './Recipes.css';
 
 const MAX_RECIPES = 12;
 
@@ -27,13 +25,36 @@ function Recipes() {
   const { fetchRecipes, initialFetch } = useFetch();
   const { location: { pathname } } = useHistory();
 
-  const categoryIcons = [[beef, noBeef],
-    [breakfast, ''],
-    [chicken, ''],
-    [dessert, ''],
-    [goat, '']];
-
-  const food = [[foods, noFoods], [drinks, noDrinks]];
+  const renderIcon = (strCategory, index) => {
+    const categoryIcons = [
+      <IconBeef
+        key="Beef"
+        categorySelected={ categorySelected }
+        strCategory={ strCategory }
+      />,
+      <IconBreakfast
+        key="Beef"
+        categorySelected={ categorySelected }
+        strCategory={ strCategory }
+      />,
+      <IconChicken
+        key="Chicken"
+        categorySelected={ categorySelected }
+        strCategory={ strCategory }
+      />,
+      <IconDessert
+        key="Dessert"
+        categorySelected={ categorySelected }
+        strCategory={ strCategory }
+      />,
+      <IconGoat
+        key="Goat"
+        categorySelected={ categorySelected }
+        strCategory={ strCategory }
+      />,
+    ];
+    return categoryIcons[index];
+  };
 
   useEffect(() => {
     (async () => {
@@ -61,49 +82,62 @@ function Recipes() {
         iconeSearch
         iconeProfile
       />
-      <main className="bg-[#262321]">
-        <nav className="flex-center justify-between pb-9 px-2">
+      <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
+        <nav className="flex-center justify-between pb-9">
           <button
-            className="reset-btn text-white flex-center flex-col gap-[5px]"
+            className={
+              `reset-btn flex-center flex-col gap-[5px] ${
+                categorySelected === 'All'
+                  ? 'text-[#7D8C00]' : 'text-[#F9EFBB]'}`
+            }
             type="button"
             data-testid="All-category-filter"
+            disabled={ categorySelected === 'All' }
             onClick={ () => handleClickCategory('All') }
           >
-            <img
-              className="h-[45px]"
-              src={
-                food[pathname === '/meals' ? 0 : 1][categorySelected === 'All' ? 0 : 1]
+            <div
+              className={
+                `category border-[${categorySelected === 'All'
+                  ? '#7D8C00' : '#F9EFBB'}]`
               }
-              alt="category All icon"
-            />
+            >
+              { pathname === '/meals' ? (
+                <IconFood categorySelected={ categorySelected } strCategory="All" />
+              ) : (
+                <IconDrink categorySelected={ categorySelected } strCategory="All" />
+              ) }
+            </div>
             All
           </button>
-          {categories.map(({ strCategory }, index) => (
-            <button
-              className="reset-btn text-white flex-center flex-col gap-[5px]"
-              type="button"
-              key={ index }
-              data-testid={ `${strCategory}-category-filter` }
-              onClick={ () => handleClickCategory(strCategory) }
-            >
-              <img
-                className="h-[45px]"
-                src={
-                  categoryIcons[index][`${categorySelected === strCategory ? 0 : 1}`]
+          {categories.map(({ strCategory }, index) => {
+            const color = categorySelected === strCategory ? '#7D8C00' : '#F9EFBB';
+            return (
+              <button
+                className={
+                  `reset-btn flex-center flex-col gap-[5px] text-[${color}]`
                 }
-                alt={ `category ${strCategory} icon` }
-              />
-              { strCategory }
-            </button>
-          ))}
+                type="button"
+                key={ index }
+                data-testid={ `${strCategory}-category-filter` }
+                onClick={ () => handleClickCategory(strCategory) }
+              >
+                <div
+                  className={ `category border-[${color}]` }
+                >
+                  { renderIcon(strCategory, index) }
+                </div>
+                { strCategory }
+              </button>
+            );
+          })}
         </nav>
         {loading && (
-          <div>
-            <h2>Loading...</h2>
+          <div className="w-full h-full flex-center">
+            <h2 className="text-[#F9EFBB]">Loading...</h2>
           </div>
         )}
         {error && <div>{error}</div>}
-        <div>
+        <div className="cards-container">
           {!loading && !error && (
             <RecipeCard />
           )}
