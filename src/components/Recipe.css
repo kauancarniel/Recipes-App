@@ -1,7 +1,3 @@
-.img-recipe {
-  width: 100%;
-}
-
 .link-copied {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
@@ -15,18 +11,13 @@
 }
 
 .message {
-  background-color: darkgrey;
+  background-color: var(--gray);
   border-radius: 10px;
-  color: white;
+  color: var(--darkYellow);
   padding: 20px 30px;
 }
 
 .instructions {
-
   transition: opacity 0.3s ease-in, max-height 0.3s ease-in;
 } 
 
-/* .instructions.visible {
-  opacity: 1;
-  max-height: 1000px;
-} */
