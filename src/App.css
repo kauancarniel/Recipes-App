@@ -5,7 +5,7 @@
   --green: #7D8C00;
   --orange: #CF5927;
   --yellow: #F9EFBB;
-  --darkYellow: #F9EFBB;
+  --darkYellow: #E6C767;
   --red: #880627;
   --darkGray: #262321;
   --gray: #cccccc;
@@ -35,7 +35,7 @@
     @apply grid grid-cols-auto-fill gap-4 w-full justify-items-center justify-center sm:grid-cols-sm-auto-fill
   }
   .login-box {
-    @apply w-[85%] p-4 transform -translate-y-1/2 rounded-lg shadow-[0_15px_25px_rgba(0,0,0,0.6)] max-w-[580px]
+    @apply w-[85%] p-4 transform -translate-y-1/2 rounded-lg shadow-[0_15px_25px_rgba(0,0,0,0.6)] max-w-[580px] sm:p-9
   }
 
   .bg-form {
@@ -43,11 +43,11 @@
   }
 
   .user-box {
-    @apply relative
+    @apply relative w-full
   }
 
   .input {
-    @apply w-[100%] py-1 text-base text-white border-b border-b-white border-t-0 border-l-0 border-r-0 font-[epilogue] active:bg-transparent valid:bg-transparent
+    @apply w-full py-1 text-base text-white border-b border-b-white border-t-0 border-l-0 border-r-0 font-[epilogue] active:bg-transparent valid:bg-transparent
   }
 
   .input-select {
@@ -101,11 +101,11 @@
   }
 
   .header {
-    @apply w-full h-14 flex justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-10
+    @apply w-full min-h-[56px] flex flex-col items-center justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-20
   }
 
   .footer {
-    @apply fixed bottom-0 w-full flex justify-around items-center bg-[var(--yellow)] py-2 shadow-[0_-4px_6px_rgba(0,0,0,0.4)] z-10
+    @apply fixed bottom-0 w-full bg-[var(--yellow)] py-2 shadow-[0_-4px_6px_rgba(0,0,0,0.4)] z-10
   }
 
   .search-input {
@@ -114,6 +114,14 @@
 
   .search-btn {
     @apply border border-solid border-[var(--green)] rounded-r-md py-1 px-2 bg-[var(--green)] text-white cursor-pointer
+  }
+
+  .options-menu {
+    @apply absolute w-full top-14 right-auto bg-[var(--yellow)] rounded-b-lg flex justify-center max-w-[1000px]
+  }
+
+  .option-menu {
+    @apply no-underline text-[var(--green)] text-[24px] flex items-center gap-x-2 hover:text-[var(--orange)]
   }
 }
 

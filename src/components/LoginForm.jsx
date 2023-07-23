@@ -29,7 +29,7 @@ export default function LoginForm() {
 
   return (
     <form
-      className="flex-center flex-col gap-7"
+      className="flex-center flex-col gap-7 w-full max-w-sm"
       onSubmit={ (event) => {
         event.preventDefault();
         handleSubmit();
@@ -52,7 +52,7 @@ export default function LoginForm() {
           Email
         </label>
       </div>
-      <div className="flex-center relative">
+      <div className="flex-center relative w-full">
         <div className="user-box">
           <input
             className="peer reset-input input"

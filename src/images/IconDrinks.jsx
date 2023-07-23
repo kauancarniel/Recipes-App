@@ -9,7 +9,7 @@ function IconDrinks({ categorySelected = null, strCategory = null }) {
   if (categorySelected) {
     color = categorySelected === strCategory ? 'var(--green)' : 'var(--yellow)';
   } else {
-    color = pathname.includes('/drinks') ? 'var(--red)' : 'var(--green)';
+    color = pathname.includes('/drinks') ? 'var(--orange)' : 'var(--green)';
   }
 
   return (

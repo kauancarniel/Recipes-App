@@ -7,6 +7,7 @@ import nameLogo from '../images/name-recipes-app.svg';
 import iconFoods from '../images/icon-foods.svg';
 import iconDrinks from '../images/icon-drinks.svg';
 import SearchBar from './SearchBar';
+import Menu from './Menu';
 import './Header.css';
 
 function Header({ title, iconeProfile = false, iconeSearch = false }) {
@@ -19,8 +20,8 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
   const pathSvgFull = `${pathSvg1}${pathSvg2}${pathSvg3}`;
 
   return (
-    <header className="w-full flex flex-col items-center justify-center">
-      <div className="header">
+    <div className="w-full flex flex-col items-center justify-center">
+      <header className="header">
         <div className="flex justify-between w-full sm:w-[90%] gap-x-3 max-w-[1000px]">
           {showSearchBar ? (
             <SearchBar />
@@ -35,7 +36,10 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
               <button
                 className="reset-btn w-10 h-10 overflow-hidden"
                 type="button"
-                onClick={ () => setShowSearchBar(!showSearchBar) }
+                onClick={ () => {
+                  setShowSearchBar(!showSearchBar);
+                  if (menuOpen) setMenuOpen(!menuOpen);
+                } }
               >
                 { showSearchBar ? (
                   <TbSearchOff size="30px" color="var(--green)" />
@@ -50,7 +54,10 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
                   className="hidden"
                   type="checkbox"
                   checked={ menuOpen }
-                  onChange={ () => setMenuOpen(!menuOpen) }
+                  onChange={ () => {
+                    setMenuOpen(!menuOpen);
+                    if (showSearchBar) setShowSearchBar(!showSearchBar);
+                  } }
                 />
                 <svg
                   className="menu-trans"
@@ -66,7 +73,10 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
             )}
           </nav>
         </div>
-      </div>
+        {menuOpen && (
+          <Menu />
+        )}
+      </header>
       <div
         className="recipe-box flex-center bg-form glass title-box"
       >
@@ -82,7 +92,7 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
           {title}
         </h1>
       </div>
-    </header>
+    </div>
   );
 }
 

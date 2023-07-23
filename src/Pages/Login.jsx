@@ -7,7 +7,7 @@ import './Login.css';
 function Login() {
   return (
     <main
-      className="min-h-screen flex-center"
+      className="min-h-screen flex-center w-full"
     >
       <div className="login-box flex-center flex-col bg-form glass max-h-screen">
         <img src={ logo } alt="logo" className="w-40" />

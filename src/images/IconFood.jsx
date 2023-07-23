@@ -10,7 +10,7 @@ function IconFood({ categorySelected = null, strCategory = null }) {
   if (categorySelected) {
     color = categorySelected === strCategory ? 'var(--green)' : 'var(--yellow)';
   } else {
-    color = pathname.includes('/meals') ? 'var(--red)' : 'var(--green)';
+    color = pathname.includes('/meals') ? 'var(--orange)' : 'var(--green)';
   }
 
   return (
