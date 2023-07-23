@@ -1,3 +1,7 @@
+.img-recipe {
+  width: 100%;
+}
+
 @tailwind components;
 @tailwind utilities;
 
@@ -41,9 +45,6 @@
   .btn-container {
     @apply flex fixed z-50 items-center bottom-0 justify-center w-[100%]
   }
-}
-
-
 .link-copied {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
@@ -57,9 +58,9 @@
 }
 
 .message {
-  background-color: darkgrey;
+  background-color: var(--gray);
   border-radius: 10px;
-  color: white;
+  color: var(--darkYellow);
   padding: 20px 30px;
 }
 
@@ -67,7 +68,6 @@
   background-color: inherit;
   border: none;
 }
-
 
 .btns:active {
   transition: transform 0.1s ease-in-out;

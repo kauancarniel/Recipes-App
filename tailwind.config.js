@@ -66,6 +66,20 @@ export const theme = {
           bottom: '100%',
         },
       },
+      show: {
+        '0%': {
+          opacity: 0,
+          transform: 'scale(0)',
+        },
+        '100%': {
+          opacity: 1,
+          transform: 'scale(1)',
+        },
+      },
+    },
+    gridTemplateColumns: {
+      'auto-fill': 'repeat(auto-fill, 148px)',
+      'sm-auto-fill': 'repeat(auto-fill, 180px)',
     },
   },
 
@@ -73,7 +87,7 @@ export const theme = {
     epilogue: ['Epilogue', 'sans-serif'],
   },
   screens: {
-    sm: '450px',
+    sm: '550px',
     md: '800px',
     lg: '1024px',
   },

@@ -1,33 +1,40 @@
 import { useHistory } from 'react-router-dom';
 
 import useFetch from '../hooks/useFetch';
-import drinkIcon from '../images/drinkIcon.svg';
-import mealIcon from '../images/mealIcon.svg';
-import './Footer.css';
+import IconFood from '../images/IconFood';
+import IconDrinks from '../images/IconDrinks';
 
 export default function Footer() {
   const history = useHistory();
+  const { pathname } = history.location;
   const { initialFetch } = useFetch();
 
-  const handleClick = async (pathname) => {
-    initialFetch(pathname);
-    history.push(pathname);
+  const handleClick = async (route) => {
+    initialFetch(route);
+    history.push(route);
   };
 
   return (
-    <footer data-testid="footer">
-      <button
-        disabled={ history.location.pathname.includes('/drinks') }
-        onClick={ () => handleClick('/drinks') }
-      >
-        <img src={ drinkIcon } alt="Drink" data-testid="drinks-bottom-btn" />
-      </button>
-      <button
-        disabled={ history.location.pathname.includes('/meals') }
-        onClick={ () => handleClick('/meals') }
-      >
-        <img src={ mealIcon } alt="Meals" data-testid="meals-bottom-btn" />
-      </button>
+    <footer
+      className="footer"
+      data-testid="footer"
+    >
+      <div className="w-full max-w-[1000px] flex justify-around items-center">
+        <button
+          className="reset-btn"
+          disabled={ pathname.includes('/drinks') }
+          onClick={ () => handleClick('/drinks') }
+        >
+          <IconDrinks />
+        </button>
+        <button
+          className="reset-btn"
+          disabled={ pathname.includes('/meals') }
+          onClick={ () => handleClick('/meals') }
+        >
+          <IconFood />
+        </button>
+      </div>
     </footer>
   );
 }
