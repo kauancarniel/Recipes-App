@@ -101,11 +101,15 @@
   }
 
   .header {
-    @apply w-full flex justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-md z-10
+    @apply w-full flex justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-10
   }
 
   .footer {
-    @apply fixed bottom-0 w-full flex justify-around items-center bg-[var(--yellow)] py-2
+    @apply fixed bottom-0 w-full flex justify-around items-center bg-[var(--yellow)] py-2 shadow-[0_-4px_6px_rgba(0,0,0,0.4)] z-10
+  }
+
+  .search-input {
+    @apply border border-[var(--green)] rounded-l-md py-1 px-2 mb-1 w-max text-[var(--green)]
   }
 }
 

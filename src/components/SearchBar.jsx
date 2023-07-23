@@ -45,13 +45,17 @@ function SearchBar() {
   return (
     <div>
       <form>
-        <input
-          type="text"
-          onChange={ saveSearchOpt }
-          name="textSearch"
-          data-testid="search-input"
-          placeholder="Type here"
-        />
+        <div>
+          <input
+            className="reset-input search-input placeholder:text-[var(--gray)]"
+            type="text"
+            onChange={ saveSearchOpt }
+            name="textSearch"
+            data-testid="search-input"
+            placeholder="Type Here"
+          />
+          <button onClick={ fetchingApi } data-testid="exec-search-btn">Search</button>
+        </div>
         <div>
           <label htmlFor="ingredient">
             <input
@@ -87,7 +91,6 @@ function SearchBar() {
             First letter
           </label>
         </div>
-        <button onClick={ fetchingApi } data-testid="exec-search-btn">Search</button>
       </form>
     </div>
   );
