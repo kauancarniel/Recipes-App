@@ -15,7 +15,6 @@ import IconBreakfast from '../images/IconBreakfast';
 import IconChicken from '../images/IconChicken';
 import IconDessert from '../images/IconDessert';
 import IconGoat from '../images/IconGoat';
-import './Recipes.css';
 
 const MAX_RECIPES = 12;
 
@@ -67,7 +66,7 @@ function Recipes() {
     if (allCondition || categorySelected === strCategory) {
       const recipesDataAll = await fetchRecipes(pathname);
       setRecipes(recipesDataAll.slice(0, MAX_RECIPES));
-      setCategorySelected(strCategory);
+      setCategorySelected('All');
     } else {
       const recipesData = await fetchRecipes(pathname, 'category', strCategory);
       setRecipes(recipesData.slice(0, MAX_RECIPES));

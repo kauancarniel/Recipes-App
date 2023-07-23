@@ -1,7 +1,6 @@
 import { useHistory } from 'react-router-dom';
 
 import useFetch from '../hooks/useFetch';
-import './Footer.css';
 import IconFood from '../images/IconFood';
 import IconDrinks from '../images/IconDrinks';
 

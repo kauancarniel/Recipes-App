@@ -1,27 +1,6 @@
-@tailwind components;
-@tailwind utilities;
-
-@layer components {
-  .menu-trans {
-    @apply w-10 transition transform duration-500 ease-in-out
-  }
-
-  .title-box {
-    @apply flex-col gap-y-2 py-6 mt-12 rounded-t-lg sm:mt-16
-  }
-
-  .title {
-    @apply uppercase text-center font-[900] text-2xl text-[#CF5927] tracking-[4px]
-  }
-
-  .header {
-    @apply w-full flex justify-center px-3 bg-[#F9EFBB] py-1 fixed top-0 shadow-md z-10
-  }
-}
-
 .line {
   fill: none;
-  stroke: #7D8C00;
+  stroke: var(--green);
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
