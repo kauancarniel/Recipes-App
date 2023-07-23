@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function IconDessert({ categorySelected, strCategory }) {
-  const color = categorySelected === strCategory ? '#7D8C00' : '#F9EFBB';
+  const color = categorySelected === strCategory ? 'var(--green)' : 'var(--yellow)';
 
   return (
     <svg width="33" height="29" viewBox="0 0 29 25" fill="none" xmlns="http://www.w3.org/2000/svg">

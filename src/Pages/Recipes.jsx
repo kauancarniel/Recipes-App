@@ -87,7 +87,7 @@ function Recipes() {
             className={
               `reset-btn flex-center flex-col gap-[5px] ${
                 categorySelected === 'All'
-                  ? 'text-[#7D8C00]' : 'text-[#F9EFBB]'}`
+                  ? 'text-[var(--green)]' : 'text-[var(--yellow)]'}`
             }
             type="button"
             data-testid="All-category-filter"
@@ -97,7 +97,7 @@ function Recipes() {
             <div
               className={
                 `category border-[${categorySelected === 'All'
-                  ? '#7D8C00' : '#F9EFBB'}]`
+                  ? 'var(--green)' : 'var(--yellow)'}]`
               }
             >
               { pathname === '/meals' ? (
@@ -109,7 +109,7 @@ function Recipes() {
             All
           </button>
           {categories.map(({ strCategory }, index) => {
-            const color = categorySelected === strCategory ? '#7D8C00' : '#F9EFBB';
+            const color = categorySelected === strCategory ? 'var(--green)' : 'var(--yellow)';
             return (
               <button
                 className={
@@ -132,7 +132,7 @@ function Recipes() {
         </nav>
         {loading && (
           <div className="w-full h-full flex-center">
-            <h2 className="text-[#F9EFBB]">Loading...</h2>
+            <h2 className="text-[var(--yellow)]">Loading...</h2>
           </div>
         )}
         {error && <div>{error}</div>}

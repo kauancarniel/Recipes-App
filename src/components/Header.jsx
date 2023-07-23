@@ -38,9 +38,9 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
                 onClick={ () => setShowSearchBar(!showSearchBar) }
               >
                 { showSearchBar ? (
-                  <TbSearchOff size="30px" color="#7D8C00" />
+                  <TbSearchOff size="30px" color="var(--green)" />
                 ) : (
-                  <TbSearch size="30px" color="#7D8C00" />
+                  <TbSearch size="30px" color="var(--green)" />
                 )}
               </button>
             )}

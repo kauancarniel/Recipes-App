@@ -7,9 +7,9 @@ function IconDrinks({ categorySelected = null, strCategory = null }) {
   const { pathname } = useLocation();
   let color;
   if (categorySelected) {
-    color = categorySelected === strCategory ? '#7D8C00' : '#F9EFBB';
+    color = categorySelected === strCategory ? 'var(--green)' : 'var(--yellow)';
   } else {
-    color = pathname.includes('/drinks') ? '#880627' : '#7D8C00';
+    color = pathname.includes('/drinks') ? 'var(--red)' : 'var(--green)';
   }
 
   return (

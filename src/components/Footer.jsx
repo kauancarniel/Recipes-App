@@ -16,7 +16,7 @@ export default function Footer() {
 
   return (
     <footer
-      className="fixed bottom-0 w-full flex justify-around items-center bg-[#F9EFBB] py-2"
+      className="footer"
       data-testid="footer"
     >
       <button
