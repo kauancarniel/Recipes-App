@@ -6,12 +6,11 @@ import ShareBtn from './ShareBtn';
 import FavoriteBtn from './FavoriteBtn';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
-import IngredientsList from './IngredientsList';
 import RecipeBtns from './RecipeBtns';
 import RecommendRecipes from './RecommendRecipes';
 import './Recipe.css';
-import FormCommentary from './FormCommentary';
 import { RenderButtons } from './RenderButtons';
+import FormCommentary from './FormCommentary';
 
 const MAX_RECOMMENDATIONS = 15;
 const INIT = 7;
@@ -50,13 +49,13 @@ export default function RecipeInProg() {
   };
 
   return (
-    <main>
+    <main className="min-h-screen bg-[#262321] flex justify-center  ">
       { loading && <p>Loading...</p> }
       { error && <p>{ error }</p> }
       { (!loading && !error) && (
-        <>
+        <div className='containerzao md:max-[60%]:'>
           <header className="flex justify-center ">
-            <div className="absolute z-10 top-[17rem] right-5">
+            <div className="absolute z-10 top-[17rem] md:top-[22rem] right-5">
               <ShareBtn
                 type={ NAME_URL }
                 id={ id }
@@ -64,9 +63,9 @@ export default function RecipeInProg() {
               />
               <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
             </div>
-            <div className="bg-black absolute tam-img ">
+            <div className="bg-black tam-img ">
               <img
-                className="tam-img opacity-40"
+                className="tam-img opacity-50"
                 src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
                 alt={ `${recipe[`str${KEY_BASE}`]}` }
                 data-testid="recipe-photo"
@@ -86,19 +85,17 @@ export default function RecipeInProg() {
               {IoChevronBackCircleSharp()}
             </button>
           </header>
-          <section className="mt-52 p-3">
+          <section className="p-3">
             <div className="border-grey mt-10 ">
               <RenderButtons
                 isVisible={ visibleIng }
                 setVisible={ setVisibleIng }
                 icon={ PiBowlFoodFill }
                 title="Ingredients"
+                recipe={ recipe }
+                isInProgress={ isInProgress }
               />
-              {visibleIng && (
-                <ul className={ `text-sm p-0 ${visibleIng ? 'animate-open' : 'h-0'}` }>
-                  <IngredientsList recipe={ recipe } isInProgress={ isInProgress } />
-                </ul>
-              )}
+
             </div>
             <div className="mt-6 border-grey flex flex-col mb-10 ">
               <RenderButtons
@@ -106,38 +103,26 @@ export default function RecipeInProg() {
                 setVisible={ setVisibleIns }
                 icon={ IoListCircleSharp }
                 title="Instructions"
+                recipe={ recipe }
+                isInProgress={ isInProgress }
               />
-              {visibleIns && (
-                <div className={ visibleIns ? 'animate-open' : 'h-0' }>
-                  <p data-testid="instructions">{recipe.strInstructions}</p>
-                  {recipe.strYoutube && (
-                    <div
-                      data-testid="video"
-                      className="flex items-end rounded-xl mt-7 w-[100%] bg-black "
-                    >
-                      <iframe
-                        className="border-none rounded-xl w-[100%] opacity-60 "
-                        src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
-                        title="Recipe Video"
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
+
             </div>
           </section>
           { !isInProgress && (
             <RecommendRecipes recommendRecipes={ recommendRecipes } />
           )}
-          <FormCommentary />
-          <div className="mt-28">
+          <div>
+            <FormCommentary />
+          </div>
+          <div className='pb-10 bg-[#262321]'>
             <RecipeBtns
               recipe={ recipe }
               isInProgress={ isInProgress }
               setIsInProgress={ setIsInProgress }
             />
           </div>
-        </>
+        </div>
       )}
       {linkCopy && (
         <div className="link-copied" data-testid="link">

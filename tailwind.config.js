@@ -73,8 +73,8 @@ export const theme = {
     epilogue: ['Epilogue', 'sans-serif'],
   },
   screens: {
-    sm: '394px',
-    md: '768px',
+    sm: '450px',
+    md: '800px',
     lg: '1024px',
   },
 };

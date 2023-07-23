@@ -3,7 +3,6 @@ import { useHistory, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import RecipesContext from '../context/RecipesContext';
-import './RecipeBtns.css';
 import { addInDoneRecipes, getStorage, handleRemoveInProgress } from '../utils/functions';
 
 export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
