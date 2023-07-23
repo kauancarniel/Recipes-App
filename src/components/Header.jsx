@@ -21,7 +21,7 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
   return (
     <header className="w-full flex flex-col items-center justify-center">
       <div className="header">
-        <div className="flex justify-between w-full sm:w-[90%]">
+        <div className="flex justify-between w-full sm:w-[90%] gap-x-3 max-w-[1000px]">
           {showSearchBar ? (
             <SearchBar />
           ) : (
@@ -30,7 +30,7 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
               <img src={ nameLogo } alt="name logo" />
             </div>
           )}
-          <nav className="flex gap-x-3">
+          <nav className="flex gap-x-1">
             {iconeSearch && (
               <button
                 className="reset-btn w-10 h-10 overflow-hidden"

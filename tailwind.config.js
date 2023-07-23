@@ -78,7 +78,7 @@ export const theme = {
       },
     },
     gridTemplateColumns: {
-      'auto-fill': 'repeat(auto-fill, 150px)',
+      'auto-fill': 'repeat(auto-fill, 148px)',
       'sm-auto-fill': 'repeat(auto-fill, 180px)',
     },
   },

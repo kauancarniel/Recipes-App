@@ -93,7 +93,7 @@
   }
 
   .title-box {
-    @apply flex-col gap-y-2 py-6 mt-12 rounded-t-lg sm:mt-16
+    @apply flex-col gap-y-2 py-6 mt-16 rounded-t-lg sm:mt-16
   }
 
   .title {
@@ -101,7 +101,7 @@
   }
 
   .header {
-    @apply w-full flex justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-10
+    @apply w-full h-14 flex justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-10
   }
 
   .footer {
@@ -109,7 +109,11 @@
   }
 
   .search-input {
-    @apply border border-[var(--green)] rounded-l-md py-1 px-2 mb-1 w-max text-[var(--green)]
+    @apply border border-solid border-[var(--green)] rounded-l-md py-1 px-2 w-full text-[var(--green)]
+  }
+
+  .search-btn {
+    @apply border border-solid border-[var(--green)] rounded-r-md py-1 px-2 bg-[var(--green)] text-white cursor-pointer
   }
 }
 

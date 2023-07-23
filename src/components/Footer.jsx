@@ -19,20 +19,22 @@ export default function Footer() {
       className="footer"
       data-testid="footer"
     >
-      <button
-        className="reset-btn"
-        disabled={ pathname.includes('/drinks') }
-        onClick={ () => handleClick('/drinks') }
-      >
-        <IconDrinks />
-      </button>
-      <button
-        className="reset-btn"
-        disabled={ pathname.includes('/meals') }
-        onClick={ () => handleClick('/meals') }
-      >
-        <IconFood />
-      </button>
+      <div className="w-full max-w-[1000px] flex justify-around items-center">
+        <button
+          className="reset-btn"
+          disabled={ pathname.includes('/drinks') }
+          onClick={ () => handleClick('/drinks') }
+        >
+          <IconDrinks />
+        </button>
+        <button
+          className="reset-btn"
+          disabled={ pathname.includes('/meals') }
+          onClick={ () => handleClick('/meals') }
+        >
+          <IconFood />
+        </button>
+      </div>
     </footer>
   );
 }

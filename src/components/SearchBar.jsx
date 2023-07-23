@@ -5,9 +5,10 @@ import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 
 const MAX_RECIPES = 12;
+const radiosOpt = ['Name', 'Ingredient', 'First-Letter'];
 
 function SearchBar() {
-  const [optSearch, setOptSearch] = useState('');
+  const [optSearch, setOptSearch] = useState('Name');
   const [textSearch, setTextSearch] = useState('');
   const { setRecipes, error } = useContext(RecipesContext);
   const { fetchRecipes, fireToast } = useFetch();
@@ -43,56 +44,46 @@ function SearchBar() {
   };
 
   return (
-    <div>
-      <form>
-        <div>
-          <input
-            className="reset-input search-input placeholder:text-[var(--gray)]"
-            type="text"
-            onChange={ saveSearchOpt }
-            name="textSearch"
-            data-testid="search-input"
-            placeholder="Type Here"
-          />
-          <button onClick={ fetchingApi } data-testid="exec-search-btn">Search</button>
-        </div>
-        <div>
-          <label htmlFor="ingredient">
+    <form className="flex-center flex-col w-full max-w-md gap-y-1">
+      <div className="flex-center w-full">
+        <input
+          className="reset-input search-input placeholder:text-[var(--gray)]"
+          type="text"
+          onChange={ saveSearchOpt }
+          name="textSearch"
+          data-testid="search-input"
+          placeholder="Type Here"
+        />
+        <button
+          className="reset-btn search-btn"
+          onClick={ fetchingApi }
+          data-testid="exec-search-btn"
+        >
+          Search
+        </button>
+      </div>
+      <div className="flex justify-evenly items-center w-full">
+        { radiosOpt.map((radio) => (
+          <label
+            key={ radio }
+            className={ `${optSearch === radio
+              ? 'text-[var(--red)] font-bold' : 'text-[var(--green)]'} cursor-pointer` }
+            htmlFor={ radio }
+          >
             <input
-              id="ingredient"
+              className="hidden"
+              id={ radio }
               type="radio"
-              value="ingredient"
+              value={ radio }
               name="search"
-              data-testid="ingredient-search-radio"
+              data-testid={ `${radio.toLocaleLowerCase()}-search-radio` }
               onChange={ saveSearchOpt }
             />
-            Ingredient
+            { radio.replace('-', ' ') }
           </label>
-          <label htmlFor="name">
-            <input
-              id="name"
-              type="radio"
-              value="name"
-              name="search"
-              data-testid="name-search-radio"
-              onChange={ saveSearchOpt }
-            />
-            Name
-          </label>
-          <label htmlFor="firstLetter">
-            <input
-              id="firstLetter"
-              type="radio"
-              value="firstLetter"
-              name="search"
-              data-testid="first-letter-search-radio"
-              onChange={ saveSearchOpt }
-            />
-            First letter
-          </label>
-        </div>
-      </form>
-    </div>
+        ))}
+      </div>
+    </form>
   );
 }
 
