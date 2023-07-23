@@ -9,8 +9,8 @@ const MAX_RECIPES = 12;
 function SearchBar() {
   const [optSearch, setOptSearch] = useState('');
   const [textSearch, setTextSearch] = useState('');
-  const { setRecipes } = useContext(RecipesContext);
-  const { fetchRecipes } = useFetch();
+  const { setRecipes, error } = useContext(RecipesContext);
+  const { fetchRecipes, fireToast } = useFetch();
   const history = useHistory();
 
   const { location: { pathname } } = history;
@@ -22,18 +22,23 @@ function SearchBar() {
 
   const fetchingApi = async (event) => {
     event.preventDefault();
+    if (!textSearch || !optSearch) {
+      fireToast('Please, select an option and type in the search field to search!');
+      return;
+    }
     if (optSearch === 'firstLetter' && textSearch.length > 1) {
-      global.alert('Your search must have only 1 (one) character');
-    } else {
-      const data = await fetchRecipes(pathname, optSearch, textSearch);
-      if (!data) global.alert('Sorry, we haven\'t found any recipes for these filters.');
-      else {
-        setRecipes(data.slice(0, MAX_RECIPES));
-        if (data.length === 1) {
-          history.push(`${pathname}/${pathname === '/meals'
-            ? data[0].idMeal : data[0].idDrink}`);
-        }
-      }
+      fireToast('Your search must have only 1 (one) character!');
+      return;
+    }
+    const data = await fetchRecipes(pathname, optSearch, textSearch);
+    if (error) {
+      fireToast('Sorry, we haven\'t found any recipes for these filters.');
+      return;
+    }
+    setRecipes(data.slice(0, MAX_RECIPES));
+    if (data.length === 1) {
+      history.push(`${pathname}/${pathname === '/meals'
+        ? data[0].idMeal : data[0].idDrink}`);
     }
   };
 

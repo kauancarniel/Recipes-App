@@ -109,7 +109,8 @@ function Recipes() {
             All
           </button>
           {categories.map(({ strCategory }, index) => {
-            const color = categorySelected === strCategory ? 'var(--green)' : 'var(--yellow)';
+            const color = categorySelected === strCategory
+              ? 'var(--green)' : 'var(--yellow)';
             return (
               <button
                 className={
@@ -135,7 +136,6 @@ function Recipes() {
             <h2 className="text-[var(--yellow)]">Loading...</h2>
           </div>
         )}
-        {error && <div>{error}</div>}
         <div className="cards-container">
           {!loading && !error && (
             <RecipeCard />
