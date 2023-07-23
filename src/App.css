@@ -123,6 +123,10 @@
   .option-menu {
     @apply no-underline text-[var(--green)] text-[24px] flex items-center gap-x-2 hover:text-[var(--orange)]
   }
+
+  .category-btn {
+    @apply reset-btn flex items-center flex-col gap-[5px] w-[55px]
+  }
 }
 
 * {

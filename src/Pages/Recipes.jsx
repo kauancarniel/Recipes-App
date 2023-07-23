@@ -10,11 +10,7 @@ import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
 import IconFood from '../images/IconFood';
 import IconDrink from '../images/IconDrinks';
-import IconBeef from '../images/IconBeef';
-import IconBreakfast from '../images/IconBreakfast';
-import IconChicken from '../images/IconChicken';
-import IconDessert from '../images/IconDessert';
-import IconGoat from '../images/IconGoat';
+import CategoryIcon from '../components/CategoryIcon';
 
 const MAX_RECIPES = 12;
 
@@ -23,37 +19,6 @@ function Recipes() {
   const { setRecipes, categories, loading, error } = useContext(RecipesContext);
   const { fetchRecipes, initialFetch } = useFetch();
   const { location: { pathname } } = useHistory();
-
-  const renderIcon = (strCategory, index) => {
-    const categoryIcons = [
-      <IconBeef
-        key="Beef"
-        categorySelected={ categorySelected }
-        strCategory={ strCategory }
-      />,
-      <IconBreakfast
-        key="Beef"
-        categorySelected={ categorySelected }
-        strCategory={ strCategory }
-      />,
-      <IconChicken
-        key="Chicken"
-        categorySelected={ categorySelected }
-        strCategory={ strCategory }
-      />,
-      <IconDessert
-        key="Dessert"
-        categorySelected={ categorySelected }
-        strCategory={ strCategory }
-      />,
-      <IconGoat
-        key="Goat"
-        categorySelected={ categorySelected }
-        strCategory={ strCategory }
-      />,
-    ];
-    return categoryIcons[index];
-  };
 
   useEffect(() => {
     (async () => {
@@ -82,12 +47,11 @@ function Recipes() {
         iconeProfile
       />
       <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
-        <nav className="flex-center justify-between pb-9">
+        <nav className="flex justify-between pb-9">
           <button
             className={
-              `reset-btn flex-center flex-col gap-[5px] ${
-                categorySelected === 'All'
-                  ? 'text-[var(--green)]' : 'text-[var(--yellow)]'}`
+              `category-btn ${categorySelected === 'All'
+                ? 'text-[var(--green)]' : 'text-[var(--yellow)]'}`
             }
             type="button"
             data-testid="All-category-filter"
@@ -113,9 +77,7 @@ function Recipes() {
               ? 'var(--green)' : 'var(--yellow)';
             return (
               <button
-                className={
-                  `reset-btn flex-center flex-col gap-[5px] text-[${color}]`
-                }
+                className={ `category-btn text-[${color}]` }
                 type="button"
                 key={ index }
                 data-testid={ `${strCategory}-category-filter` }
@@ -124,7 +86,11 @@ function Recipes() {
                 <div
                   className={ `category border-[${color}]` }
                 >
-                  { renderIcon(strCategory, index) }
+                  <CategoryIcon
+                    strCategory={ strCategory }
+                    categorySelected={ categorySelected }
+                    index={ index }
+                  />
                 </div>
                 { strCategory }
               </button>
