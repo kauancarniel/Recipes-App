@@ -9,11 +9,11 @@ function RecommendRecipes({ recommendRecipes }) {
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Drink' : 'Meal';
 
   return (
-    <div className='md:border-grey md:flex md:justify-center md:p-6 '>
+    <div className="md:border-grey md:flex md:justify-center md:p-6 ">
       <h1 className="recommend-title">Recommends</h1>
-      <Carousel className=" flex bg-inherit md:w-[70%] box-shadow " >
+      <Carousel className=" flex bg-inherit md:w-[70%] box-shadow ">
         {recommendRecipes.map((recipe, index) => (
-          <Carousel.Item className='' key={ `${recipe[`id${KEY_BASE}`]}${recipe[`str${KEY_BASE}`]}` }>
+          <Carousel.Item key={ `${recipe[`id${KEY_BASE}`]}` }>
             <div className="bg-black lg:rounded-xl">
               <img
                 className="caroussel-img lg:rounded-xl"

@@ -43,21 +43,23 @@ export default function RecipeInProg() {
       if (!isInProgress) {
         setRecommendRecipes(recommendData.slice(INIT, MAX_RECOMMENDATIONS));
       }
+      setVisibleIng(windowWidth);
+      setVisibleIns(windowWidth);
     })();
   }, []);
 
   const handleBack = () => {
     history.goBack();
   };
-  
+
   return (
-    <main className="min-h-screen  recipe-box bg-form glass p-0 ">
+    <main className="min-h-screen recipe-box bg-form glass p-0 ">
       { loading && <p>Loading...</p> }
       { error && <p>{ error }</p> }
       { (!loading && !error) && (
         <>
           <header className="flex justify-center ">
-            <div className="absolute z-10 top-[17rem] md:top-[24rem] right-5">
+            <div className="absolute z-10 top-[17rem] md:top-[28rem] right-5">
               <ShareBtn
                 type={ NAME_URL }
                 id={ id }
@@ -65,9 +67,9 @@ export default function RecipeInProg() {
               />
               <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
             </div>
-            <div className="bg-black tam-img md:blur[100px]">
+            <div className="bg-black tam-img">
               <img
-                className="tam-img opacity-50  "
+                className="tam-img opacity-50 "
                 src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
                 alt={ `${recipe[`str${KEY_BASE}`]}` }
                 data-testid="recipe-photo"
@@ -90,7 +92,7 @@ export default function RecipeInProg() {
           <section className="p-3">
             <div className="border-grey mt-10 ">
               <RenderButtons
-                isVisible={ windowWidth || visibleIng }
+                isVisible={ visibleIng }
                 setVisible={ setVisibleIng }
                 icon={ PiBowlFoodFill }
                 title="Ingredients"
@@ -101,7 +103,7 @@ export default function RecipeInProg() {
             </div>
             <div className="mt-6 border-grey flex flex-col mb-10 ">
               <RenderButtons
-                isVisible={ windowWidth || visibleIns }
+                isVisible={ visibleIns }
                 setVisible={ setVisibleIns }
                 icon={ IoListCircleSharp }
                 title="Instructions"
@@ -115,10 +117,10 @@ export default function RecipeInProg() {
             {!isInProgress && (
               <RecommendRecipes recommendRecipes={ recommendRecipes } />
             )}
-            <div>
+            <div className="mb-10 coment">
               <FormCommentary />
             </div>
-            <div className="pb-10 bg-[#262321]">
+            <div>
               <RecipeBtns
                 recipe={ recipe }
                 isInProgress={ isInProgress }

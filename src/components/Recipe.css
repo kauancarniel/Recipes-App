@@ -1,13 +1,9 @@
-.img-recipe {
-  width: 100%;
-}
-
 @tailwind components;
 @tailwind utilities;
 
 @layer components {
   .tam-img {
-    @apply w-[100%] h-52 md:h-80 
+    @apply w-[100%] h-52 md:h-96 
   }
   .no-border {
     @apply bg-inherit border-none
@@ -31,7 +27,7 @@
     @apply w-[100%] h-56 md:h-96 opacity-70  border-2 border-black border-r-0 border-l-0  
   }
   .recommend-title {
-    @apply absolute text-white opacity-70 left-4 sm:left-[10px] lg:left-[18.7%] md:left-[19.4%] md:text-2xl p-3  text-xl z-50
+    @apply absolute text-white opacity-70 left-4 sm:left-[10px] lg:left-[19%] md:left-[19.5%]  md:text-2xl p-3  text-xl z-50
   }
   .button-back {
     @apply absolute top-2 left-2  opacity-70 btn-design text-[#F9EFBB]
@@ -91,7 +87,7 @@
   
 }
 
-
-.blurs {
-  filter: blur(10px);
+.coment {
+  display: flex;
+  border: 2px solid blue;
 }
