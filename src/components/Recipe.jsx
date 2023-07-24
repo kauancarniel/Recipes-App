@@ -73,19 +73,19 @@ export default function RecipeInProg() {
             </div>
             <div className="bg-black tam-img">
               <img
-                className="tam-img opacity-50 "
+                className="tam-img"
                 src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
                 alt={ `${recipe[`str${KEY_BASE}`]}` }
                 data-testid="recipe-photo"
               />
             </div>
             <div>
-              <h1 data-testid="recipe-title" className="title-recipe">
+              <h1 data-testid="recipe-title" className="title-recipe shadow-name">
                 {recipe[`str${KEY_BASE}`]}
               </h1>
             </div>
             <div>
-              <h3 data-testid="recipe-category" className="title-category">
+              <h3 data-testid="recipe-category" className="title-category shadow-name">
                 {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
               </h3>
             </div>

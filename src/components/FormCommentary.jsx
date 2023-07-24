@@ -75,13 +75,17 @@ export default function FormCommentary() {
           </button>
         </div>
       </form>
-      <div className="self-start">
+      <div className="self-start divide-y">
         {allComents && allComents.map((com, ind) => (
           <div key={ ind } className="flex flex-col mb-8">
             <p> com.name </p>
             <div className="flex flex-row">
-              <p>{ `${com.rating},0  `}</p>
-              <p id="st">{Array.from({ length: Number(com.rating) }, () => star).join('')}</p>
+              <p>
+                { `${com.rating},0  `}
+              </p>
+              <p id="st">
+                {Array.from({ length: Number(com.rating) }, () => star).join('')}
+              </p>
             </div>
             <p>{ com.comment }</p>
           </div>

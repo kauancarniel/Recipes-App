@@ -30,7 +30,7 @@
     @apply absolute text-white opacity-70 left-4 sm:left-[10px] lg:left-[19%] md:left-[19.5%]  md:text-2xl p-3  text-xl z-50
   }
   .button-back {
-    @apply absolute top-2 left-2  opacity-70 btn-design text-[#F9EFBB]
+    @apply absolute top-2 left-2  opacity-70 btn-design text-[var(--darkYellow)]
   }
   .border-grey {
     @apply border-div border-gray-300 border-[0.1px] p-3

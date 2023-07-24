@@ -149,3 +149,7 @@ html {
   background-size: cover;
   background-position: bottom;
 }
+
+.shadow-name {
+  text-shadow: 0px 0px 5px rgba(0,0,0,0.8);
+};
