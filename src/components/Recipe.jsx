@@ -54,7 +54,11 @@ export default function RecipeInProg() {
 
   return (
     <main className="min-h-screen recipe-box bg-form glass p-0 ">
-      { loading && <p>Loading...</p> }
+      { loading && (
+        <div className="w-full h-[80vh] flex-center">
+          <h2 className="text-[var(--yellow)]">Loading...</h2>
+        </div>
+      )}
       { error && <p>{ error }</p> }
       { (!loading && !error) && (
         <>
@@ -117,7 +121,7 @@ export default function RecipeInProg() {
             {!isInProgress && (
               <RecommendRecipes recommendRecipes={ recommendRecipes } />
             )}
-            <div className="mb-10 coment">
+            <div className="mb-10">
               <FormCommentary />
             </div>
             <div>

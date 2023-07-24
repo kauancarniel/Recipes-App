@@ -76,18 +76,7 @@
   color: black;
 }
 
-.containerzao {
-  display: flex;
-  flex-direction: column;
-  border: 2px solid red;
-}
-
 .box-shadow {
   box-shadow: 4px 4px 4px rgb(0, 0, 0);
-  
 }
 
-.coment {
-  display: flex;
-  border: 2px solid blue;
-}
