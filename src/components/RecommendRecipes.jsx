@@ -9,21 +9,21 @@ function RecommendRecipes({ recommendRecipes }) {
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Drink' : 'Meal';
 
   return (
-    <div>
+    <div className='md:border-grey md:flex md:justify-center md:p-6 '>
       <h1 className="recommend-title">Recommends</h1>
-      <Carousel className="mb-10 flex">
+      <Carousel className=" flex bg-inherit md:w-[70%] box-shadow " >
         {recommendRecipes.map((recipe, index) => (
-          <Carousel.Item key={ `${recipe[`id${KEY_BASE}`]}${recipe[`str${KEY_BASE}`]}` }>
-            <div className="bg-black ">
+          <Carousel.Item className='' key={ `${recipe[`id${KEY_BASE}`]}${recipe[`str${KEY_BASE}`]}` }>
+            <div className="bg-black lg:rounded-xl">
               <img
-                className="caroussel-img shadow-img"
+                className="caroussel-img lg:rounded-xl"
                 src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
                 alt={ `${recipe[`str${KEY_BASE}`]}` }
                 data-testid={ `${index}-recommendation-card` }
               />
               <h4
                 className="absolute
-               top-5 left-3 p-3 text-white"
+               top-5 left-3 p-3  sm:left-[1%]  text-white"
               >
                 {recipe[`str${KEY_BASE}`]}
 

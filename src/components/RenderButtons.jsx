@@ -8,7 +8,7 @@ export function RenderButtons({ isVisible,
     <div>
       {' '}
       <button
-        className="btn-design"
+        className="btn-design lg:w-[100%] "
         onClick={ () => {
           setVisible(!isVisible);
           console.log(isVisible);
@@ -18,9 +18,12 @@ export function RenderButtons({ isVisible,
         <h4 className="p-1 tam-title">{title}</h4>
       </button>
       {isVisible && (
-        <div className={ isVisible ? animateOpen : 'h-0' }>
+        <div className={ `${isVisible ? animateOpen : 'h-0'} ` }>
           {title === 'Ingredients' ? (
-            <ul className={ `text-sm p-0 ${isVisible ? animateOpen : 'h-0'}` }>
+            <ul
+              className={ `text-sm p-0 ${isVisible ? animateOpen : 'h-0'}
+       ` }
+            >
               <IngredientsList recipe={ recipe } isInProgress={ isInProgress } />
             </ul>
           ) : (
@@ -38,7 +41,7 @@ export function RenderButtons({ isVisible,
                   className="flex items-end rounded-xl mt-7 w-[100%] bg-black "
                 >
                   <iframe
-                    className="border-none rounded-xl w-[100%] opacity-60"
+                    className="rounded-xl w-[100%] opacity-60 lg:h-96"
                     src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
                     title="Recipe Video"
                   />

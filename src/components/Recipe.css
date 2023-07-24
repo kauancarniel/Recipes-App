@@ -7,31 +7,31 @@
 
 @layer components {
   .tam-img {
-    @apply w-[100%] h-52 md:h-72
+    @apply w-[100%] h-52 md:h-80 
   }
   .no-border {
     @apply bg-inherit border-none
   }
   .title-category {
-    @apply absolute top-3 left-14 text-xl text-white 
+    @apply absolute top-3 left-14  text-xl text-white 
   }
-  .title {
-    @apply absolute top-24 flex left-0 items-end p-[28px] text-white h-24 w-[100%]  text-[20px] 
+  .title-recipe {
+    @apply absolute top-24 flex left-0  items-end p-[28px] text-white  w-[100%]  md:justify-center text-sm md:text-5xl
   }
   .tam-title {
     @apply text-xl mb-4
   }
   .btn-design {
-    @apply text-[#F9EFBB] bg-inherit border-none text-[40px] flex 
+    @apply text-[#F9EFBB] bg-inherit border-none text-[40px] flex
   }
   .border-div {
     @apply border-solid border-2 rounded-lg
   }
   .caroussel-img {
-    @apply w-[100%] h-56 md:h-80 opacity-70  border-2 border-black border-r-0 border-l-0 
+    @apply w-[100%] h-56 md:h-96 opacity-70  border-2 border-black border-r-0 border-l-0  
   }
   .recommend-title {
-    @apply absolute text-white opacity-70 left-4 p-3  text-xl z-50
+    @apply absolute text-white opacity-70 left-4 sm:left-[10px] lg:left-[18.7%] md:left-[19.4%] md:text-2xl p-3  text-xl z-50
   }
   .button-back {
     @apply absolute top-2 left-2  opacity-70 btn-design text-[#F9EFBB]
@@ -45,6 +45,7 @@
   .btn-container {
     @apply flex fixed z-50 items-center bottom-0 justify-center w-[100%]
   }
+}
 .link-copied {
   align-items: center;
   background-color: rgba(0, 0, 0, 0.2);
@@ -83,5 +84,14 @@
   display: flex;
   flex-direction: column;
   border: 2px solid red;
-  width: 100%;
+}
+
+.box-shadow {
+  box-shadow: 4px 4px 4px rgb(0, 0, 0);
+  
+}
+
+
+.blurs {
+  filter: blur(10px);
 }

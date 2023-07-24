@@ -12,8 +12,9 @@ import './Recipe.css';
 import { RenderButtons } from './RenderButtons';
 import FormCommentary from './FormCommentary';
 
-const MAX_RECOMMENDATIONS = 15;
+const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
+const lgWidth = 1024;
 
 export default function RecipeInProg() {
   const { loading, error, linkCopy } = useContext(RecipesContext);
@@ -31,6 +32,7 @@ export default function RecipeInProg() {
 
   const NAME_URL = `/${pathname.split('/')[1]}`;
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
+  const windowWidth = (window.innerWidth > lgWidth);
 
   useEffect(() => {
     (async () => {
@@ -47,15 +49,15 @@ export default function RecipeInProg() {
   const handleBack = () => {
     history.goBack();
   };
-
+  
   return (
-    <main className="min-h-screen bg-[#262321] flex justify-center  ">
+    <main className="min-h-screen  recipe-box bg-form glass p-0 ">
       { loading && <p>Loading...</p> }
       { error && <p>{ error }</p> }
       { (!loading && !error) && (
-        <div className='containerzao md:max-[60%]:'>
+        <>
           <header className="flex justify-center ">
-            <div className="absolute z-10 top-[17rem] md:top-[22rem] right-5">
+            <div className="absolute z-10 top-[17rem] md:top-[24rem] right-5">
               <ShareBtn
                 type={ NAME_URL }
                 id={ id }
@@ -63,22 +65,22 @@ export default function RecipeInProg() {
               />
               <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
             </div>
-            <div className="bg-black tam-img ">
+            <div className="bg-black tam-img md:blur[100px]">
               <img
-                className="tam-img opacity-50"
+                className="tam-img opacity-50  "
                 src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
                 alt={ `${recipe[`str${KEY_BASE}`]}` }
                 data-testid="recipe-photo"
               />
             </div>
             <div>
-              <h1 data-testid="recipe-title" className="title text-base">
+              <h1 data-testid="recipe-title" className="title-recipe">
                 {recipe[`str${KEY_BASE}`]}
               </h1>
             </div>
             <div>
               <h3 data-testid="recipe-category" className="title-category">
-                { KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic }
+                {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
               </h3>
             </div>
             <button onClick={ handleBack } className="button-back">
@@ -88,7 +90,7 @@ export default function RecipeInProg() {
           <section className="p-3">
             <div className="border-grey mt-10 ">
               <RenderButtons
-                isVisible={ visibleIng }
+                isVisible={ windowWidth || visibleIng }
                 setVisible={ setVisibleIng }
                 icon={ PiBowlFoodFill }
                 title="Ingredients"
@@ -99,7 +101,7 @@ export default function RecipeInProg() {
             </div>
             <div className="mt-6 border-grey flex flex-col mb-10 ">
               <RenderButtons
-                isVisible={ visibleIns }
+                isVisible={ windowWidth || visibleIns }
                 setVisible={ setVisibleIns }
                 icon={ IoListCircleSharp }
                 title="Instructions"
@@ -109,20 +111,23 @@ export default function RecipeInProg() {
 
             </div>
           </section>
-          { !isInProgress && (
-            <RecommendRecipes recommendRecipes={ recommendRecipes } />
-          )}
-          <div>
-            <FormCommentary />
-          </div>
-          <div className='pb-10 bg-[#262321]'>
-            <RecipeBtns
-              recipe={ recipe }
-              isInProgress={ isInProgress }
-              setIsInProgress={ setIsInProgress }
-            />
-          </div>
-        </div>
+          <section className="md:p-[1rem]">
+            {!isInProgress && (
+              <RecommendRecipes recommendRecipes={ recommendRecipes } />
+            )}
+            <div>
+              <FormCommentary />
+            </div>
+            <div className="pb-10 bg-[#262321]">
+              <RecipeBtns
+                recipe={ recipe }
+                isInProgress={ isInProgress }
+                setIsInProgress={ setIsInProgress }
+              />
+            </div>
+          </section>
+
+        </>
       )}
       {linkCopy && (
         <div className="link-copied" data-testid="link">
