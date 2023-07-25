@@ -48,10 +48,6 @@ export default function RecipeInProg() {
     })();
   }, []);
 
-  const handleBack = () => {
-    history.goBack();
-  };
-
   return (
     <main className="min-h-screen recipe-box bg-form glass p-0 ">
       { loading && (
@@ -74,8 +70,8 @@ export default function RecipeInProg() {
             <div className="bg-black tam-img">
               <img
                 className="tam-img"
-                src={ `${recipe[`str${KEY_BASE}Thumb`]}` }
-                alt={ `${recipe[`str${KEY_BASE}`]}` }
+                src={ recipe[`str${KEY_BASE}Thumb`] }
+                alt={ recipe[`str${KEY_BASE}`] }
                 data-testid="recipe-photo"
               />
             </div>
@@ -89,7 +85,7 @@ export default function RecipeInProg() {
                 {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
               </h3>
             </div>
-            <button onClick={ handleBack } className="button-back">
+            <button onClick={ history.goBack() } className="button-back">
               {IoChevronBackCircleSharp()}
             </button>
           </header>

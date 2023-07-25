@@ -8,8 +8,10 @@ import FavoriteRecipes from './Pages/FavoriteRecipes';
 import Profile from './Pages/Profile';
 import RecipeDetails from './Pages/RecipeDetails';
 import RecipeInProgress from './Pages/RecipeInProgress';
-import './App.css';
 import NotFound from './Pages/NotFound';
+import Register from './Pages/Register';
+import './App.css';
+import RememberPass from './Pages/RememberPass';
 
 function App() {
   return (
@@ -24,7 +26,8 @@ function App() {
       <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" component={ DoneRecipes } />
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
-      <Route path="/register" component={ Login } />
+      <Route path="/register" component={ Register } />
+      <Route path="/remember-password" component={ RememberPass } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );

@@ -1,3 +1,5 @@
+import Swal from 'sweetalert2';
+
 export const getStorage = (key) => JSON.parse(localStorage.getItem(key));
 export const setStorage = (key, value) => localStorage
   .setItem(key, JSON.stringify(value));
@@ -83,3 +85,14 @@ export const addInDoneRecipes = (recipe, NAME_URL) => {
 
   setStorage('doneRecipes', [...newDoneRecipes, newRecipe]);
 };
+
+export const Toast = Swal.mixin({
+  toast: true,
+  position: 'top-end',
+  showConfirmButton: false,
+  timer: 2000,
+  didOpen: (toast) => {
+    toast.addEventListener('mouseenter', Swal.stopTimer);
+    toast.addEventListener('mouseleave', Swal.resumeTimer);
+  },
+});

@@ -19,7 +19,7 @@ export default function RecipeCard() {
       to={ `${pathname}/${item[`id${KEY_BASE}`]}` }
     >
       <img
-        className="rounded-md w-full"
+        className="rounded-md w-full border-0"
         src={ item[`str${KEY_BASE}Thumb`] }
         alt={ item[`str${KEY_BASE}`] }
         data-testid={ `${index}-card-img` }
