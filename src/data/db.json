@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "John Doe",
+      "email": "guifjj92@gmail.com",
+      "password": "123456"
+    },
+    {
+      "id": 2,
+      "name": "Doug do Back-end",
+      "email": "trybe@trybe.com",
+      "password": "123456"
+    }
+  ],
+  "recipes": []
+}

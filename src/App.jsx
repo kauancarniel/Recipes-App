@@ -9,6 +9,7 @@ import Profile from './Pages/Profile';
 import RecipeDetails from './Pages/RecipeDetails';
 import RecipeInProgress from './Pages/RecipeInProgress';
 import './App.css';
+import NotFound from './Pages/NotFound';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" component={ DoneRecipes } />
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
+      <Route path="/register" component={ Login } />
+      <Route path="*" component={ NotFound } />
     </Switch>
   );
 }
