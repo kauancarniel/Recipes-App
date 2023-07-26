@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getStorage, setStorage } from '../utils/functions';
+
+import Star from './Star';
 import './FormCommentary.css';
 
 export default function FormCommentary() {
@@ -36,16 +38,7 @@ export default function FormCommentary() {
       <form>
         <div className="rating flex flex-row-reverse justify-end">
           { notas.map((nota) => (
-            <>
-              <input
-                type="radio"
-                id={ `star${nota}` }
-                name="rating"
-                value={ nota }
-                onChange={ ({ target }) => setRating(target.value) }
-              />
-              <label htmlFor={ `star${nota}` } title="text" />
-            </>
+            <Star key={ nota } nota={ nota } setRating={ setRating } />
           )) }
         </div>
         <div className="flex flex-col items-center">

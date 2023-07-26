@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
 import { HiOutlineHome, HiHeart, HiLogout } from 'react-icons/hi';
@@ -7,9 +8,16 @@ import { MdOutlineEditNote } from 'react-icons/md';
 import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
 
-export default function Menu() {
+import MenuHamburguer from './MenuHamburguer';
+
+export default function Menu({ ShowClose = false }) {
   return (
     <nav className="options-menu">
+      {ShowClose && (
+        <div>
+          <MenuHamburguer />
+        </div>
+      )}
       <ul className="list-none flex flex-col p-6 gap-y-3 max-w-[300px]">
         <li>
           <Link
@@ -88,3 +96,7 @@ export default function Menu() {
     </nav>
   );
 }
+
+Menu.propTypes = {
+  ShowClose: PropTypes.bool,
+}.isRequired;

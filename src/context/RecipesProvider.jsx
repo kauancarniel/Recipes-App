@@ -12,6 +12,7 @@ export default function RecipesProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [user, setUser] = useState({});
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const store = useMemo(() => ({
     recipes,
@@ -30,7 +31,10 @@ export default function RecipesProvider({ children }) {
     setFilter,
     user,
     setUser,
-  }), [recipes, categories, loading, error, linkCopy, checkboxes, filter, user]);
+    menuOpen,
+    setMenuOpen,
+  }), [recipes, categories, loading, error, linkCopy,
+    checkboxes, filter, user, menuOpen]);
 
   return (
     <RecipesContext.Provider value={ store }>

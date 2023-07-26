@@ -24,13 +24,13 @@
     @apply border-solid border-2 rounded-lg
   }
   .caroussel-img {
-    @apply w-[100%] h-56 md:h-96 opacity-70  border-2 border-black border-r-0 border-l-0  
+    @apply w-full h-56 md:h-96 border-2 border-black border-r-0 border-l-0  
   }
   .recommend-title {
-    @apply absolute text-white opacity-70 left-4 sm:left-[10px] lg:left-[19%] md:left-[19.5%]  md:text-2xl p-3  text-xl z-50
+    @apply absolute text-white opacity-70 left-4 sm:left-[16.5%] lg:left-[19%] md:left-[19.5%]  md:text-2xl p-3  text-xl z-50
   }
   .button-back {
-    @apply absolute top-2 left-2  opacity-70 btn-design text-[var(--darkYellow)]
+    @apply absolute top-2 left-2 btn-design text-[var(--darkYellow)]
   }
   .border-grey {
     @apply border-div border-gray-300 border-[0.1px] p-3
@@ -41,24 +41,6 @@
   .btn-container {
     @apply flex fixed z-50 items-center bottom-0 justify-center w-[100%]
   }
-}
-.link-copied {
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.2);
-  display: flex;
-  height: 100vh;
-  justify-content: center;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1;
-}
-
-.message {
-  background-color: var(--gray);
-  border-radius: 10px;
-  color: var(--darkYellow);
-  padding: 20px 30px;
 }
 
 #root > main > section > div.border-grey.mt-10 > div > div > ul > li > label > div > span {

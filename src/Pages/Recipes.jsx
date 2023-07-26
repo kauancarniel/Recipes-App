@@ -43,7 +43,6 @@ function Recipes() {
       <Header
         title={ pathname === '/meals' ? 'Meals' : 'Drinks' }
         iconeSearch
-        iconeProfile
       />
       <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
         <nav className="flex justify-between pb-9">

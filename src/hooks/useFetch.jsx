@@ -6,7 +6,7 @@ import { Toast } from '../utils/functions';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
-    setError, error, user, setUser } = useContext(RecipesContext);
+    setError, error, setUser } = useContext(RecipesContext);
 
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;

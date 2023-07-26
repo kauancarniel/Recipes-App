@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import RecipesContext from '../context/RecipesContext';
 import './RecipeCard.css';
 
 export default function RecipeCard() {
-  const { location: { pathname } } = useHistory();
+  const { pathname } = useLocation();
   const { recipes } = useContext(RecipesContext);
 
   const KEY_BASE = pathname === '/meals' ? 'Meal' : 'Drink';
