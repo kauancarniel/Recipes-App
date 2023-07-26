@@ -16,3 +16,31 @@
   color: white;
   padding: 20px 30px;
 }
+
+.none {
+  text-decoration: none;
+}
+
+@tailwind components;
+
+@layer components {
+  .no-search {
+    @apply w-full h-[80vh] flex justify-center items-center
+  }
+
+  .ready-recipe {
+    @apply flex flex-wrap w-[100%] justify-center md:justify-center
+  }
+
+  .content-ready{
+    @apply p-1 flex flex-col justify-center  items-center w-[100%]
+  }
+
+  .container-ready {
+    @apply w-[350px] flex m-2 md:w-[350px] lg:w-[430px] 
+  }
+
+  .detail-img {
+    @apply rounded-md border-white w-[146px] h-[100%] md:w-[178px]
+  }
+}

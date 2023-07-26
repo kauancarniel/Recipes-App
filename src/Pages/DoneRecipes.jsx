@@ -6,10 +6,11 @@ import { getStorage } from '../utils/functions';
 import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
 import './DoneRecipes.css';
+import Filter from '../components/Filter';
 
 function DoneRecipes() {
   const { linkCopy } = useContext(RecipesContext);
-  const [filter, setFilter] = useState('all');
+  const { filter } = useContext(RecipesContext);
 
   const doneRecipes = getStorage('doneRecipes') || [];
 
@@ -17,83 +18,84 @@ function DoneRecipes() {
     ? doneRecipes
     : doneRecipes.filter(({ type }) => type === filter);
 
-  const buttonFilter = ['all', 'meal', 'drink'];
-
   return (
     <>
       <Header title="Done Recipes" iconeProfile />
       {filteredRecipes.length === 0 ? (
-        <main>
-          <p>Nenhuma receita favorita encontrada.</p>
-        </main>
+        <div className="no-search">
+          <h2 className="text-[var(--yellow)]">Nenhuma receita favorita encontrada.</h2>
+        </div>
       ) : (
-        <main>
+        <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
           <nav>
-            { buttonFilter.map((type) => (
-              <button
-                key={ type }
-                data-testid={ `filter-by-${type}-btn` }
-                onClick={ () => setFilter(type) }
-                disabled={ filter === type }
-              >
-                {type}
-              </button>
-            ))}
+            <Filter />
           </nav>
-          <section>
+          <section className="ready-recipe border-div">
             { filteredRecipes.map(({
               id, type, image, name, nationality,
               category, doneDate, alcoholicOrNot, tags,
             }, index) => (
-              <div key={ index }>
-                <Link to={ `${type}s/${id}` }>
+              <div className="border-grey container-ready p-0" key={ index }>
+                <Link
+                  class=" w-[148px] md:w-[180px]"
+                  to={ `${type}s/${id}` }
+                >
                   <img
-                    style={ { width: '100px' } }
+                    className="detail-img border-div border-[0.1px]"
                     src={ image }
                     alt="Recipe"
                     data-testid={ `${index}-horizontal-image` }
                   />
                 </Link>
-                <div>
-                  <div>
-                    <Link to={ `${type}s/${id}` }>
-                      <h3 data-testid={ `${index}-horizontal-name` }>{name}</h3>
+                <div className=" flex flex-col justify-center w-[100%] items-center border-div border-blue-800">
+                  <div className="flex border-div justify-center items-center  w-[100%]">
+                    <Link className="none border-div" to={ `${type}s/${id}` }>
+                      <h4
+                        className="text-[var(--orange)] shadow-name"
+                        data-testid={ `${index}-horizontal-name` }
+                      >
+                        {name}
+                      </h4>
                     </Link>
-                    <ShareBtn
-                      type={ `/${type}s` }
-                      id={ id }
-                      testId={ `${index}-horizontal-share-btn` }
-                    />
+
                   </div>
                   <div>
-                    <p data-testid={ `${index}-horizontal-top-text` }>
+                    <p
+                      className="text-[var(--gray)] text-sm"
+                      data-testid={ `${index}-horizontal-top-text` }
+                    >
                       { type === 'meal'
                         ? `${nationality} - ${category}`
                         : alcoholicOrNot }
                     </p>
                   </div>
-                  {
+                  <div className='border-div flex w-[100%]'>
+                    <p className='text-[var(--darkYellow)] text-sm'>
+                      Done In:
+                      {' '}
+                      <span className='text-[var(--gray)] text-[10px]' data-testid={ `${index}-horizontal-done-date` }>
+                        { doneDate.toLocaleString('pt-BR', {
+                          day: '2-digit',
+                          month: '2-digit',
+                          year: 'numeric',
+                        }) }
 
-                  }
-                  <p>
-                    Done In:
-                    {' '}
-                    <span data-testid={ `${index}-horizontal-done-date` }>
-                      { doneDate.toLocaleString('pt-BR', {
-                        day: '2-digit',
-                        month: '2-digit',
-                        year: 'numeric',
-                      }) }
-                    </span>
-                  </p>
-                  {tags.map((tag, indexTag) => (
-                    <div
-                      key={ indexTag }
-                      data-testid={ `${index}-${tag}-horizontal-tag` }
-                    >
-                      {tag}
-                    </div>
-                  ))}
+                      </span>
+                    </p>
+                  </div>
+                  <div className='flex'>
+                    {tags.map((tag, indexTag) => (
+                      <div
+                        
+                        key={ indexTag }
+                        data-testid={ `${index}-${tag}-horizontal-tag` }
+                      >
+                       <p className='m-1'>
+                        {tag}
+                        </p> 
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             ))}

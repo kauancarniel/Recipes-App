@@ -81,7 +81,7 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
         className="recipe-box flex-center bg-form glass title-box"
       >
         <img
-          className="w-12"
+          className="w-12 h-9"
           src={ title === 'Meals' ? iconFoods : iconDrinks }
           alt="icon type"
         />
