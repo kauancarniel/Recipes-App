@@ -143,6 +143,10 @@
   .go-login {
     @apply no-underline font-normal text-[var(--green)] hover:text-[var(--yellow)]
   }
+
+  .burguer-container {
+    @apply flex gap-x-2 absolute z-30 top-3 right-3 bg-[var(--yellow)] rounded-[100%]
+  }
 }
 
 * {

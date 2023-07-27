@@ -56,29 +56,34 @@ export default function RecipeInProg() {
         { (!loading && !error) && (
           <>
             <div>
-              <div className="flex gap-x-2 absolute z-30 top-3 right-3 bg-[var(--yellow)] rounded-[100%]">
+              <div className="burguer-container">
                 <MenuHamburguer />
               </div>
               {menuOpen && (<Menu showClose />)}
             </div>
             <header className="flex justify-center ">
-              <div className="bg-black tam-img">
+              <div className="tam-img relative">
                 <img
                   className="tam-img"
                   src={ recipe[`str${KEY_BASE}Thumb`] }
                   alt={ recipe[`str${KEY_BASE}`] }
                   data-testid="recipe-photo"
                 />
+                <h1
+                  data-testid="recipe-title"
+                  className="title-recipe shadow-name"
+                >
+                  {recipe[`str${KEY_BASE}`]}
+                </h1>
               </div>
-              <h1 data-testid="recipe-title" className="title-recipe shadow-name">
-                {recipe[`str${KEY_BASE}`]}
-              </h1>
-              <h3 data-testid="recipe-category" className="title-category shadow-name">
-                {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
-              </h3>
-              <button onClick={ history.goBack } className="button-back shadow-name">
-                <IoChevronBackCircleSharp />
-              </button>
+              <div className="absolute top-3 left-3 flex items-center gap-x-2">
+                <button onClick={ history.goBack } className="button-back shadow-name">
+                  <IoChevronBackCircleSharp />
+                </button>
+                <h3 data-testid="recipe-category" className="title-category shadow-name">
+                  {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
+                </h3>
+              </div>
             </header>
             <section className="p-3">
               <div className="relative border-grey mt-10 ">
