@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import InputGroup from 'react-bootstrap/InputGroup';
 import { useLocation } from 'react-router-dom';
 import { handleSaveProgress, getStorage, initialIngredients } from '../utils/functions';
 import RecipesContext from '../context/RecipesContext';
@@ -36,36 +35,36 @@ export default function IngredientsList({ recipe, isInProgress, visible }) {
   return (
     <div
       id="checklist"
-      className={ `${visible ? 'animate-open' : 'h-0'}`}
+      className={ visible ? 'animate-open' : 'h-0' }
     >
       { ingredients.map(([key, value], index) => (
-          <>
-            <input
-              key={`${key}-input`}
-              className={ `${isInProgress ? 'enabled' : 'disabled' }` }
-              type="checkbox"
-              id={ key }
-              name="ingredient"
-              checked={ !!checkboxes[key] }
-              onChange={ () => handleChange(key, value) }
-              disabled={ !isInProgress}
-            />
-            <label
-              key={`${key}-label`}
-              className={ `${isInProgress ? 'enabled' : 'disabled' }` }
-              data-testid={ `${index}-ingredient-step` }
-              htmlFor={ key }
-            >
-                {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
-            </label>
-          </>
+        <>
+          <input
+            key={ `${key}-input` }
+            className={ isInProgress ? 'enabled' : 'disabled' }
+            type="checkbox"
+            id={ key }
+            name="ingredient"
+            checked={ !!checkboxes[key] }
+            onChange={ () => handleChange(key, value) }
+            disabled={ !isInProgress }
+          />
+          <label
+            key={ `${key}-label` }
+            className={ isInProgress ? 'enabled' : 'disabled' }
+            data-testid={ `${index}-ingredient-step` }
+            htmlFor={ key }
+          >
+            {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
+          </label>
+        </>
       ))}
     </div>
-  )
-  
+  );
 }
 
 IngredientsList.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
   visible: PropTypes.bool.isRequired,
+  isInProgress: PropTypes.bool.isRequired,
 };

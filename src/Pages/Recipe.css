@@ -9,10 +9,10 @@
     @apply bg-inherit border-none
   }
   .title-category {
-    @apply absolute top-3 left-14  text-xl text-white 
+    @apply text-xl text-white m-0
   }
   .title-recipe {
-    @apply absolute top-24 flex left-0  items-end p-[28px] text-white  w-[100%] justify-center md:text-5xl
+    @apply w-full h-full absolute top-0 flex left-0 items-center p-[28px] text-white justify-center md:text-5xl
   }
   .tam-title {
     @apply text-xl mb-4
@@ -30,7 +30,7 @@
     @apply absolute text-white opacity-70 left-4 sm:left-[16.5%] lg:left-[19%] md:left-[19.5%]  md:text-2xl p-3  text-xl z-50
   }
   .button-back {
-    @apply absolute top-2 left-2 btn-design text-[var(--yellow)]
+    @apply btn-design text-[var(--yellow)]
   }
   .border-grey {
     @apply border-div border-gray-300 border-[0.1px] p-3

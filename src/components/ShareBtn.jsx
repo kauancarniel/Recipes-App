@@ -19,7 +19,7 @@ export default function ShareBtn({ type, id, testId }) {
       alt="compartilhar"
       onClick={ () => {
         copy(`${URLBASE}${type}/${id}`);
-        fireToast('Password copied', 'success');
+        fireToast('Link copied', 'success');
       } }
     >
       <BsShare size="30px" />
