@@ -58,15 +58,21 @@ export default function FormCommentary() {
             onChange={ ({ target }) => setComment(target.value) }
             placeholder="Add a comment..."
           />
-          <button
-            id="button"
-            className="self-end"
-            disabled={ !(rating.length && comment.length >= MIN_LENGTH) }
-            type="submit"
-            onClick={ onSubmit }
-          >
-            Comment
-          </button>
+          <div className="flex justify-between w-full">
+            <p className="text-white text-xs m-0 pl-2 pt-1">
+              { `${comment.length}/200` }
+            </p>
+            <button
+              id="button"
+              className="self-end"
+              disabled={ !(rating.length && comment.length >= MIN_LENGTH) }
+              type="submit"
+              onClick={ onSubmit }
+            >
+              Comment
+            </button>
+
+          </div>
         </div>
       </form>
       <div className="self-start divide-y max-w-xs">

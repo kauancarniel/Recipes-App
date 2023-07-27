@@ -97,9 +97,9 @@
   color: var(--yellow);
 }
 
-button:disabled {
+#button:disabled {
   background-color: var(--orange);
-  color: var(--gray-dark);
+  color: var(--yellow);
   cursor: not-allowed;
 }
 
