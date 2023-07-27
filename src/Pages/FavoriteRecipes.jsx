@@ -64,7 +64,7 @@ function FavoriteRecipes() {
                         ? `${recipe.nationality} - ${recipe.category}`
                         : recipe.alcoholicOrNot }
                     </p>
-                    <div>
+                    <div className='mt-2'>
                       <ShareBtn
                         type={ `/${recipe.type}s` }
                         id={ recipe.id }

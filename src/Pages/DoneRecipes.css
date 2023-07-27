@@ -33,7 +33,7 @@
   }
 
   .content-ready{
-    @apply p-1 flex flex-col justify-center  items-center w-[100%]
+    @apply p-6 flex flex-col w-[100%]
   }
 
   .container-ready {
