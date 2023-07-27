@@ -1,23 +1,12 @@
 import { useContext } from 'react';
-import Swal from 'sweetalert2';
 
-import fetchAPI from '../services/fetchAPI';
+import { fetchAPI, fetchNewUser, fetchUsers } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
-
-const Toast = Swal.mixin({
-  toast: true,
-  position: 'top-end',
-  showConfirmButton: false,
-  timer: 2000,
-  didOpen: (toast) => {
-    toast.addEventListener('mouseenter', Swal.stopTimer);
-    toast.addEventListener('mouseleave', Swal.resumeTimer);
-  },
-});
+import { Toast } from '../utils/functions';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
-    setError, error } = useContext(RecipesContext);
+    setError, error, setUser } = useContext(RecipesContext);
 
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
@@ -34,9 +23,9 @@ const useFetch = () => {
     }
   };
 
-  const fireToast = (title) => {
+  const fireToast = (title, icon = 'error') => {
     Toast.fire({
-      icon: 'error',
+      icon,
       title,
       background: 'var(--darkGray)',
       color: 'var(--yellow)',
@@ -55,7 +44,52 @@ const useFetch = () => {
     }
   };
 
-  return { fetchRecipes, initialFetch, fireToast };
+  const fetchUser = async (email, password = null) => {
+    try {
+      setLoading(true);
+      return await fetchUsers(email, password);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const postNewUser = async (newUser) => {
+    try {
+      setLoading(true);
+      await fetchNewUser(newUser);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const checkUserExist = async (email) => {
+    const userResponse = await fetchUser(email);
+    return !!userResponse.length;
+  };
+
+  const loginUser = async ({ email, password }) => {
+    const userResponse = await fetchUser(email, password);
+    setUser(userResponse[0] || {});
+    if (userResponse.length) {
+      return true;
+    }
+    fireToast('Email ou senha inválidos');
+    return false;
+  };
+
+  return { fetchRecipes,
+    initialFetch,
+    fireToast,
+    fetchUser,
+    postNewUser,
+    loginUser,
+    checkUserExist };
 };
 
 export default useFetch;

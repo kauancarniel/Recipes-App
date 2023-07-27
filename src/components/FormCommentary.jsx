@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getStorage, setStorage } from '../utils/functions';
+
+import Star from './Star';
 import './FormCommentary.css';
 
 export default function FormCommentary() {
@@ -11,17 +13,19 @@ export default function FormCommentary() {
   const [allComents, setAllComents] = useState(getStorage(pathname));
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('');
+  const [like, setLike] = useState(0);
 
   useEffect(() => { if (!allComents) setStorage(pathname, []); }, []);
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const user = getStorage('user');
+    // const user = getStorage('user');
+    // const coment = [...getStorage(pathname), { comment,
+    //   rating,
+    //   email: user.email,
+    //   name: user.name }];
     const coment = [...getStorage(pathname), { comment,
-      rating,
-      email: user.email,
-      name: user.name,
-      age: user.age }];
+      rating }];
     setAllComents(coment);
     setStorage(pathname, coment);
     const radioInputs = document.getElementsByName('rating');
@@ -31,21 +35,12 @@ export default function FormCommentary() {
     setComment('');
   };
   return (
-    <div className="flex flex-col space-x-10 gap-2 items-center">
-      <h3 className="self-start ml-15">Comentarios: </h3>
+    <div className="flex flex-col items-center mt-10">
+      <h3 className="self-start text-white">Comments: </h3>
       <form>
         <div className="rating flex flex-row-reverse justify-end">
           { notas.map((nota) => (
-            <>
-              <input
-                type="radio"
-                id={ `star${nota}` }
-                name="rating"
-                value={ nota }
-                onChange={ ({ target }) => setRating(target.value) }
-              />
-              <label htmlFor={ `star${nota}` } title="text" />
-            </>
+            <Star key={ nota } nota={ nota } setRating={ setRating } />
           )) }
         </div>
         <div className="flex flex-col items-center">
@@ -62,8 +57,8 @@ export default function FormCommentary() {
             rows="3"
             value={ comment }
             onChange={ ({ target }) => setComment(target.value) }
+            placeholder="Add a comment..."
           />
-          {/* <p>{200 - comment.length}</p> */}
           <button
             id="button"
             className="self-end"
@@ -71,23 +66,23 @@ export default function FormCommentary() {
             type="submit"
             onClick={ onSubmit }
           >
-            Comentar
+            Comment
           </button>
         </div>
       </form>
-      <div className="self-start divide-y">
+      <div className="self-start divide-y max-w-xs">
         {allComents && allComents.map((com, ind) => (
-          <div key={ ind } className="flex flex-col mb-8">
-            <p> com.name </p>
+          <div key={ ind } className="flex flex-col mb-10">
+            <p className="mb-0 text-white"> com.name </p>
             <div className="flex flex-row">
-              <p>
+              <p className="mb-0 text-white">
                 { `${com.rating},0  `}
               </p>
-              <p id="st">
+              <p id="st" className="mb-0">
                 {Array.from({ length: Number(com.rating) }, () => star).join('')}
               </p>
             </div>
-            <p>{ com.comment }</p>
+            <p className="text-white break-words">{ com.comment }</p>
           </div>
         ))}
       </div>

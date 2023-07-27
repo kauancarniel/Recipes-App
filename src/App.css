@@ -55,7 +55,7 @@
   }
 
   .label {
-    @apply absolute top-0 left-0 pt-2 pb-2 text-base text-white pointer-events-none transition-all duration-500 font-[epilogue]
+    @apply absolute top-0 left-0 py-2 text-base text-white pointer-events-none transition-all duration-500 font-[epilogue]
   }
 
   .reset-input {
@@ -63,7 +63,7 @@
   }
 
   .viewpass-btn {
-    @apply outline-none border-0 bg-transparent text-white font-bold text-base cursor-pointer
+    @apply outline-none bg-transparent text-white font-bold text-base cursor-pointer border-solid border-b border-b-white border-t-0 border-l-0 border-r-0 py-2
   }
 
   .btn-login {
@@ -105,7 +105,7 @@
   }
 
   .footer {
-    @apply fixed bottom-0 w-full bg-[var(--yellow)] py-2 shadow-[0_-4px_6px_rgba(0,0,0,0.4)] z-10
+    @apply fixed bottom-0 w-full flex-center bg-[var(--yellow)] py-2 shadow-[0_-4px_6px_rgba(0,0,0,0.4)] z-10
   }
 
   .search-input {
@@ -126,6 +126,22 @@
 
   .category-btn {
     @apply reset-btn flex items-center flex-col gap-[5px] w-[55px]
+  }
+
+  .card {
+    @apply border-0
+  }
+
+  .error-register {
+    @apply text-[var(--orange)] text-sm font-bold m-0
+  }
+
+  .password-remember {
+    @apply text-[var(--darkYellow)] font-bold text-2xl tracking-widest text-center
+  }
+
+  .go-login {
+    @apply no-underline font-normal text-[var(--green)] hover:text-[var(--yellow)]
   }
 }
 
@@ -153,3 +169,7 @@ html {
 .shadow-name {
   text-shadow: 0px 0px 5px rgba(0,0,0,0.8);
 };
+
+.transf {
+  transform: scale(1.1);
+}

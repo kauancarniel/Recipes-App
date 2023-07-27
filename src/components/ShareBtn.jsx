@@ -1,31 +1,28 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
+import { BsShare } from 'react-icons/bs';
 
-import RecipesContext from '../context/RecipesContext';
+import useFetch from '../hooks/useFetch';
 import shareIcon from '../images/shareIcon.svg';
 
-const TIME_OUT = 1000;
-
 export default function ShareBtn({ type, id, testId }) {
-  const { setLinkCopy } = useContext(RecipesContext);
-
+  const { fireToast } = useFetch();
   const URLBASE = window.location.origin;
 
   return (
     <button
       data-testid={ testId }
       type="button"
-      className=" no-border bg-none "
+      className="no-border bg-none text-[var(--yellow)] hover:scale-110"
       src={ shareIcon }
       alt="compartilhar"
       onClick={ () => {
         copy(`${URLBASE}${type}/${id}`);
-        setLinkCopy(true);
-        setTimeout(() => setLinkCopy(false), TIME_OUT);
+        fireToast('Password copied', 'success');
       } }
     >
-      <img src={ shareIcon } className="w-6 z-10" alt="Share" />
+      <BsShare size="45px" />
     </button>
   );
 }

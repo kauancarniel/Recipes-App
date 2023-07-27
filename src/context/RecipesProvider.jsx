@@ -11,6 +11,8 @@ export default function RecipesProvider({ children }) {
   const [linkCopy, setLinkCopy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [user, setUser] = useState({});
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const store = useMemo(() => ({
     recipes,
@@ -27,7 +29,12 @@ export default function RecipesProvider({ children }) {
     setCheckboxes,
     filter,
     setFilter,
-  }), [recipes, categories, loading, error, linkCopy, checkboxes, filter]);
+    user,
+    setUser,
+    menuOpen,
+    setMenuOpen,
+  }), [recipes, categories, loading, error, linkCopy,
+    checkboxes, filter, user, menuOpen]);
 
   return (
     <RecipesContext.Provider value={ store }>

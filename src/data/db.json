@@ -1,0 +1,21 @@
+{
+  "users": [
+    {
+      "id": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "email": "guifjj92@gmail.com",
+      "name": "Guilherme Fernandes",
+      "password": "1234567",
+      "points": 0,
+      "createAt": "2023-07-25T19:12:48.082Z"
+    },
+    {
+      "id": "c743fdbb-69a6-4e5e-b75e-3b6033bba25c",
+      "email": "joaomarcelolimaoliveira7@gmail.com",
+      "name": "João Marcelo Titio",
+      "password": "1234567",
+      "points": 0,
+      "createAt": "2023-07-25T19:18:30.355Z"
+    }
+  ],
+  "recipes": []
+}
