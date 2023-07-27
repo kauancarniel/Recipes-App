@@ -1,21 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
-import ShareBtn from '../components/ShareBtn';
-import FavoriteBtn from '../components/FavoriteBtn';
+
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
+import ShareBtn from '../components/ShareBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
 import RecipeBtns from '../components/RecipeBtns';
 import RecommendRecipes from '../components/RecommendRecipes';
 import './Recipe.css';
-import { RenderButtons } from '../components/RenderButtons';
+import RenderButtons from '../components/RenderButtons';
 import FormCommentary from '../components/FormCommentary';
+import MenuHamburguer from '../components/MenuHamburguer';
+import Menu from '../components/Menu';
 
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
 
 export default function RecipeInProg() {
-  const { loading, error } = useContext(RecipesContext);
+  const { loading, error, menuOpen } = useContext(RecipesContext);
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -52,6 +55,12 @@ export default function RecipeInProg() {
         { error && <p>{ error }</p> }
         { (!loading && !error) && (
           <>
+            <div>
+              <div className="flex gap-x-2 absolute z-30 top-3 right-3 bg-[var(--yellow)] rounded-[100%]">
+                <MenuHamburguer />
+              </div>
+              {menuOpen && (<Menu showClose />)}
+            </div>
             <header className="flex justify-center ">
               <div className="bg-black tam-img">
                 <img
@@ -67,8 +76,8 @@ export default function RecipeInProg() {
               <h3 data-testid="recipe-category" className="title-category shadow-name">
                 {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
               </h3>
-              <button onClick={ history.goBack } className="button-back">
-                {IoChevronBackCircleSharp()}
+              <button onClick={ history.goBack } className="button-back shadow-name">
+                <IoChevronBackCircleSharp />
               </button>
             </header>
             <section className="p-3">

@@ -10,14 +10,9 @@ import { FaRankingStar } from 'react-icons/fa6';
 
 import MenuHamburguer from './MenuHamburguer';
 
-export default function Menu({ ShowClose = false }) {
+export default function Menu({ showClose = false }) {
   return (
-    <nav className="options-menu">
-      {ShowClose && (
-        <div>
-          <MenuHamburguer />
-        </div>
-      )}
+    <nav className={`options-menu ${showClose ? 'top-0' : ''}`}>
       <ul className="list-none flex flex-col p-6 gap-y-3 max-w-[300px]">
         <li>
           <Link

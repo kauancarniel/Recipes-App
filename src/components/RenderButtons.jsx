@@ -5,7 +5,7 @@ import { IoListCircleSharp } from 'react-icons/io5';
 
 import IngredientsList from './IngredientsList';
 
-export function RenderButtons({ title, recipe, isInProgress }) {
+export default function RenderButtons({ title, recipe, isInProgress }) {
   const [visible, setVisible] = useState(false);
 
   const lgWidth = 1024;
