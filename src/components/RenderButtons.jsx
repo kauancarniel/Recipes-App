@@ -7,7 +7,6 @@ import IngredientsList from './IngredientsList';
 
 export function RenderButtons({ title, recipe, isInProgress }) {
   const [visible, setVisible] = useState(false);
-  const animateOpen = 'animate-open';
 
   const lgWidth = 1024;
   const windowWidth = (window.innerWidth > lgWidth);
@@ -35,16 +34,13 @@ export function RenderButtons({ title, recipe, isInProgress }) {
         <h4 className="p-1 tam-title">{title}</h4>
       </button>
       {visible && (
-        <div className={ `${visible ? animateOpen : 'h-0'} ` }>
+        <div className={ `${visible ? 'animate-open' : 'h-0'} ` }>
           {title === 'Ingredients' ? (
-            <ul
-              className={ `text-sm p-0 ${visible ? animateOpen : 'h-0'}
-       ` }
-            >
-              <IngredientsList recipe={ recipe } isInProgress={ isInProgress } />
-            </ul>
+              <IngredientsList recipe={ recipe } isInProgress={ isInProgress }
+              visible={ visible }
+              />
           ) : (
-            <div className={ visible ? animateOpen : 'h-0' }>
+            <div className={ visible ? 'animate-open' : 'h-0' }>
               <p
                 className="text-white"
                 data-testid="instructions"

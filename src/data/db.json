@@ -5,6 +5,10 @@
       "email": "guifjj92@gmail.com",
       "name": "Guilherme Fernandes",
       "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
       "points": 0,
       "createAt": "2023-07-25T19:12:48.082Z"
     },
@@ -13,8 +17,24 @@
       "email": "joaomarcelolimaoliveira7@gmail.com",
       "name": "João Marcelo Titio",
       "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
       "points": 0,
       "createAt": "2023-07-25T19:18:30.355Z"
+    },
+    {
+      "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
+      "email": "lucasdielo@hotmail.com",
+      "name": "Lucas Dielo",
+      "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
+      "points": 0,
+      "createAt": "2023-07-27T18:04:08.985Z"
     }
   ],
   "recipes": []

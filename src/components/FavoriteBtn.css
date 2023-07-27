@@ -18,10 +18,13 @@
 .checkmark {
   top: 0;
   left: 0;
-  height: 45px;
-  width: 45px;
   transition: 100ms;
   animation: dislike_effect 400ms ease;
+}
+
+.checkmark svg {
+  height: 35px;
+  width: 35px;
 }
 
 .container-like input:checked ~ .checkmark path {

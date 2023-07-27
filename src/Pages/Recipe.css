@@ -12,7 +12,7 @@
     @apply absolute top-3 left-14  text-xl text-white 
   }
   .title-recipe {
-    @apply absolute top-24 flex left-0  items-end p-[28px] text-white  w-[100%]  md:justify-center text-sm md:text-5xl
+    @apply absolute top-24 flex left-0  items-end p-[28px] text-white  w-[100%] justify-center md:text-5xl
   }
   .tam-title {
     @apply text-xl mb-4
@@ -36,10 +36,14 @@
     @apply border-div border-gray-300 border-[0.1px] p-3
   }
   .btn-recipe {
-    @apply w-[60%] h-8 rounded-md text-white text-sm border-none bg-[#6e7909]
+    @apply w-[60%] max-w-[1000px] rounded-md text-white text-sm border-none bg-[#6e7909] py-3 font-bold uppercase tracking-widest
   }
   .btn-container {
-    @apply flex fixed z-50 items-center bottom-0 justify-center w-[100%]
+    @apply fixed bottom-0 z-50 flex items-center justify-center w-[100%]
+  }
+
+  .iframe-youtube {
+    @apply rounded-xl w-[100%] sm:w-[90%] h-60 sm:h-64 md:h-80 lg:h-96
   }
 }
 
@@ -61,4 +65,3 @@
 .box-shadow {
   box-shadow: 4px 4px 4px rgb(0, 0, 0);
 }
-
