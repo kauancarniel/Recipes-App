@@ -79,7 +79,7 @@ const useFetch = () => {
     if (userResponse.length) {
       return true;
     }
-    fireToast('Email ou senha inválidos');
+    fireToast('Invalid email or password');
     return false;
   };
 
