@@ -42,93 +42,88 @@ export default function RecipeInProg() {
   }, []);
 
   return (
-    <main className="min-h-screen recipe-box bg-form glass p-0 ">
-      { loading && (
-        <div className="w-full h-[80vh] flex-center">
-          <h2 className="text-[var(--yellow)]">Loading...</h2>
-        </div>
-      )}
-      { error && <p>{ error }</p> }
-      { (!loading && !error) && (
-        <>
-          <header className="flex justify-center ">
-            <div className="bg-black tam-img">
-              <img
-                className="tam-img"
-                src={ recipe[`str${KEY_BASE}Thumb`] }
-                alt={ recipe[`str${KEY_BASE}`] }
-                data-testid="recipe-photo"
-              />
-            </div>
-            <div>
+    <>
+      <main className="min-h-screen recipe-box bg-form glass p-0 ">
+        { loading && (
+          <div className="w-full h-[80vh] flex-center">
+            <h2 className="text-[var(--yellow)]">Loading...</h2>
+          </div>
+        )}
+        { error && <p>{ error }</p> }
+        { (!loading && !error) && (
+          <>
+            <header className="flex justify-center ">
+              <div className="bg-black tam-img">
+                <img
+                  className="tam-img"
+                  src={ recipe[`str${KEY_BASE}Thumb`] }
+                  alt={ recipe[`str${KEY_BASE}`] }
+                  data-testid="recipe-photo"
+                />
+              </div>
               <h1 data-testid="recipe-title" className="title-recipe shadow-name">
                 {recipe[`str${KEY_BASE}`]}
               </h1>
-            </div>
-            <div>
               <h3 data-testid="recipe-category" className="title-category shadow-name">
                 {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
               </h3>
-            </div>
-            <button onClick={ history.goBack } className="button-back">
-              {IoChevronBackCircleSharp()}
-            </button>
-          </header>
-          <section className="p-3">
-            <div className="relative border-grey mt-10 ">
-              <div className="flex gap-x-2 absolute z-10 top-3 right-3">
-                <ShareBtn
-                  type={ NAME_URL }
-                  id={ id }
-                  testId="share-btn"
-                />
-                <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
-              </div>
-              <RenderButtons
-                title="Ingredients"
-                recipe={ recipe }
-                isInProgress={ isInProgress }
-              />
-            </div>
-            <div className="mt-6 border-grey flex flex-col mb-10 ">
-              <RenderButtons
-                title="Instructions"
-                recipe={ recipe }
-                isInProgress={ isInProgress }
-              />
-            </div>
-            {recipe.strYoutube && (
-              <div
-                data-testid="video"
-                className="flex justify-center rounded-xl w-full "
-              >
-                <iframe
-                  className="rounded-xl w-[100%] sm:w-[90%] h-60 sm:h-64 md:h-80 lg:h-96"
-                  src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
-                  title="Recipe Video"
+              <button onClick={ history.goBack } className="button-back">
+                {IoChevronBackCircleSharp()}
+              </button>
+            </header>
+            <section className="p-3">
+              <div className="relative border-grey mt-10 ">
+                <div className="flex gap-x-2 absolute z-10 top-3 right-3">
+                  <ShareBtn
+                    type={ NAME_URL }
+                    id={ id }
+                    testId="share-btn"
+                  />
+                  <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
+                </div>
+                <RenderButtons
+                  title="Ingredients"
+                  recipe={ recipe }
+                  isInProgress={ isInProgress }
                 />
               </div>
-            )}
-          </section>
-          <section className="md:p-[1rem]">
-            {!isInProgress && (
-              <RecommendRecipes recommendRecipes={ recommendRecipes } />
-            )}
-            <div className="mb-10">
-              <FormCommentary />
-            </div>
-            <div>
-              <RecipeBtns
-                recipe={ recipe }
-                isInProgress={ isInProgress }
-                setIsInProgress={ setIsInProgress }
-              />
-            </div>
-          </section>
-
-        </>
-      )}
-    </main>
+              <div className="mt-6 border-grey flex flex-col mb-10 ">
+                <RenderButtons
+                  title="Instructions"
+                  recipe={ recipe }
+                  isInProgress={ isInProgress }
+                />
+              </div>
+              {recipe.strYoutube && (
+                <div
+                  data-testid="video"
+                  className="flex justify-center rounded-xl w-full "
+                >
+                  <iframe
+                    className="iframe-youtube"
+                    src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
+                    title="Recipe Video"
+                  />
+                </div>
+              )}
+            </section>
+            <section className="md:p-[1rem]">
+              {!isInProgress && (
+                <RecommendRecipes recommendRecipes={ recommendRecipes } />
+              )}
+              <div className="mb-10">
+                <FormCommentary />
+              </div>
+            </section>
+          </>
+        )}
+      </main>
+      <RecipeBtns
+        recipe={ recipe }
+        isInProgress={ isInProgress }
+        setIsInProgress={ setIsInProgress }
+      />
+    </>
 
   );
 }

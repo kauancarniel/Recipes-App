@@ -14,7 +14,7 @@ export default function ShareBtn({ type, id, testId }) {
     <button
       data-testid={ testId }
       type="button"
-      className="no-border bg-none text-[var(--yellow)] hover:scale-110"
+      className="no-border bg-none text-[var(--yellow)]"
       src={ shareIcon }
       alt="compartilhar"
       onClick={ () => {
@@ -22,7 +22,7 @@ export default function ShareBtn({ type, id, testId }) {
         fireToast('Password copied', 'success');
       } }
     >
-      <BsShare size="45px" />
+      <BsShare size="30px" />
     </button>
   );
 }

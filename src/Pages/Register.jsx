@@ -40,6 +40,11 @@ export default function Register() {
   const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
   const classBtn = `${classBtnMain} ${classBtbHover} ${classBtnDisabled}`;
 
+  const checkEmail = async (email) => {
+    const emailExist = await checkUserExist(email);
+    setEmailRegister(emailExist);
+  };
+
   return (
     <InitialLayout>
       <p className="text-[var(--green)] font-bold text-5xl tracking-widest">
@@ -61,7 +66,7 @@ export default function Register() {
             value={ user.email }
             data-testid="email-input"
             onChange={ ({ target }) => handleChange(target) }
-            onBlur={ ({ target }) => setEmailRegister(checkUserExist(target.value)) }
+            onBlur={ ({ target }) => checkEmail(target.value) }
             required
           />
           <label
@@ -179,7 +184,7 @@ export default function Register() {
             && user.password.length >= PASSWORD_LENGTH
             && user.password === confirmPass
             && !emailRegister
-            && user.name >= NAME_LENGTH
+            && user.name.length >= NAME_LENGTH
           ) }
         >
           <span className="absolute block anim1 line1" />
