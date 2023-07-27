@@ -48,8 +48,8 @@ function DoneRecipes() {
                   />
                 </Link>
                 <div className=" flex flex-col justify-center w-[100%] items-center border-div border-blue-800">
-                  <div className="flex border-div justify-center items-center  w-[100%]">
-                    <Link className="none border-div" to={ `${type}s/${id}` }>
+                  <div className="flex justify-center items-center  w-[100%]">
+                    <Link className="none" to={ `${type}s/${id}` }>
                       <h4
                         className="text-[var(--orange)] shadow-name"
                         data-testid={ `${index}-horizontal-name` }
@@ -69,11 +69,23 @@ function DoneRecipes() {
                         : alcoholicOrNot }
                     </p>
                   </div>
-                  <div className='border-div flex w-[100%]'>
-                    <p className='text-[var(--darkYellow)] text-sm'>
+                  <div className="flex">
+                    {tags.map((tag, indexTag) => (
+                      <div
+                        key={ indexTag }
+                        data-testid={ `${index}-${tag}-horizontal-tag` }
+                      >
+                        <p className="mr-1 text-white">
+                          {tag}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="border-div justify-center items-end   flex w-[100%]">
+                    <p className="text-[var(--darkYellow)] text-sm m-0">
                       Done In:
                       {' '}
-                      <span className='text-[var(--gray)] text-[10px]' data-testid={ `${index}-horizontal-done-date` }>
+                      <span className="text-[var(--gray)] text-[10px]" data-testid={ `${index}-horizontal-done-date` }>
                         { doneDate.toLocaleString('pt-BR', {
                           day: '2-digit',
                           month: '2-digit',
@@ -82,19 +94,6 @@ function DoneRecipes() {
 
                       </span>
                     </p>
-                  </div>
-                  <div className='flex'>
-                    {tags.map((tag, indexTag) => (
-                      <div
-                        
-                        key={ indexTag }
-                        data-testid={ `${index}-${tag}-horizontal-tag` }
-                      >
-                       <p className='m-1'>
-                        {tag}
-                        </p> 
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
