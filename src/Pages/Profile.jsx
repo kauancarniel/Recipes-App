@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Header from '../components/Header';
 import EditUserInfo from '../components/EditUserInfo';
 
-import './Profile.css';
 import './Login.css';
 
 function Profile() {
