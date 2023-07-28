@@ -10,8 +10,6 @@ export default function FormCommentary() {
   const [allComents, setAllComents] = useState(getStorage(pathname));
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('0');
-  const [like, setLike] = useState(0);
-  const [rating, setRating] = useState('');
   // const [like, setLike] = useState(0);
 
   useEffect(() => { if (!allComents) setStorage(pathname, []); }, []);
@@ -70,21 +68,6 @@ export default function FormCommentary() {
           >
             Comment
           </button>
-          <div className="flex justify-between w-full">
-            <p className="text-white text-xs m-0 pl-2 pt-1">
-              { `${comment.length}/200` }
-            </p>
-            <button
-              id="button"
-              className="self-end"
-              disabled={ !(rating.length && comment.length >= MIN_LENGTH) }
-              type="submit"
-              onClick={ onSubmit }
-            >
-              Comment
-            </button>
-
-          </div>
         </div>
       </form>
       <div className="self-start divide-y max-w-xs">
