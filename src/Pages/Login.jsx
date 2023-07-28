@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import validator from 'validator';
 
-import InitialLayout from '../components/InitialLayout';
 import useFetch from '../hooks/useFetch';
+import useCookies from '../hooks/useCookies';
+import InitialLayout from '../components/InitialLayout';
 import logo from '../images/logo-recipes-app.svg';
 import './Login.css';
 
@@ -12,9 +13,14 @@ function Login() {
   const [user, setUser] = useState({ email: '', password: '' });
   const [viewPassword, setViewPassword] = useState(false);
   const { loginUser } = useFetch();
+  const { validateCookie } = useCookies();
   const history = useHistory();
 
   const PASSWORD_LENGTH = 7;
+
+  useEffect(() => {
+    validateCookie();
+  }, []);
 
   const handleChange = ({ name, value }) => {
     setUser({ ...user, [name]: value });
@@ -26,8 +32,7 @@ function Login() {
   };
 
   const focus = 'peer-focus:-top-5 peer-focus:text-xs';
-  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
-  const classLabel = `label ${focus} ${valid}`;
+  const valid = '-top-5 text-xs';
   const classBtnMain = 'reset-input btn-login';
   const classBtbHover = 'enabled:hover:text-[#F9EFBB] shadow-hover';
   const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
@@ -49,12 +54,13 @@ function Login() {
             id="email"
             type="email"
             name="email"
+            value={ user.email }
             data-testid="email-input"
             onChange={ ({ target }) => handleChange(target) }
             required
           />
           <label
-            className={ classLabel }
+            className={ `label ${focus} ${user.email.length ? valid : ''}` }
             htmlFor="email"
           >
             Email
@@ -66,13 +72,14 @@ function Login() {
               className="peer reset-input input"
               id="password"
               name="password"
+              value={ user.password }
               type={ viewPassword ? 'text' : 'password' }
               data-testid="password-input"
               onChange={ ({ target }) => handleChange(target) }
               required
             />
             <label
-              className={ classLabel }
+              className={ `label ${focus} ${user.password.length ? valid : ''}` }
               htmlFor="password"
             >
               Password

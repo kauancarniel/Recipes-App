@@ -1,6 +1,7 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import useCookies from '../hooks/useCookies';
 import Header from '../components/Header';
 import { getStorage } from '../utils/functions';
 import RecipesContext from '../context/RecipesContext';
@@ -9,7 +10,12 @@ import './DoneRecipes.css';
 
 function DoneRecipes() {
   const { linkCopy } = useContext(RecipesContext);
+  const { validateCookie } = useCookies();
   const [filter, setFilter] = useState('all');
+
+  useEffect(() => {
+    validateCookie();
+  }, []);
 
   const doneRecipes = getStorage('doneRecipes') || [];
 

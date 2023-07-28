@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
+import useCookies from '../hooks/useCookies';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -17,9 +18,12 @@ function Recipes() {
   const [categorySelected, setCategorySelected] = useState('All');
   const { setRecipes, categories, loading, error } = useContext(RecipesContext);
   const { fetchRecipes, initialFetch } = useFetch();
+  const { validateCookie } = useCookies();
   const { location: { pathname } } = useHistory();
 
   useEffect(() => {
+    const isLogged = validateCookie();
+    if (!isLogged) return;
     (async () => {
       initialFetch(pathname);
     })();

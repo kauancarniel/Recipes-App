@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import useCookies from '../hooks/useCookies';
 import Header from '../components/Header';
-import { getStorage } from '../utils/functions';
 import Filter from '../components/Filter';
 import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
@@ -10,9 +10,14 @@ import FavoriteBtn from '../components/FavoriteBtn';
 import './DoneRecipes.css';
 
 function FavoriteRecipes() {
-  const { filter, linkCopy } = useContext(RecipesContext);
-  const [favorites, setFavorites] = useState(() => getStorage('favoriteRecipes') || []);
+  const { validateCookie } = useCookies();
+  const { filter, linkCopy, userLogged } = useContext(RecipesContext);
 
+  useEffect(() => {
+    validateCookie();
+  }, []);
+
+  const { favorites } = userLogged;
   const filteredFavorites = filter === 'all'
     ? favorites
     : favorites.filter(({ type }) => type === filter);

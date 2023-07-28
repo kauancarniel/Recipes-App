@@ -5,14 +5,16 @@ import useFetch from '../hooks/useFetch';
 import IconFood from '../images/IconFood';
 import IconDrinks from '../images/IconDrinks';
 
-export default function Footer({ setCategorySelected }) {
+export default function Footer({ setCategorySelected = null }) {
   const history = useHistory();
   const { pathname } = history.location;
   const { initialFetch } = useFetch();
 
   const handleClick = async (route) => {
-    setCategorySelected('All');
-    initialFetch(route);
+    if (setCategorySelected) {
+      setCategorySelected('All');
+      initialFetch(route);
+    }
     history.push(route);
   };
 
@@ -42,5 +44,5 @@ export default function Footer({ setCategorySelected }) {
 }
 
 Footer.propTypes = {
-  setCategorySelected: PropTypes.func.isRequired,
+  setCategorySelected: PropTypes.func,
 };

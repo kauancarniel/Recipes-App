@@ -2,11 +2,11 @@ import { useContext } from 'react';
 
 import { fetchAPI, fetchNewUser, fetchUsers } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
-import { Toast } from '../utils/functions';
+import { Toast, setCookie } from '../utils/functions';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
-    setError, error, setUser } = useContext(RecipesContext);
+    setError, error, setUserLogged } = useContext(RecipesContext);
 
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
@@ -75,8 +75,10 @@ const useFetch = () => {
 
   const loginUser = async ({ email, password }) => {
     const userResponse = await fetchUser(email, password);
-    setUser(userResponse[0] || {});
     if (userResponse.length) {
+      delete userResponse[0].password;
+      setCookie('userLogged', userResponse[0]);
+      setUserLogged(userResponse[0]);
       return true;
     }
     fireToast('Invalid email or password');

@@ -1,5 +1,7 @@
 import Swal from 'sweetalert2';
 
+const HOURS = 3;
+
 export const getStorage = (key) => JSON.parse(localStorage.getItem(key));
 export const setStorage = (key, value) => localStorage
   .setItem(key, JSON.stringify(value));
@@ -96,3 +98,20 @@ export const Toast = Swal.mixin({
     toast.addEventListener('mouseleave', Swal.resumeTimer);
   },
 });
+
+export const setCookie = (name, value = userLogged) => {
+  const date = new Date();
+  date.setHours(date.getHours() + HOURS);
+  document.cookie = `${name}=${JSON
+    .stringify(value)};expires=${date.toGMTString()};path=/`;
+};
+
+export const getCookie = (name) => {
+  const cookies = document.cookie.split(';');
+  const cookie = cookies.find((c) => c.includes(name));
+  return cookie ? JSON.parse(cookie.split('=')[1]) : null;
+};
+
+export const deleteCookie = (name) => {
+  document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+};

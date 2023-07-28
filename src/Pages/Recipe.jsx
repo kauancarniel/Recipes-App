@@ -4,6 +4,7 @@ import { IoChevronBackCircleSharp } from 'react-icons/io5';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
+import useCookies from '../hooks/useCookies';
 import ShareBtn from '../components/ShareBtn';
 import FavoriteBtn from '../components/FavoriteBtn';
 import RecipeBtns from '../components/RecipeBtns';
@@ -19,6 +20,7 @@ const INIT = 7;
 
 export default function RecipeInProg() {
   const { loading, error, menuOpen } = useContext(RecipesContext);
+  const { validateCookie } = useCookies();
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -33,6 +35,8 @@ export default function RecipeInProg() {
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
 
   useEffect(() => {
+    const isLogged = validateCookie();
+    if (!isLogged) return;
     (async () => {
       const [recipeData] = await fetchRecipes(NAME_URL, 'details', id);
       setRecipe(recipeData);
