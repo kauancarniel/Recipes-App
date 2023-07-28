@@ -1,15 +1,17 @@
 import { useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import useFetch from '../hooks/useFetch';
 import IconFood from '../images/IconFood';
 import IconDrinks from '../images/IconDrinks';
 
-export default function Footer() {
+export default function Footer({ setCategorySelected }) {
   const history = useHistory();
   const { pathname } = history.location;
   const { initialFetch } = useFetch();
 
   const handleClick = async (route) => {
+    setCategorySelected('All');
     initialFetch(route);
     history.push(route);
   };
@@ -38,3 +40,7 @@ export default function Footer() {
     </footer>
   );
 }
+
+Footer.propTypes = {
+  setCategorySelected: PropTypes.func.isRequired,
+};

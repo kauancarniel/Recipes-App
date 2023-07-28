@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import InputGroup from 'react-bootstrap/InputGroup';
 import { useLocation } from 'react-router-dom';
 import { handleSaveProgress, getStorage, initialIngredients } from '../utils/functions';
 import RecipesContext from '../context/RecipesContext';
+import './IngredientsList.css';
 
-export default function IngredientsList({ recipe, isInProgress }) {
+export default function IngredientsList({ recipe, isInProgress, visible }) {
   const { checkboxes, setCheckboxes } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const NAME_URL = pathname.split('/')[1];
@@ -32,39 +32,39 @@ export default function IngredientsList({ recipe, isInProgress }) {
     handleSaveProgress(recipe[`id${KEY_BASE}`], NAME_URL, newCheckboxes);
   };
 
-  return ingredients.map(([key, value], index) => (
-    <li
-      className="list-none w-[100%] text-white  "
-      key={ key }
-      data-testid={ `${index}-ingredient-name-and-measure` }
+  return (
+    <div
+      id="checklist"
+      className={ visible ? 'animate-open' : 'h-0' }
     >
-      {
-        isInProgress ? (
+      { ingredients.map(([key, value], index) => (
+        <>
+          <input
+            key={ `${key}-input` }
+            className={ isInProgress ? 'enabled' : 'disabled' }
+            type="checkbox"
+            id={ key }
+            name="ingredient"
+            checked={ !!checkboxes[key] }
+            onChange={ () => handleChange(key, value) }
+            disabled={ !isInProgress }
+          />
           <label
-            style={ { textDecoration: checkboxes[key] ? 'line-through' : 'none' } }
+            key={ `${key}-label` }
+            className={ isInProgress ? 'enabled' : 'disabled' }
             data-testid={ `${index}-ingredient-step` }
             htmlFor={ key }
           >
-            <InputGroup className="mb-2 flex items-center">
-              <InputGroup.Checkbox
-                className="m-0 w-3 h-3 "
-                type="checkbox"
-                id={ key }
-                name={ key }
-                checked={ !!checkboxes[key] }
-                onChange={ () => handleChange(key, value) }
-              />
-              {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
-            </InputGroup>
+            {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
           </label>
-        ) : (
-          `${value} - ${recipe[`strMeasure${index + 1}`]}`
-        )
-      }
-    </li>
-  ));
+        </>
+      ))}
+    </div>
+  );
 }
 
 IngredientsList.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
+  visible: PropTypes.bool.isRequired,
+  isInProgress: PropTypes.bool.isRequired,
 };

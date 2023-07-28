@@ -34,7 +34,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
   };
 
   return (
-    <div className="btn-container">
+    <div className="btn-container py-2">
       {isInProgress ? (
         <button
           className="btn-recipe btns"

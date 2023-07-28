@@ -1,0 +1,54 @@
+{
+  "users": [
+    {
+      "id": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "email": "guifjj92@gmail.com",
+      "name": "Guilherme Fernandes",
+      "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
+      "points": 0,
+      "createAt": "2023-07-25T19:12:48.082Z"
+    },
+    {
+      "id": "c743fdbb-69a6-4e5e-b75e-3b6033bba25c",
+      "email": "joaomarcelolimaoliveira7@gmail.com",
+      "name": "João Marcelo Titio",
+      "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
+      "points": 0,
+      "createAt": "2023-07-25T19:18:30.355Z"
+    },
+    {
+      "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
+      "email": "lucasdielo@hotmail.com",
+      "name": "Lucas Dielo",
+      "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
+      "points": 0,
+      "createAt": "2023-07-27T18:04:08.985Z"
+    },
+    {
+      "id": "95d1d753-6946-4a47-ab5c-de0919ef610f",
+      "email": "kauan@gmail.com",
+      "name": "Kauan",
+      "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
+      "points": 0,
+      "createAt": "2023-07-27T20:22:03.399Z"
+    }
+  ],
+  "recipes": [],
+  "comments": {}
+}

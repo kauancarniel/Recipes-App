@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import 'react-toastify/dist/ReactToastify.css';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
@@ -44,7 +43,6 @@ function Recipes() {
       <Header
         title={ pathname === '/meals' ? 'Meals' : 'Drinks' }
         iconeSearch
-        iconeProfile
       />
       <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
         <nav className="flex justify-between pb-9">
@@ -108,7 +106,7 @@ function Recipes() {
           )}
         </div>
       </main>
-      <Footer />
+      <Footer setCategorySelected={ setCategorySelected } />
     </>
   );
 }

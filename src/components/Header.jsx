@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TbSearch, TbSearchOff } from 'react-icons/tb';
 
+import RecipesContext from '../context/RecipesContext';
+import MenuHamburguer from './MenuHamburguer';
+import SearchBar from './SearchBar';
+import Menu from './Menu';
 import iconLogo from '../images/icon-recipes-app.svg';
 import nameLogo from '../images/name-recipes-app.svg';
 import iconFoods from '../images/icon-foods.svg';
 import iconDrinks from '../images/icon-drinks.svg';
-import SearchBar from './SearchBar';
-import Menu from './Menu';
 import './Header.css';
 
-function Header({ title, iconeProfile = false, iconeSearch = false }) {
+function Header({ title, iconeSearch = false }) {
+  const { menuOpen, setMenuOpen } = useContext(RecipesContext);
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
-
-  const pathSvg1 = 'M27 10 13 10C10.8 10 9 8.2 9 6 9 ';
-  const pathSvg2 = '3.5 10.8 2 13 2 15.2 2 17 3.8 17 6L17 26C17 28.2 18.8 ';
-  const pathSvg3 = '30 21 30 23.2 30 25 28.2 25 26 25 23.8 23.2 22 21 22L7 22';
-  const pathSvgFull = `${pathSvg1}${pathSvg2}${pathSvg3}`;
 
   return (
     <div className="w-full flex flex-col items-center justify-center">
@@ -48,34 +45,13 @@ function Header({ title, iconeProfile = false, iconeSearch = false }) {
                 )}
               </button>
             )}
-            {iconeProfile && (
-              <label className="flex-center hamburguer cursor-pointer">
-                <input
-                  className="hidden"
-                  type="checkbox"
-                  checked={ menuOpen }
-                  onChange={ () => {
-                    setMenuOpen(!menuOpen);
-                    if (showSearchBar) setShowSearchBar(!showSearchBar);
-                  } }
-                />
-                <svg
-                  className="menu-trans"
-                  viewBox="0 0 32 32"
-                >
-                  <path
-                    className="line line-top-bottom"
-                    d={ pathSvgFull }
-                  />
-                  <path className="line" d="M7 16 27 16" />
-                </svg>
-              </label>
-            )}
+            <MenuHamburguer
+              showSearchBar={ showSearchBar }
+              setShowSearchBar={ setShowSearchBar }
+            />
           </nav>
         </div>
-        {menuOpen && (
-          <Menu />
-        )}
+        {menuOpen && (<Menu />)}
       </header>
       <div
         className="recipe-box flex-center bg-form glass title-box"

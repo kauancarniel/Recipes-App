@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { getStorage, setStorage } from '../utils/functions';
+
+import Star from './Star';
 import './FormCommentary.css';
 
 export default function FormCommentary() {
-  const star = '★';
-  const notas = ['5', '4', '3', '2', '1'];
-
   const { pathname } = useLocation();
   const [allComents, setAllComents] = useState(getStorage(pathname));
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('');
+  // const [like, setLike] = useState(0);
 
   useEffect(() => { if (!allComents) setStorage(pathname, []); }, []);
 
+  const star = '★';
+  const notas = ['5', '4', '3', '2', '1'];
+  const MIN_LENGTH = 3;
+
   const onSubmit = (event) => {
     event.preventDefault();
-    const user = getStorage('user');
+    // const user = getStorage('user');
+    // const coment = [...getStorage(pathname), { comment,
+    //   rating,
+    //   email: user.email,
+    //   name: user.name }];
     const coment = [...getStorage(pathname), { comment,
-      rating,
-      email: user.email,
-      name: user.name,
-      age: user.age }];
+      rating }];
     setAllComents(coment);
     setStorage(pathname, coment);
     const radioInputs = document.getElementsByName('rating');
@@ -31,29 +36,18 @@ export default function FormCommentary() {
     setComment('');
   };
   return (
-    <div className="flex flex-col space-x-10 gap-2 items-center">
-      <h3 className="self-start ml-15">Comentarios: </h3>
+    <div className="flex flex-col items-center mt-10">
+      <h3 className="self-start text-white">Comments: </h3>
       <form>
         <div className="rating flex flex-row-reverse justify-end">
           { notas.map((nota) => (
-            <>
-              <input
-                type="radio"
-                id={ `star${nota}` }
-                name="rating"
-                value={ nota }
-                onChange={ ({ target }) => setRating(target.value) }
-              />
-              <label htmlFor={ `star${nota}` } title="text" />
-            </>
+            <Star key={ nota } nota={ nota } setRating={ setRating } />
           )) }
         </div>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center gap-y-2">
           <textarea
-            className="resize-none block p-2.5 w-full text-sm text-gray-900
-            rounded-lg border border-gray-300 focus:ring-blue-500
-           focus:border-blue-500  dark:border-gray-600 dark:placeholder-gray-400
-            dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="resize-none block bg-transparent p-2.5 w-full text-sm text-white
+            rounded-lg border border-solid border-gray-300 outline-none"
             maxLength="200"
             id="formComment"
             required
@@ -62,32 +56,38 @@ export default function FormCommentary() {
             rows="3"
             value={ comment }
             onChange={ ({ target }) => setComment(target.value) }
+            placeholder="Add a comment..."
           />
-          {/* <p>{200 - comment.length}</p> */}
-          <button
-            id="button"
-            className="self-end"
-            disabled={ rating.length === 0 }
-            type="submit"
-            onClick={ onSubmit }
-          >
-            Comentar
-          </button>
+          <div className="flex justify-between w-full">
+            <p className="text-white text-xs m-0 pl-2 pt-1">
+              { `${comment.length}/200` }
+            </p>
+            <button
+              id="button"
+              className="self-end"
+              disabled={ !(rating.length && comment.length >= MIN_LENGTH) }
+              type="submit"
+              onClick={ onSubmit }
+            >
+              Comment
+            </button>
+
+          </div>
         </div>
       </form>
-      <div className="self-start divide-y">
+      <div className="self-start divide-y max-w-xs">
         {allComents && allComents.map((com, ind) => (
-          <div key={ ind } className="flex flex-col mb-8">
-            <p> com.name </p>
+          <div key={ ind } className="flex flex-col mb-10">
+            <p className="mb-0 text-white"> com.name </p>
             <div className="flex flex-row">
-              <p>
+              <p className="mb-0 text-white">
                 { `${com.rating},0  `}
               </p>
-              <p id="st">
+              <p id="st" className="mb-0">
                 {Array.from({ length: Number(com.rating) }, () => star).join('')}
               </p>
             </div>
-            <p>{ com.comment }</p>
+            <p className="text-white break-words">{ com.comment }</p>
           </div>
         ))}
       </div>
