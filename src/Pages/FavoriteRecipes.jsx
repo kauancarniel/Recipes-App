@@ -37,7 +37,6 @@ function FavoriteRecipes() {
                   key={ `${recipe.id}${recipe.type}` }
                 >
                   <Link
-                    class=" w-[148px] md:w-[180px]"
                     to={ `/${recipe.type}s/${recipe.id}` }
                   >
                     <img
@@ -64,7 +63,7 @@ function FavoriteRecipes() {
                         ? `${recipe.nationality} - ${recipe.category}`
                         : recipe.alcoholicOrNot }
                     </p>
-                    <div className='mt-2'>
+                    <div className="mt-2">
                       <ShareBtn
                         type={ `/${recipe.type}s` }
                         id={ recipe.id }

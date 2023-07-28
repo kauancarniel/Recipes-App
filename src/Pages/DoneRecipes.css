@@ -41,6 +41,10 @@
   }
 
   .detail-img {
-    @apply rounded-md border-white w-[146px] h-[100%] md:w-[178px]
+    @apply rounded-md border-white w-[146px] h-[100%] lg:w-[178px]
+  }
+
+  .title-done {
+    @apply text-[var(--orange)] text-lg mr-2
   }
 }

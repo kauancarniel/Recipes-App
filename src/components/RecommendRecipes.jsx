@@ -24,6 +24,7 @@ function RecommendRecipes({ recommendRecipes }) {
               <h4
                 className="absolute
                top-5 left-3 p-3  sm:left-[1%]  text-white"
+                data-testid={ `${index}-recommendation-title` }
               >
                 {recipe[`str${KEY_BASE}`]}
 

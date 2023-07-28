@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../components/Header';
@@ -7,13 +7,13 @@ import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
 import './DoneRecipes.css';
 import Filter from '../components/Filter';
+import Footer from '../components/Footer';
 
 function DoneRecipes() {
   const { linkCopy } = useContext(RecipesContext);
   const { filter } = useContext(RecipesContext);
-
+  const date = 10;
   const doneRecipes = getStorage('doneRecipes') || [];
-
   const filteredRecipes = filter === 'all'
     ? doneRecipes
     : doneRecipes.filter(({ type }) => type === filter);
@@ -21,23 +21,22 @@ function DoneRecipes() {
   return (
     <>
       <Header title="Done Recipes" iconeProfile />
-      {filteredRecipes.length === 0 ? (
-        <div className="no-search">
-          <h2 className="text-[var(--yellow)]">Nenhuma receita favorita encontrada.</h2>
-        </div>
-      ) : (
-        <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
-          <nav>
-            <Filter />
-          </nav>
+      <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
+        <Filter />
+        {filteredRecipes.length === 0 ? (
+          <div className="no-search">
+            <h2 className="text-[var(--yellow)] text-lg md:text-2xl">
+              Nenhuma receita feita encontrada.
+            </h2>
+          </div>
+        ) : (
           <section className="ready-recipe ">
             { filteredRecipes.map(({
               id, type, image, name, nationality,
               category, doneDate, alcoholicOrNot, tags,
             }, index) => (
-              <div className="border-grey container-ready md:w-[400px] p-0" key={ index }>
+              <div className="border-grey container-ready p-0" key={ index }>
                 <Link
-                  class=" w-[148px] md:w-[180px]"
                   to={ `${type}s/${id}` }
                 >
                   <img
@@ -47,25 +46,23 @@ function DoneRecipes() {
                     data-testid={ `${index}-horizontal-image` }
                   />
                 </Link>
-                <div className="md:p-5 p-[0.7rem]">
+                <div className="lg:p-3 p-[0.7rem] w-[100%]">
                   <div className="flex justify-between">
-                    <Link
-                      className="none"
-                      to={ `${type}s/${id}` }
-                    >
+                    <Link className="none" to={ `${type}s/${id}` }>
                       <h4
-                        className="text-[var(--orange)]
-                    shadow-name "
+                        className="title-done shadow-name "
                         data-testid={ `${index}-horizontal-name` }
                       >
                         {name}
                       </h4>
                     </Link>
-                    <ShareBtn
-                      type={ `/${type}s` }
-                      id={ id }
-                      testId={ `${index}-horizontal-share-btn` }
-                    />
+                    <div>
+                      <ShareBtn
+                        type={ `/${type}s` }
+                        id={ id }
+                        testId={ `${index}-horizontal-share-btn` }
+                      />
+                    </div>
                   </div>
                   <p
                     className="text-[var(--gray)] text-sm"
@@ -75,19 +72,19 @@ function DoneRecipes() {
                       ? `${nationality} - ${category}`
                       : alcoholicOrNot }
                   </p>
-                  <div className="flex  mt-2">
+                  <div className="flex mt-2">
                     {tags.map((tag, indexTag) => (
                       <div
                         key={ indexTag }
                         data-testid={ `${index}-${tag}-horizontal-tag` }
                       >
-                        <p className="mr-1 text-white text-xs md:text-base ">
+                        <p className="mr-1 text-white  ">
                           {tag}
                         </p>
                       </div>
                     ))}
                   </div>
-                  <div className=" justify-center items-end  flex w-[100%]">
+                  <div className="justify-normal flex w-[100%]">
                     <p className="text-[var(--darkYellow)] text-[11px] sm:text-sm m-0">
                       Done In:
                       {' '}
@@ -95,12 +92,7 @@ function DoneRecipes() {
                         className="text-[var(--gray)] text-[9px] sm:text-[9.7px]"
                         data-testid={ `${index}-horizontal-done-date` }
                       >
-                        { doneDate.toLocaleString('pt-BR', {
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric',
-                        }) }
-
+                        { doneDate.slice(0, date)}
                       </span>
                     </p>
                   </div>
@@ -109,8 +101,9 @@ function DoneRecipes() {
               </div>
             ))}
           </section>
-        </main>
-      )}
+        )}
+      </main>
+      <Footer />
       {linkCopy && (
         <div className="link-copied" data-testid="link">
           <p className="message">Link copied!</p>

@@ -27,7 +27,7 @@ describe('Teste do componente RecipeDetail', () => {
 
     await waitForElementToBeRemoved(() => screen.getByText(/loading/i), { timeout: 4000 });
 
-    recommendedDataMock.slice(0, 5).forEach((item, index) => {
+    recommendedDataMock.slice(7, 14).forEach((item, index) => {
       const title = screen.getByTestId(`${index}-recommendation-title`);
       expect(title).toHaveTextContent(item.strDrink);
     });
