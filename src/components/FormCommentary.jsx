@@ -9,6 +9,8 @@ export default function FormCommentary() {
   const { pathname } = useLocation();
   const [allComents, setAllComents] = useState(getStorage(pathname));
   const [comment, setComment] = useState('');
+  const [rating, setRating] = useState('0');
+  const [like, setLike] = useState(0);
   const [rating, setRating] = useState('');
   // const [like, setLike] = useState(0);
 
@@ -33,6 +35,7 @@ export default function FormCommentary() {
     radioInputs.forEach((input) => {
       input.checked = false;
     });
+    setRating('0');
     setComment('');
   };
   return (
@@ -58,6 +61,15 @@ export default function FormCommentary() {
             onChange={ ({ target }) => setComment(target.value) }
             placeholder="Add a comment..."
           />
+          <button
+            id="button"
+            className="self-end"
+            disabled={ rating === '0' }
+            type="submit"
+            onClick={ onSubmit }
+          >
+            Comment
+          </button>
           <div className="flex justify-between w-full">
             <p className="text-white text-xs m-0 pl-2 pt-1">
               { `${comment.length}/200` }
