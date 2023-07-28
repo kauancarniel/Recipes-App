@@ -33,8 +33,7 @@ export default function Register() {
   };
 
   const focus = 'peer-focus:-top-5 peer-focus:text-xs';
-  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
-  const classLabel = `label ${focus} ${valid}`;
+  const valid = '-top-5 text-xs';
   const classBtnMain = 'reset-input btn-login';
   const classBtbHover = 'enabled:hover:text-[#F9EFBB] shadow-hover';
   const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
@@ -70,7 +69,7 @@ export default function Register() {
             required
           />
           <label
-            className={ classLabel }
+            className={ `label ${focus} ${user.email.length ? valid : ''}` }
             htmlFor="email"
           >
             Email
@@ -88,7 +87,7 @@ export default function Register() {
             required
           />
           <label
-            className={ classLabel }
+            className={ `label ${focus} ${user.password.length ? valid : ''}` }
             htmlFor="name"
           >
             Name
@@ -107,7 +106,7 @@ export default function Register() {
               required
             />
             <label
-              className={ classLabel }
+              className={ `label ${focus} ${user.email.length ? valid : ''}` }
               htmlFor="password"
             >
               Password
@@ -138,7 +137,7 @@ export default function Register() {
               required
             />
             <label
-              className={ classLabel }
+              className={ `label ${focus} ${confirmPass.length ? valid : ''}` }
               htmlFor="confirmPass"
             >
               Confirm Password

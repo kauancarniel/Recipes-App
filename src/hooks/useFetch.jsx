@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { fetchAPI, fetchNewUser, fetchUsers } from '../services/fetchAPI';
+import { fetchAPI, fetchNewUser, fetchPatchUser, fetchUsers } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
 
@@ -85,13 +85,26 @@ const useFetch = () => {
     return false;
   };
 
+  const patchUser = async (id, key, data) => {
+    try {
+      setLoading(true);
+      await fetchPatchUser(id, key, data);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return { fetchRecipes,
     initialFetch,
     fireToast,
     fetchUser,
     postNewUser,
     loginUser,
-    checkUserExist };
+    checkUserExist,
+    patchUser };
 };
 
 export default useFetch;

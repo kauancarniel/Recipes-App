@@ -50,7 +50,7 @@ function Login() {
       >
         <div className="user-box focus">
           <input
-            className="peer reset-input input"
+            className="reset-input input"
             id="email"
             type="email"
             name="email"

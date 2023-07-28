@@ -18,8 +18,7 @@ export default function RememberPass() {
   const NAME_LENGTH = 3;
 
   const focus = 'peer-focus:-top-5 peer-focus:text-xs';
-  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
-  const classLabel = `label ${focus} ${valid}`;
+  const valid = '-top-5 text-xs';
   const classBtnMain = 'reset-input btn-login';
   const classBtbHover = 'enabled:hover:text-[#F9EFBB] shadow-hover';
   const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
@@ -91,7 +90,7 @@ export default function RememberPass() {
             required
           />
           <label
-            className={ classLabel }
+            className={ `label ${focus} ${user.email.length ? valid : ''}` }
             htmlFor="email"
           >
             Registered Email
@@ -109,7 +108,7 @@ export default function RememberPass() {
             required
           />
           <label
-            className={ classLabel }
+            className={ `label ${focus} ${user.name.length ? valid : ''}` }
             htmlFor="name"
           >
             Registered Name
