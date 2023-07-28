@@ -7,19 +7,14 @@ import './Login.css';
 
 function Profile() {
   const [editInfos, setEditInfos] = useState(false);
+  const [editPassword, setEditPassword] = useState(false);
   return (
     <>
       <Header title="Profile" iconeProfile />
       <main
-        className="text-white
-          min-h-scree
-          h-150 w-190
-          flex
-          flex-col
-          self-center
-          whitespace-nowrap"
+        className="text-white min-h-scree flex flex-col self-center whitespace-nowrap"
       >
-        <EditUserInfo setEditInfos={ setEditInfos } editInfos={ editInfos } />
+        <EditUserInfo editInfos={ editInfos } editPassword={ editPassword } setEditInfos={ setEditInfos } setEditPassword={ setEditPassword } />
       </main>
     </>
   );

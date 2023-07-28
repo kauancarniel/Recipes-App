@@ -1,78 +1,270 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import validator from 'validator';
+
 import InitialLayout from './InitialLayout';
-import Register from '../Pages/Register';
-
-import '../Pages/Profile.css';
+import '../Pages/Login.css';
+import './EditUserInfo.css';
 import './FormCommentary.css';
+import useFetch from '../hooks/useFetch';
 
-export default function EditUserInfo({ setEditInfos, editInfos }) {
+export default function EditUserInfo({ editInfos, editPassword, setEditInfos, setEditPassword }) {
+  const [user, setUser] = useState({
+    email: '',
+    name: '',
+    password: '',
+  });
+  const [confirmPass, setConfirmPass] = useState('');
+  const [lastPassword, setLastPass] = useState('');
+  const [viewLastPassword, setViewLastPassword] = useState(false);
+  const [viewPassword, setViewPassword] = useState(false);
+  const [viewConfirmPass, setViewConfirmPass] = useState(false);
+  const [emailRegister, setEmailRegister] = useState(false);
+  const { postNewUser, checkUserExist } = useFetch();
+  const history = useHistory();
+
+  const PASSWORD_LENGTH = 7;
+  const NAME_LENGTH = 3;
+
+  const handleChange = ({ name, value }) => {
+    setUser({ ...user, [name]: value });
+  };
+
+  const handleSubmit = async () => {
+    await postNewUser(user);
+    history.push('/meals');
+  };
+
+  const focus = 'peer-focus:-top-5 peer-focus:text-xs';
+  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
+  const classLabel = `label ${focus} ${valid}`;
+  const classBtnMain = 'reset-input btn-login';
+  const classBtbHover = 'enabled:hover:text-[#F9EFBB] shadow-hover';
+  const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
+  const classBtn = `${classBtnMain} ${classBtbHover} ${classBtnDisabled}`;
+
+  const checkEmail = async (email) => {
+    const emailExist = await checkUserExist(email);
+    setEmailRegister(emailExist);
+  };
+
   return (
     <InitialLayout>
-      {!editInfos ? (
-        <div>
-          <button className="edit-button" onClick={ () => setEditInfos(true) }>
-            <svg className="edit-svgIcon" viewBox="0 0 512 512">
-              <path
-                d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"
-              />
+      <div>
+        <div className="flex flex-row">
+          <button
+            className="button w-100"
+            onClick={ () => {
+              setEditInfos((prev) => !prev);
+              setEditPassword(false);
+            } }
+          >
+            <svg className="svg-icon" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="#a649da" strokeLinecap="round" strokeWidth="2">
+                <path d="m20 20h-16" />
+                <path clipRule="evenodd" d="m14.5858 4.41422c.781-.78105 2.0474-.78105 2.8284 0 .7811.78105.7811 2.04738 0 2.82843l-8.28322 8.28325-3.03046.202.20203-3.0304z" fillRule="evenodd" />
+              </g>
             </svg>
+            <span className="lable">Edit Infos</span>
           </button>
+          <button
+            className="button"
+            onClick={ () => {
+              setEditPassword((prev) => !prev);
+              setEditInfos(false);
+            } }
+          >
+            <svg className="svg-icon" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+              <g stroke="#a649da" strokeLinecap="round" strokeWidth="2">
+                <path d="m20 20h-16" />
+                <path clipRule="evenodd" d="m14.5858 4.41422c.781-.78105 2.0474-.78105 2.8284 0 .7811.78105.7811 2.04738 0 2.82843l-8.28322 8.28325-3.03046.202.20203-3.0304z" fillRule="evenodd" />
+              </g>
+            </svg>
+            <span className="lable">Edit Password</span>
+          </button>
+        </div>
+        <div>
           <h1>Nome do usuario</h1>
           <h1>E-mail do usuario</h1>
-          <h1>Senha</h1>
         </div>
-      ) : (
-        <div className="flex flex-col items-center gap-4 w-80">
-          {/* <Register /> */}
-          <div className="form__group field">
-            <input type="text" className="form__field" placeholder="name" required="" />
-            <label htmlFor="name" className="form__label">Name</label>
-          </div>
-          <div className="form__group field">
+      </div>
+      { editInfos && (
+        <form
+          className="flex-center flex-col gap-7 w-full max-w-sm"
+          onSubmit={ (event) => {
+            event.preventDefault();
+            handleSubmit();
+          } }
+        >
+          <div className="user-box">
             <input
+              className="peer reset-input input"
+              id="email"
               type="email"
-              className="form__field"
-              placeholder="E-mail"
-              required=""
+              name="email"
+              value={ user.email }
+              data-testid="email-input"
+              onChange={ ({ target }) => handleChange(target) }
+              onBlur={ ({ target }) => checkEmail(target.value) }
+              required
             />
-            <label htmlFor="name" className="form__label">E-mail</label>
+            <label
+              className={ classLabel }
+              htmlFor="email"
+            >
+              Email
+            </label>
           </div>
-          <div className="form__group field">
+          <div className="user-box">
             <input
-              type="password"
-              className="form__field"
-              placeholder="Last Password"
-              required=""
+              className="peer reset-input input"
+              id="name"
+              type="text"
+              name="name"
+              value={ user.name }
+              data-testid="name-input"
+              onChange={ ({ target }) => handleChange(target) }
+              required
             />
-            <label htmlFor="name" className="form__label">Last Password</label>
+            <label
+              className={ classLabel }
+              htmlFor="name"
+            >
+              Name
+            </label>
           </div>
-          <div className="form__group field">
-            <input
-              type="password"
-              className="form__field"
-              placeholder="New Password"
-              required=""
-            />
-            <label htmlFor="name" className="form__label">New Password</label>
+          <button
+            id="button"
+            type="submit"
+            disabled={ !(
+              validator.isEmail(user.email)
+            ) }
+          >
+            Save Changes
+          </button>
+        </form>
+      ) }
+      { editPassword && (
+        <form
+          className="flex-center flex-col gap-7 w-full max-w-sm"
+          onSubmit={ (event) => {
+            event.preventDefault();
+            handleSubmit();
+          } }
+        >
+          <div className="flex-center relative w-full">
+            <div className="user-box">
+              <input
+                className="peer reset-input input"
+                id="lastPassword"
+                name="lastPassword"
+                value={ user.viewLastPassword }
+                type={ viewLastPassword ? 'text' : 'password' }
+                onChange={ ({ target }) => setLastPass(target.value) }
+                required
+              />
+              <label
+                className={ classLabel }
+                htmlFor="password"
+              >
+                Last Password
+              </label>
+            </div>
+            <button
+              type="button"
+              className="flex-center viewpass-btn"
+              onClick={ () => setViewLastPassword(!viewLastPassword) }
+            >
+              { viewLastPassword ? (
+                <BsEyeSlash />
+              ) : (
+                <BsEye />
+              )}
+            </button>
           </div>
-          <div className="form__group field">
-            <input
-              type="password"
-              className="form__field"
-              placeholder="Confirm Password"
-              required=""
-            />
-            <label htmlFor="name" className="form__label">Confirm Password</label>
+          <div className="flex-center relative w-full">
+            <div className="user-box">
+              <input
+                className="peer reset-input input"
+                id="password"
+                name="password"
+                value={ user.password }
+                type={ viewPassword ? 'text' : 'password' }
+                onChange={ ({ target }) => handleChange(target) }
+                required
+              />
+              <label
+                className={ classLabel }
+                htmlFor="password"
+              >
+                NewPassword
+              </label>
+            </div>
+            <button
+              type="button"
+              className="flex-center viewpass-btn"
+              onClick={ () => setViewPassword(!viewPassword) }
+            >
+              { viewPassword ? (
+                <BsEyeSlash />
+              ) : (
+                <BsEye />
+              )}
+            </button>
           </div>
-          <button id="button" onClick={ () => setEditInfos(false) }>Save Changes</button>
-        </div>
-      )}
+          <div className="flex-center relative w-full">
+            <div className="user-box">
+              <input
+                className="peer reset-input input"
+                id="confirmPass"
+                name="confirmPass"
+                value={ confirmPass }
+                type={ viewConfirmPass ? 'text' : 'password' }
+                data-testid="confirmPass-input"
+                onChange={ ({ target }) => setConfirmPass(target.value) }
+                required
+              />
+              <label
+                className={ classLabel }
+                htmlFor="confirmPass"
+              >
+                Confirm Password
+              </label>
+            </div>
+            <button
+              type="button"
+              className="flex-center viewpass-btn"
+              onClick={ () => setViewConfirmPass(!viewConfirmPass) }
+            >
+              { viewConfirmPass ? (
+                <BsEyeSlash />
+              ) : (
+                <BsEye />
+              )}
+            </button>
+          </div>
+          { emailRegister && (
+            <p className="error-register">
+              E-mail already registered, change it or
+              {' '}
+              <Link
+                className="no-underline text-[var(--darkYellow)] hover:text-[var(--yellow)]"
+                to="/"
+              >
+                login
+              </Link>
+              {' '}
+              to proceed!
+            </p>
+          )}
+          { user.password !== confirmPass && (
+            <p className="error-register">
+              Different passwords!
+            </p>
+          )}
+        </form>
+      ) }
     </InitialLayout>
   );
 }
-
-EditUserInfo.propTypes = {
-  editInfos: PropTypes.bool.isRequired,
-  setEditInfos: PropTypes.func.isRequired,
-};
