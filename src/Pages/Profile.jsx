@@ -1,44 +1,26 @@
-import React from 'react';
-import { useHistory } from 'react-router-dom';
-import Footer from '../components/Footer';
+import React, { useState } from 'react';
 import Header from '../components/Header';
+import EditUserInfo from '../components/EditUserInfo';
+
+import './Profile.css';
+import './Login.css';
 
 function Profile() {
-  const history = useHistory();
-  const userData = JSON.parse(localStorage.getItem('user'));
-  const email = userData ? userData.email : '';
-
-  const logout = () => {
-    localStorage.clear();
-    history.push('/');
-  };
-
+  const [editInfos, setEditInfos] = useState(false);
   return (
     <>
-      <div>
-
-        <Header title="Profile" iconeProfile />
-        <p data-testid="profile-email">{email}</p>
-        <button
-          data-testid="profile-done-btn"
-          onClick={ () => history.push('/done-recipes') }
-        >
-          Done Recipes
-        </button>
-        <button
-          data-testid="profile-favorite-btn"
-          onClick={ () => history.push('/favorite-recipes') }
-        >
-          Favorite Recipes
-        </button>
-        <button
-          data-testid="profile-logout-btn"
-          onClick={ logout }
-        >
-          Logout
-        </button>
-      </div>
-      <Footer />
+      <Header title="Profile" iconeProfile />
+      <main
+        className="text-white
+          min-h-scree
+          h-150 w-190
+          flex
+          flex-col
+          self-center
+          whitespace-nowrap"
+      >
+        <EditUserInfo setEditInfos={ setEditInfos } editInfos={ editInfos } />
+      </main>
     </>
   );
 }

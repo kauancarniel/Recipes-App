@@ -12,7 +12,7 @@ export default function FormCommentary() {
   const { pathname } = useLocation();
   const [allComents, setAllComents] = useState(getStorage(pathname));
   const [comment, setComment] = useState('');
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState('0');
   const [like, setLike] = useState(0);
 
   useEffect(() => { if (!allComents) setStorage(pathname, []); }, []);
@@ -32,6 +32,7 @@ export default function FormCommentary() {
     radioInputs.forEach((input) => {
       input.checked = false;
     });
+    setRating('0');
     setComment('');
   };
   return (
@@ -62,7 +63,7 @@ export default function FormCommentary() {
           <button
             id="button"
             className="self-end"
-            disabled={ rating.length === 0 }
+            disabled={ rating === '0' }
             type="submit"
             onClick={ onSubmit }
           >
