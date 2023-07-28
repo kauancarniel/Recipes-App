@@ -1,21 +1,24 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
-import ShareBtn from '../components/ShareBtn';
-import FavoriteBtn from '../components/FavoriteBtn';
+
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
+import ShareBtn from '../components/ShareBtn';
+import FavoriteBtn from '../components/FavoriteBtn';
 import RecipeBtns from '../components/RecipeBtns';
 import RecommendRecipes from '../components/RecommendRecipes';
 import './Recipe.css';
-import { RenderButtons } from '../components/RenderButtons';
+import RenderButtons from '../components/RenderButtons';
 import FormCommentary from '../components/FormCommentary';
+import MenuHamburguer from '../components/MenuHamburguer';
+import Menu from '../components/Menu';
 
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
 
 export default function RecipeInProg() {
-  const { loading, error } = useContext(RecipesContext);
+  const { loading, error, menuOpen } = useContext(RecipesContext);
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -43,7 +46,7 @@ export default function RecipeInProg() {
 
   return (
     <>
-      <main className="min-h-screen recipe-box bg-form glass p-0 ">
+      <main className="min-h-screen recipe-box bg-form glass p-0 mb-16 rounded-b-lg">
         { loading && (
           <div className="w-full h-[80vh] flex-center">
             <h2 className="text-[var(--yellow)]">Loading...</h2>
@@ -52,24 +55,35 @@ export default function RecipeInProg() {
         { error && <p>{ error }</p> }
         { (!loading && !error) && (
           <>
+            <div>
+              <div className="burguer-container">
+                <MenuHamburguer />
+              </div>
+              {menuOpen && (<Menu showClose />)}
+            </div>
             <header className="flex justify-center ">
-              <div className="bg-black tam-img">
+              <div className="tam-img relative">
                 <img
                   className="tam-img"
                   src={ recipe[`str${KEY_BASE}Thumb`] }
                   alt={ recipe[`str${KEY_BASE}`] }
                   data-testid="recipe-photo"
                 />
+                <h1
+                  data-testid="recipe-title"
+                  className="title-recipe shadow-name"
+                >
+                  {recipe[`str${KEY_BASE}`]}
+                </h1>
               </div>
-              <h1 data-testid="recipe-title" className="title-recipe shadow-name">
-                {recipe[`str${KEY_BASE}`]}
-              </h1>
-              <h3 data-testid="recipe-category" className="title-category shadow-name">
-                {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
-              </h3>
-              <button onClick={ history.goBack } className="button-back">
-                {IoChevronBackCircleSharp()}
-              </button>
+              <div className="absolute top-3 left-3 flex items-center gap-x-2">
+                <button onClick={ history.goBack } className="button-back shadow-name">
+                  <IoChevronBackCircleSharp />
+                </button>
+                <h3 data-testid="recipe-category" className="title-category shadow-name">
+                  {KEY_BASE === 'Meal' ? recipe.strCategory : recipe.strAlcoholic}
+                </h3>
+              </div>
             </header>
             <section className="p-3">
               <div className="relative border-grey mt-10 ">
@@ -111,7 +125,7 @@ export default function RecipeInProg() {
               {!isInProgress && (
                 <RecommendRecipes recommendRecipes={ recommendRecipes } />
               )}
-              <div className="mb-10">
+              <div>
                 <FormCommentary />
               </div>
             </section>

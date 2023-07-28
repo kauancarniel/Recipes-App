@@ -5,7 +5,7 @@ import { IoListCircleSharp } from 'react-icons/io5';
 
 import IngredientsList from './IngredientsList';
 
-export function RenderButtons({ title, recipe, isInProgress }) {
+export default function RenderButtons({ title, recipe, isInProgress }) {
   const [visible, setVisible] = useState(false);
 
   const lgWidth = 1024;
@@ -36,9 +36,11 @@ export function RenderButtons({ title, recipe, isInProgress }) {
       {visible && (
         <div className={ `${visible ? 'animate-open' : 'h-0'} ` }>
           {title === 'Ingredients' ? (
-              <IngredientsList recipe={ recipe } isInProgress={ isInProgress }
+            <IngredientsList
+              recipe={ recipe }
+              isInProgress={ isInProgress }
               visible={ visible }
-              />
+            />
           ) : (
             <div className={ visible ? 'animate-open' : 'h-0' }>
               <p

@@ -35,7 +35,20 @@
       "myRecipes": [],
       "points": 0,
       "createAt": "2023-07-27T18:04:08.985Z"
+    },
+    {
+      "id": "95d1d753-6946-4a47-ab5c-de0919ef610f",
+      "email": "kauan@gmail.com",
+      "name": "Kauan",
+      "password": "1234567",
+      "doneRecipes": [],
+      "favoriteRecipes": [],
+      "inProgressRecipes": {},
+      "myRecipes": [],
+      "points": 0,
+      "createAt": "2023-07-27T20:22:03.399Z"
     }
   ],
-  "recipes": []
+  "recipes": [],
+  "comments": {}
 }
