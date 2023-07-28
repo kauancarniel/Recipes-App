@@ -7,7 +7,6 @@ import Filter from '../components/Filter';
 import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
 import FavoriteBtn from '../components/FavoriteBtn';
-import Footer from '../components/Footer';
 import './DoneRecipes.css';
 
 function FavoriteRecipes() {
@@ -63,12 +62,14 @@ function FavoriteRecipes() {
                         ? `${recipe.nationality} - ${recipe.category}`
                         : recipe.alcoholicOrNot }
                     </p>
-                    <div className="mt-2">
-                      <ShareBtn
-                        type={ `/${recipe.type}s` }
-                        id={ recipe.id }
-                        testId={ `${index}-horizontal-share-btn` }
-                      />
+                    <div className="flex mt-2">
+                      <div className="mr-3">
+                        <ShareBtn
+                          type={ `/${recipe.type}s` }
+                          id={ recipe.id }
+                          testId={ `${index}-horizontal-share-btn` }
+                        />
+                      </div>
                       <FavoriteBtn
                         recipe={ recipe }
                         testId={ `${index}-horizontal-favorite-btn` }
@@ -87,7 +88,6 @@ function FavoriteRecipes() {
           <p className="message">Link copied!</p>
         </div>
       )}
-      <Footer />
     </>
   );
 }

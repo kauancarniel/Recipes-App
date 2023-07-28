@@ -7,7 +7,6 @@ import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
 import './DoneRecipes.css';
 import Filter from '../components/Filter';
-import Footer from '../components/Footer';
 
 function DoneRecipes() {
   const { linkCopy } = useContext(RecipesContext);
@@ -103,7 +102,6 @@ function DoneRecipes() {
           </section>
         )}
       </main>
-      <Footer />
       {linkCopy && (
         <div className="link-copied" data-testid="link">
           <p className="message">Link copied!</p>

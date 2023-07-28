@@ -33,6 +33,8 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
     history.push('/done-recipes');
   };
 
+  const arrayCheckbox = Object.values(checkboxes);
+
   return (
     <div className="btn-container py-2">
       {isInProgress ? (
@@ -40,7 +42,8 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
           className="btn-recipe btns"
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
-          disabled={ Object.values(checkboxes).some((value) => value === '') }
+          disabled={ arrayCheckbox.length === 0 ? true
+            : arrayCheckbox.some((value) => value === '') }
         >
           Finalizar Receita
         </button>
