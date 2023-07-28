@@ -1,12 +1,12 @@
 import { useContext } from 'react';
 
-import { fetchAPI, fetchNewUser, fetchUsers } from '../services/fetchAPI';
+import { fetchAPI, fetchNewUser, fetchUserPoints, fetchUsers } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast } from '../utils/functions';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
-    setError, error, setUser } = useContext(RecipesContext);
+    setError, error, setUser, user } = useContext(RecipesContext);
 
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
@@ -68,6 +68,18 @@ const useFetch = () => {
     }
   };
 
+  const addPoints = async (points) => {
+    try {
+      setLoading(true);
+      await fetchUserPoints(user, user.id, points);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const checkUserExist = async (email) => {
     const userResponse = await fetchUser(email);
     return !!userResponse.length;
@@ -89,7 +101,9 @@ const useFetch = () => {
     fetchUser,
     postNewUser,
     loginUser,
-    checkUserExist };
+    checkUserExist,
+    addPoints,
+  };
 };
 
 export default useFetch;

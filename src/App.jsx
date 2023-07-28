@@ -11,6 +11,7 @@ import NotFound from './Pages/NotFound';
 import Register from './Pages/Register';
 import './App.css';
 import RememberPass from './Pages/RememberPass';
+import Ranking from './Pages/Ranking';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
       <Route path="/register" component={ Register } />
       <Route path="/remember-password" component={ RememberPass } />
+      <Route path="/ranking" component={ Ranking } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );

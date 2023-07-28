@@ -71,7 +71,7 @@ export default function Menu({ showClose = false }) {
         <li>
           <Link
             className="option-menu"
-            to="/favorite-recipes"
+            to="/ranking"
           >
             <FaRankingStar className="border-2 border-solid rounded-[100%]" />
             Ranking

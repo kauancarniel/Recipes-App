@@ -52,3 +52,21 @@ export const fetchNewUser = async (user) => {
     }),
   });
 };
+
+export const fetchUserPoints = async (user, email, newPoints) => {
+  try {
+    await fetch(`${process.env.REACT_APP_BASE_URL}/users/${email}`, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'PUT',
+      body: JSON.stringify({
+        ...user,
+        points: newPoints,
+      }),
+    });
+  } catch (error) {
+    throw new Error('Erro ao atualizar os pontos do usuário');
+  }
+};
