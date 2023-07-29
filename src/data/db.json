@@ -92,6 +92,44 @@
       "my": [],
       "points": 0,
       "createAt": "2023-07-28T21:22:34.055Z"
+    },
+    {
+      "id": "d1b9f63c-0199-49ab-a30d-079fab186648",
+      "email": "plisciliane@gmail.com",
+      "name": "Plisciliane Leal",
+      "password": "456123789",
+      "dones": [
+        {
+          "id": "53065",
+          "type": "meal",
+          "nationality": "Japanese",
+          "category": "Seafood",
+          "alcoholicOrNot": "",
+          "name": "Sushi",
+          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg",
+          "doneDate": "2023-07-29T23:14:11.521Z",
+          "tags": []
+        }
+      ],
+      "favorites": [
+        {
+          "id": "52844",
+          "type": "meal",
+          "nationality": "Italian",
+          "category": "Pasta",
+          "alcoholicOrNot": "",
+          "name": "Lasagne",
+          "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg"
+        }
+      ],
+      "inProgress": {
+        "meals": {
+          "53065": {}
+        }
+      },
+      "my": [],
+      "points": 0,
+      "createAt": "2023-07-29T20:17:13.555Z"
     }
   ],
   "recipes": [],

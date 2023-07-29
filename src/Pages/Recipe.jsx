@@ -18,7 +18,7 @@ import Menu from '../components/Menu';
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
 
-export default function RecipeInProg() {
+export default function Recipe() {
   const { loading, error, menuOpen } = useContext(RecipesContext);
   const { validateCookie } = useUser();
   const history = useHistory();
@@ -81,7 +81,13 @@ export default function RecipeInProg() {
                 </h1>
               </div>
               <div className="absolute top-3 left-3 flex items-center gap-x-2">
-                <button onClick={ history.goBack } className="button-back shadow-name">
+                <button
+                  onClick={ () => {
+                    history.goBack();
+                    setIsInProgress(!isInProgress);
+                  } }
+                  className="button-back shadow-name"
+                >
                   <IoChevronBackCircleSharp />
                 </button>
                 <h3 data-testid="recipe-category" className="title-category shadow-name">

@@ -3,33 +3,37 @@ import { useHistory, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import RecipesContext from '../context/RecipesContext';
-import { addInDoneRecipes, handleRemoveInProgress } from '../utils/functions';
+import useUser from '../hooks/useUser';
 
 export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
-  const { checkboxes, userLogged } = useContext(RecipesContext);
-  const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
+  const { userLogged } = useContext(RecipesContext);
+  const { handleRemoveInProgress, addInDoneRecipes } = useUser();
+  const [isRecipeInProgress, setIsRecipeInProgress] = useState('loading');
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
 
   const NAME_URL = pathname.split('/')[1];
+  const { inProgress } = userLogged || { inProgress: {} };
 
   useEffect(() => {
-    if (userLogged) {
-      const { inProgress } = userLogged;
-      if (inProgress[NAME_URL]) setIsRecipeInProgress(!!inProgress[NAME_URL][id]);
+    if (inProgress[NAME_URL]) {
+      const textBtn = inProgress[NAME_URL][id] ? 'Continue Recipe' : 'Start Recipe';
+      setIsRecipeInProgress(textBtn);
+    } else {
+      setIsRecipeInProgress('Start Recipe');
     }
-  }, []);
+  }, [userLogged, isInProgress]);
 
   const startRecipe = () => {
     setIsInProgress(!isInProgress);
     history.push(`${pathname}/in-progress`);
   };
 
-  const finishRecipe = () => {
+  const finishRecipe = async () => {
     setIsInProgress(!isInProgress);
     handleRemoveInProgress(id, NAME_URL);
-    addInDoneRecipes(recipe, NAME_URL);
+    await addInDoneRecipes(recipe, NAME_URL, id);
     history.push('/done-recipes');
   };
 
@@ -40,7 +44,10 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
           className="btn-recipe btns"
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
-          disabled={ Object.values(checkboxes).some((value) => value === '') }
+          disabled={
+            inProgress[NAME_URL][id]
+            && Object.values(inProgress[NAME_URL][id]).some((value) => value === '')
+          }
         >
           Finalizar Receita
         </button>
@@ -51,7 +58,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
           type="button"
           data-testid="start-recipe-btn"
         >
-          { isRecipeInProgress ? 'Continue Recipe' : 'Start Recipe'}
+          {isRecipeInProgress}
         </button>
       )}
     </div>

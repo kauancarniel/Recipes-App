@@ -50,21 +50,64 @@ const useUser = () => {
     await patchUser(id, 'favorites', newFavorites);
   };
 
-  const saveProgress = async (key, NAME_URL, checkBoxes) => {
-    const ingredients = Object.values(checkBoxes).filter((value) => value !== '');
-    const { inProgress, id } = userLogged;
+  const setUserProgress = (NAME_URL, key, checkboxes) => {
+    const { inProgress } = userLogged;
     const newProgressRecipes = {
       ...inProgress,
       [NAME_URL]: {
         ...inProgress[NAME_URL],
-        [key]: ingredients,
+        [key]: checkboxes,
       },
     };
     setUserLogged({ ...userLogged, inProgress: newProgressRecipes });
-    await patchUser(id, 'inProgress', newProgressRecipes);
+    return newProgressRecipes;
   };
 
-  return { validateCookie, changeFavorite, saveProgress, logout };
+  const saveProgress = async (key, NAME_URL, checkBoxes) => {
+    const newProgressRecipes = setUserProgress(NAME_URL, key, checkBoxes);
+    await patchUser(userLogged.id, 'inProgress', newProgressRecipes);
+  };
+
+  const handleRemoveInProgress = (id, NAME_URL) => {
+    const { inProgress } = userLogged;
+    if (Object.keys(inProgress[NAME_URL]).length === 1) {
+      delete inProgress[NAME_URL];
+    } else {
+      delete inProgress[NAME_URL][id];
+    }
+    saveProgress(id, NAME_URL, inProgress);
+  };
+
+  const addInDoneRecipes = async (recipe, NAME_URL, id) => {
+    const BASE_KEY = NAME_URL === 'meals' ? 'Meal' : 'Drink';
+    const { strArea, strCategory, strAlcoholic, strTags } = recipe;
+    const { dones } = userLogged || { dones: [] };
+    const formatedRecipe = {
+      id,
+      type: BASE_KEY.toLocaleLowerCase(),
+      nationality: strArea || '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic || '',
+      name: recipe[`str${BASE_KEY}`],
+      image: recipe[`str${BASE_KEY}Thumb`],
+      doneDate: new Date().toISOString(),
+      tags: strTags ? strTags.split(',').splice(0, 2) : [],
+    };
+    const filteredDones = dones
+      .filter(({ id: doneId, type }) => !(
+        doneId === id && type === BASE_KEY.toLocaleLowerCase()
+      ));
+
+    await patchUser(userLogged.id, 'dones', [...filteredDones, formatedRecipe]);
+  };
+
+  return { validateCookie,
+    changeFavorite,
+    saveProgress,
+    handleRemoveInProgress,
+    setUserProgress,
+    addInDoneRecipes,
+    logout };
 };
 
 export default useUser;

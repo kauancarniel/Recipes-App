@@ -48,7 +48,7 @@ export default function RememberPass() {
     </button>,
     <Link
       key="register"
-      to="/register"
+      to="/signup"
       className="no-underline text-[var(--orange)] hover:text-[var(--red)]"
     >
       Sing Up
@@ -145,7 +145,7 @@ export default function RememberPass() {
                     className="go-login"
                     to="/"
                   >
-                    Vá para o Login
+                    Go to Login
                   </Link>
                 </p>
               )}

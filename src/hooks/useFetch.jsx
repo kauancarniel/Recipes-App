@@ -90,13 +90,10 @@ const useFetch = () => {
 
   const patchUser = async (id, key, data) => {
     try {
-      setLoading(true);
       await fetchPatchUser(id, key, data);
     } catch ({ message }) {
       setError(message);
       return [];
-    } finally {
-      setLoading(false);
     }
   };
 
