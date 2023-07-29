@@ -4,7 +4,7 @@ import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import validator from 'validator';
 
 import useFetch from '../hooks/useFetch';
-import useCookies from '../hooks/useCookies';
+import useUser from '../hooks/useUser';
 import InitialLayout from '../components/InitialLayout';
 import logo from '../images/logo-recipes-app.svg';
 import './Login.css';
@@ -13,13 +13,15 @@ function Login() {
   const [user, setUser] = useState({ email: '', password: '' });
   const [viewPassword, setViewPassword] = useState(false);
   const { loginUser } = useFetch();
-  const { validateCookie } = useCookies();
+  const { validateCookie } = useUser();
   const history = useHistory();
 
   const PASSWORD_LENGTH = 7;
 
   useEffect(() => {
-    validateCookie();
+    (async () => {
+      await validateCookie();
+    })();
   }, []);
 
   const handleChange = ({ name, value }) => {
@@ -124,7 +126,7 @@ function Login() {
             Don&apos;t have an account?
             {' '}
             <Link
-              to="/register"
+              to="/signup"
               className="no-underline text-[#fff] hover:text-[#aaa]"
             >
               Sign up!

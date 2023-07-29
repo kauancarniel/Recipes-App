@@ -6,8 +6,29 @@
       "name": "Guilherme Fernandes",
       "password": "1234567",
       "dones": [],
-      "favorites": [],
-      "inProgress": {},
+      "favorites": [
+        {
+          "id": "53065",
+          "type": "meal",
+          "nationality": "Japanese",
+          "category": "Seafood",
+          "alcoholicOrNot": "",
+          "name": "Sushi",
+          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg"
+        }
+      ],
+      "inProgress": {
+        "meals": {
+          "53065": [
+            "Sushi Rice",
+            "Rice wine",
+            "Caster Sugar",
+            "Mayonnaise",
+            "Soy Sauce",
+            "Cucumber"
+          ]
+        }
+      },
       "my": [],
       "points": 0,
       "createAt": "2023-07-25T19:12:48.082Z"
@@ -47,6 +68,30 @@
       "my": [],
       "points": 0,
       "createAt": "2023-07-27T20:22:03.399Z"
+    },
+    {
+      "id": "3e3ace1c-b7a3-4430-b393-55a7fe98ab61",
+      "email": "",
+      "name": "",
+      "password": "",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "my": [],
+      "points": 0,
+      "createAt": "2023-07-28T21:05:28.202Z"
+    },
+    {
+      "id": "55611a5f-63bc-424d-ae66-2871df894494",
+      "email": "teste@teste.com",
+      "name": "teste",
+      "password": "1234567",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "my": [],
+      "points": 0,
+      "createAt": "2023-07-28T21:22:34.055Z"
     }
   ],
   "recipes": [],

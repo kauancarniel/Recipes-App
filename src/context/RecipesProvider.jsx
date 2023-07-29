@@ -12,7 +12,7 @@ export default function RecipesProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [userLogged, setUserLogged] = useState({ id: '' });
+  const [userLogged, setUserLogged] = useState(null);
 
   const store = useMemo(() => ({
     recipes,

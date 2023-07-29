@@ -1,14 +1,17 @@
 /* eslint-disable max-len */
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import { changeFavorite, verifyFavorite } from '../utils/functions';
+import RecipesContext from '../context/RecipesContext';
+import useUser from '../hooks/useUser';
 import './FavoriteBtn.css';
 
 const NEGATIVE_ONE = -1;
 
-export default function FavoriteBtn({ recipe, setFavorites = null }) {
+export default function FavoriteBtn({ recipe }) {
+  const { userLogged } = useContext(RecipesContext);
+  const { changeFavorite } = useUser();
   const { pathname } = useLocation();
   const [isFavorite, setIsFavorite] = useState(() => false);
 
@@ -28,17 +31,14 @@ export default function FavoriteBtn({ recipe, setFavorites = null }) {
     };
 
   useEffect(() => {
-    setIsFavorite(verifyFavorite(formatRecipe.id, formatRecipe.type));
+    if (!userLogged) return;
+    const { favorites } = userLogged;
+    setIsFavorite(favorites.some(({ id, type }) => id === formatRecipe.id && type === formatRecipe.type));
   }, []);
 
-  const handleClick = () => {
-    const newFavorites = changeFavorite(
-      formatRecipe,
-      formatRecipe.type,
-      !isFavorite,
-    );
+  const handleClick = async () => {
+    await changeFavorite(formatRecipe, formatRecipe.type, !isFavorite);
     setIsFavorite(!isFavorite);
-    if (setFavorites) setFavorites(newFavorites);
   };
 
   return (
@@ -56,5 +56,4 @@ export default function FavoriteBtn({ recipe, setFavorites = null }) {
 
 FavoriteBtn.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
-  setFavorites: PropTypes.func,
 };

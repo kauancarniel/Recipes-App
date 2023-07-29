@@ -9,10 +9,10 @@ import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
 
 import RecipesContext from '../context/RecipesContext';
-import useCookies from '../hooks/useCookies';
+import useUser from '../hooks/useUser';
 
 export default function Menu({ showClose = false }) {
-  const { logout } = useCookies();
+  const { logout } = useUser();
   const { setMenuOpen } = useContext(RecipesContext);
   return (
     <nav className={ `options-menu ${showClose ? 'top-0' : ''}` }>

@@ -27,7 +27,7 @@ export const fetchAPI = async (pathname, optSearch, textSearch) => {
   return data[pathname.split('/')[1]];
 };
 
-export const fetchUsers = async (email, password) => {
+export const fetchUserEmail = async (email, password) => {
   let response;
   if (!password) {
     response = await fetch(`${URL_BASE}?email=${email}`);
@@ -38,12 +38,19 @@ export const fetchUsers = async (email, password) => {
   return data;
 };
 
+export const fetchUserId = async (id) => {
+  const response = await fetch(`${URL_BASE}/${id}`);
+  const data = await response.json();
+  return data;
+};
+
 export const fetchNewUser = async (user) => {
+  const id = uuidv4();
   await fetch(URL_BASE, {
     headers,
     method: 'POST',
     body: JSON.stringify({
-      id: uuidv4(),
+      id,
       ...user,
       dones: [],
       favorites: [],
@@ -53,6 +60,7 @@ export const fetchNewUser = async (user) => {
       createAt: new Date(),
     }),
   });
+  return id;
 };
 
 export const fetchPatchUser = async (id, key, data) => {

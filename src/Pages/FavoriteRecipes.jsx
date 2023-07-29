@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import useCookies from '../hooks/useCookies';
+import useUser from '../hooks/useUser';
 import Header from '../components/Header';
 import Filter from '../components/Filter';
 import RecipesContext from '../context/RecipesContext';
@@ -10,14 +10,16 @@ import FavoriteBtn from '../components/FavoriteBtn';
 import './DoneRecipes.css';
 
 function FavoriteRecipes() {
-  const { validateCookie } = useCookies();
+  const { validateCookie } = useUser();
   const { filter, linkCopy, userLogged } = useContext(RecipesContext);
 
   useEffect(() => {
-    validateCookie();
+    (async () => {
+      await validateCookie();
+    })();
   }, []);
 
-  const { favorites } = userLogged;
+  const { favorites } = userLogged || { favorites: [] };
   const filteredFavorites = filter === 'all'
     ? favorites
     : favorites.filter(({ type }) => type === filter);
@@ -27,7 +29,7 @@ function FavoriteRecipes() {
       <Header title="Favorite Recipes" iconeProfile />
       <Filter />
       <main>
-        {!favorites.length ? (
+        {!filteredFavorites.length ? (
           <p>Sem favoritos</p>
         ) : filteredFavorites.map((recipe, index) => (
           <div key={ `${recipe.id}${recipe.type}` }>

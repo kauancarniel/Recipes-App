@@ -1,19 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import validator from 'validator';
 import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import { IoChevronBackCircleSharp } from 'react-icons/io5';
 
 import InitialLayout from '../components/InitialLayout';
 import useFetch from '../hooks/useFetch';
+import useUser from '../hooks/useUser';
 
 export default function RememberPass() {
   const { fetchUser, fireToast } = useFetch();
+  const { validateCookie } = useUser();
   const [user, setUser] = useState({
     email: '',
     name: '',
   });
   const [password, setPassword] = useState('');
   const [indexBtn, setIndexBtn] = useState(0);
+
+  useEffect(() => {
+    (async () => {
+      await validateCookie();
+    })();
+  }, []);
 
   const NAME_LENGTH = 3;
 
@@ -51,7 +60,7 @@ export default function RememberPass() {
   };
 
   const handleSubmit = async () => {
-    const userResponse = await fetchUser(user.email);
+    const userResponse = await fetchUser(user);
     if (userResponse.length) {
       if (userResponse[0].name !== user.name) {
         setPassword('Valid email, but name does not match registered. Please try again');
@@ -68,9 +77,17 @@ export default function RememberPass() {
 
   return (
     <InitialLayout>
-      <p className="text-[var(--green)] font-bold text-5xl tracking-widest text-center">
-        REMEMBER PASSWORD
-      </p>
+      <div className="text-center mb-3 flex gap-x-2 items-center">
+        <Link
+          className="no-underline text-[var(--yellow)] hover:text-[var(--darkYellow)]"
+          to="/"
+        >
+          <IoChevronBackCircleSharp size="40px" />
+        </Link>
+        <h1 className="text-[var(--green)] font-bold text-5xl tracking-widest m-0">
+          REMEMBER PASS
+        </h1>
+      </div>
       <form
         className="flex-center flex-col gap-7 w-full max-w-sm"
         onSubmit={ (event) => {

@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import validator from 'validator';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
+import { IoChevronBackCircleSharp } from 'react-icons/io5';
 
+import useFetch from '../hooks/useFetch';
+import useUser from '../hooks/useUser';
 import InitialLayout from '../components/InitialLayout';
 import './Login.css';
-import useFetch from '../hooks/useFetch';
 
 export default function Register() {
   const [user, setUser] = useState({
@@ -18,18 +20,25 @@ export default function Register() {
   const [viewConfirmPass, setViewConfirmPass] = useState(false);
   const [emailRegister, setEmailRegister] = useState(false);
   const { postNewUser, checkUserExist } = useFetch();
+  const { validateCookie } = useUser();
   const history = useHistory();
 
   const PASSWORD_LENGTH = 7;
   const NAME_LENGTH = 3;
+
+  useEffect(() => {
+    (async () => {
+      await validateCookie();
+    })();
+  }, []);
 
   const handleChange = ({ name, value }) => {
     setUser({ ...user, [name]: value });
   };
 
   const handleSubmit = async () => {
-    await postNewUser(user);
-    history.push('/meals');
+    const success = await postNewUser(user);
+    if (success) history.push('/meals');
   };
 
   const focus = 'peer-focus:-top-5 peer-focus:text-xs';
@@ -46,9 +55,17 @@ export default function Register() {
 
   return (
     <InitialLayout>
-      <p className="text-[var(--green)] font-bold text-5xl tracking-widest">
-        SING UP
-      </p>
+      <div className="text-center mb-3 flex gap-x-2 items-center">
+        <Link
+          className="no-underline text-[var(--yellow)] hover:text-[var(--darkYellow)]"
+          to="/"
+        >
+          <IoChevronBackCircleSharp size="40px" />
+        </Link>
+        <h1 className="text-[var(--green)] font-bold text-5xl tracking-widest m-0">
+          SIGN UP
+        </h1>
+      </div>
       <form
         className="flex-center flex-col gap-7 w-full max-w-sm"
         onSubmit={ (event) => {
@@ -87,7 +104,7 @@ export default function Register() {
             required
           />
           <label
-            className={ `label ${focus} ${user.password.length ? valid : ''}` }
+            className={ `label ${focus} ${user.name.length ? valid : ''}` }
             htmlFor="name"
           >
             Name
@@ -106,7 +123,7 @@ export default function Register() {
               required
             />
             <label
-              className={ `label ${focus} ${user.email.length ? valid : ''}` }
+              className={ `label ${focus} ${user.password.length ? valid : ''}` }
               htmlFor="password"
             >
               Password
