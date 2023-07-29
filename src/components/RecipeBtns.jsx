@@ -4,18 +4,15 @@ import PropTypes from 'prop-types';
 
 import RecipesContext from '../context/RecipesContext';
 import { addInDoneRecipes, getStorage, handleRemoveInProgress } from '../utils/functions';
-import usersData from '../data/db.json';
 import useFetch from '../hooks/useFetch';
 
 export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
-  const { checkboxes, user } = useContext(RecipesContext);
+  const { checkboxes } = useContext(RecipesContext);
   const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
   const { addPoints } = useFetch();
-  const { users } = usersData;
-  const identifyUser = users.find((userData) => userData.email === user.email);
 
   const NAME_URL = pathname.split('/')[1];
 
@@ -31,13 +28,16 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
     history.push(`${pathname}/in-progress`);
   };
 
+  console.log(NAME_URL);
   const finishRecipe = async () => {
+    const pointsM = 5;
+    const pointsD = 2;
     setIsInProgress(!isInProgress);
     handleRemoveInProgress(id, NAME_URL);
     addInDoneRecipes(recipe, NAME_URL);
-    const points = 5;
-    const newPoints = identifyUser.points + points;
-    await addPoints(newPoints);
+    const promisePoints = NAME_URL === 'meals' ? addPoints(pointsM)
+      : addPoints(pointsD);
+    await promisePoints;
 
     history.push('/done-recipes');
   };

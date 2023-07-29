@@ -10,6 +10,7 @@ const keys = {
 };
 
 const URL_USERS = `${process.env.REACT_APP_BASE_URL}/users?email=`;
+const APLICATION_JSON = 'application/json';
 
 export const fetchAPI = async (pathname, optSearch, textSearch) => {
   const BASE_URL = pathname === '/meals'
@@ -36,8 +37,8 @@ export const fetchUsers = async (email, password) => {
 export const fetchNewUser = async (user) => {
   await fetch(`${process.env.REACT_APP_BASE_URL}/users`, {
     headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
+      Accept: APLICATION_JSON,
+      'Content-Type': APLICATION_JSON,
     },
     method: 'POST',
     body: JSON.stringify({
@@ -54,19 +55,15 @@ export const fetchNewUser = async (user) => {
 };
 
 export const fetchUserPoints = async (user, email, newPoints) => {
-  try {
-    await fetch(`${process.env.REACT_APP_BASE_URL}/users/${email}`, {
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      method: 'PUT',
-      body: JSON.stringify({
-        ...user,
-        points: newPoints,
-      }),
-    });
-  } catch (error) {
-    throw new Error('Erro ao atualizar os pontos do usuário');
-  }
+  await fetch(`${process.env.REACT_APP_BASE_URL}/users/${email}`, {
+    headers: {
+      Accept: APLICATION_JSON,
+      'Content-Type': APLICATION_JSON,
+    },
+    method: 'PUT',
+    body: JSON.stringify({
+      ...user,
+      points: newPoints,
+    }),
+  });
 };
