@@ -1,21 +1,31 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import useUser from '../hooks/useUser';
 import Header from '../components/Header';
-import { getStorage } from '../utils/functions';
 import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
 import './DoneRecipes.css';
 
 function DoneRecipes() {
-  const { linkCopy } = useContext(RecipesContext);
+  const { linkCopy, userLogged } = useContext(RecipesContext);
+  const { validateCookie } = useUser();
   const [filter, setFilter] = useState('all');
 
-  const doneRecipes = getStorage('doneRecipes') || [];
+  useEffect(() => {
+    (async () => {
+      await validateCookie();
+    })();
+  }, []);
+
+  const { dones } = userLogged || { dones: [] };
+  const MAX_RECIPES = 11;
 
   const filteredRecipes = filter === 'all'
-    ? doneRecipes
-    : doneRecipes.filter(({ type }) => type === filter);
+    ? dones
+    : dones.filter(({ type }) => type === filter);
+  let indexInit = filteredRecipes.length - MAX_RECIPES;
+  indexInit = indexInit < 0 ? 0 : indexInit;
 
   const buttonFilter = ['all', 'meal', 'drink'];
 
@@ -24,7 +34,7 @@ function DoneRecipes() {
       <Header title="Done Recipes" iconeProfile />
       {filteredRecipes.length === 0 ? (
         <main>
-          <p>Nenhuma receita favorita encontrada.</p>
+          <p>Nenhuma receita finalizada encontrada.</p>
         </main>
       ) : (
         <main>
@@ -41,7 +51,7 @@ function DoneRecipes() {
             ))}
           </nav>
           <section>
-            { filteredRecipes.map(({
+            { filteredRecipes.slice(indexInit, filteredRecipes.length).map(({
               id, type, image, name, nationality,
               category, doneDate, alcoholicOrNot, tags,
             }, index) => (

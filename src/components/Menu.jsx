@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { CgProfile } from 'react-icons/cg';
@@ -8,16 +8,20 @@ import { MdOutlineEditNote } from 'react-icons/md';
 import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
 
-import MenuHamburguer from './MenuHamburguer';
+import RecipesContext from '../context/RecipesContext';
+import useUser from '../hooks/useUser';
 
 export default function Menu({ showClose = false }) {
+  const { logout } = useUser();
+  const { setMenuOpen } = useContext(RecipesContext);
   return (
-    <nav className={`options-menu ${showClose ? 'top-0' : ''}`}>
+    <nav className={ `options-menu ${showClose ? 'top-0' : ''}` }>
       <ul className="list-none flex flex-col p-6 gap-y-3 max-w-[300px]">
         <li>
           <Link
             className="option-menu"
             to="/meals"
+            onClick={ () => setMenuOpen(false) }
           >
             <HiOutlineHome className="border-2 border-solid rounded-[100%]" />
             Home
@@ -27,6 +31,7 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             to="/profile"
+            onClick={ () => setMenuOpen(false) }
           >
             <CgProfile />
             Profile
@@ -36,6 +41,7 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             to="/my-recipes"
+            onClick={ () => setMenuOpen(false) }
           >
             <MdOutlineEditNote className="border-2 border-solid rounded-[100%]" />
             My Recipes
@@ -45,6 +51,7 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             to="/in-progress-recipes"
+            onClick={ () => setMenuOpen(false) }
           >
             <LuChefHat className="border-2 border-solid rounded-[100%]" />
             Recipes in Progress
@@ -54,6 +61,7 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             to="/done-recipes"
+            onClick={ () => setMenuOpen(false) }
           >
             <FiCheckCircle />
             Done Recipes
@@ -63,6 +71,7 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             to="/favorite-recipes"
+            onClick={ () => setMenuOpen(false) }
           >
             <HiHeart className="border-2 border-solid rounded-[100%]" />
             Favorite Recipes
@@ -72,6 +81,7 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             to="/favorite-recipes"
+            onClick={ () => setMenuOpen(false) }
           >
             <FaRankingStar className="border-2 border-solid rounded-[100%]" />
             Ranking
@@ -80,7 +90,7 @@ export default function Menu({ showClose = false }) {
         <li>
           <Link
             className="option-menu"
-            onClick={ () => {} }
+            onClick={ logout }
             to="/"
           >
             <HiLogout className="border-2 border-solid rounded-[100%]" />

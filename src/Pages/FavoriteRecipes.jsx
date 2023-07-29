@@ -1,8 +1,8 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+import useUser from '../hooks/useUser';
 import Header from '../components/Header';
-import { getStorage } from '../utils/functions';
 import Filter from '../components/Filter';
 import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
@@ -10,9 +10,16 @@ import FavoriteBtn from '../components/FavoriteBtn';
 import './DoneRecipes.css';
 
 function FavoriteRecipes() {
-  const { filter, linkCopy } = useContext(RecipesContext);
-  const [favorites, setFavorites] = useState(() => getStorage('favoriteRecipes') || []);
+  const { validateCookie } = useUser();
+  const { filter, linkCopy, userLogged } = useContext(RecipesContext);
 
+  useEffect(() => {
+    (async () => {
+      await validateCookie();
+    })();
+  }, []);
+
+  const { favorites } = userLogged || { favorites: [] };
   const filteredFavorites = filter === 'all'
     ? favorites
     : favorites.filter(({ type }) => type === filter);
@@ -22,7 +29,7 @@ function FavoriteRecipes() {
       <Header title="Favorite Recipes" iconeProfile />
       <Filter />
       <main>
-        {!favorites.length ? (
+        {!filteredFavorites.length ? (
           <p>Sem favoritos</p>
         ) : filteredFavorites.map((recipe, index) => (
           <div key={ `${recipe.id}${recipe.type}` }>
@@ -53,8 +60,6 @@ function FavoriteRecipes() {
                 />
                 <FavoriteBtn
                   recipe={ recipe }
-                  testId={ `${index}-horizontal-favorite-btn` }
-                  setFavorites={ setFavorites }
                 />
               </div>
             </div>
