@@ -10,7 +10,7 @@ export default function FormCommentary({ onSubmit }) {
   const { pathname } = useLocation();
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('0');
-  const { user } = useContext(RecipesContext);
+  const { userLogged } = useContext(RecipesContext);
   const parts = pathname.split('/');
   const limitBarra = 3;
   const requiredPart = parts.slice(1, limitBarra).join('/');
@@ -55,7 +55,7 @@ export default function FormCommentary({ onSubmit }) {
               });
               setRating('0');
               setComment('');
-              onSubmit(url, comment, rating, user);
+              onSubmit(url, comment, rating, userLogged.name);
             } }
           >
             Comment

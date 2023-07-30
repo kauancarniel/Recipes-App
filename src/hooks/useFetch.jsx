@@ -8,7 +8,7 @@ import { Toast, setCookie } from '../utils/functions';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
-    setError, error, user } = useContext(RecipesContext);
+    setError, error, userLogged } = useContext(RecipesContext);
   const { users } = usersData;
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
@@ -75,11 +75,11 @@ const useFetch = () => {
   };
 
   const addPoints = async (points) => {
-    const identifyUser = users.find((userData) => userData.email === user.email);
+    const identifyUser = users.find((userData) => userData.email === userLogged.email);
     const sumPoints = identifyUser.points + points;
     try {
       setLoading(true);
-      await fetchUserPoints(user, sumPoints);
+      await fetchUserPoints(userLogged, sumPoints);
     } catch ({ message }) {
       setError(message);
       return [];

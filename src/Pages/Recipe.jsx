@@ -50,9 +50,9 @@ export default function Recipe() {
     })();
   }, []);
 
-  const onSubmitComment = async (url, comment, rating, user) => {
+  const onSubmitComment = async (url, comment, rating, userNAME) => {
     setCommentSubmit(true);
-    await fetchAddComment(url, comment, rating, user.name);
+    await fetchAddComment(url, comment, rating, userNAME);
     console.log('Comment added successfully');
     setCommentSubmit(false);
   };

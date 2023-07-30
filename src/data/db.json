@@ -38,12 +38,72 @@
       "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
       "email": "lucasdielo@hotmail.com",
       "name": "Lucas Dielo",
-      "password": "1234567",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
+      "dones": [
+        {
+          "id": "52844",
+          "type": "meal",
+          "nationality": "Italian",
+          "category": "Pasta",
+          "alcoholicOrNot": "",
+          "name": "Lasagne",
+          "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg",
+          "tags": [],
+          "doneDate": "2023-07-30T20:03:43.700Z"
+        }
+      ],
+      "favorites": [
+        {
+          "id": "53065",
+          "type": "meal",
+          "nationality": "Japanese",
+          "category": "Seafood",
+          "alcoholicOrNot": "",
+          "name": "Sushi",
+          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg"
+        },
+        {
+          "id": "53069",
+          "type": "meal",
+          "nationality": "Filipino",
+          "category": "Beef",
+          "alcoholicOrNot": "",
+          "name": "Bistek",
+          "image": "https://www.themealdb.com/images/media/meals/4pqimk1683207418.jpg"
+        }
+      ],
+      "inProgress": {
+        "meals": {
+          "52844": {
+            "id": "52844",
+            "type": "meal",
+            "nationality": "Italian",
+            "category": "Pasta",
+            "alcoholicOrNot": "",
+            "name": "Lasagne",
+            "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg",
+            "tags": [],
+            "usedIngredients": {
+              "strIngredient1": "Olive Oil",
+              "strIngredient2": "Bacon",
+              "strIngredient3": "Onion",
+              "strIngredient4": "Celery",
+              "strIngredient5": "Carrots",
+              "strIngredient6": "Garlic",
+              "strIngredient7": "Minced Beef",
+              "strIngredient8": "Tomato Puree",
+              "strIngredient9": "Chopped Tomatoes",
+              "strIngredient10": "Honey",
+              "strIngredient11": "Lasagne Sheets",
+              "strIngredient12": "Creme Fraiche",
+              "strIngredient13": "Mozzarella Balls",
+              "strIngredient14": "Parmesan Cheese",
+              "strIngredient15": "Basil Leaves"
+            }
+          }
+        }
+      },
       "my": [],
-      "points": 0,
+      "points": 5,
       "createAt": "2023-07-27T18:04:08.985Z"
     },
     {
@@ -106,7 +166,13 @@
     }
   ],
   "recipes": [],
-  "comments": {}
+  "comments": {
+    "/meals/52844": [
+      {
+        "name": "Lucas Dielo",
+        "text": "sdaadsad",
+        "rat": "5"
+      }
+    ]
+  }
 }
-
-  
