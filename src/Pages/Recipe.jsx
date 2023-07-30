@@ -13,6 +13,7 @@ import RenderButtons from '../components/RenderButtons';
 import FormCommentary from '../components/FormCommentary';
 import MenuHamburguer from '../components/MenuHamburguer';
 import Menu from '../components/Menu';
+import { fetchAddComment } from '../services/fetchAPI';
 
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
@@ -27,6 +28,7 @@ export default function RecipeInProg() {
   const [isInProgress, setIsInProgress] = useState(
     () => pathname.includes('in-progress'),
   );
+  const [commentSubmit, setCommentSubmit] = useState(false);
   const { fetchRecipes } = useFetch();
 
   const NAME_URL = `/${pathname.split('/')[1]}`;
@@ -44,16 +46,24 @@ export default function RecipeInProg() {
     })();
   }, []);
 
+  const onSubmitComment = async (url, comment, rating, user) => {
+    setCommentSubmit(true);
+    await fetchAddComment(url, comment, rating, user.name);
+    console.log('Comment added successfully');
+    setCommentSubmit(false);
+  };
+
   return (
     <>
       <main className="min-h-screen recipe-box bg-form glass p-0 mb-16 rounded-b-lg">
-        { loading && (
+        { }
+        { error && <p>{ error }</p> }
+        { loading && commentSubmit ? (
           <div className="w-full h-[80vh] flex-center">
+            {console.log(recipe)}
             <h2 className="text-[var(--yellow)]">Loading...</h2>
           </div>
-        )}
-        { error && <p>{ error }</p> }
-        { (!loading && !error) && (
+        ) : (
           <>
             <div>
               <div className="burguer-container">
@@ -126,7 +136,7 @@ export default function RecipeInProg() {
                 <RecommendRecipes recommendRecipes={ recommendRecipes } />
               )}
               <div>
-                <FormCommentary />
+                <FormCommentary onSubmit={ onSubmitComment } />
               </div>
             </section>
           </>

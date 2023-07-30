@@ -54,8 +54,8 @@ export const fetchNewUser = async (user) => {
   });
 };
 
-export const fetchUserPoints = async (user, email, newPoints) => {
-  await fetch(`${process.env.REACT_APP_BASE_URL}/users/${email}`, {
+export const fetchUserPoints = async (user, newPoints) => {
+  await fetch(`${process.env.REACT_APP_BASE_URL}/users/${user.id}`, {
     headers: {
       Accept: APLICATION_JSON,
       'Content-Type': APLICATION_JSON,
@@ -64,6 +64,30 @@ export const fetchUserPoints = async (user, email, newPoints) => {
     body: JSON.stringify({
       ...user,
       points: newPoints,
+    }),
+  });
+};
+
+export const fetchAddComment = async (key, text, rat, name) => {
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/comments`);
+  const existingComments = await response.json();
+
+  await fetch(`${process.env.REACT_APP_BASE_URL}/comments`, {
+    headers: {
+      Accept: APLICATION_JSON,
+      'Content-Type': APLICATION_JSON,
+    },
+    method: 'POST',
+    body: JSON.stringify({
+      ...existingComments,
+      [key]: [
+        ...(existingComments[key] || []),
+        {
+          name,
+          text,
+          rat,
+        },
+      ],
     }),
   });
 };

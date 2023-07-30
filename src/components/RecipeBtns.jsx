@@ -28,7 +28,6 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
     history.push(`${pathname}/in-progress`);
   };
 
-  console.log(NAME_URL);
   const finishRecipe = async () => {
     const pointsM = 5;
     const pointsD = 2;

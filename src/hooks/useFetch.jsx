@@ -74,7 +74,7 @@ const useFetch = () => {
     const sumPoints = identifyUser.points + points;
     try {
       setLoading(true);
-      await fetchUserPoints(user, user.id, sumPoints);
+      await fetchUserPoints(user, sumPoints);
     } catch ({ message }) {
       setError(message);
       return [];
