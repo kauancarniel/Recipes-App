@@ -11,12 +11,28 @@ import { FaRankingStar } from 'react-icons/fa6';
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
 
+const MIDDAY = 12;
+const EIGHTEEN = 18;
+
 export default function Menu({ showClose = false }) {
   const { logout } = useUser();
-  const { setMenuOpen } = useContext(RecipesContext);
+  const { setMenuOpen, userLogged } = useContext(RecipesContext);
+  const date = new Date();
+  const greeting = ['Good Morning', 'Good Afternoon', 'Good Evening'];
+  const { name } = userLogged;
+
+  const getGreeting = () => {
+    if (date.getHours() < MIDDAY) return greeting[0];
+    if (date.getHours() < EIGHTEEN) return greeting[1];
+    return greeting[2];
+  };
+
   return (
     <nav className={ `options-menu ${showClose ? 'top-0' : ''}` }>
-      <ul className="list-none flex flex-col p-6 gap-y-3 max-w-[300px]">
+      <h4 className="pt-3 text-[var(--green)] font-normal">
+        { `${getGreeting()}, ${name}.`}
+      </h4>
+      <ul className="list-none flex justify-center flex-col p-0 m-0 pb-4 gap-y-3">
         <li>
           <Link
             className="option-menu"

@@ -1,6 +1,12 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { TbSearch, TbSearchOff } from 'react-icons/tb';
+import { CgProfile } from 'react-icons/cg';
+import { HiHeart } from 'react-icons/hi';
+import { FiCheckCircle } from 'react-icons/fi';
+import { MdOutlineEditNote } from 'react-icons/md';
+import { LuChefHat } from 'react-icons/lu';
+import { FaRankingStar } from 'react-icons/fa6';
 
 import RecipesContext from '../context/RecipesContext';
 import MenuHamburguer from './MenuHamburguer';
@@ -11,6 +17,17 @@ import nameLogo from '../images/name-recipes-app.svg';
 import iconFoods from '../images/icon-foods.svg';
 import iconDrinks from '../images/icon-drinks.svg';
 import './Header.css';
+
+const iconsTitle = {
+  Meals: (<img src={ iconFoods } alt="food icon" className="h-12" />),
+  Drinks: (<img src={ iconDrinks } alt="food icon" className="h-12" />),
+  Profile: <CgProfile />,
+  'My Recipes': <MdOutlineEditNote className="icon-title" />,
+  'Recipes in Progress': <LuChefHat className="icon-title" />,
+  'Done Recipes': <FiCheckCircle />,
+  'Favorite Recipes': <HiHeart className="icon-title" />,
+  Ranking: <FaRankingStar className="icon-title" />,
+};
 
 function Header({ title, iconeSearch = false }) {
   const { menuOpen, setMenuOpen } = useContext(RecipesContext);
@@ -56,11 +73,7 @@ function Header({ title, iconeSearch = false }) {
       <div
         className="recipe-box flex-center bg-form glass title-box"
       >
-        <img
-          className="w-12 h-9"
-          src={ title === 'Meals' ? iconFoods : iconDrinks }
-          alt="icon type"
-        />
+        {iconsTitle[title]}
         <h1
           className="title"
           data-testid="page-title"

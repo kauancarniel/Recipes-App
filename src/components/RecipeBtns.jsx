@@ -38,8 +38,8 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
       : addPoints(pointsD);
     await promisePoints;
     setIsInProgress(!isInProgress);
-    handleRemoveInProgress(id, NAME_URL);
-    addInDoneRecipes(recipe, NAME_URL);
+    handleRemoveInProgress(id, NAME_URL, true);
+    await addInDoneRecipes(recipe, NAME_URL);
     history.push('/done-recipes');
   };
 

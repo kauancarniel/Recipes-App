@@ -6,6 +6,8 @@ import RecipesContext from '../context/RecipesContext';
 import ShareBtn from '../components/ShareBtn';
 import './DoneRecipes.css';
 
+const MAX_RECIPES = 10;
+
 function DoneRecipes() {
   const { linkCopy, userLogged } = useContext(RecipesContext);
   const { validateCookie } = useUser();
@@ -23,8 +25,6 @@ function DoneRecipes() {
   const filteredRecipes = filter === 'all'
     ? dones
     : dones.filter(({ type }) => type === filter);
-  let indexInit = filteredRecipes.length - MAX_RECIPES;
-  indexInit = indexInit < 0 ? 0 : indexInit;
 
   const buttonFilter = ['all', 'meal', 'drink'];
 
