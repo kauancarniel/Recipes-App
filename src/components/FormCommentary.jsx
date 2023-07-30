@@ -49,6 +49,10 @@ export default function FormCommentary({ onSubmit }) {
             type="submit"
             onClick={ (event) => {
               event.preventDefault();
+              const radioInputs = document.getElementsByName('rating');
+              radioInputs.forEach((input) => {
+                input.checked = false;
+              });
               setRating('0');
               setComment('');
               onSubmit(url, comment, rating, user);
