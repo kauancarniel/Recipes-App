@@ -19,14 +19,25 @@
       ],
       "inProgress": {
         "meals": {
-          "53065": [
-            "Sushi Rice",
-            "Rice wine",
-            "Caster Sugar",
-            "Mayonnaise",
-            "Soy Sauce",
-            "Cucumber"
-          ]
+          "53065": {
+            "id": "53065",
+            "type": "meal",
+            "nationality": "Japanese",
+            "category": "Seafood",
+            "alcoholicOrNot": "",
+            "name": "Sushi",
+            "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg",
+            "tags": [],
+            "usedIngredients": {
+              "strIngredient1": "Sushi Rice",
+              "strIngredient2": "",
+              "strIngredient3": "",
+              "strIngredient4": "",
+              "strIngredient5": "",
+              "strIngredient6": "",
+              "strIngredient7": ""
+            }
+          }
         }
       },
       "my": [],
@@ -98,19 +109,7 @@
       "email": "plisciliane@gmail.com",
       "name": "Plisciliane Leal",
       "password": "456123789",
-      "dones": [
-        {
-          "id": "53065",
-          "type": "meal",
-          "nationality": "Japanese",
-          "category": "Seafood",
-          "alcoholicOrNot": "",
-          "name": "Sushi",
-          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg",
-          "doneDate": "2023-07-29T23:14:11.521Z",
-          "tags": []
-        }
-      ],
+      "dones": [],
       "favorites": [
         {
           "id": "52844",
@@ -122,11 +121,7 @@
           "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg"
         }
       ],
-      "inProgress": {
-        "meals": {
-          "53065": {}
-        }
-      },
+      "inProgress": {},
       "my": [],
       "points": 0,
       "createAt": "2023-07-29T20:17:13.555Z"
