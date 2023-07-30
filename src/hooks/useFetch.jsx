@@ -12,7 +12,7 @@ const useFetch = () => {
   const { users } = usersData;
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
-  
+
   const fetchRecipes = async (pathname, optSearch = 'name', textSearch = '') => {
     try {
       setLoading(true);
@@ -24,7 +24,7 @@ const useFetch = () => {
       setLoading(false);
     }
   };
-  
+
   const fireToast = (title, icon = 'error') => {
     Toast.fire({
       icon,
@@ -45,7 +45,7 @@ const useFetch = () => {
       setCategories(categoriesData.slice(0, MAX_CATEGORIES));
     }
   };
-  
+
   const fetchUser = async ({ id = null, email = null, password = null }) => {
     try {
       setLoading(true);
@@ -87,7 +87,7 @@ const useFetch = () => {
       setLoading(false);
     }
   };
-  
+
   const checkUserExist = async (email) => {
     const userResponse = await fetchUserEmail(email);
     return !!userResponse.length;

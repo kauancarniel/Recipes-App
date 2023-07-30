@@ -40,70 +40,97 @@
       "name": "Lucas Dielo",
       "dones": [
         {
-          "id": "52844",
+          "id": "52978",
           "type": "meal",
-          "nationality": "Italian",
-          "category": "Pasta",
+          "nationality": "Turkish",
+          "category": "Side",
           "alcoholicOrNot": "",
-          "name": "Lasagne",
-          "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg",
-          "tags": [],
-          "doneDate": "2023-07-30T20:03:43.700Z"
+          "name": "Kumpir",
+          "image": "https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg",
+          "tags": [
+            "SideDish"
+          ],
+          "doneDate": "2023-07-30T20:34:15.708Z"
         }
       ],
-      "favorites": [
-        {
-          "id": "53065",
-          "type": "meal",
-          "nationality": "Japanese",
-          "category": "Seafood",
-          "alcoholicOrNot": "",
-          "name": "Sushi",
-          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg"
-        },
-        {
-          "id": "53069",
-          "type": "meal",
-          "nationality": "Filipino",
-          "category": "Beef",
-          "alcoholicOrNot": "",
-          "name": "Bistek",
-          "image": "https://www.themealdb.com/images/media/meals/4pqimk1683207418.jpg"
-        }
-      ],
+      "favorites": [],
       "inProgress": {
         "meals": {
-          "52844": {
-            "id": "52844",
+          "52785": {
+            "id": "52785",
             "type": "meal",
-            "nationality": "Italian",
-            "category": "Pasta",
+            "nationality": "Indian",
+            "category": "Vegetarian",
             "alcoholicOrNot": "",
-            "name": "Lasagne",
-            "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg",
+            "name": "Dal fry",
+            "image": "https://www.themealdb.com/images/media/meals/wuxrtu1483564410.jpg",
+            "tags": [
+              "Curry",
+              "Vegetarian"
+            ],
+            "usedIngredients": {
+              "strIngredient1": "Toor dal",
+              "strIngredient2": "Water",
+              "strIngredient3": "Salt",
+              "strIngredient4": "Turmeric",
+              "strIngredient5": "",
+              "strIngredient6": "",
+              "strIngredient7": "",
+              "strIngredient8": "",
+              "strIngredient9": "",
+              "strIngredient10": "",
+              "strIngredient11": "",
+              "strIngredient12": "",
+              "strIngredient13": "",
+              "strIngredient14": "",
+              "strIngredient15": "",
+              "strIngredient16": ""
+            }
+          },
+          "52978": {
+            "id": "52978",
+            "type": "meal",
+            "nationality": "Turkish",
+            "category": "Side",
+            "alcoholicOrNot": "",
+            "name": "Kumpir",
+            "image": "https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg",
+            "tags": [
+              "SideDish"
+            ],
+            "usedIngredients": {
+              "strIngredient1": "Potatoes",
+              "strIngredient2": "Butter",
+              "strIngredient3": "Cheese",
+              "strIngredient4": "Onion",
+              "strIngredient5": "Red Pepper",
+              "strIngredient6": "Red Chile Flakes"
+            }
+          },
+          "53069": {
+            "id": "53069",
+            "type": "meal",
+            "nationality": "Filipino",
+            "category": "Beef",
+            "alcoholicOrNot": "",
+            "name": "Bistek",
+            "image": "https://www.themealdb.com/images/media/meals/4pqimk1683207418.jpg",
             "tags": [],
             "usedIngredients": {
-              "strIngredient1": "Olive Oil",
-              "strIngredient2": "Bacon",
-              "strIngredient3": "Onion",
-              "strIngredient4": "Celery",
-              "strIngredient5": "Carrots",
-              "strIngredient6": "Garlic",
-              "strIngredient7": "Minced Beef",
-              "strIngredient8": "Tomato Puree",
-              "strIngredient9": "Chopped Tomatoes",
-              "strIngredient10": "Honey",
-              "strIngredient11": "Lasagne Sheets",
-              "strIngredient12": "Creme Fraiche",
-              "strIngredient13": "Mozzarella Balls",
-              "strIngredient14": "Parmesan Cheese",
-              "strIngredient15": "Basil Leaves"
+              "strIngredient1": "Beef",
+              "strIngredient2": "Soy Sauce",
+              "strIngredient3": "Lemon",
+              "strIngredient4": "Garlic",
+              "strIngredient5": "Onion",
+              "strIngredient6": "Olive Oil",
+              "strIngredient7": "Water",
+              "strIngredient8": "Salt"
             }
           }
         }
       },
       "my": [],
-      "points": 5,
+      "points": 10,
       "createAt": "2023-07-27T18:04:08.985Z"
     },
     {
@@ -166,13 +193,5 @@
     }
   ],
   "recipes": [],
-  "comments": {
-    "/meals/52844": [
-      {
-        "name": "Lucas Dielo",
-        "text": "sdaadsad",
-        "rat": "5"
-      }
-    ]
-  }
+  "comments": {}
 }

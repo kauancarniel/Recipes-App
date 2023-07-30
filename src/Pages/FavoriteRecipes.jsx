@@ -79,8 +79,6 @@ function FavoriteRecipes() {
                       </div>
                       <FavoriteBtn
                         recipe={ recipe }
-                        testId={ `${index}-horizontal-favorite-btn` }
-                        setFavorites={ setFavorites }
                       />
                     </div>
                   </div>
