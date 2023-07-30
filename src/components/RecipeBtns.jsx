@@ -32,8 +32,8 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
 
   const finishRecipe = async () => {
     setIsInProgress(!isInProgress);
-    handleRemoveInProgress(id, NAME_URL);
-    await addInDoneRecipes(recipe, NAME_URL, id);
+    handleRemoveInProgress(id, NAME_URL, recipe);
+    await addInDoneRecipes(recipe, NAME_URL);
     history.push('/done-recipes');
   };
 
@@ -45,8 +45,10 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
           disabled={
-            inProgress[NAME_URL][id]
-            && Object.values(inProgress[NAME_URL][id]).some((value) => value === '')
+            !(inProgress[NAME_URL]
+            && inProgress[NAME_URL][id]
+            && Object.values(inProgress[NAME_URL][id].usedIngredients)
+              .every((value) => value))
           }
         >
           Finalizar Receita

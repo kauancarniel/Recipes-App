@@ -19,23 +19,31 @@ export default function IngredientsList({ recipe, isInProgress }) {
 
   useEffect(() => {
     let usedIngredients = {};
-    if (userLogged) {
+    if (userLogged && isInProgress) {
       if (inProgress[NAME_URL] && inProgress[NAME_URL][id]) {
-        usedIngredients = inProgress[NAME_URL][id];
+        usedIngredients = inProgress[NAME_URL][id].usedIngredients;
       } else {
         usedIngredients = initialIngredients(ingredients);
       }
-      setUserProgress(NAME_URL, id, usedIngredients);
+      setUserProgress(NAME_URL, id, usedIngredients, recipe);
     }
-  }, []);
+  }, [isInProgress]);
 
   const handleChange = async (key, value) => {
-    const checkboxes = userLogged.inProgress[NAME_URL][id];
+    const checkboxes = (inProgress[NAME_URL] && inProgress[NAME_URL][id])
+      ? inProgress[NAME_URL][id].usedIngredients
+      : {};
     const newCheckboxes = {
       ...checkboxes,
       [key]: checkboxes[key] === '' ? value : '',
     };
-    await saveProgress(id, NAME_URL, newCheckboxes);
+    await saveProgress(id, NAME_URL, newCheckboxes, recipe);
+  };
+
+  const verifyChecked = (key) => {
+    if (!inProgress[NAME_URL]) return false;
+    if (!inProgress[NAME_URL][id]) return false;
+    return !!inProgress[NAME_URL][id].usedIngredients[key];
   };
 
   return ingredients.map(([key, value], index) => (
@@ -46,7 +54,7 @@ export default function IngredientsList({ recipe, isInProgress }) {
         type="checkbox"
         id={ key }
         name="ingredient"
-        checked={ !!inProgress[NAME_URL][id][key] }
+        checked={ verifyChecked(key) }
         onChange={ () => handleChange(key, value) }
         disabled={ !isInProgress }
       />

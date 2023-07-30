@@ -20,7 +20,8 @@ const INIT = 7;
 
 export default function Recipe() {
   const { loading, error, menuOpen } = useContext(RecipesContext);
-  const { validateCookie } = useUser();
+  const { validateCookie, handleRemoveInProgress } = useUser();
+  const { fetchRecipes } = useFetch();
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -29,7 +30,6 @@ export default function Recipe() {
   const [isInProgress, setIsInProgress] = useState(
     () => pathname.includes('in-progress'),
   );
-  const { fetchRecipes } = useFetch();
 
   const NAME_URL = `/${pathname.split('/')[1]}`;
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
@@ -47,6 +47,14 @@ export default function Recipe() {
       }
     })();
   }, []);
+
+  const goBack = () => {
+    if (isInProgress) {
+      handleRemoveInProgress(id, pathname.split('/')[1]);
+    }
+    setIsInProgress(!isInProgress);
+    history.goBack();
+  };
 
   return (
     <>
@@ -82,10 +90,7 @@ export default function Recipe() {
               </div>
               <div className="absolute top-3 left-3 flex items-center gap-x-2">
                 <button
-                  onClick={ () => {
-                    history.goBack();
-                    setIsInProgress(!isInProgress);
-                  } }
+                  onClick={ goBack }
                   className="button-back shadow-name"
                 >
                   <IoChevronBackCircleSharp />
@@ -135,9 +140,7 @@ export default function Recipe() {
               {!isInProgress && (
                 <RecommendRecipes recommendRecipes={ recommendRecipes } />
               )}
-              <div>
-                <FormCommentary />
-              </div>
+              <FormCommentary />
             </section>
           </>
         )}
