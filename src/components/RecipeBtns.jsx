@@ -32,7 +32,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
 
   const finishRecipe = async () => {
     setIsInProgress(!isInProgress);
-    handleRemoveInProgress(id, NAME_URL, recipe);
+    handleRemoveInProgress(id, NAME_URL, true);
     await addInDoneRecipes(recipe, NAME_URL);
     history.push('/done-recipes');
   };

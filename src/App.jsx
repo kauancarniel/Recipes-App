@@ -9,8 +9,9 @@ import Profile from './Pages/Profile';
 import Recipe from './Pages/Recipe';
 import NotFound from './Pages/NotFound';
 import Register from './Pages/Register';
-import './App.css';
 import RememberPass from './Pages/RememberPass';
+import RecipesInProgress from './Pages/RecipesInProgress';
+import './App.css';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
       <Route path="/signup" component={ Register } />
       <Route path="/remember-password" component={ RememberPass } />
+      <Route path="/in-progress-recipes" component={ RecipesInProgress } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );

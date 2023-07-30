@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import copy from 'clipboard-copy';
-import { BsShare } from 'react-icons/bs';
+import { MdShare } from 'react-icons/md';
 
 import useFetch from '../hooks/useFetch';
 import shareIcon from '../images/shareIcon.svg';
@@ -22,7 +22,7 @@ export default function ShareBtn({ type, id, testId }) {
         fireToast('Link copied', 'success');
       } }
     >
-      <BsShare size="30px" />
+      <MdShare size="35px" />
     </button>
   );
 }
