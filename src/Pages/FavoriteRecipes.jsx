@@ -30,7 +30,7 @@ function FavoriteRecipes() {
       <Filter />
       <main>
         {!filteredFavorites.length ? (
-          <p>Sem favoritos</p>
+          <p>No favorite recipes.</p>
         ) : filteredFavorites.map((recipe, index) => (
           <div key={ `${recipe.id}${recipe.type}` }>
             <Link to={ `/${recipe.type}s/${recipe.id}` }>
