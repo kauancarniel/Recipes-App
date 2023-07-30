@@ -38,21 +38,7 @@
       "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
       "email": "lucasdielo@hotmail.com",
       "name": "Lucas Dielo",
-      "dones": [
-        {
-          "id": "52978",
-          "type": "meal",
-          "nationality": "Turkish",
-          "category": "Side",
-          "alcoholicOrNot": "",
-          "name": "Kumpir",
-          "image": "https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg",
-          "tags": [
-            "SideDish"
-          ],
-          "doneDate": "2023-07-30T20:34:15.708Z"
-        }
-      ],
+      "dones": [],
       "favorites": [],
       "inProgress": {
         "meals": {

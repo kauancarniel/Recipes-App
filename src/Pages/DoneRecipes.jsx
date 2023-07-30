@@ -20,7 +20,6 @@ function DoneRecipes() {
   }, []);
 
   const { dones } = userLogged || { dones: [] };
-  const MAX_RECIPES = 11;
   const DATE = 10;
   const filteredRecipes = filter === 'all'
     ? dones
@@ -53,7 +52,7 @@ function DoneRecipes() {
               ))}
             </nav>
             <section className="ready-recipe ">
-              {filteredRecipes.slice(indexInit, filteredRecipes.length).map(({
+              {filteredRecipes.slice(0, MAX_RECIPES).map(({
                 id, type, image, name, nationality, category, doneDate, alcoholicOrNot,
                 tags,
               }, index) => (
