@@ -1,8 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import useFetch from '../hooks/useFetch';
 import RecipesContext from '../context/RecipesContext';
+import useUser from '../hooks/useUser';
+import useFetch from '../hooks/useFetch';
 
 export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
   const { userLogged } = useContext(RecipesContext);
