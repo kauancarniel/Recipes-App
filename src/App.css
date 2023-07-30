@@ -117,7 +117,7 @@
   }
 
   .options-menu {
-    @apply absolute w-full top-14 right-auto bg-[var(--yellow)] rounded-b-lg flex justify-center max-w-[1000px] z-20
+    @apply absolute w-full top-14 right-auto bg-[var(--yellow)] rounded-b-lg flex items-center flex-col max-w-[1000px] z-20
   }
 
   .option-menu {
@@ -146,6 +146,14 @@
 
   .burguer-container {
     @apply flex gap-x-2 absolute z-30 top-3 right-3 bg-[var(--yellow)] rounded-[100%]
+  }
+
+  .icon-title {
+    @apply w-14 h-14 border-2 border-solid rounded-[100%] text-[var(--green)]
+  }
+
+  .del-in-progress-btn {
+    @apply text-[var(--orange)]
   }
 }
 

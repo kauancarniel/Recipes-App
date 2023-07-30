@@ -39,7 +39,7 @@ const useUser = () => {
     const { favorites, id } = userLogged;
 
     if (isFavorite) {
-      newFavorites = [...favorites, recipe];
+      newFavorites = [recipe, ...favorites];
     } else {
       newFavorites = favorites.filter(
         ({ id: favId, type: favType }) => !(
@@ -53,10 +53,11 @@ const useUser = () => {
 
   const setRecipeFormated = (recipe, NAME_URL) => {
     const BASE_KEY = NAME_URL === 'meals' ? 'Meal' : 'Drink';
+    if (recipe.id && recipe.type) return recipe;
     const { strArea, strCategory, strAlcoholic, strTags } = recipe;
     return {
       id: idRecipe,
-      type: BASE_KEY.toLocaleLowerCase(),
+      type: BASE_KEY.toLowerCase(),
       nationality: strArea || '',
       category: strCategory,
       alcoholicOrNot: strAlcoholic || '',
@@ -89,10 +90,10 @@ const useUser = () => {
     await patchUser(userLogged.id, 'inProgress', newProgressRecipes);
   };
 
-  const handleRemoveInProgress = async (id, NAME_URL, recipe = null) => {
+  const handleRemoveInProgress = async (id, NAME_URL, force = false) => {
     const { inProgress } = userLogged;
     const condition = (Object.values(inProgress[NAME_URL][id].usedIngredients)
-      .every((value) => !value));
+      .every((value) => !value || force));
     if (condition) {
       if (Object.keys(inProgress[NAME_URL]).length === 1) {
         delete inProgress[NAME_URL];
@@ -100,14 +101,10 @@ const useUser = () => {
         delete inProgress[NAME_URL][id];
       }
     }
-    if (recipe) {
-      saveProgress(id, NAME_URL, inProgress, recipe);
-    } else {
-      if (condition) {
-        await patchUser(userLogged.id, 'inProgress', inProgress);
-      }
-      setUserLogged({ ...userLogged, inProgress });
+    if (condition) {
+      await patchUser(userLogged.id, 'inProgress', inProgress);
     }
+    setUserLogged({ ...userLogged, inProgress });
   };
 
   const addInDoneRecipes = async (recipe, NAME_URL) => {
@@ -121,7 +118,7 @@ const useUser = () => {
         formatedRecipe.id === id && type === formatedRecipe.type
       ));
 
-    await patchUser(userLogged.id, 'dones', [...filteredDones, formatedRecipe]);
+    await patchUser(userLogged.id, 'dones', [formatedRecipe, ...filteredDones]);
   };
 
   return { validateCookie,
