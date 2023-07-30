@@ -17,29 +17,7 @@
           "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg"
         }
       ],
-      "inProgress": {
-        "meals": {
-          "53065": {
-            "id": "53065",
-            "type": "meal",
-            "nationality": "Japanese",
-            "category": "Seafood",
-            "alcoholicOrNot": "",
-            "name": "Sushi",
-            "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg",
-            "tags": [],
-            "usedIngredients": {
-              "strIngredient1": "Sushi Rice",
-              "strIngredient2": "",
-              "strIngredient3": "",
-              "strIngredient4": "",
-              "strIngredient5": "",
-              "strIngredient6": "",
-              "strIngredient7": ""
-            }
-          }
-        }
-      },
+      "inProgress": {},
       "my": [],
       "points": 0,
       "createAt": "2023-07-25T19:12:48.082Z"

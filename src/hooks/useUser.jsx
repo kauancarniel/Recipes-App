@@ -89,7 +89,7 @@ const useUser = () => {
     await patchUser(userLogged.id, 'inProgress', newProgressRecipes);
   };
 
-  const handleRemoveInProgress = (id, NAME_URL, recipe = null) => {
+  const handleRemoveInProgress = async (id, NAME_URL, recipe = null) => {
     const { inProgress } = userLogged;
     const condition = (Object.values(inProgress[NAME_URL][id].usedIngredients)
       .every((value) => !value));
@@ -103,7 +103,9 @@ const useUser = () => {
     if (recipe) {
       saveProgress(id, NAME_URL, inProgress, recipe);
     } else {
-      console.log(inProgress);
+      if (condition) {
+        await patchUser(userLogged.id, 'inProgress', inProgress);
+      }
       setUserLogged({ ...userLogged, inProgress });
     }
   };
