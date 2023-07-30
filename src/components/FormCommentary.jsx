@@ -15,7 +15,7 @@ export default function FormCommentary() {
   useEffect(() => { if (!allComents) setStorage(pathname, []); }, []);
 
   const star = '★';
-  const notas = ['5', '4', '3', '2', '1'];
+  const grades = ['5', '4', '3', '2', '1'];
   const MIN_LENGTH = 3;
 
   const onSubmit = (event) => {
@@ -37,11 +37,11 @@ export default function FormCommentary() {
     setComment('');
   };
   return (
-    <div className="flex flex-col items-center mt-10">
+    <div className="flex flex-col items-center mt-10 px-3">
       <h3 className="self-start text-white">Comments: </h3>
       <form>
         <div className="rating flex flex-row-reverse justify-end">
-          { notas.map((nota) => (
+          { grades.map((nota) => (
             <Star key={ nota } nota={ nota } setRating={ setRating } />
           )) }
         </div>
