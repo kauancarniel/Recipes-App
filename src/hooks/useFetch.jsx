@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 import usersData from '../data/db.json';
 import { fetchAPI,
-  fetchNewUser, fetchUserPoints, fetchUsers } from '../services/fetchAPI';
+  fetchNewUser, fetchUserPoints,
+  fetchPatchUser, fetchUserEmail, fetchUserId } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
-import { Toast } from '../utils/functions';
+import { Toast, setCookie } from '../utils/functions';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
-    setError, error, setUser, user } = useContext(RecipesContext);
+    setError, error, user } = useContext(RecipesContext);
   const { users } = usersData;
   const identifyUser = users.find((userData) => userData.email === user.email);
   const MAX_RECIPES = 12;
@@ -46,10 +47,12 @@ const useFetch = () => {
     }
   };
 
-  const fetchUser = async (email, password = null) => {
+  const fetchUser = async ({ id = null, email = null, password = null }) => {
     try {
       setLoading(true);
-      return await fetchUsers(email, password);
+      if (email) return await fetchUserEmail(email, password);
+      if (id !== null) return await fetchUserId(id);
+      throw new Error('fetchUser needs at least one parameter (id or email');
     } catch ({ message }) {
       setError(message);
       return [];
@@ -61,7 +64,9 @@ const useFetch = () => {
   const postNewUser = async (newUser) => {
     try {
       setLoading(true);
-      await fetchNewUser(newUser);
+      const id = await fetchNewUser(newUser);
+      setCookie('userLogged', id);
+      return true;
     } catch ({ message }) {
       setError(message);
       return [];
@@ -84,18 +89,27 @@ const useFetch = () => {
   };
 
   const checkUserExist = async (email) => {
-    const userResponse = await fetchUser(email);
+    const userResponse = await fetchUserEmail(email);
     return !!userResponse.length;
   };
 
   const loginUser = async ({ email, password }) => {
-    const userResponse = await fetchUser(email, password);
-    setUser(userResponse[0] || {});
+    const userResponse = await fetchUserEmail(email, password);
     if (userResponse.length) {
+      setCookie('userLogged', userResponse[0].id);
       return true;
     }
     fireToast('Invalid email or password');
     return false;
+  };
+
+  const patchUser = async (id, key, data) => {
+    try {
+      await fetchPatchUser(id, key, data);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    }
   };
 
   return { fetchRecipes,
@@ -105,6 +119,7 @@ const useFetch = () => {
     postNewUser,
     loginUser,
     checkUserExist,
+    patchUser,
     addPoints,
   };
 };

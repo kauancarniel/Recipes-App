@@ -1,70 +1,76 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useLocation } from 'react-router-dom';
-import { handleSaveProgress, getStorage, initialIngredients } from '../utils/functions';
+import { useLocation, useParams } from 'react-router-dom';
+
 import RecipesContext from '../context/RecipesContext';
+import useUser from '../hooks/useUser';
+import { initialIngredients } from '../utils/functions';
 import './IngredientsList.css';
 
-export default function IngredientsList({ recipe, isInProgress, visible }) {
-  const { checkboxes, setCheckboxes } = useContext(RecipesContext);
+export default function IngredientsList({ recipe, isInProgress }) {
+  const { userLogged } = useContext(RecipesContext);
+  const { saveProgress, setUserProgress } = useUser();
   const { pathname } = useLocation();
+  const { id } = useParams();
   const NAME_URL = pathname.split('/')[1];
-  const KEY_BASE = NAME_URL === 'meals' ? 'Meal' : 'Drink';
   const ingredients = Object.entries(recipe)
     .filter(([key, value]) => (key.includes('strIngredient') && value));
+  const { inProgress } = userLogged || { inProgress: {} };
 
   useEffect(() => {
-    const recipesProgress = getStorage('inProgressRecipes');
-    const id = recipe[`id${KEY_BASE}`];
-    let usedIngredients = [];
-    if (recipesProgress && recipesProgress[NAME_URL] && recipesProgress[NAME_URL][id]) {
-      usedIngredients = recipesProgress[NAME_URL][id];
+    let usedIngredients = {};
+    if (userLogged && isInProgress) {
+      if (inProgress[NAME_URL] && inProgress[NAME_URL][id]) {
+        usedIngredients = inProgress[NAME_URL][id].usedIngredients;
+      } else {
+        usedIngredients = initialIngredients(ingredients);
+      }
+      setUserProgress(NAME_URL, id, usedIngredients, recipe);
     }
-    setCheckboxes(initialIngredients(ingredients, usedIngredients));
-  }, []);
+  }, [isInProgress]);
 
-  const handleChange = (key, value) => {
+  const handleChange = async (key, value) => {
+    const checkboxes = (inProgress[NAME_URL] && inProgress[NAME_URL][id])
+      ? inProgress[NAME_URL][id].usedIngredients
+      : {};
     const newCheckboxes = {
       ...checkboxes,
       [key]: checkboxes[key] === '' ? value : '',
     };
-    setCheckboxes(newCheckboxes);
-    handleSaveProgress(recipe[`id${KEY_BASE}`], NAME_URL, newCheckboxes);
+    await saveProgress(id, NAME_URL, newCheckboxes, recipe);
   };
 
-  return (
-    <div
-      id="checklist"
-      className={ visible ? 'animate-open' : 'h-0' }
-    >
-      { ingredients.map(([key, value], index) => (
-        <>
-          <input
-            key={ `${key}-input` }
-            className={ isInProgress ? 'enabled' : 'disabled' }
-            type="checkbox"
-            id={ key }
-            name="ingredient"
-            checked={ !!checkboxes[key] }
-            onChange={ () => handleChange(key, value) }
-            disabled={ !isInProgress }
-          />
-          <label
-            key={ `${key}-label` }
-            className={ isInProgress ? 'enabled' : 'disabled' }
-            data-testid={ `${index}-ingredient-step` }
-            htmlFor={ key }
-          >
-            {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
-          </label>
-        </>
-      ))}
-    </div>
-  );
+  const verifyChecked = (key) => {
+    if (!inProgress[NAME_URL]) return false;
+    if (!inProgress[NAME_URL][id]) return false;
+    return !!inProgress[NAME_URL][id].usedIngredients[key];
+  };
+
+  return ingredients.map(([key, value], index) => (
+    <span key={ `${key}-input` } className="checklist">
+      <input
+        key={ `${key}-input` }
+        className={ isInProgress ? 'enabled' : 'disabled' }
+        type="checkbox"
+        id={ key }
+        name="ingredient"
+        checked={ verifyChecked(key) }
+        onChange={ () => handleChange(key, value) }
+        disabled={ !isInProgress }
+      />
+      <label
+        key={ `${key}-label` }
+        className={ isInProgress ? 'enabled' : 'disabled' }
+        data-testid={ `${index}-ingredient-step` }
+        htmlFor={ key }
+      >
+        {`${value} - ${recipe[`strMeasure${index + 1}`]}`}
+      </label>
+    </span>
+  ));
 }
 
 IngredientsList.propTypes = {
   recipe: PropTypes.instanceOf(Object).isRequired,
-  visible: PropTypes.bool.isRequired,
   isInProgress: PropTypes.bool.isRequired,
 };

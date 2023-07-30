@@ -34,12 +34,14 @@ export default function RenderButtons({ title, recipe, isInProgress }) {
         <h4 className="p-1 tam-title">{title}</h4>
       </button>
       {visible && (
-        <div className={ `${visible ? 'animate-open' : 'h-0'} ` }>
+        <div
+          className={ `${visible
+            ? 'animate-open' : 'h-0'} grid grid-cols-[auto] justify-center` }
+        >
           {title === 'Ingredients' ? (
             <IngredientsList
               recipe={ recipe }
               isInProgress={ isInProgress }
-              visible={ visible }
             />
           ) : (
             <div className={ visible ? 'animate-open' : 'h-0' }>
@@ -60,8 +62,5 @@ export default function RenderButtons({ title, recipe, isInProgress }) {
 RenderButtons.propTypes = {
   title: PropTypes.string.isRequired,
   isInProgress: PropTypes.bool.isRequired,
-  recipe: PropTypes.shape({
-    strInstructions: PropTypes.string.isRequired,
-    strYoutube: PropTypes.string.isRequired,
-  }).isRequired,
+  recipe: PropTypes.instanceOf(Object).isRequired,
 };

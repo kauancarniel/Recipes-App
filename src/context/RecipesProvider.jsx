@@ -6,13 +6,12 @@ import RecipesContext from './RecipesContext';
 export default function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [checkboxes, setCheckboxes] = useState({});
   const [filter, setFilter] = useState('all');
   const [linkCopy, setLinkCopy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [user, setUser] = useState({});
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userLogged, setUserLogged] = useState(null);
 
   const store = useMemo(() => ({
     recipes,
@@ -25,16 +24,13 @@ export default function RecipesProvider({ children }) {
     setError,
     linkCopy,
     setLinkCopy,
-    checkboxes,
-    setCheckboxes,
     filter,
     setFilter,
-    user,
-    setUser,
     menuOpen,
     setMenuOpen,
-  }), [recipes, categories, loading, error, linkCopy,
-    checkboxes, filter, user, menuOpen]);
+    userLogged,
+    setUserLogged,
+  }), [recipes, categories, loading, error, linkCopy, filter, menuOpen, userLogged]);
 
   return (
     <RecipesContext.Provider value={ store }>

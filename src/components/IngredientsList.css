@@ -1,13 +1,13 @@
-#checklist {
+.checklist {
   color: white;
   position: relative;
   display: grid;
-  grid-template-columns: 30px auto;
+  grid-template-columns: 30px 100%;
   align-items: center;
   justify-content: center;
 }
 
-#checklist label {
+.checklist label {
   position: relative;
   display: grid;
   align-items: center;
@@ -16,20 +16,20 @@
   margin-right: 20px;
 }
 
-#checklist .enabled {
+.checklist .enabled {
   cursor: pointer;
 }
 
-#checklist .disabled {
+.checklist .disabled {
   cursor: default;
 }
 
-#checklist label::before, #checklist label::after {
+.checklist label::before, .checklist label::after {
   content: "";
   position: absolute;
 }
 
-#checklist label::before {
+.checklist label::before {
   height: 2px;
   width: 8px;
   left: -27px;
@@ -38,7 +38,7 @@
   transition: background 0.3s ease;
 }
 
-#checklist label:after {
+.checklist label:after {
   height: 4px;
   width: 4px;
   top: 8px;
@@ -46,7 +46,7 @@
   border-radius: 50%;
 }
 
-#checklist input[type="checkbox"], #list input[type="checkbox"] {
+.checklist input[type="checkbox"], #list input[type="checkbox"] {
   -webkit-appearance: none;
   -moz-appearance: none;
   position: relative;
@@ -61,7 +61,7 @@
   margin-right: 20px;
 }
 
-#checklist input[type="checkbox"]::before, #checklist input[type="checkbox"]::after {
+.checklist input[type="checkbox"]::before, .checklist input[type="checkbox"]::after {
   content: "";
   position: absolute;
   height: 2px;
@@ -70,37 +70,37 @@
   border-radius: 2px;
 }
 
-#checklist input[type="checkbox"]::before {
+.checklist input[type="checkbox"]::before {
   width: 0px;
   right: 60%;
   transform-origin: right bottom;
 }
 
-#checklist input[type="checkbox"]::after {
+.checklist input[type="checkbox"]::after {
   width: 0px;
   left: 40%;
   transform-origin: left bottom;
 }
 
-#checklist input[type="checkbox"]:checked::before {
+.checklist input[type="checkbox"]:checked::before {
   animation: check-01 0.4s ease forwards;
 }
 
-#checklist input[type="checkbox"]:checked::after {
+.checklist input[type="checkbox"].enabled:checked::after {
   animation: check-02 0.4s ease forwards;
 }
 
-#checklist input[type="checkbox"]:checked + label {
+.checklist input[type="checkbox"].enabled:checked + label {
   color: var(--gray);
   animation: move 0.3s ease 0.1s forwards;
 }
 
-#checklist input[type="checkbox"]:checked + label::before {
+.checklist input[type="checkbox"].enabled:checked + label::before {
   background: var(--gray);
   animation: slice 0.4s ease forwards;
 }
 
-#checklist input[type="checkbox"]:checked + label::after {
+.checklist input[type="checkbox"].enabled:checked + label::after {
   animation: firework 0.5s ease forwards 0.1s;
 }
 

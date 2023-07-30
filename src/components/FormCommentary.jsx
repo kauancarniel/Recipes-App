@@ -17,14 +17,14 @@ export default function FormCommentary({ onSubmit }) {
   const url = `/${requiredPart}`;
   const { comments } = data;
   const star = '★';
-  const notas = ['5', '4', '3', '2', '1'];
+  const grades = ['5', '4', '3', '2', '1'];
 
   return (
-    <div className="flex flex-col items-center mt-10">
+    <div className="flex flex-col items-center mt-10 px-3">
       <h3 className="self-start text-white">Comments: </h3>
       <form>
         <div className="rating flex flex-row-reverse justify-end">
-          { notas.map((nota) => (
+          { grades.map((nota) => (
             <Star key={ nota } nota={ nota } setRating={ setRating } />
           )) }
         </div>

@@ -1,27 +1,29 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import RecipesContext from '../context/RecipesContext';
-import { addInDoneRecipes, getStorage, handleRemoveInProgress } from '../utils/functions';
 import useFetch from '../hooks/useFetch';
+import RecipesContext from '../context/RecipesContext';
 
 export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
-  const { checkboxes } = useContext(RecipesContext);
-  const [isRecipeInProgress, setIsRecipeInProgress] = useState(false);
+  const { userLogged } = useContext(RecipesContext);
+  const { handleRemoveInProgress, addInDoneRecipes } = useUser();
+  const [isRecipeInProgress, setIsRecipeInProgress] = useState('loading');
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
   const { addPoints } = useFetch();
 
   const NAME_URL = pathname.split('/')[1];
+  const { inProgress } = userLogged || { inProgress: {} };
 
   useEffect(() => {
-    const recipesProgress = getStorage('inProgressRecipes');
-    if (recipesProgress && recipesProgress[NAME_URL]) {
-      setIsRecipeInProgress(!!recipesProgress[NAME_URL][id]);
+    if (inProgress[NAME_URL]) {
+      const textBtn = inProgress[NAME_URL][id] ? 'Continue Recipe' : 'Start Recipe';
+      setIsRecipeInProgress(textBtn);
+    } else {
+      setIsRecipeInProgress('Start Recipe');
     }
-  }, []);
+  }, [userLogged, isInProgress]);
 
   const startRecipe = () => {
     setIsInProgress(!isInProgress);
@@ -31,17 +33,14 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
   const finishRecipe = async () => {
     const pointsM = 5;
     const pointsD = 2;
-    setIsInProgress(!isInProgress);
-    handleRemoveInProgress(id, NAME_URL);
-    addInDoneRecipes(recipe, NAME_URL);
     const promisePoints = NAME_URL === 'meals' ? addPoints(pointsM)
       : addPoints(pointsD);
     await promisePoints;
-
+    setIsInProgress(!isInProgress);
+    handleRemoveInProgress(id, NAME_URL);
+    addInDoneRecipes(recipe, NAME_URL);
     history.push('/done-recipes');
   };
-
-  const arrayCheckbox = Object.values(checkboxes);
 
   return (
     <div className="btn-container py-2">
@@ -50,8 +49,12 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
           className="btn-recipe btns"
           data-testid="finish-recipe-btn"
           onClick={ finishRecipe }
-          disabled={ arrayCheckbox.length === 0 ? true
-            : arrayCheckbox.some((value) => value === '') }
+          disabled={
+            !(inProgress[NAME_URL]
+            && inProgress[NAME_URL][id]
+            && Object.values(inProgress[NAME_URL][id].usedIngredients)
+              .every((value) => value))
+          }
         >
           Finalizar Receita
         </button>
@@ -62,7 +65,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
           type="button"
           data-testid="start-recipe-btn"
         >
-          { isRecipeInProgress ? 'Continue Recipe' : 'Start Recipe'}
+          {isRecipeInProgress}
         </button>
       )}
     </div>

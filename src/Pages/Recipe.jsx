@@ -1,25 +1,28 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
-
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
+import useUser from '../hooks/useUser';
 import ShareBtn from '../components/ShareBtn';
 import FavoriteBtn from '../components/FavoriteBtn';
 import RecipeBtns from '../components/RecipeBtns';
 import RecommendRecipes from '../components/RecommendRecipes';
 import './Recipe.css';
 import RenderButtons from '../components/RenderButtons';
-import FormCommentary from '../components/FormCommentary';
 import MenuHamburguer from '../components/MenuHamburguer';
 import Menu from '../components/Menu';
+import FormCommentary from '../components/FormCommentary';
+
 import { fetchAddComment } from '../services/fetchAPI';
 
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
 
-export default function RecipeInProg() {
+export default function Recipe() {
   const { loading, error, menuOpen } = useContext(RecipesContext);
+  const { validateCookie, handleRemoveInProgress } = useUser();
+  const { fetchRecipes } = useFetch();
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -29,13 +32,14 @@ export default function RecipeInProg() {
     () => pathname.includes('in-progress'),
   );
   const [commentSubmit, setCommentSubmit] = useState(false);
-  const { fetchRecipes } = useFetch();
 
   const NAME_URL = `/${pathname.split('/')[1]}`;
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
 
   useEffect(() => {
     (async () => {
+      const isLogged = await validateCookie();
+      if (!isLogged) return;
       const [recipeData] = await fetchRecipes(NAME_URL, 'details', id);
       setRecipe(recipeData);
       if (!isInProgress) {
@@ -51,6 +55,14 @@ export default function RecipeInProg() {
     await fetchAddComment(url, comment, rating, user.name);
     console.log('Comment added successfully');
     setCommentSubmit(false);
+  };
+
+  const goBack = () => {
+    if (isInProgress) {
+      handleRemoveInProgress(id, pathname.split('/')[1]);
+    }
+    setIsInProgress(!isInProgress);
+    history.goBack();
   };
 
   return (
@@ -87,7 +99,10 @@ export default function RecipeInProg() {
                 </h1>
               </div>
               <div className="absolute top-3 left-3 flex items-center gap-x-2">
-                <button onClick={ history.goBack } className="button-back shadow-name">
+                <button
+                  onClick={ goBack }
+                  className="button-back shadow-name"
+                >
                   <IoChevronBackCircleSharp />
                 </button>
                 <h3 data-testid="recipe-category" className="title-category shadow-name">
@@ -103,7 +118,7 @@ export default function RecipeInProg() {
                     id={ id }
                     testId="share-btn"
                   />
-                  <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
+                  <FavoriteBtn recipe={ recipe } />
                 </div>
                 <RenderButtons
                   title="Ingredients"
