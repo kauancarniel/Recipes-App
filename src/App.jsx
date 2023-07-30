@@ -25,7 +25,7 @@ function App() {
       <Route path="/profile" component={ Profile } />
       <Route path="/done-recipes" component={ DoneRecipes } />
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
-      <Route path="/register" component={ Register } />
+      <Route path="/signup" component={ Register } />
       <Route path="/remember-password" component={ RememberPass } />
       <Route path="*" component={ NotFound } />
     </Switch>

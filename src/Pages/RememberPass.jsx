@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import validator from 'validator';
 import { Link } from 'react-router-dom';
 import copy from 'clipboard-copy';
+import { IoChevronBackCircleSharp } from 'react-icons/io5';
 
 import InitialLayout from '../components/InitialLayout';
 import useFetch from '../hooks/useFetch';
+import useUser from '../hooks/useUser';
 
 export default function RememberPass() {
   const { fetchUser, fireToast } = useFetch();
+  const { validateCookie } = useUser();
   const [user, setUser] = useState({
     email: '',
     name: '',
@@ -15,11 +18,16 @@ export default function RememberPass() {
   const [password, setPassword] = useState('');
   const [indexBtn, setIndexBtn] = useState(0);
 
+  useEffect(() => {
+    (async () => {
+      await validateCookie();
+    })();
+  }, []);
+
   const NAME_LENGTH = 3;
 
   const focus = 'peer-focus:-top-5 peer-focus:text-xs';
-  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
-  const classLabel = `label ${focus} ${valid}`;
+  const valid = '-top-5 text-xs';
   const classBtnMain = 'reset-input btn-login';
   const classBtbHover = 'enabled:hover:text-[#F9EFBB] shadow-hover';
   const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
@@ -40,7 +48,7 @@ export default function RememberPass() {
     </button>,
     <Link
       key="register"
-      to="/register"
+      to="/signup"
       className="no-underline text-[var(--orange)] hover:text-[var(--red)]"
     >
       Sing Up
@@ -52,7 +60,7 @@ export default function RememberPass() {
   };
 
   const handleSubmit = async () => {
-    const userResponse = await fetchUser(user.email);
+    const userResponse = await fetchUser(user);
     if (userResponse.length) {
       if (userResponse[0].name !== user.name) {
         setPassword('Valid email, but name does not match registered. Please try again');
@@ -69,9 +77,17 @@ export default function RememberPass() {
 
   return (
     <InitialLayout>
-      <p className="text-[var(--green)] font-bold text-5xl tracking-widest text-center">
-        REMEMBER PASSWORD
-      </p>
+      <div className="text-center mb-3 flex gap-x-2 items-center">
+        <Link
+          className="no-underline text-[var(--yellow)] hover:text-[var(--darkYellow)]"
+          to="/"
+        >
+          <IoChevronBackCircleSharp size="40px" />
+        </Link>
+        <h1 className="text-[var(--green)] font-bold text-5xl tracking-widest m-0">
+          REMEMBER PASS
+        </h1>
+      </div>
       <form
         className="flex-center flex-col gap-7 w-full max-w-sm"
         onSubmit={ (event) => {
@@ -91,7 +107,7 @@ export default function RememberPass() {
             required
           />
           <label
-            className={ classLabel }
+            className={ `label ${focus} ${user.email.length ? valid : ''}` }
             htmlFor="email"
           >
             Registered Email
@@ -109,7 +125,7 @@ export default function RememberPass() {
             required
           />
           <label
-            className={ classLabel }
+            className={ `label ${focus} ${user.name.length ? valid : ''}` }
             htmlFor="name"
           >
             Registered Name
@@ -129,7 +145,7 @@ export default function RememberPass() {
                     className="go-login"
                     to="/"
                   >
-                    Vá para o Login
+                    Go to Login
                   </Link>
                 </p>
               )}

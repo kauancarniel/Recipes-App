@@ -4,6 +4,7 @@ import { IoChevronBackCircleSharp } from 'react-icons/io5';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
+import useUser from '../hooks/useUser';
 import ShareBtn from '../components/ShareBtn';
 import FavoriteBtn from '../components/FavoriteBtn';
 import RecipeBtns from '../components/RecipeBtns';
@@ -17,8 +18,9 @@ import Menu from '../components/Menu';
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
 
-export default function RecipeInProg() {
+export default function Recipe() {
   const { loading, error, menuOpen } = useContext(RecipesContext);
+  const { validateCookie } = useUser();
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -34,6 +36,8 @@ export default function RecipeInProg() {
 
   useEffect(() => {
     (async () => {
+      const isLogged = await validateCookie();
+      if (!isLogged) return;
       const [recipeData] = await fetchRecipes(NAME_URL, 'details', id);
       setRecipe(recipeData);
       if (!isInProgress) {
@@ -77,7 +81,13 @@ export default function RecipeInProg() {
                 </h1>
               </div>
               <div className="absolute top-3 left-3 flex items-center gap-x-2">
-                <button onClick={ history.goBack } className="button-back shadow-name">
+                <button
+                  onClick={ () => {
+                    history.goBack();
+                    setIsInProgress(!isInProgress);
+                  } }
+                  className="button-back shadow-name"
+                >
                   <IoChevronBackCircleSharp />
                 </button>
                 <h3 data-testid="recipe-category" className="title-category shadow-name">
@@ -93,7 +103,7 @@ export default function RecipeInProg() {
                     id={ id }
                     testId="share-btn"
                   />
-                  <FavoriteBtn recipe={ recipe } testId="favorite-btn" />
+                  <FavoriteBtn recipe={ recipe } />
                 </div>
                 <RenderButtons
                   title="Ingredients"
