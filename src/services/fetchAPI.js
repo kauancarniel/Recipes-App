@@ -72,3 +72,23 @@ export const fetchPatchUser = async (id, key, data) => {
     }),
   });
 };
+
+export const fetchAddComment = async (key, text, rat, name) => {
+  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/comments`);
+  const existingComments = await response.json();
+  await fetch(`${process.env.REACT_APP_BASE_URL}/comments`, {
+    headers,
+    method: 'POST',
+    body: JSON.stringify({
+      ...existingComments,
+      [key]: [
+        ...(existingComments[key] || []),
+        {
+          name,
+          text,
+          rat,
+        },
+      ],
+    }),
+  });
+};

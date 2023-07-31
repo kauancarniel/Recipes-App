@@ -106,5 +106,13 @@
     }
   ],
   "recipes": [],
-  "comments": {}
+  "comments": {
+    "/meals/52971": [
+      {
+        "name": "Lucas Dielo",
+        "text": "sdasd",
+        "rat": "4"
+      }
+    ]
+  }
 }
