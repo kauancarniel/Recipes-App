@@ -8,7 +8,7 @@ import './FormCommentary.css';
 import '../Pages/Login.css';
 import useFetch from '../hooks/useFetch';
 
-export default function EditUserInfo({ setEditUserInfo }) {
+export default function EditUserInfo({  }) {
   const [user, setUser] = useState({
     email: '',
     name: '',
