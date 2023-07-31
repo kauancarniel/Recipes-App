@@ -40,10 +40,6 @@ export default function EditUserPass({ setEditUserPass }) {
     <InitialLayout>
       <form
         className="flex-center flex-col gap-7 w-full max-w-sm"
-        onSubmit={ (event) => {
-          event.preventDefault();
-          handleSubmit();
-        } }
       >
         <div className="flex-center relative w-full">
           <div className="user-box">
@@ -142,13 +138,15 @@ export default function EditUserPass({ setEditUserPass }) {
           </p>
         )}
         <div className="space-x-5">
-          <button
+          {/* <button
             id="button"
             disabled={ user.password !== confirmPass || user.password.length === 0 }
+            onClick={ handleSubmit() }
           >
             Sanve Changes
-          </button>
+          </button> */}
           <button
+            onClick={ setEditUserPass(false) }
             id="button"
           >
             Cancel
