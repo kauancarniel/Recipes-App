@@ -4,12 +4,13 @@ import { Route, Switch } from 'react-router-dom';
 import Recipes from './Pages/Recipes';
 import Login from './Pages/Login';
 import DoneRecipes from './Pages/DoneRecipes';
-import FavoriteRecipes from './Pages/FavoriteRecipes';
 import Profile from './Pages/Profile';
 import Recipe from './Pages/Recipe';
 import NotFound from './Pages/NotFound';
+import FavoriteRecipes from './Pages/FavoriteRecipes';
 import Register from './Pages/Register';
 import RememberPass from './Pages/RememberPass';
+import Ranking from './Pages/Ranking';
 import RecipesInProgress from './Pages/RecipesInProgress';
 import MyRecipes from './Pages/MyRecipes';
 import './App.css';
@@ -29,6 +30,7 @@ function App() {
       <Route path="/favorite-recipes" component={ FavoriteRecipes } />
       <Route path="/signup" component={ Register } />
       <Route path="/remember-password" component={ RememberPass } />
+      <Route path="/ranking" component={ Ranking } />
       <Route path="/in-progress-recipes" component={ RecipesInProgress } />
       <Route path="/my-recipes" component={ MyRecipes } />
       <Route path="*" component={ NotFound } />

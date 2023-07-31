@@ -96,7 +96,7 @@ export default function Menu({ showClose = false }) {
         <li>
           <Link
             className="option-menu"
-            to="/favorite-recipes"
+            to="/ranking"
             onClick={ () => setMenuOpen(false) }
           >
             <FaRankingStar className="border-2 border-solid rounded-[100%]" />
