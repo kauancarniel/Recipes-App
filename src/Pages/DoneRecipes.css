@@ -45,6 +45,6 @@
   }
 
   .title-done {
-    @apply text-[var(--orange)] text-lg mr-2
+    @apply text-[var(--orange)] text-lg mr-2 
   }
 }

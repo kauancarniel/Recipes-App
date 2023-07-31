@@ -36,7 +36,7 @@ function DoneRecipes() {
               Nenhuma receita feita encontrada.
             </h2>
           </div>
-        ) : (
+        ) : ( 
           <>
             <nav>
               {buttonFilter.map((type) => (

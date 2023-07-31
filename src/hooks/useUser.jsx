@@ -76,7 +76,10 @@ const useUser = () => {
         [key]: {
           ...((inProgress[NAME_URL] && inProgress[NAME_URL][key])
             ? inProgress[NAME_URL][key]
-            : setRecipeFormated(recipe, NAME_URL)),
+            : {
+              ...setRecipeFormated(recipe, NAME_URL),
+              startDate: new Date().toISOString(),
+            }),
           usedIngredients: checkboxes,
         },
       },
@@ -119,6 +122,7 @@ const useUser = () => {
       ));
 
     await patchUser(userLogged.id, 'dones', [formatedRecipe, ...filteredDones]);
+    setUserLogged({ ...userLogged, dones: [formatedRecipe, ...filteredDones] });
   };
 
   return { validateCookie,

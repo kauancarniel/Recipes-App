@@ -5,7 +5,30 @@
       "email": "guifjj92@gmail.com",
       "name": "Guilherme Fernandes",
       "password": "1234567",
-      "dones": [],
+      "dones": [
+        {
+          "id": "53065",
+          "type": "meal",
+          "nationality": "Japanese",
+          "category": "Seafood",
+          "alcoholicOrNot": "",
+          "name": "Sushi",
+          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg",
+          "tags": [],
+          "doneDate": "2023-07-31T17:32:56.656Z"
+        },
+        {
+          "id": "17222",
+          "type": "drink",
+          "nationality": "",
+          "category": "Cocktail",
+          "alcoholicOrNot": "Alcoholic",
+          "name": "A1",
+          "image": "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
+          "tags": [],
+          "doneDate": "2023-07-31T17:22:33.088Z"
+        }
+      ],
       "favorites": [
         {
           "id": "53065",
