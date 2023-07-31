@@ -2,10 +2,6 @@ import Swal from 'sweetalert2';
 
 const HOURS = 3;
 
-export const getStorage = (key) => JSON.parse(localStorage.getItem(key));
-export const setStorage = (key, value) => localStorage
-  .setItem(key, JSON.stringify(value));
-
 export const initialIngredients = (ingredients) => ingredients
   .reduce((obj, [key]) => ({
     ...obj,

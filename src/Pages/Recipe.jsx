@@ -14,8 +14,6 @@ import MenuHamburguer from '../components/MenuHamburguer';
 import Menu from '../components/Menu';
 import FormCommentary from '../components/FormCommentary';
 
-import { fetchAddComment } from '../services/fetchAPI';
-
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
 
@@ -31,7 +29,6 @@ export default function Recipe() {
   const [isInProgress, setIsInProgress] = useState(
     () => pathname.includes('in-progress'),
   );
-  const [commentSubmit, setCommentSubmit] = useState(false);
 
   const NAME_URL = `/${pathname.split('/')[1]}`;
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
@@ -49,13 +46,6 @@ export default function Recipe() {
       }
     })();
   }, []);
-
-  const onSubmitComment = async (url, comment, rating, userNAME) => {
-    setCommentSubmit(true);
-    await fetchAddComment(url, comment, rating, userNAME);
-    console.log('Comment added successfully');
-    setCommentSubmit(false);
-  };
 
   const goBack = () => {
     if (isInProgress) {
@@ -151,7 +141,7 @@ export default function Recipe() {
                 <RecommendRecipes recommendRecipes={ recommendRecipes } />
               )}
               <div>
-                <FormCommentary onSubmit={ onSubmitComment } />
+                <FormCommentary />
               </div>
             </section>
           </>
