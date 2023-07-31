@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import usersData from '../data/db.json';
 import { fetchAPI,
-  fetchNewUser, fetchUserPoints,
+  fetchNewUser,
   fetchPatchUser, fetchUserEmail, fetchUserId } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
@@ -79,7 +79,7 @@ const useFetch = () => {
     const sumPoints = identifyUser.points + points;
     try {
       setLoading(true);
-      await fetchUserPoints(userLogged, sumPoints);
+      await fetchPatchUser(userLogged.id, 'points', sumPoints);
     } catch ({ message }) {
       setError(message);
       return [];

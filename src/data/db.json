@@ -38,85 +38,12 @@
       "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
       "email": "lucasdielo@hotmail.com",
       "name": "Lucas Dielo",
+      "password": "1234567",
       "dones": [],
       "favorites": [],
-      "inProgress": {
-        "meals": {
-          "52785": {
-            "id": "52785",
-            "type": "meal",
-            "nationality": "Indian",
-            "category": "Vegetarian",
-            "alcoholicOrNot": "",
-            "name": "Dal fry",
-            "image": "https://www.themealdb.com/images/media/meals/wuxrtu1483564410.jpg",
-            "tags": [
-              "Curry",
-              "Vegetarian"
-            ],
-            "usedIngredients": {
-              "strIngredient1": "Toor dal",
-              "strIngredient2": "Water",
-              "strIngredient3": "Salt",
-              "strIngredient4": "Turmeric",
-              "strIngredient5": "",
-              "strIngredient6": "",
-              "strIngredient7": "",
-              "strIngredient8": "",
-              "strIngredient9": "",
-              "strIngredient10": "",
-              "strIngredient11": "",
-              "strIngredient12": "",
-              "strIngredient13": "",
-              "strIngredient14": "",
-              "strIngredient15": "",
-              "strIngredient16": ""
-            }
-          },
-          "52978": {
-            "id": "52978",
-            "type": "meal",
-            "nationality": "Turkish",
-            "category": "Side",
-            "alcoholicOrNot": "",
-            "name": "Kumpir",
-            "image": "https://www.themealdb.com/images/media/meals/mlchx21564916997.jpg",
-            "tags": [
-              "SideDish"
-            ],
-            "usedIngredients": {
-              "strIngredient1": "Potatoes",
-              "strIngredient2": "Butter",
-              "strIngredient3": "Cheese",
-              "strIngredient4": "Onion",
-              "strIngredient5": "Red Pepper",
-              "strIngredient6": "Red Chile Flakes"
-            }
-          },
-          "53069": {
-            "id": "53069",
-            "type": "meal",
-            "nationality": "Filipino",
-            "category": "Beef",
-            "alcoholicOrNot": "",
-            "name": "Bistek",
-            "image": "https://www.themealdb.com/images/media/meals/4pqimk1683207418.jpg",
-            "tags": [],
-            "usedIngredients": {
-              "strIngredient1": "Beef",
-              "strIngredient2": "Soy Sauce",
-              "strIngredient3": "Lemon",
-              "strIngredient4": "Garlic",
-              "strIngredient5": "Onion",
-              "strIngredient6": "Olive Oil",
-              "strIngredient7": "Water",
-              "strIngredient8": "Salt"
-            }
-          }
-        }
-      },
+      "inProgress": {},
       "my": [],
-      "points": 10,
+      "points": 0,
       "createAt": "2023-07-27T18:04:08.985Z"
     },
     {
@@ -179,5 +106,6 @@
     }
   ],
   "recipes": [],
-  "comments": {}
+  "comments": {
+}
 }

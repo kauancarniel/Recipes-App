@@ -73,21 +73,9 @@ export const fetchPatchUser = async (id, key, data) => {
   });
 };
 
-export const fetchUserPoints = async (user, newPoints) => {
-  await fetch(`${process.env.REACT_APP_BASE_URL}/users/${user.id}`, {
-    headers,
-    method: 'PUT',
-    body: JSON.stringify({
-      ...user,
-      points: newPoints,
-    }),
-  });
-};
-
 export const fetchAddComment = async (key, text, rat, name) => {
   const response = await fetch(`${process.env.REACT_APP_BASE_URL}/comments`);
   const existingComments = await response.json();
-
   await fetch(`${process.env.REACT_APP_BASE_URL}/comments`, {
     headers,
     method: 'POST',
