@@ -6,7 +6,7 @@
   gap: 2px;
   height: 40px;
   border: none;
-  background: black;
+  background: rgb(0, 0, 0);
   border-radius: 20px;  
   cursor: pointer;
 }
