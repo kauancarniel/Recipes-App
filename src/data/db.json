@@ -5,35 +5,35 @@
       "email": "guifjj92@gmail.com",
       "name": "Guilherme Fernandes",
       "password": "1234567",
-      "doneRecipes": [],
-      "favoriteRecipes": [],
-      "inProgressRecipes": {},
-      "myRecipes": [],
-      "points": 0,
+      "dones": [
+        {
+          "id": "17222",
+          "type": "drink",
+          "nationality": "",
+          "category": "Cocktail",
+          "alcoholicOrNot": "Alcoholic",
+          "name": "A1",
+          "image": "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
+          "tags": [],
+          "doneDate": "2023-07-31T19:32:45.726Z"
+        }
+      ],
+      "favorites": [],
+      "inProgress": {},
+      "my": [],
+      "score": 2,
       "createAt": "2023-07-25T19:12:48.082Z"
-    },
-    {
-      "id": "c743fdbb-69a6-4e5e-b75e-3b6033bba25c",
-      "email": "joaomarcelolimaoliveira7@gmail.com",
-      "name": "João Marcelo Titio",
-      "password": "1234567",
-      "doneRecipes": [],
-      "favoriteRecipes": [],
-      "inProgressRecipes": {},
-      "myRecipes": [],
-      "points": 0,
-      "createAt": "2023-07-25T19:18:30.355Z"
     },
     {
       "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
       "email": "lucasdielo@hotmail.com",
       "name": "Lucas Dielo",
       "password": "1234567",
-      "doneRecipes": [],
-      "favoriteRecipes": [],
-      "inProgressRecipes": {},
-      "myRecipes": [],
-      "points": 0,
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "my": [],
+      "score": 0,
       "createAt": "2023-07-27T18:04:08.985Z"
     },
     {
@@ -41,62 +41,14 @@
       "email": "kauan@gmail.com",
       "name": "Kauan",
       "password": "1234567",
-      "doneRecipes": [],
-      "favoriteRecipes": [],
-      "inProgressRecipes": {},
-      "myRecipes": [],
-      "points": 0,
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "my": [],
+      "score": 0,
       "createAt": "2023-07-27T20:22:03.399Z"
-    },
-    {
-      "id": "c09877b9-ed26-4fa5-8364-9a11c37765b3",
-      "email": "asd@asda.com",
-      "name": "asd",
-      "password": "qwerty123",
-      "doneRecipes": [],
-      "favoriteRecipes": [],
-      "inProgressRecipes": {},
-      "myRecipes": [],
-      "points": 0,
-      "createAt": "2023-07-31T17:36:43.556Z"
-    },
-    {
-      "id": "739fc458-1b98-4704-97f0-400b373d2666",
-      "email": "asd@asda.com",
-      "name": "a",
-      "password": "",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
-      "my": [],
-      "points": 0,
-      "createAt": "2023-07-31T18:37:24.554Z"
-    },
-    {
-      "id": "b597d915-e1fe-4112-8680-756502187570",
-      "email": "",
-      "name": "",
-      "password": "",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
-      "my": [],
-      "points": 0,
-      "createAt": "2023-07-31T20:57:59.951Z"
-    },
-    {
-      "id": "fdda4218-49f0-4874-8f58-0f82d21da4ab",
-      "email": "",
-      "name": "",
-      "password": "",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
-      "my": [],
-      "points": 0,
-      "createAt": "2023-07-31T20:57:59.959Z"
     }
   ],
   "recipes": [],
-  "comments": {}
+  "comments": []
 }

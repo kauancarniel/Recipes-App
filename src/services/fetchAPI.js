@@ -14,7 +14,8 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const URL_BASE = `${process.env.REACT_APP_BASE_URL}/users`;
+const URL_USERS = `${process.env.REACT_APP_BASE_URL}/users`;
+const URL_COMMENTS = `${process.env.REACT_APP_BASE_URL}/comments`;
 
 export const fetchAPI = async (pathname, optSearch, textSearch) => {
   const BASE_URL = pathname === '/meals'
@@ -30,23 +31,23 @@ export const fetchAPI = async (pathname, optSearch, textSearch) => {
 export const fetchUserEmail = async (email, password) => {
   let response;
   if (!password) {
-    response = await fetch(`${URL_BASE}?email=${email}`);
+    response = await fetch(`${URL_USERS}?email=${email}`);
   } else {
-    response = await fetch(`${URL_BASE}?email=${email}&password=${password}`);
+    response = await fetch(`${URL_USERS}?email=${email}&password=${password}`);
   }
   const data = await response.json();
   return data;
 };
 
 export const fetchUserId = async (id) => {
-  const response = await fetch(`${URL_BASE}/${id}`);
+  const response = await fetch(`${URL_USERS}/${id}`);
   const data = await response.json();
   return data;
 };
 
 export const fetchNewUser = async (user) => {
   const id = uuidv4();
-  await fetch(URL_BASE, {
+  await fetch(URL_USERS, {
     headers,
     method: 'POST',
     body: JSON.stringify({
@@ -63,14 +64,18 @@ export const fetchNewUser = async (user) => {
   return id;
 };
 
-export const fetchPatchUser = async (id, key, data) => {
-  await fetch(`${URL_BASE}/${id}`, {
+export const fetchPatchUser = async (id, data) => {
+  await fetch(`${URL_USERS}/${id}`, {
     headers,
     method: 'PATCH',
-    body: JSON.stringify({
-      [key]: data,
-    }),
+    body: JSON.stringify(data),
   });
+};
+
+export const fetchComments = async (key, params) => {
+  const response = await fetch(`${URL_COMMENTS}?${key}=${params}`);
+  const data = await response.json();
+  return data;
 };
 
 export const fetchAddComment = async (key, text, rat, name) => {

@@ -21,10 +21,10 @@ import './Header.css';
 const iconsTitle = {
   Meals: (<img src={ iconFoods } alt="food icon" className="h-12" />),
   Drinks: (<img src={ iconDrinks } alt="food icon" className="h-12" />),
-  Profile: <CgProfile />,
+  Profile: <CgProfile className="w-14 h-14 text-[var(--green)]" />,
   'My Recipes': <MdOutlineEditNote className="icon-title" />,
   'Recipes in Progress': <LuChefHat className="icon-title" />,
-  'Done Recipes': <FiCheckCircle />,
+  'Done Recipes': <FiCheckCircle className="w-14 h-14 text-[var(--green)]" />,
   'Favorite Recipes': <HiHeart className="icon-title" />,
   Ranking: <FaRankingStar className="icon-title" />,
 };

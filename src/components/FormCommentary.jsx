@@ -1,31 +1,57 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import PropTypes from 'prop-types';
-import data from '../data/db.json';
+
+import RecipesContext from '../context/RecipesContext';
 import Star from './Star';
 import './FormCommentary.css';
-import RecipesContext from '../context/RecipesContext';
+import { fetchComments } from '../services/fetchAPI';
 
-export default function FormCommentary({ onSubmit }) {
+export default function FormCommentary() {
+  const { userLogged } = useContext(RecipesContext);
   const { pathname } = useLocation();
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('0');
-  const { userLogged } = useContext(RecipesContext);
-  const parts = pathname.split('/');
-  const limitBarra = 3;
-  const requiredPart = parts.slice(1, limitBarra).join('/');
-  const url = `/${requiredPart}`;
-  const { comments } = data;
+  const [comments, setComments] = useState([]);
+
+  const URL_ARRAY = pathname.split('/');
+  const key = `${URL_ARRAY[1]}/${URL_ARRAY[2]}`;
+
+  useEffect(() => {
+    (async () => {
+      if (userLogged) {
+        const dataComments = await fetchComments(key);
+        console.log(dataComments);
+        setComments(dataComments);
+      }
+    })();
+  }, [userLogged]);
+
   const star = '★';
   const grades = ['5', '4', '3', '2', '1'];
+
+  const handleSubmit = async () => {
+    setRating('0');
+    setComment('');
+    // await fetchAddComment(key, comment, rating, userLogged);
+  };
 
   return (
     <div className="flex flex-col items-center mt-10 px-3">
       <h3 className="self-start text-white">Comments: </h3>
-      <form>
+      <form
+        onSubmit={ (event) => {
+          event.preventDefault();
+          handleSubmit();
+        } }
+      >
         <div className="rating flex flex-row-reverse justify-end">
-          { grades.map((nota) => (
-            <Star key={ nota } nota={ nota } setRating={ setRating } />
+          { grades.map((grade) => (
+            <Star
+              key={ grade }
+              grade={ grade }
+              setRating={ setRating }
+              rating={ rating }
+            />
           )) }
         </div>
         <div className="flex flex-col items-center gap-y-2">
@@ -45,26 +71,15 @@ export default function FormCommentary({ onSubmit }) {
           <button
             id="button"
             className="self-end"
-            disabled={ rating === '0' }
-            type="submit"
-            onClick={ (event) => {
-              event.preventDefault();
-              const radioInputs = document.getElementsByName('rating');
-              radioInputs.forEach((input) => {
-                input.checked = false;
-              });
-              setRating('0');
-              setComment('');
-              onSubmit(url, comment, rating, userLogged.name);
-            } }
+            disabled={ !(!!rating && !!comment.length) }
           >
             Comment
           </button>
         </div>
       </form>
       <div className="self-start divide-y max-w-xs">
-        { comments[url]
-    && comments[url].map((com, ind) => {
+        { comments
+    && comments.map((com, ind) => {
       return (
         <div key={ ind } className="flex flex-col mb-10">
           <p className="mb-0 text-white">{com.name}</p>
@@ -82,7 +97,3 @@ export default function FormCommentary({ onSubmit }) {
     </div>
   );
 }
-
-FormCommentary.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-};
