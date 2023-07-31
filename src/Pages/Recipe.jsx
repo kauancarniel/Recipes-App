@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
-
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 import useUser from '../hooks/useUser';
@@ -11,9 +10,11 @@ import RecipeBtns from '../components/RecipeBtns';
 import RecommendRecipes from '../components/RecommendRecipes';
 import './Recipe.css';
 import RenderButtons from '../components/RenderButtons';
-import FormCommentary from '../components/FormCommentary';
 import MenuHamburguer from '../components/MenuHamburguer';
 import Menu from '../components/Menu';
+import FormCommentary from '../components/FormCommentary';
+
+import { fetchAddComment } from '../services/fetchAPI';
 
 const MAX_RECOMMENDATIONS = 14;
 const INIT = 7;
@@ -30,6 +31,7 @@ export default function Recipe() {
   const [isInProgress, setIsInProgress] = useState(
     () => pathname.includes('in-progress'),
   );
+  const [commentSubmit, setCommentSubmit] = useState(false);
 
   const NAME_URL = `/${pathname.split('/')[1]}`;
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
@@ -48,6 +50,13 @@ export default function Recipe() {
     })();
   }, []);
 
+  const onSubmitComment = async (url, comment, rating, userNAME) => {
+    setCommentSubmit(true);
+    await fetchAddComment(url, comment, rating, userNAME);
+    console.log('Comment added successfully');
+    setCommentSubmit(false);
+  };
+
   const goBack = () => {
     if (isInProgress) {
       handleRemoveInProgress(id, pathname.split('/')[1]);
@@ -59,13 +68,14 @@ export default function Recipe() {
   return (
     <>
       <main className="min-h-screen recipe-box bg-form glass p-0 mb-16 rounded-b-lg">
-        { loading && (
+        { }
+        { error && <p>{ error }</p> }
+        { loading && commentSubmit ? (
           <div className="w-full h-[80vh] flex-center">
+            {console.log(recipe)}
             <h2 className="text-[var(--yellow)]">Loading...</h2>
           </div>
-        )}
-        { error && <p>{ error }</p> }
-        { (!loading && !error) && (
+        ) : (
           <>
             <div>
               <div className="burguer-container">
@@ -140,7 +150,9 @@ export default function Recipe() {
               {!isInProgress && (
                 <RecommendRecipes recommendRecipes={ recommendRecipes } />
               )}
-              <FormCommentary />
+              <div>
+                <FormCommentary onSubmit={ onSubmitComment } />
+              </div>
             </section>
           </>
         )}

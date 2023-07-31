@@ -1,41 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
-import { getStorage, setStorage } from '../utils/functions';
-
+import PropTypes from 'prop-types';
+import data from '../data/db.json';
 import Star from './Star';
 import './FormCommentary.css';
+import RecipesContext from '../context/RecipesContext';
 
-export default function FormCommentary() {
+export default function FormCommentary({ onSubmit }) {
   const { pathname } = useLocation();
-  const [allComents, setAllComents] = useState(getStorage(pathname));
   const [comment, setComment] = useState('');
   const [rating, setRating] = useState('0');
-  // const [like, setLike] = useState(0);
-
-  useEffect(() => { if (!allComents) setStorage(pathname, []); }, []);
-
+  const { userLogged } = useContext(RecipesContext);
+  const parts = pathname.split('/');
+  const limitBarra = 3;
+  const requiredPart = parts.slice(1, limitBarra).join('/');
+  const url = `/${requiredPart}`;
+  const { comments } = data;
   const star = '★';
   const grades = ['5', '4', '3', '2', '1'];
-  const MIN_LENGTH = 3;
 
-  const onSubmit = (event) => {
-    event.preventDefault();
-    // const user = getStorage('user');
-    // const coment = [...getStorage(pathname), { comment,
-    //   rating,
-    //   email: user.email,
-    //   name: user.name }];
-    const coment = [...getStorage(pathname), { comment,
-      rating }];
-    setAllComents(coment);
-    setStorage(pathname, coment);
-    const radioInputs = document.getElementsByName('rating');
-    radioInputs.forEach((input) => {
-      input.checked = false;
-    });
-    setRating('0');
-    setComment('');
-  };
   return (
     <div className="flex flex-col items-center mt-10 px-3">
       <h3 className="self-start text-white">Comments: </h3>
@@ -64,28 +47,42 @@ export default function FormCommentary() {
             className="self-end"
             disabled={ rating === '0' }
             type="submit"
-            onClick={ onSubmit }
+            onClick={ (event) => {
+              event.preventDefault();
+              const radioInputs = document.getElementsByName('rating');
+              radioInputs.forEach((input) => {
+                input.checked = false;
+              });
+              setRating('0');
+              setComment('');
+              onSubmit(url, comment, rating, userLogged.name);
+            } }
           >
             Comment
           </button>
         </div>
       </form>
       <div className="self-start divide-y max-w-xs">
-        {allComents && allComents.map((com, ind) => (
-          <div key={ ind } className="flex flex-col mb-10">
-            <p className="mb-0 text-white"> com.name </p>
-            <div className="flex flex-row">
-              <p className="mb-0 text-white">
-                { `${com.rating},0  `}
-              </p>
-              <p id="st" className="mb-0">
-                {Array.from({ length: Number(com.rating) }, () => star).join('')}
-              </p>
-            </div>
-            <p className="text-white break-words">{ com.comment }</p>
+        { comments[url]
+    && comments[url].map((com, ind) => {
+      return (
+        <div key={ ind } className="flex flex-col mb-10">
+          <p className="mb-0 text-white">{com.name}</p>
+          <div className="flex flex-row">
+            <p className="mb-0 text-white">{`${com.rat},0  `}</p>
+            <p id="st" className="mb-0">
+              {Array.from({ length: Number(com.rat) }, () => star).join('')}
+            </p>
           </div>
-        ))}
+          <p className="text-white break-words">{com.text}</p>
+        </div>
+      );
+    })}
       </div>
     </div>
   );
 }
+
+FormCommentary.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

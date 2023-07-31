@@ -58,12 +58,12 @@ describe('DoneRecipes', () => {
     expect(recipe2Name).toHaveTextContent('Recipe 2');
   });
 
-  test('Deve exibir uma mensagem quando não houver receitas favoritas', async () => {
+  test('Deve exibir uma mensagem quando não houver receitas feitas', async () => {
     localStorage.removeItem('doneRecipes');
 
     renderWithRouterAndProvider(<App />, route);
 
-    const emptyMessage = screen.getByText('Nenhuma receita favorita encontrada.');
+    const emptyMessage = screen.getByText('Nenhuma receita feita encontrada.');
     expect(emptyMessage).toBeInTheDocument();
   });
 

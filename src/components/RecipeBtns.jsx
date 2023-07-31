@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
+import useFetch from '../hooks/useFetch';
 
 export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
   const { userLogged } = useContext(RecipesContext);
@@ -12,6 +12,7 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
   const history = useHistory();
   const { id } = useParams();
   const { pathname } = useLocation();
+  const { addPoints } = useFetch();
 
   const NAME_URL = pathname.split('/')[1];
   const { inProgress } = userLogged || { inProgress: {} };
@@ -31,6 +32,11 @@ export default function RecipeBtns({ recipe, isInProgress, setIsInProgress }) {
   };
 
   const finishRecipe = async () => {
+    const pointsM = 5;
+    const pointsD = 2;
+    const promisePoints = NAME_URL === 'meals' ? addPoints(pointsM)
+      : addPoints(pointsD);
+    await promisePoints;
     setIsInProgress(!isInProgress);
     handleRemoveInProgress(id, NAME_URL, true);
     await addInDoneRecipes(recipe, NAME_URL);
