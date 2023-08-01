@@ -24,6 +24,7 @@ const useComment = () => {
     setComments((prevComments) => [formatedComment, ...prevComments]);
     await fetchPostComment(formatedComment);
   };
+
   return { addComment };
 };
 
