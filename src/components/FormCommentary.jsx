@@ -7,6 +7,7 @@ import useComment from '../hooks/useComment';
 import Star from './Star';
 import './FormCommentary.css';
 import CountRatings from './CountRatings';
+import CommentBtn from './CommentBtn';
 
 const FIVE = 5;
 const FOUR = 4;
@@ -32,29 +33,32 @@ export default function FormCommentary() {
   const grades = [FIVE, FOUR, THREE, 2, 1];
 
   const handleSubmit = async () => {
-    setComment({ comment: '', rating: '0' });
+    setComment({ comment: '', rating: 0 });
     await addComment(assessment);
   };
 
   return (
     <div className="flex flex-col items-center mt-10 px-3 text-white">
       <h3 className="self-start text-white">Assessments: </h3>
-      <div className="w-full flex flex-wrap justify-around items-center gap-4">
+      <div className="w-full flex flex-wrap justify-around gap-4">
         <form
           onSubmit={ (event) => {
             event.preventDefault();
             handleSubmit();
           } }
         >
-          <div className="rating flex flex-row-reverse justify-end">
-            { grades.map((grade) => (
-              <Star
-                key={ grade }
-                grade={ grade }
-                setComment={ setComment }
-                assessment={ assessment }
-              />
-            )) }
+          <div className="flex justify-between px-2 items-center">
+            <h4 className="m-1">Evaluate:</h4>
+            <div className="rating flex flex-row-reverse justify-end">
+              { grades.map((grade) => (
+                <Star
+                  key={ grade }
+                  grade={ grade }
+                  setComment={ setComment }
+                  assessment={ assessment }
+                />
+              )) }
+            </div>
           </div>
           <div className="flex flex-col items-center gap-y-2">
             <textarea
@@ -72,13 +76,7 @@ export default function FormCommentary() {
               } }
               placeholder="Add a comment..."
             />
-            <button
-              id="button"
-              className="self-end"
-              disabled={ !(!!assessment.rating && !!assessment.comment.length) }
-            >
-              Comment
-            </button>
+            <CommentBtn assessment={ assessment } />
           </div>
         </form>
         <div>
