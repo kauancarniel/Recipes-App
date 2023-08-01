@@ -57,7 +57,7 @@ export const fetchNewUser = async (user) => {
       favorites: [],
       inProgress: {},
       my: [],
-      points: 0,
+      score: 0,
       createAt: new Date().toISOString(),
     }),
   });
@@ -70,6 +70,12 @@ export const fetchPatchUser = async (id, data) => {
     method: 'PATCH',
     body: JSON.stringify(data),
   });
+};
+
+export const fetchRanking = async () => {
+  const response = await fetch(`${URL_USERS}?_sort=score&_order=desc`);
+  const data = await response.json();
+  return data;
 };
 
 export const fetchComments = async (key, value) => {

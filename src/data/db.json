@@ -5,19 +5,7 @@
       "email": "guifjj92@gmail.com",
       "name": "Guilherme Fernandes",
       "password": "1234567",
-      "dones": [
-        {
-          "id": "17222",
-          "type": "drink",
-          "nationality": "",
-          "category": "Cocktail",
-          "alcoholicOrNot": "Alcoholic",
-          "name": "A1",
-          "image": "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
-          "tags": [],
-          "doneDate": "2023-07-31T19:32:45.726Z"
-        }
-      ],
+      "dones": [],
       "favorites": [],
       "inProgress": {},
       "my": [],
