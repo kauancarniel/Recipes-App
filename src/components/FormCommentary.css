@@ -68,11 +68,6 @@
   transform: scaleX(1);
 }
 
-
-#st {
-  color: #ffa723;
-}
-
 #button {
   background-color: var(--green);
   border: none;

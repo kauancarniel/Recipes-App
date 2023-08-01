@@ -58,7 +58,7 @@ export const fetchNewUser = async (user) => {
       inProgress: {},
       my: [],
       points: 0,
-      createAt: new Date(),
+      createAt: new Date().toISOString(),
     }),
   });
   return id;
@@ -72,28 +72,16 @@ export const fetchPatchUser = async (id, data) => {
   });
 };
 
-export const fetchComments = async (key, params) => {
-  const response = await fetch(`${URL_COMMENTS}?${key}=${params}`);
+export const fetchComments = async (key, value) => {
+  const response = await fetch(`${URL_COMMENTS}?${key}=${value}`);
   const data = await response.json();
   return data;
 };
 
-export const fetchAddComment = async (key, text, rat, name) => {
-  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/comments`);
-  const existingComments = await response.json();
-  await fetch(`${process.env.REACT_APP_BASE_URL}/comments`, {
+export const fetchPostComment = async (comment) => {
+  await fetch(URL_COMMENTS, {
     headers,
     method: 'POST',
-    body: JSON.stringify({
-      ...existingComments,
-      [key]: [
-        ...(existingComments[key] || []),
-        {
-          name,
-          text,
-          rat,
-        },
-      ],
-    }),
+    body: JSON.stringify(comment),
   });
 };
