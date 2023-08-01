@@ -62,11 +62,48 @@
       "email": "lucasdielo@hotmail.com",
       "name": "Lucas Dielo",
       "password": "1234567",
-      "dones": [],
+      "dones": [
+        {
+          "id": "53069",
+          "type": "meal",
+          "nationality": "Filipino",
+          "category": "Beef",
+          "alcoholicOrNot": "",
+          "name": "Bistek",
+          "image": "https://www.themealdb.com/images/media/meals/4pqimk1683207418.jpg",
+          "tags": [],
+          "doneDate": "2023-08-01T15:19:13.461Z"
+        },
+        {
+          "id": "17837",
+          "type": "drink",
+          "nationality": "",
+          "category": "Ordinary Drink",
+          "alcoholicOrNot": "Alcoholic",
+          "name": "Adam",
+          "image": "https://www.thecocktaildb.com/images/media/drink/v0at4i1582478473.jpg",
+          "tags": [
+            "Alcoholic",
+            "Holiday"
+          ],
+          "doneDate": "2023-08-01T15:18:48.140Z"
+        },
+        {
+          "id": "13332",
+          "type": "drink",
+          "nationality": "",
+          "category": "Shot",
+          "alcoholicOrNot": "Alcoholic",
+          "name": "B-53",
+          "image": "https://www.thecocktaildb.com/images/media/drink/rwqxrv1461866023.jpg",
+          "tags": [],
+          "doneDate": "2023-08-01T15:16:56.765Z"
+        }
+      ],
       "favorites": [],
       "inProgress": {},
       "my": [],
-      "points": 0,
+      "points": 11,
       "createAt": "2023-07-27T18:04:08.985Z"
     },
     {
@@ -129,6 +166,5 @@
     }
   ],
   "recipes": [],
-  "comments": {
-}
+  "comments": {}
 }

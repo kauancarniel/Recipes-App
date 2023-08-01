@@ -73,6 +73,12 @@ export const fetchPatchUser = async (id, key, data) => {
   });
 };
 
+export const fetchRanking = async () => {
+  const response = await fetch(`${URL_BASE}`);
+  const data = await response.json();
+  return data;
+};
+
 export const fetchAddComment = async (key, text, rat, name) => {
   const response = await fetch(`${process.env.REACT_APP_BASE_URL}/comments`);
   const existingComments = await response.json();

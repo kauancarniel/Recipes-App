@@ -1,12 +1,16 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
-import usersData from '../data/db.json';
 import RecipesContext from '../context/RecipesContext';
+import { fetchRanking } from '../services/fetchAPI';
 
 function Ranking() {
-  const { users } = usersData;
-  const { loading } = useContext(RecipesContext);
-
+  const { loading, ranking, setRanking } = useContext(RecipesContext);
+  useEffect(() => {
+    (async () => {
+      const dataUsers = await fetchRanking();
+      setRanking(dataUsers);
+    })();
+  }, []);
   return (
     <>
       <Header title="Ranking" />
@@ -18,7 +22,7 @@ function Ranking() {
         )}
         <section className="flex flex-col p-[28px] ">
           <h1 className="mb-9 text-center text-[var(--orange)]">Colocações</h1>
-          {users
+          {ranking
             .sort((a, b) => b.points - a.points)
             .map((user, index) => {
               const { name, points } = user;
@@ -37,7 +41,7 @@ function Ranking() {
                 >
                   {medalIcon && <p className="mr-2">{medalIcon}</p>}
                   <p
-                    className={ ` mr-2 ${index > 2 ? 'ml-7' : 'ml-0'} 
+                    className={ ` mr-2 ${index > 2 ? 'ml-7' : 'ml-0'}
                     text-[var(--gray)] font-bold` }
                   >
                     {name}
