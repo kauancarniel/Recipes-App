@@ -1,4 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { TbStarsFilled } from 'react-icons/tb';
+import { PiStarFill } from 'react-icons/pi';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import { fetchRanking } from '../services/fetchAPI';
@@ -8,48 +10,62 @@ function Ranking() {
   const { loading } = useContext(RecipesContext);
   const [ranking, setRanking] = useState([]);
   const { validateCookie } = useUser();
+
   useEffect(() => {
-    (async () => {
+    const fetchData = async () => {
       const isLogged = await validateCookie();
       if (!isLogged) return;
       const dataUsers = await fetchRanking();
       setRanking(dataUsers);
-    })();
+    };
+    fetchData();
   }, []);
 
   const MAXRANKING = 10;
   const TOP10 = ranking.slice(0, MAXRANKING);
 
+  const medalIcons = {
+    0: <TbStarsFilled size={ 30 } />,
+    1: (
+      <>
+        <PiStarFill />
+        <PiStarFill />
+      </>
+    ),
+    2: <PiStarFill />,
+  };
+
   return (
     <>
       <Header title="Ranking" />
       <main className="min-h-screen recipe-box bg-form glass p-0 mb-16 rounded-b-lg">
-        { loading && (
+        {loading && (
           <div className="w-full h-[80vh] flex-center">
             <h2 className="text-[var(--yellow)]">Loading...</h2>
           </div>
         )}
         <section className="flex flex-col p-[28px] ">
-          <h1 className="mb-9 text-center text-[var(--orange)]">Colocações</h1>
           {TOP10.map((user, index) => {
             const { name, score } = user;
-            let medalIcon = null;
-            if (index === 0) {
-              medalIcon = '🥇';
-            } else if (index === 1) {
-              medalIcon = '🥈';
-            } else if (index === 2) {
-              medalIcon = '🥉';
-            }
+            const medalIcon = index < 3 && medalIcons[index];
             return (
               <div
                 key={ user.id }
-                className="flex border-grey p-2 border-[0.1px] rounded-none"
+                className="flex border-grey
+               p-2 items-center border-[0.1px] rounded-none"
               >
-                {medalIcon && <p className="mr-2">{medalIcon}</p>}
+                {medalIcon && (
+                  <div className="flex justify-center items-center w-[15%]">
+                    <p
+                      className={ `mr-2 text-yellow-500 ${index === 0 && 'text-[30px]'}` }
+                    >
+                      {medalIcon}
+                    </p>
+                  </div>
+                )}
                 <p
-                  className={ ` mr-2 ${index > 2 ? 'ml-7' : 'ml-0'}
-                    text-[var(--gray)] font-bold` }
+                  className={ `mr-2 ${index > 2 ? 'ml-7' : 'ml-0'}
+                 text-[var(--gray)] font-bold` }
                 >
                   {name}
                 </p>
