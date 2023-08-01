@@ -111,10 +111,11 @@ const useUser = () => {
   };
 
   const addInDoneRecipes = async (recipe, NAME_URL) => {
-    const { dones } = userLogged || { dones: [] };
+    const { dones } = userLogged || { dones: [], score: 0 };
     const FIVE = 5;
     const TWO = 2;
     const points = NAME_URL === 'meals' ? FIVE : TWO;
+    const score = userLogged.score + points;
     const formatedRecipe = {
       ...setRecipeFormated(recipe, NAME_URL),
       doneDate: new Date().toISOString(),
@@ -126,9 +127,9 @@ const useUser = () => {
 
     await patchUser(userLogged.id, {
       dones: [formatedRecipe, ...filteredDones],
-      score: userLogged.score + points,
+      score,
     });
-    setUserLogged({ ...userLogged, dones: [formatedRecipe, ...filteredDones] });
+    setUserLogged({ ...userLogged, dones: [formatedRecipe, ...filteredDones], score });
   };
 
   return { validateCookie,
