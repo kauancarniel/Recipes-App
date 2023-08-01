@@ -57,7 +57,7 @@ export const fetchNewUser = async (user) => {
       favorites: [],
       inProgress: {},
       my: [],
-      points: 0,
+      score: 0,
       createAt: new Date().toISOString(),
     }),
   });
