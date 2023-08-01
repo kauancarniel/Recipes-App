@@ -1,21 +1,24 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import { fetchRanking } from '../services/fetchAPI';
+import useUser from '../hooks/useUser';
 
 function Ranking() {
-  const { loading, ranking, setRanking } = useContext(RecipesContext);
+  const { loading } = useContext(RecipesContext);
+  const [ranking, setRanking] = useState([]);
+  const { validateCookie } = useUser();
   useEffect(() => {
     (async () => {
+      const isLogged = await validateCookie();
+      if (!isLogged) return;
       const dataUsers = await fetchRanking();
       setRanking(dataUsers);
     })();
   }, []);
 
   const MAXRANKING = 10;
-  const TOP10 = ranking
-    .sort((a, b) => b.score - a.score)
-    .slice(0, MAXRANKING);
+  const TOP10 = ranking.slice(0, MAXRANKING);
 
   return (
     <>

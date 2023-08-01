@@ -73,7 +73,7 @@ export const fetchPatchUser = async (id, data) => {
 };
 
 export const fetchRanking = async () => {
-  const response = await fetch(`${URL_USERS}`);
+  const response = await fetch(`${URL_USERS}?_sort=score&_order=desc`);
   const data = await response.json();
   return data;
 };
