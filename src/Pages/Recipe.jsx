@@ -60,9 +60,8 @@ export default function Recipe() {
       <main className="min-h-screen recipe-box bg-form glass p-0 mb-16 rounded-b-lg">
         { }
         { error && <p>{ error }</p> }
-        { loading && commentSubmit ? (
+        { loading ? (
           <div className="w-full h-[80vh] flex-center">
-            {console.log(recipe)}
             <h2 className="text-[var(--yellow)]">Loading...</h2>
           </div>
         ) : (

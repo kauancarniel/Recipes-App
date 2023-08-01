@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Star({ grade, setRating, rating }) {
+function Star({ grade, setComment, assessment }) {
+  const { rating } = assessment;
   return (
     <>
       <input
@@ -11,7 +12,9 @@ function Star({ grade, setRating, rating }) {
         name="rating"
         value={ grade }
         checked={ Number(grade) <= Number(rating) }
-        onChange={ ({ target }) => setRating(target.value) }
+        onChange={ ({ target: { name, value } }) => {
+          setComment({ ...assessment, [name]: Number(value) });
+        } }
       />
       <label htmlFor={ `star${grade}` } title="text" />
     </>
@@ -20,8 +23,11 @@ function Star({ grade, setRating, rating }) {
 
 Star.propTypes = {
   grade: PropTypes.string.isRequired,
-  setRating: PropTypes.func.isRequired,
-  rating: PropTypes.string.isRequired,
+  setComment: PropTypes.func.isRequired,
+  assessment: PropTypes.shape({
+    rating: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Star;

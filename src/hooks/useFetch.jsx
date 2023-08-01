@@ -1,7 +1,6 @@
 import { useContext } from 'react';
-// import { useParams } from 'react-router-dom';
 
-import { fetchAPI, fetchNewUser, fetchPatchUser,
+import { fetchAPI, fetchComments, fetchNewUser, fetchPatchUser,
   fetchUserEmail, fetchUserId } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
@@ -9,7 +8,6 @@ import { Toast, setCookie } from '../utils/functions';
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
     setError, error } = useContext(RecipesContext);
-  // const { id: idUrl } = useParams();
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
 
@@ -98,7 +96,14 @@ const useFetch = () => {
     }
   };
 
-  // const fetchRecipeComments = async (keys) => {
+  const fetchRecipeComments = async (key, value) => {
+    try {
+      return await fetchComments(key, value);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    }
+  };
 
   return { fetchRecipes,
     initialFetch,
@@ -108,6 +113,7 @@ const useFetch = () => {
     loginUser,
     checkUserExist,
     patchUser,
+    fetchRecipeComments,
   };
 };
 
