@@ -38,17 +38,6 @@
     }
   ],
   "recipes": [],
-<<<<<<< HEAD
-  "comments": {
-    "/meals/52971": [
-      {
-        "name": "Lucas Dielo",
-        "text": "sdasd",
-        "rat": "4"
-      }
-    ]
-  }
-=======
   "comments": [
     {
       "id": "21316248-bf00-4a3b-a783-62eef68a78a6",
@@ -104,5 +93,4 @@
       "disliked": []
     }
   ]
->>>>>>> 2f16e17ae072f2de4f52fe896651b8cefedee762
 }
