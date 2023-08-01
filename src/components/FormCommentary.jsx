@@ -37,6 +37,13 @@ export default function FormCommentary() {
     await addComment(assessment);
   };
 
+  const setAverage = () => {
+    const sumRatings = comments.reduce((sum, { rating }) => rating + sum, 0);
+    console.log(sumRatings);
+    if (sumRatings) return sumRatings.toFixed(2);
+    return 'Not yet.';
+  };
+
   return (
     <div className="flex flex-col items-center mt-10 px-3 text-white">
       <h3 className="self-start text-white">Assessments: </h3>
@@ -101,9 +108,8 @@ export default function FormCommentary() {
           <p className="my-3 text-[20px]">
             Average rating:
             <span className="text-[#ffa723] font-bold">
-              { ` ${(comments
-                .reduce((sum, { rating }) => rating + sum, 0) / comments.length)
-                .toFixed(2)}` }
+              { ' ' }
+              { setAverage() }
             </span>
           </p>
         </div>
