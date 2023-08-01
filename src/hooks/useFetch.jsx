@@ -1,15 +1,13 @@
 import { useContext } from 'react';
-import usersData from '../data/db.json';
-import { fetchAPI,
-  fetchNewUser,
-  fetchPatchUser, fetchUserEmail, fetchUserId } from '../services/fetchAPI';
+
+import { fetchAPI, fetchComments, fetchNewUser, fetchPatchUser,
+  fetchUserEmail, fetchUserId } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
-    setError, error, userLogged } = useContext(RecipesContext);
-  const { users } = usersData;
+    setError, error } = useContext(RecipesContext);
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
 
@@ -74,20 +72,6 @@ const useFetch = () => {
     }
   };
 
-  const addPoints = async (points) => {
-    const identifyUser = users.find((userData) => userData.email === userLogged.email);
-    const sumPoints = identifyUser.points + points;
-    try {
-      setLoading(true);
-      await fetchPatchUser(userLogged.id, 'points', sumPoints);
-    } catch ({ message }) {
-      setError(message);
-      return [];
-    } finally {
-      setLoading(false);
-    }
-  };
-
   const checkUserExist = async (email) => {
     const userResponse = await fetchUserEmail(email);
     return !!userResponse.length;
@@ -103,9 +87,18 @@ const useFetch = () => {
     return false;
   };
 
-  const patchUser = async (id, key, data) => {
+  const patchUser = async (id, data) => {
     try {
-      await fetchPatchUser(id, key, data);
+      await fetchPatchUser(id, data);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    }
+  };
+
+  const fetchRecipeComments = async (key, value) => {
+    try {
+      return await fetchComments(key, value);
     } catch ({ message }) {
       setError(message);
       return [];
@@ -120,7 +113,7 @@ const useFetch = () => {
     loginUser,
     checkUserExist,
     patchUser,
-    addPoints,
+    fetchRecipeComments,
   };
 };
 

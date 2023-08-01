@@ -48,7 +48,7 @@ const useUser = () => {
       );
     }
     setUserLogged({ ...userLogged, favorites: newFavorites });
-    await patchUser(id, 'favorites', newFavorites);
+    await patchUser(id, { favorites: newFavorites });
   };
 
   const setRecipeFormated = (recipe, NAME_URL) => {
@@ -90,7 +90,7 @@ const useUser = () => {
 
   const saveProgress = async (key, NAME_URL, checkBoxes, recipe) => {
     const newProgressRecipes = setUserProgress(NAME_URL, key, checkBoxes, recipe);
-    await patchUser(userLogged.id, 'inProgress', newProgressRecipes);
+    await patchUser(userLogged.id, { inProgress: newProgressRecipes });
   };
 
   const handleRemoveInProgress = async (id, NAME_URL, force = false) => {
@@ -105,13 +105,16 @@ const useUser = () => {
       }
     }
     if (condition) {
-      await patchUser(userLogged.id, 'inProgress', inProgress);
+      await patchUser(userLogged.id, { inProgress });
     }
     setUserLogged({ ...userLogged, inProgress });
   };
 
   const addInDoneRecipes = async (recipe, NAME_URL) => {
     const { dones } = userLogged || { dones: [] };
+    const FIVE = 5;
+    const TWO = 2;
+    const points = NAME_URL === 'meals' ? FIVE : TWO;
     const formatedRecipe = {
       ...setRecipeFormated(recipe, NAME_URL),
       doneDate: new Date().toISOString(),
@@ -121,7 +124,10 @@ const useUser = () => {
         formatedRecipe.id === id && type === formatedRecipe.type
       ));
 
-    await patchUser(userLogged.id, 'dones', [formatedRecipe, ...filteredDones]);
+    await patchUser(userLogged.id, {
+      dones: [formatedRecipe, ...filteredDones],
+      score: userLogged.score + points,
+    });
     setUserLogged({ ...userLogged, dones: [formatedRecipe, ...filteredDones] });
   };
 

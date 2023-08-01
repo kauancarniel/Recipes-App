@@ -7,17 +7,6 @@
       "password": "1234567",
       "dones": [
         {
-          "id": "53065",
-          "type": "meal",
-          "nationality": "Japanese",
-          "category": "Seafood",
-          "alcoholicOrNot": "",
-          "name": "Sushi",
-          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg",
-          "tags": [],
-          "doneDate": "2023-07-31T17:32:56.656Z"
-        },
-        {
           "id": "17222",
           "type": "drink",
           "nationality": "",
@@ -26,36 +15,14 @@
           "name": "A1",
           "image": "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
           "tags": [],
-          "doneDate": "2023-07-31T17:22:33.088Z"
+          "doneDate": "2023-07-31T19:32:45.726Z"
         }
       ],
-      "favorites": [
-        {
-          "id": "53065",
-          "type": "meal",
-          "nationality": "Japanese",
-          "category": "Seafood",
-          "alcoholicOrNot": "",
-          "name": "Sushi",
-          "image": "https://www.themealdb.com/images/media/meals/g046bb1663960946.jpg"
-        }
-      ],
-      "inProgress": {},
-      "my": [],
-      "points": 0,
-      "createAt": "2023-07-25T19:12:48.082Z"
-    },
-    {
-      "id": "c743fdbb-69a6-4e5e-b75e-3b6033bba25c",
-      "email": "joaomarcelolimaoliveira7@gmail.com",
-      "name": "João Marcelo Titio",
-      "password": "1234567",
-      "dones": [],
       "favorites": [],
       "inProgress": {},
       "my": [],
-      "points": 0,
-      "createAt": "2023-07-25T19:18:30.355Z"
+      "score": 2,
+      "createAt": "2023-07-25T19:12:48.082Z"
     },
     {
       "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
@@ -66,7 +33,7 @@
       "favorites": [],
       "inProgress": {},
       "my": [],
-      "points": 0,
+      "score": 0,
       "createAt": "2023-07-27T18:04:08.985Z"
     },
     {
@@ -78,57 +45,12 @@
       "favorites": [],
       "inProgress": {},
       "my": [],
-      "points": 0,
+      "score": 0,
       "createAt": "2023-07-27T20:22:03.399Z"
-    },
-    {
-      "id": "3e3ace1c-b7a3-4430-b393-55a7fe98ab61",
-      "email": "",
-      "name": "",
-      "password": "",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
-      "my": [],
-      "points": 0,
-      "createAt": "2023-07-28T21:05:28.202Z"
-    },
-    {
-      "id": "55611a5f-63bc-424d-ae66-2871df894494",
-      "email": "teste@teste.com",
-      "name": "teste",
-      "password": "1234567",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
-      "my": [],
-      "points": 0,
-      "createAt": "2023-07-28T21:22:34.055Z"
-    },
-    {
-      "id": "d1b9f63c-0199-49ab-a30d-079fab186648",
-      "email": "plisciliane@gmail.com",
-      "name": "Plisciliane Leal",
-      "password": "456123789",
-      "dones": [],
-      "favorites": [
-        {
-          "id": "52844",
-          "type": "meal",
-          "nationality": "Italian",
-          "category": "Pasta",
-          "alcoholicOrNot": "",
-          "name": "Lasagne",
-          "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg"
-        }
-      ],
-      "inProgress": {},
-      "my": [],
-      "points": 0,
-      "createAt": "2023-07-29T20:17:13.555Z"
     }
   ],
   "recipes": [],
+<<<<<<< HEAD
   "comments": {
     "/meals/52971": [
       {
@@ -138,4 +60,61 @@
       }
     ]
   }
+=======
+  "comments": [
+    {
+      "id": "21316248-bf00-4a3b-a783-62eef68a78a6",
+      "recipeId": "53065",
+      "userId": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "userName": "Guilherme Fernandes",
+      "comment": "Sushi é top!",
+      "rating": 4,
+      "createAt": "2023-07-31T23:12:33.136Z"
+    },
+    {
+      "id": "791b9a26-d91b-4d98-ab5e-33a59f0c5780",
+      "recipeId": "53026",
+      "userId": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "userName": "Guilherme Fernandes",
+      "comment": "Sou vegano.",
+      "rating": 2,
+      "createAt": "2023-07-31T23:29:23.884Z",
+      "liked": [],
+      "disliked": []
+    },
+    {
+      "id": "86763bae-4ca7-462a-a439-c217f85fca1d",
+      "recipeId": "53065",
+      "userId": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "userName": "Guilherme Fernandes",
+      "comment": "Salmão é vida!",
+      "rating": 5,
+      "createAt": "2023-07-31T23:29:41.547Z",
+      "liked": [],
+      "disliked": []
+    },
+    {
+      "id": "dd92598b-a0cc-42c0-8b96-9e9fbf0de356",
+      "recipeId": "53065",
+      "userId": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "userName": "Guilherme Fernandes",
+      "comment": "Mais ou menos",
+      "rating": 2,
+      "createAt": "2023-08-01T00:10:23.462Z",
+      "liked": [],
+      "disliked": []
+    },
+    {
+      "id": "d23fce4c-d952-4a9a-9095-f809fed9e10a",
+      "recipeId": "53065",
+      "userId": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "userName": "Guilherme Fernandes",
+      "comment": "Maravilhos",
+      "rating": 5,
+      "createAt": "2023-08-01T00:37:51.359Z",
+      "liked": [],
+      "disliked": []
+    }
+  ]
+>>>>>>> 2f16e17ae072f2de4f52fe896651b8cefedee762
 }
