@@ -14,7 +14,8 @@ const headers = {
   'Content-Type': 'application/json',
 };
 
-const URL_BASE = `${process.env.REACT_APP_BASE_URL}/users`;
+const URL_USERS = `${process.env.REACT_APP_BASE_URL}/users`;
+const URL_COMMENTS = `${process.env.REACT_APP_BASE_URL}/comments`;
 
 export const fetchAPI = async (pathname, optSearch, textSearch) => {
   const BASE_URL = pathname === '/meals'
@@ -30,23 +31,23 @@ export const fetchAPI = async (pathname, optSearch, textSearch) => {
 export const fetchUserEmail = async (email, password) => {
   let response;
   if (!password) {
-    response = await fetch(`${URL_BASE}?email=${email}`);
+    response = await fetch(`${URL_USERS}?email=${email}`);
   } else {
-    response = await fetch(`${URL_BASE}?email=${email}&password=${password}`);
+    response = await fetch(`${URL_USERS}?email=${email}&password=${password}`);
   }
   const data = await response.json();
   return data;
 };
 
 export const fetchUserId = async (id) => {
-  const response = await fetch(`${URL_BASE}/${id}`);
+  const response = await fetch(`${URL_USERS}/${id}`);
   const data = await response.json();
   return data;
 };
 
 export const fetchNewUser = async (user) => {
   const id = uuidv4();
-  await fetch(URL_BASE, {
+  await fetch(URL_USERS, {
     headers,
     method: 'POST',
     body: JSON.stringify({
@@ -57,44 +58,36 @@ export const fetchNewUser = async (user) => {
       inProgress: {},
       my: [],
       points: 0,
-      createAt: new Date(),
+      createAt: new Date().toISOString(),
     }),
   });
   return id;
 };
 
-export const fetchPatchUser = async (id, key, data) => {
-  await fetch(`${URL_BASE}/${id}`, {
+export const fetchPatchUser = async (id, data) => {
+  await fetch(`${URL_USERS}/${id}`, {
     headers,
     method: 'PATCH',
-    body: JSON.stringify({
-      [key]: data,
-    }),
+    body: JSON.stringify(data),
   });
 };
 
 export const fetchRanking = async () => {
-  const response = await fetch(`${URL_BASE}`);
+  const response = await fetch(`${URL_USERS}`);
   const data = await response.json();
   return data;
 };
 
-export const fetchAddComment = async (key, text, rat, name) => {
-  const response = await fetch(`${process.env.REACT_APP_BASE_URL}/comments`);
-  const existingComments = await response.json();
-  await fetch(`${process.env.REACT_APP_BASE_URL}/comments`, {
+export const fetchComments = async (key, value) => {
+  const response = await fetch(`${URL_COMMENTS}?${key}=${value}`);
+  const data = await response.json();
+  return data;
+};
+
+export const fetchPostComment = async (comment) => {
+  await fetch(URL_COMMENTS, {
     headers,
     method: 'POST',
-    body: JSON.stringify({
-      ...existingComments,
-      [key]: [
-        ...(existingComments[key] || []),
-        {
-          name,
-          text,
-          rat,
-        },
-      ],
-    }),
+    body: JSON.stringify(comment),
   });
 };

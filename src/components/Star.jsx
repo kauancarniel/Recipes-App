@@ -1,25 +1,33 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Star({ nota, setRating }) {
+function Star({ grade, setComment, assessment }) {
+  const { rating } = assessment;
   return (
     <>
       <input
-        type="radio"
-        id={ `star${nota}` }
-        key={ `star${nota}` }
+        type="checkbox"
+        id={ `star${grade}` }
+        key={ `star${grade}` }
         name="rating"
-        value={ nota }
-        onChange={ ({ target }) => setRating(target.value) }
+        value={ grade }
+        checked={ Number(grade) <= Number(rating) }
+        onChange={ ({ target: { name, value } }) => {
+          setComment({ ...assessment, [name]: Number(value) });
+        } }
       />
-      <label htmlFor={ `star${nota}` } title="text" />
+      <label htmlFor={ `star${grade}` } title="text" />
     </>
   );
 }
 
 Star.propTypes = {
-  nota: PropTypes.string.isRequired,
-  setRating: PropTypes.func.isRequired,
+  grade: PropTypes.string.isRequired,
+  setComment: PropTypes.func.isRequired,
+  assessment: PropTypes.shape({
+    rating: PropTypes.string.isRequired,
+    comment: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default Star;

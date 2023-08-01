@@ -13,6 +13,7 @@ export default function RecipesProvider({ children }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [userLogged, setUserLogged] = useState(null);
   const [ranking, setRanking] = useState([]);
+  const [comments, setComments] = useState([]);
 
   const store = useMemo(() => ({
     recipes,
@@ -31,9 +32,12 @@ export default function RecipesProvider({ children }) {
     setMenuOpen,
     userLogged,
     setUserLogged,
+    comments,
+    setComments,
     ranking,
     setRanking,
-  }), [recipes, categories, loading, error, linkCopy, filter, menuOpen, userLogged,
+  }), [recipes, categories, loading,
+    error, linkCopy, filter, menuOpen, userLogged, comments,
     ranking]);
 
   return (
