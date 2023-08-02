@@ -29,22 +29,22 @@
   }
 
   .ready-recipe {
-    @apply flex flex-wrap w-[100%] justify-center md:justify-center
+    @apply flex flex-wrap w-[100%] justify-center md:justify-center gap-3
   }
 
   .content-ready{
-    @apply p-6 flex flex-col w-[100%]
+    @apply p-3 flex flex-col w-[100%]
   }
 
   .container-ready {
-    @apply w-[350px] flex m-2 md:w-[350px] lg:w-[430px] 
+    @apply w-[350px] flex md:w-[350px] lg:w-[430px] 
   }
 
   .detail-img {
-    @apply rounded-md border-white w-[146px] h-[100%] lg:w-[178px]
+    @apply rounded-l-md max-w-[100px] sm:max-w-[150px] h-[100%] lg:w-[178px]
   }
 
   .title-done {
-    @apply text-[var(--orange)] text-lg mr-2 
+    @apply text-[var(--yellow)] text-2xl font-bold
   }
 }

@@ -39,7 +39,7 @@ function FavoriteRecipes() {
 
               { filteredFavorites.map((recipe, index) => (
                 <div
-                  className="border-grey  p-0 container-ready"
+                  className="border-grey p-0 container-ready"
                   key={ `${recipe.id}${recipe.type}` }
                 >
                   <Link

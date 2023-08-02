@@ -7,6 +7,20 @@
       "password": "1234567",
       "dones": [
         {
+          "id": "53060",
+          "type": "meal",
+          "nationality": "Croatian",
+          "category": "Side",
+          "alcoholicOrNot": "",
+          "name": "Burek",
+          "image": "https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg",
+          "tags": [
+            "Streetfood",
+            " Onthego"
+          ],
+          "doneDate": "2023-08-02T19:07:58.780Z"
+        },
+        {
           "id": "17222",
           "type": "drink",
           "nationality": "",
@@ -52,28 +66,6 @@
               "strIngredient8": "Salt",
               "strIngredient9": ""
             }
-          },
-          "53060": {
-            "id": "53060",
-            "type": "meal",
-            "nationality": "Croatian",
-            "category": "Side",
-            "alcoholicOrNot": "",
-            "name": "Burek",
-            "image": "https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg",
-            "tags": [
-              "Streetfood",
-              " Onthego"
-            ],
-            "startDate": "2023-08-02T18:02:13.372Z",
-            "usedIngredients": {
-              "strIngredient1": "",
-              "strIngredient2": "Minced Beef",
-              "strIngredient3": "Onion",
-              "strIngredient4": "",
-              "strIngredient5": "",
-              "strIngredient6": ""
-            }
           }
         },
         "drinks": {
@@ -96,7 +88,7 @@
         }
       },
       "my": [],
-      "score": 2,
+      "score": 7,
       "createAt": "2023-07-25T19:12:48.082Z"
     },
     {
