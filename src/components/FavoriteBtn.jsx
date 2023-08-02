@@ -31,10 +31,9 @@ export default function FavoriteBtn({ recipe }) {
     };
 
   useEffect(() => {
-    if (!userLogged) return;
-    const { favorites } = userLogged;
+    const { favorites } = userLogged || { favorites: [] };
     setIsFavorite(favorites.some(({ id, type }) => id === formatRecipe.id && type === formatRecipe.type));
-  }, []);
+  }, [userLogged]);
 
   const handleClick = async () => {
     await changeFavorite(formatRecipe, formatRecipe.type, !isFavorite);

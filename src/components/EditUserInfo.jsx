@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext } from 'react';
 import validator from 'validator';
+
 import InitialLayout from './InitialLayout';
 import useFetch from '../hooks/useFetch';
 import RecipesContext from '../context/RecipesContext';

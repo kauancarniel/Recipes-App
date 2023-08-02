@@ -19,7 +19,7 @@ export default function Menu({ showClose = false }) {
   const { setMenuOpen, userLogged } = useContext(RecipesContext);
   const date = new Date();
   const greeting = ['Good Morning', 'Good Afternoon', 'Good Evening'];
-  const { name } = userLogged;
+  const { name } = userLogged || { name: '' };
 
   const getGreeting = () => {
     if (date.getHours() < MIDDAY) return greeting[0];

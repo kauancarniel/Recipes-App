@@ -26,12 +26,12 @@ function FavoriteRecipes() {
 
   return (
     <>
-      <Header title="Favorite Recipes" iconeProfile />
-      <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
+      <Header title="Favorite Recipes" />
+      <main className="recipe-box flex flex-col bg-form glass box-bottom">
         <Filter />
         {!favorites.length ? (
           <div className="no-search">
-            <h2 className="text-[var(--yellow)] text-2xl">Sem favoritos</h2>
+            <h2 className="text-[var(--yellow)] text-2xl">No favorites</h2>
           </div>
         )
           : (

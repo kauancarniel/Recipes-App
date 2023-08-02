@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import useUser from '../hooks/useUser';
 import Header from '../components/Header';
@@ -20,7 +20,6 @@ function DoneRecipes() {
   }, []);
 
   const { dones } = userLogged || { dones: [] };
-  const DATE = 10;
   const filteredRecipes = filter === 'all'
     ? dones
     : dones.filter(({ type }) => type === filter);
@@ -28,7 +27,7 @@ function DoneRecipes() {
   return (
     <>
       <Header title="Done Recipes" iconeProfile />
-      <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
+      <main className="recipe-box flex flex-col bg-form glass box-bottom">
         <Filter />
         {filteredRecipes.length === 0 ? (
           <div className="no-search">
@@ -42,7 +41,7 @@ function DoneRecipes() {
               id, type, image, name, nationality, category, doneDate, alcoholicOrNot,
               tags,
             }, index) => (
-              <div className="border-grey container-ready p-0" key={ index }>
+              <div className="border-grey container-ready p-0" key={ id }>
                 <Link
                   to={ `${type}s/${id}` }
                 >
@@ -99,7 +98,7 @@ function DoneRecipes() {
                         className="text-[var(--gray)] text-[9px] sm:text-[9.7px]"
                         data-testid={ `${index}-horizontal-done-date` }
                       >
-                        { doneDate.slice(0, DATE)}
+                        { new Date(doneDate).toLocaleDateString('en-US')}
                       </span>
                     </p>
                   </div>

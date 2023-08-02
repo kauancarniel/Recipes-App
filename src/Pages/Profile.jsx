@@ -4,7 +4,7 @@ import EditUserInfo from '../components/EditUserInfo';
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
 
-import InitialLayout from '../components/InitialLayout';
+import useUser from '../hooks/useUser';
 import EditUserPass from '../components/EditUserPass';
 import './Login.css';
 import './Profile.css';
@@ -22,6 +22,12 @@ function Profile() {
   }, []);
 
   const { name, email } = userLogged || { name: '', email: '' };
+
+  useEffect(() => {
+    (async () => {
+      await validateCookie();
+    })();
+  }, []);
 
   const infosUser = (
     <div>
@@ -65,14 +71,12 @@ function Profile() {
   return (
     <>
       <Header title="Profile" iconeProfile />
-      <InitialLayout>
-        <main
-          className="text-white min-h-screeflex flex-col self-center whitespace-nowrap"
-        >
-          { editInfos ? <EditUserInfo setEditUserInfo={ setEditUserInfo }/>
+      <main
+        className="text-white min-h-screeflex flex-col self-center whitespace-nowrap"
+      >
+        { editInfos ? <EditUserInfo setEditUserInfo={ setEditUserInfo } />
           : editPass ? <EditUserPass setEditUserPass={ setEditUserPass } /> : infosUser }
-        </main>
-      </InitialLayout>
+      </main>
     </>
   );
 }
