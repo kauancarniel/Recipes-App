@@ -184,6 +184,10 @@
   .tag {
     @apply py-1 px-3 rounded-[100px] bg-[var(--gray)] text-[var(--darkGray)] text-xs font-bold
   }
+
+  .name-top-ranking {
+    @apply text-white font-bold text-lg p-2 
+  }
 }
 
 * {
