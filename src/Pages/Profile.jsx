@@ -4,7 +4,6 @@ import EditUserInfo from '../components/EditUserInfo';
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
 
-import useUser from '../hooks/useUser';
 import EditUserPass from '../components/EditUserPass';
 import './Login.css';
 import './Profile.css';

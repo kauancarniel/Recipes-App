@@ -7,7 +7,6 @@ export default function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [categories, setCategories] = useState([]);
   const [filter, setFilter] = useState('all');
-  const [linkCopy, setLinkCopy] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -23,8 +22,6 @@ export default function RecipesProvider({ children }) {
     setLoading,
     error,
     setError,
-    linkCopy,
-    setLinkCopy,
     filter,
     setFilter,
     menuOpen,
@@ -34,7 +31,7 @@ export default function RecipesProvider({ children }) {
     comments,
     setComments,
   }), [recipes, categories, loading,
-    error, linkCopy, filter, menuOpen, userLogged, comments]);
+    error, filter, menuOpen, userLogged, comments]);
 
   return (
     <RecipesContext.Provider value={ store }>

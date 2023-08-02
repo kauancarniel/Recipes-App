@@ -10,7 +10,7 @@ import './DoneRecipes.css';
 const MAX_RECIPES = 10;
 
 function DoneRecipes() {
-  const { linkCopy, userLogged, filter } = useContext(RecipesContext);
+  const { userLogged, filter } = useContext(RecipesContext);
   const { validateCookie } = useUser();
 
   useEffect(() => {
