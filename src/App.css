@@ -7,6 +7,7 @@
   --yellow: #F9EFBB;
   --darkYellow: #E6C767;
   --red: #880627;
+  --darkGreen: #4a5200;
   --darkGray: #262321;
   --gray: #cccccc;
 }
@@ -155,6 +156,14 @@
   .del-in-progress-btn {
     @apply text-[var(--orange)]
   }
+
+  .comment-container {
+    @apply flex flex-col py-2 px-5 w-full max-w-lg border-solid border-x-0 border-b-0 border-[rgba(255,255,255,0.2)]
+  }
+
+  .like-btn {
+    @apply reset-btn flex gap-x-2 items-center disabled:cursor-auto
+  }
 }
 
 * {
@@ -183,5 +192,31 @@ html {
 };
 
 .transf {
+  transform: scale(1.1);
+}
+
+.swal-confirm {
+  color: white;
+  background-color: var(--orange);
+  padding: 10px 20px;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 5px;
+  margin-right: 20px;
+}
+
+.swal-cancel {
+  color: white;
+  background-color: var(--darkYellow);
+  padding: 7px 15px;
+  border: none;
+  font-weight: 700;
+  font-size: 18px;
+  border-radius: 5px;
+}
+
+.swal-confirm:hover, .swal-cancel:hover {
+  opacity: 0.8;
   transform: scale(1.1);
 }

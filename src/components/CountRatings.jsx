@@ -18,7 +18,7 @@ export default function CountRatings({ commentsLength }) {
 
   const progressBar = {
     height: '100%',
-    width: `${progress}%`,
+    width: `${comments.length === 0 ? 0 : progress}%`,
     backgroundColor: 'var(--darkYellow)',
     borderRadius: 40,
     textAlign: 'right',

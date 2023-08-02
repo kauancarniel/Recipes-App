@@ -140,7 +140,12 @@ export default function Recipe() {
                 <RecommendRecipes recommendRecipes={ recommendRecipes } />
               )}
               <div>
-                <FormCommentary />
+                <FormCommentary
+                  recipe={ {
+                    recipeName: recipe[`str${KEY_BASE}`],
+                    recipeType: KEY_BASE.toLowerCase(),
+                  } }
+                />
               </div>
             </section>
           </>
