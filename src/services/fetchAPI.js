@@ -85,3 +85,25 @@ export const fetchPostComment = async (comment) => {
     body: JSON.stringify(comment),
   });
 };
+
+export const fetchDeleteComment = async (id, data) => {
+  await fetch(`${URL_COMMENTS}/${id}`, {
+    headers,
+    method: 'DELETE',
+  });
+  data.forEach(async (comment) => {
+    await fetch(URL_COMMENTS, {
+      headers,
+      method: 'POST',
+      body: JSON.stringify(comment),
+    });
+  });
+};
+
+export const fetchPatchComment = async (id, data) => {
+  await fetch(`${URL_COMMENTS}/${id}`, {
+    headers,
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  });
+};

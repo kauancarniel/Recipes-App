@@ -4,6 +4,7 @@ import { MdOutlineDelete } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
+import useFetch from '../hooks/useFetch';
 import Header from '../components/Header';
 import ShareBtn from '../components/ShareBtn';
 
@@ -11,6 +12,7 @@ const typesBtn = ['Meals', 'Drinks'];
 
 export default function RecipesInProgress() {
   const { validateCookie, handleRemoveInProgress } = useUser();
+  const { sweetAlert } = useFetch();
   const { userLogged } = useContext(RecipesContext);
   const [typeFilter, setTypeFilter] = useState('Meals');
 
@@ -22,7 +24,6 @@ export default function RecipesInProgress() {
 
   const lowerType = typeFilter.toLowerCase();
   const { inProgress } = userLogged || { inProgress: {} };
-  console.log(Object.keys(inProgress).length, lowerType);
 
   return (
     <>
@@ -76,7 +77,12 @@ export default function RecipesInProgress() {
                         <button
                           type="button"
                           className="reset-btn del-in-progress-btn"
-                          onClick={ () => handleRemoveInProgress(id, lowerType, recipe) }
+                          onClick={ () => sweetAlert(
+                            handleRemoveInProgress,
+                            id,
+                            lowerType,
+                            recipe,
+                          ) }
                         >
                           <MdOutlineDelete size="40px" />
                         </button>
