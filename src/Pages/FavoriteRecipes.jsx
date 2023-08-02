@@ -31,7 +31,7 @@ function FavoriteRecipes() {
         <Filter />
         {!favorites.length ? (
           <div className="no-search">
-            <h2 className="text-[var(--yellow)]">Sem favoritos</h2>
+            <h2 className="text-[var(--yellow)] text-2xl">Sem favoritos</h2>
           </div>
         )
           : (

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TbStarsFilled } from 'react-icons/tb';
 import { PiStarFill } from 'react-icons/pi';
+import { IoPerson } from 'react-icons/io5';
 import Header from '../components/Header';
 import RecipesContext from '../context/RecipesContext';
 import { fetchRanking } from '../services/fetchAPI';
@@ -22,9 +23,9 @@ function Ranking() {
   }, []);
 
   const MAXRANKING = 10;
-  const TOP10 = ranking.slice(0, MAXRANKING);
+  const rankingUsers = ranking.slice(0, MAXRANKING);
 
-  const medalIcons = {
+  const iconsRanked = {
     0: <TbStarsFilled size={ 30 } />,
     1: (
       <>
@@ -33,47 +34,44 @@ function Ranking() {
       </>
     ),
     2: <PiStarFill />,
+    3: <IoPerson color="var(--gray)" size={ 20 } />,
   };
 
   return (
     <>
       <Header title="Ranking" />
-      <main className="min-h-screen recipe-box bg-form glass p-0 mb-16 rounded-b-lg">
+      <main className="min-h-screen recipe-box bg-form glass p-10 mb-16 rounded-b-lg">
         {loading && (
           <div className="w-full h-[80vh] flex-center">
             <h2 className="text-[var(--yellow)]">Loading...</h2>
           </div>
         )}
-        <section className="flex flex-col p-[28px] ">
-          {TOP10.map((user, index) => {
-            const { name, score } = user;
-            const medalIcon = index < 3 && medalIcons[index];
-            return (
-              <div
-                key={ user.id }
-                className="flex border-grey
-               p-2 items-center border-[0.1px] rounded-none"
-              >
-                {medalIcon && (
-                  <div className="flex justify-center items-center w-[15%]">
-                    <p
-                      className={ `mr-2 text-yellow-500 ${index === 0 && 'text-[30px]'}` }
-                    >
-                      {medalIcon}
-                    </p>
-                  </div>
-                )}
-                <p
-                  className={ `mr-2 ${index > 2 ? 'ml-7' : 'ml-0'}
-                 text-[var(--gray)] font-bold` }
-                >
-                  {name}
-                </p>
-                <p className="text-[var(--darkYellow)] font-bold">{score}</p>
-              </div>
-            );
-          })}
-        </section>
+        <table className="table-auto w-[100%]">
+          <tbody>
+            {rankingUsers.map((user, index) => {
+              const { name, score } = user;
+              const medalIcon = index <= 2 ? iconsRanked[index] : iconsRanked[3];
+              return (
+                <tr key={ user.id } className="border-grey p-2 items-center border-[0.1px] rounded-none m-1">
+                  <td className="text-center w-[15%] border-r-[1px] border-white p-2">
+                    {medalIcon && (
+                      <p
+                        className={ `text-yellow-500 ${index === 0 ? 'text-[30px]' : ''}
+                         text-center m-0` }
+                      >
+                        {medalIcon}
+                      </p>
+                    )}
+                  </td>
+                  <td className="text-[var(--gray)] font-bold text-lg pl-2 p-2">
+                    {name}
+                  </td>
+                  <td className="text-[var(--darkYellow)] border-l-[1px] border-white font-bold text-2xl text-center w-10">{score}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
       </main>
     </>
   );
