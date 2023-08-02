@@ -46,7 +46,7 @@ function FavoriteRecipes() {
                     to={ `/${recipe.type}s/${recipe.id}` }
                   >
                     <img
-                      className="detail-img border-div border-[0.1px]"
+                      className="detail-img"
                       src={ recipe.image }
                       alt={ `foto ${recipe.name}` }
                       data-testid={ `${index}-horizontal-image` }
@@ -55,14 +55,14 @@ function FavoriteRecipes() {
                   <div className="content-ready">
                     <Link className="none" to={ `/${recipe.type}s/${recipe.id}` }>
                       <h4
-                        className="text-[var(--orange)] shadow-name"
+                        className="text-[var(--yellow)]"
                         data-testid={ `${index}-horizontal-name` }
                       >
                         {recipe.name}
                       </h4>
                     </Link>
                     <p
-                      className="text-[var(--gray)] text-sm"
+                      className="text-[var(--gray)] text-sm mb-1"
                       data-testid={ `${index}-horizontal-top-text` }
                     >
                       { recipe.type === 'meal'
