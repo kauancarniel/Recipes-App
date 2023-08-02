@@ -57,8 +57,8 @@ function Profile() {
           <span className="lable">Edit Password</span>
         </button>
       </div>
-      <h1>{name}</h1>
-      <h1>{email}</h1>
+      <h4>{name}</h4>
+      <h4>{email}</h4>
     </div>
   );
 
