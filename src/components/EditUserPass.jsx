@@ -1,45 +1,60 @@
-import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import React, { useState, useContext } from 'react';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-
+import RecipesContext from '../context/RecipesContext';
 import InitialLayout from './InitialLayout';
+import useFetch from '../hooks/useFetch';
 
 export default function EditUserPass({ setEditUserPass }) {
+  const { patchUser, fetchUser, fireToast } = useFetch();
+  const { userLogged } = useContext(RecipesContext);
   const [user, setUser] = useState({
     email: '',
     name: '',
     password: '',
+    lastPassword: '',
+    userEmail: userLogged.email,
+    confirmPass: '',
   });
-  const [confirmPass, setConfirmPass] = useState('');
-  const [lastPassword, setLastPass] = useState('');
+
+  const [errorLastPass, setErroLastPass] = useState(false);
   const [viewLastPassword, setViewLastPassword] = useState(false);
   const [viewPassword, setViewPassword] = useState(false);
   const [viewConfirmPass, setViewConfirmPass] = useState(false);
-  const history = useHistory();
 
   const PASSWORD_LENGTH = 7;
+  const focus = 'peer-focus:-top-5 peer-focus:text-xs';
+  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
+  const classLabel = `label ${focus} ${valid}`;
 
   const handleChange = ({ name, value }) => {
     setUser({ ...user, [name]: value });
   };
 
   const handleSubmit = async () => {
-    await postNewUser(user);
-    history.push('/meals');
+    const checkPass = await fetchUser(
+      { email: user.userEmail, password: user.lastPassword },
+    );
+    setErroLastPass(!checkPass.length);
+    if (!checkPass.length === false) {
+      patchUser(userLogged.id, { password: user.password });
+      fireToast('Saved Changes!', 'success');
+      setEditUserPass(false);
+    }
   };
 
-  const focus = 'peer-focus:-top-5 peer-focus:text-xs';
-  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
-  const classLabel = `label ${focus} ${valid}`;
-  const classBtnMain = 'reset-input btn-login';
-  const classBtbHover = 'enabled:hover:text-[#F9EFBB] shadow-hover';
-  const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
-  const classBtn = `${classBtnMain} ${classBtbHover} ${classBtnDisabled}`;
+  const exit = () => {
+    setEditUserPass(false);
+  };
 
   return (
     <InitialLayout>
       <form
         className="flex-center flex-col gap-7 w-full max-w-sm"
+        onSubmit={ (event) => {
+          event.preventDefault();
+          handleSubmit();
+        } }
       >
         <div className="flex-center relative w-full">
           <div className="user-box">
@@ -49,8 +64,7 @@ export default function EditUserPass({ setEditUserPass }) {
               name="lastPassword"
               value={ user.viewLastPassword }
               type={ viewLastPassword ? 'text' : 'password' }
-              onChange={ ({ target }) => setLastPass(target.value) }
-              required
+              onChange={ ({ target }) => handleChange(target) }
             />
             <label
               className={ classLabel }
@@ -80,13 +94,12 @@ export default function EditUserPass({ setEditUserPass }) {
               value={ user.password }
               type={ viewPassword ? 'text' : 'password' }
               onChange={ ({ target }) => handleChange(target) }
-              required
             />
             <label
               className={ classLabel }
               htmlFor="password"
             >
-              NewPassword
+              New Password
             </label>
           </div>
           <button
@@ -107,11 +120,9 @@ export default function EditUserPass({ setEditUserPass }) {
               className="peer reset-input input"
               id="confirmPass"
               name="confirmPass"
-              value={ confirmPass }
+              value={ user.confirmPass }
               type={ viewConfirmPass ? 'text' : 'password' }
-              data-testid="confirmPass-input"
-              onChange={ ({ target }) => setConfirmPass(target.value) }
-              required
+              onChange={ ({ target }) => handleChange(target) }
             />
             <label
               className={ classLabel }
@@ -132,21 +143,33 @@ export default function EditUserPass({ setEditUserPass }) {
             )}
           </button>
         </div>
-        { user.password !== confirmPass && (
+        { user.password !== user.confirmPass && (
           <p className="error-register">
-            Different passwords!
+            New password and confirmation password do not match.
+          </p>
+        )}
+        { user.password.length > 0 && user.password.length < PASSWORD_LENGTH && (
+          <p className="error-register">
+            New password must be at least 7 characters long.
+          </p>
+        )}
+        { errorLastPass && (
+          <p className="error-register">
+            Invalid current password.
           </p>
         )}
         <div className="space-x-5">
-          {/* <button
-            id="button"
-            disabled={ user.password !== confirmPass || user.password.length === 0 }
-            onClick={ handleSubmit() }
-          >
-            Sanve Changes
-          </button> */}
           <button
-            onClick={ setEditUserPass(false) }
+            type="submit"
+            id="button"
+            disabled={ user.password !== user.confirmPass
+              || user.password.length < PASSWORD_LENGTH
+              || user.lastPassword.length < PASSWORD_LENGTH }
+          >
+            Changes saved!
+          </button>
+          <button
+            onClick={ exit }
             id="button"
           >
             Cancel
@@ -156,3 +179,7 @@ export default function EditUserPass({ setEditUserPass }) {
     </InitialLayout>
   );
 }
+
+EditUserPass.propTypes = {
+  setEditUserPass: PropTypes.func.isRequired,
+};
