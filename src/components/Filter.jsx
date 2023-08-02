@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import RecipesContext from '../context/RecipesContext';
 import IconFood from '../images/IconFood';
@@ -8,6 +8,10 @@ import IconBeef from '../images/IconBeef';
 export default function Filter() {
   const { filter, setFilter } = useContext(RecipesContext);
   const buttonFilter = ['All', 'Meal', 'Drink'];
+
+  useEffect(() => {
+    setFilter('all');
+  }, []);
 
   return (
     <nav className="flex justify-around pb-9">

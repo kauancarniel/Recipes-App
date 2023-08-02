@@ -3,12 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import validator from 'validator';
 
-import InitialLayout from './InitialLayout';
 import './FormCommentary.css';
 import '../Pages/Login.css';
 import useFetch from '../hooks/useFetch';
 
-export default function EditUserInfo({  }) {
+export default function EditUserInfo({ }) {
   const [user, setUser] = useState({
     email: '',
     name: '',
@@ -42,68 +41,66 @@ export default function EditUserInfo({  }) {
   };
 
   return (
-    <InitialLayout>
-      <form
-        className="flex-center flex-col gap-7 w-full max-w-sm"
-        onSubmit={ (event) => {
-          event.preventDefault();
-          handleSubmit();
-        } }
-      >
-        <div className="user-box">
-          <input
-            className="peer reset-input input"
-            id="email"
-            type="email"
-            name="email"
-            value={ user.email }
-            data-testid="email-input"
-            onChange={ ({ target }) => handleChange(target) }
-            onBlur={ ({ target }) => checkEmail(target.value) }
-            required
-          />
-          <label
-            className={ classLabel }
-            htmlFor="email"
-          >
-            Email
-          </label>
-        </div>
-        <div className="user-box">
-          <input
-            className="peer reset-input input"
-            id="name"
-            type="text"
-            name="name"
-            value={ user.name }
-            data-testid="name-input"
-            onChange={ ({ target }) => handleChange(target) }
-            required
-          />
-          <label
-            className={ classLabel }
-            htmlFor="name"
-          >
-            Name
-          </label>
-        </div>
-        <div className="space-x-5">
-          <button
-            id="button"
-            type="submit"
-            disabled={ !(
-              validator.isEmail(user.email)
-            ) }
-          >
-            Save Changes
-          </button>
-          <button
-            id="button"
-          >
-            Cancel
-          </button>
-        </div>
-      </form>
-    </InitialLayout>
+    <form
+      className="flex-center flex-col gap-7 w-full max-w-sm"
+      onSubmit={ (event) => {
+        event.preventDefault();
+        handleSubmit();
+      } }
+    >
+      <div className="user-box">
+        <input
+          className="peer reset-input input"
+          id="email"
+          type="email"
+          name="email"
+          value={ user.email }
+          data-testid="email-input"
+          onChange={ ({ target }) => handleChange(target) }
+          onBlur={ ({ target }) => checkEmail(target.value) }
+          required
+        />
+        <label
+          className={ classLabel }
+          htmlFor="email"
+        >
+          Email
+        </label>
+      </div>
+      <div className="user-box">
+        <input
+          className="peer reset-input input"
+          id="name"
+          type="text"
+          name="name"
+          value={ user.name }
+          data-testid="name-input"
+          onChange={ ({ target }) => handleChange(target) }
+          required
+        />
+        <label
+          className={ classLabel }
+          htmlFor="name"
+        >
+          Name
+        </label>
+      </div>
+      <div className="space-x-5">
+        <button
+          id="button"
+          type="submit"
+          disabled={ !(
+            validator.isEmail(user.email)
+          ) }
+        >
+          Save Changes
+        </button>
+        <button
+          id="button"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
   );
 }

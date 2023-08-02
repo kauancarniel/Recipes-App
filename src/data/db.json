@@ -5,9 +5,96 @@
       "email": "guifjj92@gmail.com",
       "name": "Guilherme Fernandes",
       "password": "1234567",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
+      "dones": [
+        {
+          "id": "17222",
+          "type": "drink",
+          "nationality": "",
+          "category": "Cocktail",
+          "alcoholicOrNot": "Alcoholic",
+          "name": "A1",
+          "image": "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
+          "tags": [],
+          "doneDate": "2023-07-31T19:32:45.726Z"
+        }
+      ],
+      "favorites": [
+        {
+          "id": "52844",
+          "type": "meal",
+          "nationality": "Italian",
+          "category": "Pasta",
+          "alcoholicOrNot": "",
+          "name": "Lasagne",
+          "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg"
+        }
+      ],
+      "inProgress": {
+        "meals": {
+          "52971": {
+            "id": "52971",
+            "type": "meal",
+            "nationality": "Tunisian",
+            "category": "Vegetarian",
+            "alcoholicOrNot": "",
+            "name": "Kafteji",
+            "image": "https://www.themealdb.com/images/media/meals/1bsv1q1560459826.jpg",
+            "tags": [],
+            "startDate": "2023-08-02T18:34:03.200Z",
+            "usedIngredients": {
+              "strIngredient1": "Potatoes",
+              "strIngredient2": "",
+              "strIngredient3": "",
+              "strIngredient4": "",
+              "strIngredient5": "",
+              "strIngredient6": "Pumpkin",
+              "strIngredient7": "",
+              "strIngredient8": "Salt",
+              "strIngredient9": ""
+            }
+          },
+          "53060": {
+            "id": "53060",
+            "type": "meal",
+            "nationality": "Croatian",
+            "category": "Side",
+            "alcoholicOrNot": "",
+            "name": "Burek",
+            "image": "https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg",
+            "tags": [
+              "Streetfood",
+              " Onthego"
+            ],
+            "startDate": "2023-08-02T18:02:13.372Z",
+            "usedIngredients": {
+              "strIngredient1": "",
+              "strIngredient2": "Minced Beef",
+              "strIngredient3": "Onion",
+              "strIngredient4": "",
+              "strIngredient5": "",
+              "strIngredient6": ""
+            }
+          }
+        },
+        "drinks": {
+          "14229": {
+            "id": "14229",
+            "type": "drink",
+            "nationality": "",
+            "category": "Shot",
+            "alcoholicOrNot": "Alcoholic",
+            "name": "747",
+            "image": "https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg",
+            "tags": [],
+            "startDate": "2023-08-02T18:33:51.190Z",
+            "usedIngredients": {
+              "strIngredient1": "Kahlua",
+              "strIngredient2": "",
+              "strIngredient3": "Frangelico"
+            }
+          }
+        }
+      },
       "my": [],
       "score": 2,
       "createAt": "2023-07-25T19:12:48.082Z"

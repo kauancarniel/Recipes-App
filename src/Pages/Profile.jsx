@@ -1,15 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import EditUserInfo from '../components/EditUserInfo';
 
-import InitialLayout from '../components/InitialLayout';
+import useUser from '../hooks/useUser';
 import EditUserPass from '../components/EditUserPass';
 import './Login.css';
 import './Profile.css';
 
 function Profile() {
+  const { validateCookie } = useUser();
   const [editInfos, setEditUserInfo] = useState(false);
   const [editPass, setEditUserPass] = useState(false);
+
+  useEffect(() => {
+    (async () => {
+      await validateCookie();
+    })();
+  }, []);
 
   const infosUser = (
     <div>
@@ -53,14 +60,12 @@ function Profile() {
   return (
     <>
       <Header title="Profile" iconeProfile />
-      <InitialLayout>
-        <main
-          className="text-white min-h-screeflex flex-col self-center whitespace-nowrap"
-        >
-          { editInfos ? <EditUserInfo setEditUserInfo={ setEditUserInfo }/>
+      <main
+        className="text-white min-h-screeflex flex-col self-center whitespace-nowrap"
+      >
+        { editInfos ? <EditUserInfo setEditUserInfo={ setEditUserInfo } />
           : editPass ? <EditUserPass setEditUserPass={ setEditUserPass } /> : infosUser }
-        </main>
-      </InitialLayout>
+      </main>
     </>
   );
 }

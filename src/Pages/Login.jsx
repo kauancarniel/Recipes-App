@@ -50,9 +50,9 @@ function Login() {
           handleSubmit();
         } }
       >
-        <div className="user-box focus">
+        <div className="user-box">
           <input
-            className="reset-input input"
+            className="peer reset-input input"
             id="email"
             type="email"
             name="email"
