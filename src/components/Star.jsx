@@ -22,10 +22,10 @@ function Star({ grade, setComment, assessment }) {
 }
 
 Star.propTypes = {
-  grade: PropTypes.string.isRequired,
+  grade: PropTypes.number.isRequired,
   setComment: PropTypes.func.isRequired,
   assessment: PropTypes.shape({
-    rating: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
     comment: PropTypes.string.isRequired,
   }).isRequired,
 };

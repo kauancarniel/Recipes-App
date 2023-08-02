@@ -7,7 +7,7 @@
   /* float: right; */
   cursor: pointer;
   font-size: 30px;
-  color: #666;
+  color: var(--gray);
 }
 
 .rating:not(:checked) > label:before {
