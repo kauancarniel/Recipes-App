@@ -164,6 +164,18 @@
   .like-btn {
     @apply reset-btn flex gap-x-2 items-center disabled:cursor-auto
   }
+
+  .table-score {
+    @apply text-[var(--darkYellow)] border-l-[1px] font-bold text-2xl text-center w-10
+  }
+
+  .table-icon {
+    @apply p-2 items-center rounded-none m-1
+  }
+
+  .icon-design {
+    @apply text-yellow-500 text-center m-0
+  }
 }
 
 * {

@@ -24,7 +24,6 @@ function Ranking() {
 
   const MAXRANKING = 10;
   const rankingUsers = ranking.slice(0, MAXRANKING);
-
   const iconsRanked = {
     0: <TbStarsFilled size={ 30 } />,
     1: (
@@ -52,13 +51,10 @@ function Ranking() {
               const { name, score } = user;
               const medalIcon = index <= 2 ? iconsRanked[index] : iconsRanked[3];
               return (
-                <tr key={ user.id } className="border-grey p-2 items-center border-[0.1px] rounded-none m-1">
-                  <td className="text-center w-[15%] border-r-[1px] border-white p-2">
+                <tr key={ user.id } className="border-grey table-icon">
+                  <td className="text-center w-[15%] border-r-[1px]  p-2">
                     {medalIcon && (
-                      <p
-                        className={ `text-yellow-500 ${index === 0 ? 'text-[30px]' : ''}
-                         text-center m-0` }
-                      >
+                      <p className={ `${index === 0 ? 'text-[30px]' : ''} icon-design` }>
                         {medalIcon}
                       </p>
                     )}
@@ -66,7 +62,7 @@ function Ranking() {
                   <td className="text-[var(--gray)] font-bold text-lg pl-2 p-2">
                     {name}
                   </td>
-                  <td className="text-[var(--darkYellow)] border-l-[1px] border-white font-bold text-2xl text-center w-10">{score}</td>
+                  <td className="table-score">{score}</td>
                 </tr>
               );
             })}
