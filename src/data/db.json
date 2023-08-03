@@ -1,119 +1,17 @@
 {
   "users": [
     {
-      "id": "b45ef904-f184-4356-9444-84511bb6fe74",
+      "id": "db8cc820-8b48-485c-ad13-ac14b6849bdf",
       "email": "guifjj92@gmail.com",
       "name": "Guilherme Fernandes",
       "password": "1234567",
-      "dones": [
-        {
-          "id": "53060",
-          "type": "meal",
-          "nationality": "Croatian",
-          "category": "Side",
-          "alcoholicOrNot": "",
-          "name": "Burek",
-          "image": "https://www.themealdb.com/images/media/meals/tkxquw1628771028.jpg",
-          "tags": [
-            "Streetfood",
-            " Onthego"
-          ],
-          "doneDate": "2023-08-02T19:07:58.780Z"
-        },
-        {
-          "id": "17222",
-          "type": "drink",
-          "nationality": "",
-          "category": "Cocktail",
-          "alcoholicOrNot": "Alcoholic",
-          "name": "A1",
-          "image": "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg",
-          "tags": [],
-          "doneDate": "2023-07-31T19:32:45.726Z"
-        }
-      ],
-      "favorites": [
-        {
-          "id": "52844",
-          "type": "meal",
-          "nationality": "Italian",
-          "category": "Pasta",
-          "alcoholicOrNot": "",
-          "name": "Lasagne",
-          "image": "https://www.themealdb.com/images/media/meals/wtsvxx1511296896.jpg"
-        }
-      ],
-      "inProgress": {
-        "meals": {
-          "52971": {
-            "id": "52971",
-            "type": "meal",
-            "nationality": "Tunisian",
-            "category": "Vegetarian",
-            "alcoholicOrNot": "",
-            "name": "Kafteji",
-            "image": "https://www.themealdb.com/images/media/meals/1bsv1q1560459826.jpg",
-            "tags": [],
-            "startDate": "2023-08-02T18:34:03.200Z",
-            "usedIngredients": {
-              "strIngredient1": "Potatoes",
-              "strIngredient2": "",
-              "strIngredient3": "",
-              "strIngredient4": "",
-              "strIngredient5": "",
-              "strIngredient6": "Pumpkin",
-              "strIngredient7": "",
-              "strIngredient8": "Salt",
-              "strIngredient9": ""
-            }
-          }
-        },
-        "drinks": {
-          "14229": {
-            "id": "14229",
-            "type": "drink",
-            "nationality": "",
-            "category": "Shot",
-            "alcoholicOrNot": "Alcoholic",
-            "name": "747",
-            "image": "https://www.thecocktaildb.com/images/media/drink/xxsxqy1472668106.jpg",
-            "tags": [],
-            "startDate": "2023-08-02T18:33:51.190Z",
-            "usedIngredients": {
-              "strIngredient1": "Kahlua",
-              "strIngredient2": "",
-              "strIngredient3": "Frangelico"
-            }
-          }
-        }
-      },
+      "photo": "",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
       "my": [],
-      "score": 7,
-      "createAt": "2023-07-25T19:12:48.082Z"
-    },
-    {
-      "id": "c743fdbb-69a6-4e5e-b75e-3b6033bba25c",
-      "email": "joaomarcelolimaoliveira7@gmail.com",
-      "name": "João Marcelo Titio",
-      "password": "1234567",
-      "doneRecipes": [],
-      "favoriteRecipes": [],
-      "inProgressRecipes": {},
-      "myRecipes": [],
       "score": 0,
-      "createAt": "2023-07-25T19:18:30.355Z"
-    },
-    {
-      "id": "1d17d90a-d29f-4d4a-8adb-de6676a63052",
-      "email": "lucasdielo@hotmail.com",
-      "name": "Lucas Dielo",
-      "password": "1234567",
-      "doneRecipes": [],
-      "favoriteRecipes": [],
-      "inProgressRecipes": {},
-      "myRecipes": [],
-      "score": 0,
-      "createAt": "2023-07-27T18:04:08.985Z"
+      "createAt": "2023-08-03T01:39:40.940Z"
     }
   ],
   "recipes": [],
