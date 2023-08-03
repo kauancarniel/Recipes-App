@@ -2,16 +2,17 @@
     position: relative;
     overflow: hidden;
   }
-
-
-.image-about {
+  
+  
+  
+  .image-about {
     position: relative;
     object-fit: cover;
     opacity: 1;
     transition: opacity 0.2s 0.3s ease-in-out;
   }
   
-.text-about {
+  .text-about {
     position: absolute;
     bottom: -300px;
     left: 0;
@@ -24,14 +25,18 @@
     transition: bottom 1s ease-in-out, opacity 0.2s 0.3s ease-in-out;
   }
   
-.image-container:hover .image-about {
+  .image-container:hover .image-about {
     opacity: 0.5; 
-    transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out; 
     cursor: pointer;
   }
+  .image-container:hover {
+    box-shadow: 0 10px 30px 5px rgba(125, 123, 123, 0.2);
+    transition: box-shadow 1s ease-in-out;
+  }
   
-.image-container:hover .text-about {
+  .image-container:hover .text-about {
     bottom: 0;
-    opacity: 1; 
+    opacity: 1;
   }
     
