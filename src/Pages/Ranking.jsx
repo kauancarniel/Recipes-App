@@ -89,12 +89,12 @@ function Ranking() {
                     <tr key={ user.id } className="border-grey table-icon">
                       <td className="text-center w-[15%] border-r-[1px]  p-2">
                         {medalIcon && (
-                          <p
+                          <span
                             className={ `${index === 0
                               ? 'text-[30px]' : ''} icon-design` }
                           >
                             {medalIcon}
-                          </p>
+                          </span>
                         )}
                       </td>
                       <td

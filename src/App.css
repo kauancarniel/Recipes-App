@@ -98,7 +98,7 @@
   }
 
   .title {
-    @apply uppercase text-center font-[900] text-2xl text-[var(--orange)] tracking-[4px]
+    @apply uppercase text-center font-bold text-4xl text-[var(--orange)] tracking-[4px]
   }
 
   .header {
