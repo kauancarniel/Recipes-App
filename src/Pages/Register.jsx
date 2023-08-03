@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import validator from 'validator';
-import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
 
 import useFetch from '../hooks/useFetch';
 import useUser from '../hooks/useUser';
 import InitialLayout from '../components/InitialLayout';
 import './Login.css';
+import RegisterInputs from '../components/RegisterInputs';
 
 export default function Register() {
   const [user, setUser] = useState({
     email: '',
     name: '',
     password: '',
+    photo: '',
   });
   const [confirmPass, setConfirmPass] = useState('');
-  const [viewPassword, setViewPassword] = useState(false);
-  const [viewConfirmPass, setViewConfirmPass] = useState(false);
   const [emailRegister, setEmailRegister] = useState(false);
-  const { postNewUser, checkUserExist } = useFetch();
+  const { postNewUser } = useFetch();
   const { validateCookie } = useUser();
   const history = useHistory();
 
@@ -32,26 +31,15 @@ export default function Register() {
     })();
   }, []);
 
-  const handleChange = ({ name, value }) => {
-    setUser({ ...user, [name]: value });
-  };
-
   const handleSubmit = async () => {
     const success = await postNewUser(user);
     if (success) history.push('/meals');
   };
 
-  const focus = 'peer-focus:-top-5 peer-focus:text-xs';
-  const valid = '-top-5 text-xs';
   const classBtnMain = 'reset-input btn-login';
   const classBtbHover = 'enabled:hover:text-[#F9EFBB] shadow-hover';
   const classBtnDisabled = 'disabled:cursor-not-allowed disabled:text-[#CF5927]';
   const classBtn = `${classBtnMain} ${classBtbHover} ${classBtnDisabled}`;
-
-  const checkEmail = async (email) => {
-    const emailExist = await checkUserExist(email);
-    setEmailRegister(emailExist);
-  };
 
   return (
     <InitialLayout>
@@ -73,104 +61,14 @@ export default function Register() {
           handleSubmit();
         } }
       >
-        <div className="user-box">
-          <input
-            className="peer reset-input input"
-            id="email"
-            type="email"
-            name="email"
-            value={ user.email }
-            data-testid="email-input"
-            onChange={ ({ target }) => handleChange(target) }
-            onBlur={ ({ target }) => checkEmail(target.value) }
-            required
+        <div className="flex flex-row flex-wrap gap-4 justify-center">
+          <RegisterInputs
+            setConfirmPass={ setConfirmPass }
+            setEmailRegister={ setEmailRegister }
+            setUser={ setUser }
+            user={ user }
+            confirmPass={ confirmPass }
           />
-          <label
-            className={ `label ${focus} ${user.email.length ? valid : ''}` }
-            htmlFor="email"
-          >
-            Email
-          </label>
-        </div>
-        <div className="user-box">
-          <input
-            className="peer reset-input input"
-            id="name"
-            type="text"
-            name="name"
-            value={ user.name }
-            data-testid="name-input"
-            onChange={ ({ target }) => handleChange(target) }
-            required
-          />
-          <label
-            className={ `label ${focus} ${user.name.length ? valid : ''}` }
-            htmlFor="name"
-          >
-            Name
-          </label>
-        </div>
-        <div className="flex-center relative w-full">
-          <div className="user-box">
-            <input
-              className="peer reset-input input"
-              id="password"
-              name="password"
-              value={ user.password }
-              type={ viewPassword ? 'text' : 'password' }
-              data-testid="password-input"
-              onChange={ ({ target }) => handleChange(target) }
-              required
-            />
-            <label
-              className={ `label ${focus} ${user.password.length ? valid : ''}` }
-              htmlFor="password"
-            >
-              Password
-            </label>
-          </div>
-          <button
-            type="button"
-            className="flex-center viewpass-btn"
-            onClick={ () => setViewPassword(!viewPassword) }
-          >
-            { viewPassword ? (
-              <BsEyeSlash />
-            ) : (
-              <BsEye />
-            )}
-          </button>
-        </div>
-        <div className="flex-center relative w-full">
-          <div className="user-box">
-            <input
-              className="peer reset-input input"
-              id="confirmPass"
-              name="confirmPass"
-              value={ confirmPass }
-              type={ viewConfirmPass ? 'text' : 'password' }
-              data-testid="confirmPass-input"
-              onChange={ ({ target }) => setConfirmPass(target.value) }
-              required
-            />
-            <label
-              className={ `label ${focus} ${confirmPass.length ? valid : ''}` }
-              htmlFor="confirmPass"
-            >
-              Confirm Password
-            </label>
-          </div>
-          <button
-            type="button"
-            className="flex-center viewpass-btn"
-            onClick={ () => setViewConfirmPass(!viewConfirmPass) }
-          >
-            { viewConfirmPass ? (
-              <BsEyeSlash />
-            ) : (
-              <BsEye />
-            )}
-          </button>
         </div>
         { emailRegister && (
           <p className="error-register">

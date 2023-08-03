@@ -11,6 +11,11 @@
   cursor: pointer;
 }
 
+.svg-icon {
+  color: white;
+  font-size: 25px;
+}
+
 .lable {
   line-height: 22px;
   font-size: 19px;
