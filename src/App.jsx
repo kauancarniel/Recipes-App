@@ -14,6 +14,7 @@ import Ranking from './Pages/Ranking';
 import RecipesInProgress from './Pages/RecipesInProgress';
 import MyRecipes from './Pages/MyRecipes';
 import './App.css';
+import About from './Pages/About';
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
       <Route path="/my-recipes" component={ MyRecipes } />
       <Route path="/my-recipes/:id" component={ Recipe } />
       <Route path="/my-recupes/:id/in-progress" component={ Recipe } />
+      <Route path="/about" component={ About } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );
