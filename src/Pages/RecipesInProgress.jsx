@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MdOutlineDelete } from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
