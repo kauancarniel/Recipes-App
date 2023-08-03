@@ -5,11 +5,11 @@ import FormCreateRecipe from '../components/FormCreateRecipe';
 
 export default function MyRecipes() {
   const [newRecipe, setNewRecipe] = useState(false);
-
   const funcTest = () => {
     setNewRecipe(!newRecipe);
   };
-
+ 
+  const { filter } = useContext(RecipesContext);
   return (
     <>
       <Header title="My Recipes" />
