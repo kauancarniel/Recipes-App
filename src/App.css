@@ -188,6 +188,10 @@
   .name-top-ranking {
     @apply text-white font-bold text-lg p-2 
   }
+
+  .editUser-container {
+    @apply w-full flex flex-col-reverse xs:flex-row gap-4 justify-center items-center
+  }
 }
 
 * {
