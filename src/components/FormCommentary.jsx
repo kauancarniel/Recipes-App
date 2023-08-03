@@ -35,7 +35,7 @@ export default function FormCommentary({ recipe }) {
   const grades = [FIVE, FOUR, THREE, 2, 1];
 
   const handleSubmit = async () => {
-    setComment({ comment: '', rating: 0 });
+    setComment({ comment: '', rating: 0, photo: userLogged.photo });
     await addComment(assessment, recipe);
   };
 
