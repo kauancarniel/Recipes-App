@@ -24,22 +24,29 @@ function Comments({ inRecipe = false }) {
             className="comment-container"
           >
             <div className="flex justify-between">
-              <div>
-                { inRecipe ? (
-                  <p className="mb-0 text-white">{comment.userName}</p>
-                ) : (
-                  <Link
-                    to={ `/${comment.recipeType}s/${comment.recipeId}` }
-                    className="mb-0 text-white"
-                  >
-                    {comment.recipeName}
-                  </Link>
-                )}
-                <div className="flex items-center gap-x-2">
-                  <p className="mb-0 text-white">{`${comment.rating},0  `}</p>
-                  <p className="mb-0 text-[#ffa723] text-[20px]">
-                    {Array.from({ length: comment.rating }, () => star).join('')}
-                  </p>
+              <div className="flex gap-3">
+                <img
+                  src={ comment.userphoto }
+                  alt="foto"
+                  className="w-10 h-10 flex self-start rounded-full"
+                />
+                <div>
+                  { inRecipe ? (
+                    <p className="mb-0 text-white">{comment.userName}</p>
+                  ) : (
+                    <Link
+                      to={ `/${comment.recipeType}s/${comment.recipeId}` }
+                      className="mb-0 text-white"
+                    >
+                      {comment.recipeName}
+                    </Link>
+                  )}
+                  <div className="flex items-center gap-x-2 min-w-[120px]">
+                    <p className="mb-0 text-white">{`${comment.rating},0  `}</p>
+                    <p className="mb-0 text-[#ffa723] text-[20px]">
+                      {Array.from({ length: comment.rating }, () => star).join('')}
+                    </p>
+                  </div>
                 </div>
               </div>
               <CommentLikedBtn comment={ comment } inRecipe={ inRecipe } />
