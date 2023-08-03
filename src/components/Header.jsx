@@ -9,6 +9,8 @@ import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
 
 import { Link } from 'react-router-dom';
+
+import { AiOutlineTeam } from 'react-icons/ai';
 import RecipesContext from '../context/RecipesContext';
 import MenuHamburguer from './MenuHamburguer';
 import SearchBar from './SearchBar';
@@ -28,6 +30,7 @@ const iconsTitle = {
   'Done Recipes': <FiCheckCircle className="w-14 h-14 text-[var(--green)]" />,
   'Favorite Recipes': <HiHeart className="icon-title" />,
   Ranking: <FaRankingStar className="icon-title" />,
+  About: <AiOutlineTeam className="icon-title" />,
 };
 
 function Header({ title, iconeSearch = false }) {
