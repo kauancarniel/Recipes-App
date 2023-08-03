@@ -62,7 +62,7 @@ function FormCreateRecipe() {
             className={ classLabel }
             htmlFor="categoryRecipe"
           >
-            Categoria da Receita
+            Categoria da Receitaa
           </label>
         </div>
         { inputsIngredients.map((input, index) => (
