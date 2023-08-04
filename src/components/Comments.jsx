@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { CgProfile } from 'react-icons/cg';
 import RecipesContext from '../context/RecipesContext';
 import CommentLikedBtn from './CommentLikedBtn';
 
@@ -25,13 +26,15 @@ function Comments({ inRecipe = false }) {
           >
             <div className="flex justify-between">
               <div className="flex gap-3">
-                { inRecipe && (
+                { inRecipe && comment.userphoto ? (
                   <img
                     src={ comment.userphoto }
                     alt="foto"
                     className="w-10 h-10 flex self-start rounded-full"
                   />
-                )}
+                ) : <CgProfile
+                  className="rounded-full w-[45px] h-[45px] bg-[var(--yellow)]"
+                />}
                 <div>
                   { inRecipe ? (
                     <p className="mb-0 text-white">{comment.userName}</p>

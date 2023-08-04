@@ -106,7 +106,7 @@ function Profile() {
         />
         <div className="space-x-5">
           <button
-            id="button"
+            className="button"
             type="submit"
             disabled={ !(verifyDisabled()) }
             onClick={ handleSubmit }
