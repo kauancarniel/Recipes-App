@@ -92,6 +92,12 @@ export const fetchPostComment = async (comment) => {
   });
 };
 
+export const fetchMyRecipes = async () => {
+  const response = await fetch(URL_RECIPES);
+  const data = await response.json();
+  return data;
+};
+
 export const fetchDeleteComment = async (id, data) => {
   await fetch(`${URL_COMMENTS}/${id}`, {
     headers,

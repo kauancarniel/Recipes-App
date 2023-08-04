@@ -1,17 +1,33 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Header from '../components/Header';
 import Filter from '../components/Filter';
 import FormCreateRecipe from '../components/FormCreateRecipe';
+import RecipesContext from '../context/RecipesContext';
+import { fetchMyRecipes } from '../services/fetchAPI';
 
 export default function MyRecipes() {
+  const { filter } = useContext(RecipesContext);
   const [type, setType] = useState('Meal');
   const [newRecipe, setNewRecipe] = useState(false);
+  const [recipesMy, setRecipesMy] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const myRecipes = await fetchMyRecipes();
+      setRecipesMy(myRecipes);
+    })();
+  },[]);
+
   const createRecipe = () => {
     setNewRecipe(!newRecipe);
+
   };
 
   // const { filter } = useContext(RecipesContext);
+
+  console.log(recipesMy)
+
   return (
     <>
       <Header title="My Recipes" />
@@ -33,6 +49,9 @@ export default function MyRecipes() {
           </button>
         </div>
         <Filter />
+        <section>
+
+        </section>
       </main>
       { newRecipe && <FormCreateRecipe type={ type } setNewRecipe={ setNewRecipe } /> }
     </>

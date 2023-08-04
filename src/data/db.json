@@ -71,6 +71,22 @@
       "strIngredient2": "ovo",
       "strMeasure2": "2un",
       "id": 1
+    },
+    {
+      "idMeal": "4ce66480-46c3-4861-b62e-fac1b00baef8",
+      "strType": "meal",
+      "strMeal": "Galinhão de cria",
+      "strCategory": "Chicken",
+      "strArea": "Realengo",
+      "strInstructions": "dasdasda sda sd asd asd asdasda sdas dad sad asd asdads ",
+      "strMealThumb": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBUUFBgVFBUYGRgaGxsbGxsaGBsYHR0eGiAbGxogGxsbIC0kHB0pIBogJTcmKS4wNDQ0GyM5PzkyPi0yNDABCwsLEA8QHhISHjIrJCkyMjIyMjU1MjAyMjIyMjIyMjI0NTIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIARMAtwMBIgACEQEDEQH/xAAcAAACAwEBAQEAAAAAAAAAAAAEBQIDBgABBwj/xABFEAACAQIEAwUGAwYEBAUFAAABAhEAAwQSITEFQVEiYXGBkQYTMqGxwULR8BQjUmLh8RVygrIHM5LCJDRTotIWQ1Rjk//EABkBAAMBAQEAAAAAAAAAAAAAAAECAwAEBf/EAC4RAAICAQMCBAUEAwEAAAAAAAABAhEDEiExQVEEEyJhMnGBkbFCocHxFCNSFf/aAAwDAQACEQMRAD8A+rPUSak1eFK5S5ymvComut10a0DHlyoxVsVFqIbIE1JaiVqaJrQMeRQmOG1GhaqxibUWtjJ7gdkzUnWrLKVJlpOg/UEuW9KglrainTSq8tAJTcGtVtb1mr3XWvUSa3UPQHKyavRDzqW21SqE8z/T9xow7nRXVGa9VSdqhqcn3K0kezXZqKtYLrRaYZRyrph4acudiMs0V7isKTyrqbwK6rf4nuS/yPYoqQrqkoqgpCK5RXr7VJV0rUayAqL1ZFQNYx4RUlqBqSnSsYkgqNxZPlUrdeO0UUBlKpFeGrDVdK0MmQYVXlq0ivIpRihlq0pktluZqMSQOtGY6zNsjmNfSllFuMmuxlJJpPuJluRvR1mCO7lS7LNE4NGHetcXhslPS1sdmWKqy84YzpsaPtWwoqlbkb1al9eor0sOKEW2jhyym17F014TXteEjrXSc5GuqQrqxiBNR95Xk1zpXKXK7tzT0onlQdxNQO+izWRmeGoNVlVuQASTAG5puhjwCpINKwfH/",
+      "strTags": "galinha,ovo,galinha",
+      "strYoutube": "https://www.youtube.com/watch?v=44MLFATUjmE&ab_channel=RenatoCariani",
+      "strIngredient1": "Frango",
+      "strMeasure1": "200 gramas",
+      "strIngredient2": "tempero",
+      "strMeasure2": "2 colher",
+      "id": 2
     }
   ],
   "comments": [
