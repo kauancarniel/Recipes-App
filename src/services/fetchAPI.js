@@ -123,3 +123,11 @@ export const fetchUsersRecipes = async ({ id = null, key = null, value = null })
   const data = await response.json();
   return data;
 };
+
+export const fetchPostRecipe = async (recipe) => {
+  await fetch(URL_RECIPES, {
+    headers,
+    method: 'POST',
+    body: JSON.stringify(recipe),
+  });
+};
