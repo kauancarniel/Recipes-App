@@ -92,12 +92,6 @@ export const fetchPostComment = async (comment) => {
   });
 };
 
-export const fetchMyRecipes = async () => {
-  const response = await fetch(URL_RECIPES);
-  const data = await response.json();
-  return data;
-};
-
 export const fetchDeleteComment = async (id, data) => {
   await fetch(`${URL_COMMENTS}/${id}`, {
     headers,
@@ -134,6 +128,21 @@ export const fetchPostRecipe = async (recipe) => {
   await fetch(URL_RECIPES, {
     headers,
     method: 'POST',
-    body: JSON.stringify(recipe),
+    body: JSON.stringify({ ...recipe, strCreateAt: new Date().toISOString() }),
+  });
+};
+
+export const fetchDeleteRecipe = async (id) => {
+  await fetch(`${URL_RECIPES}/${id}`, {
+    headers,
+    method: 'DELETE',
+  });
+};
+
+export const fetchPatchRecipe = async (id, data) => {
+  await fetch(`${URL_RECIPES}/${id}`, {
+    headers,
+    method: 'PATCH',
+    body: JSON.stringify(data),
   });
 };
