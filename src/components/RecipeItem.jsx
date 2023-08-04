@@ -4,7 +4,7 @@ import ShareBtn from './ShareBtn';
 
 function RecipeItem({ recipe }) {
   const { strMealThumb,
-    strMeal, strDrink, strType, id, strArea, strCategory, Alcoholic, strTags } = recipe;
+    strMeal, strDrink, strType, id, strArea, strCategory, strAlcoholic, strTags } = recipe;
 
   return (
     <div className="border-grey container-ready p-0">
@@ -19,7 +19,7 @@ function RecipeItem({ recipe }) {
           </div>
         </div>
         <p className="text-[var(--gray)] text-sm mb-1">
-          {strType === 'meal' ? `${strArea} - ${strCategory}` : Alcoholic}
+          {strType === 'meal' ? `${strArea} - ${strCategory}` : strAlcoholic}
         </p>
         <div className="flex w-full gap-2 flex-wrap">
           <p className="tag mt-3">

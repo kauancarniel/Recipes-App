@@ -34,7 +34,7 @@ export default function Footer({ setCategorySelected = null }) {
         <button
           className="reset-btn"
           disabled={ pathname.includes('/meals') }
-          onClick={ () => handleClick('/meals') }
+          onClick={ () => handleClick(pathname.includes('users') ? '/meals/users' : 'meals') }
         >
           <IconFood />
         </button>
