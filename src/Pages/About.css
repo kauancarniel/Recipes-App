@@ -1,9 +1,7 @@
-.image-container {
+  .image-container {
     position: relative;
     overflow: hidden;
   }
-  
-  
   
   .image-about {
     position: relative;

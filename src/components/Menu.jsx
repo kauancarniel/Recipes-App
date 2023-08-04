@@ -7,6 +7,7 @@ import { FiCheckCircle } from 'react-icons/fi';
 import { MdOutlineEditNote } from 'react-icons/md';
 import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
+import { AiOutlineTeam } from 'react-icons/ai';
 
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
@@ -120,12 +121,23 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             onClick={ logout }
+            to="/about"
+          >
+            <AiOutlineTeam className="border-2 border-solid rounded-[100%]" />
+            About
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="option-menu"
+            onClick={ logout }
             to="/"
           >
             <HiLogout className="border-2 border-solid rounded-[100%]" />
             Logout
           </Link>
         </li>
+
       </ul>
     </nav>
   );
