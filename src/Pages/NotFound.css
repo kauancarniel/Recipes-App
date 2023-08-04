@@ -1,22 +1,22 @@
-button {
+#buttonNotFound {
   padding: 12.5px 30px;
   border: 0;
   border-radius: 100px;
-  background-color: #30383d;
+  background-color: #3c454b;
   color: #ffffff;
   font-weight: Bold;
   transition: all 0.5s;
   -webkit-transition: all 0.5s;
 }
 
-button:hover {
-  background-color: #30383d;
-  box-shadow: 0 0 20px #6fc5ff50;
+#buttonNotFound:hover {
+  background-color: #3c454b;
+  box-shadow: 0 0 20px #52697950;
   transform: scale(1.1);
 }
 
-button:active {
-  background-color: #30383d;
+#buttonNotFound:active {
+  background-color: #3c454b;
   transition: all 0.25s;
   -webkit-transition: all 0.25s;
   box-shadow: none;

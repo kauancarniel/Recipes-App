@@ -15,7 +15,7 @@ export default function NotFound() {
     >
       <img src={ img } alt="asd" className="mt-30" />
       <h1>Page Not Found</h1>
-      <button onClick={ exit }>Back to Home</button>
+      <button id="buttonNotFound" onClick={ exit }>Back To Home</button>
     </div>
   );
 }
