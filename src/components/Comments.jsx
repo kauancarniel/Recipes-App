@@ -25,11 +25,13 @@ function Comments({ inRecipe = false }) {
           >
             <div className="flex justify-between">
               <div className="flex gap-3">
-                <img
-                  src={ comment.userphoto }
-                  alt="foto"
-                  className="w-10 h-10 flex self-start rounded-full"
-                />
+                { inRecipe && (
+                  <img
+                    src={ comment.userphoto }
+                    alt="foto"
+                    className="w-10 h-10 flex self-start rounded-full"
+                  />
+                )}
                 <div>
                   { inRecipe ? (
                     <p className="mb-0 text-white">{comment.userName}</p>

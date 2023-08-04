@@ -19,8 +19,7 @@ const PASSWORD_LENGTH = 7;
 
 function Profile() {
   const { userLogged, setComments } = useContext(RecipesContext);
-  const { fetchRecipeComments, fetchUser } = useFetch();
-  const { patchUser } = useUser();
+  const { fetchRecipeComments, fetchUser, patchUser, fireToast } = useFetch();
   const { validateCookie } = useUser();
   const [passwords, setPasswords] = useState(
     { lastPass: '', newPass: '', confirmPass: '', validLastPass: true },
@@ -53,9 +52,9 @@ function Profile() {
     || { lastPass: '', newPass: '', confirmPass: '', validLastPass: true };
 
   const handleSubmit = async () => {
-    patchUser(userLogged.id, { email, name });
+    patchUser(userLogged.id, { email, name, photo });
+    console.log(photo);
     fireToast('Saved Changes!', 'success');
-    setEditInfos(false);
   };
 
   const verifyDisabled = () => {

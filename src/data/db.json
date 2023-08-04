@@ -9,6 +9,7 @@
       "dones": [],
       "favorites": [],
       "inProgress": {},
+      "my": [],
       "score": 0,
       "createAt": "2023-08-03T01:39:40.940Z"
     },
@@ -52,27 +53,46 @@
       "my": [],
       "score": 0,
       "createAt": "2023-08-03T19:14:52.275Z"
-    }
-  ],
-  "recipes": [
+    },
     {
-      "idMeal": "",
-      "strMeal": "RozCovo",
-      "strCategory": {
-        "strCategory": "Beef"
-      },
-      "strArea": "Lavras",
-      "strInstructions": "Esquenta o arroz no microondas, frita o ovo na frigideira. Põe sal.",
-      "strMealThumb": "https://1.bp.blogspot.com/-NcoQTV0cOQ4/YMEzYMGIXnI/AAAAAAAA70E/GrXXM_cuecAM8OUbC1p9D_yz34nUjmWGgCLcBGAsYHQ/s2048/Roscovo%2B%25282%2529.jpg",
-      "strTags": "arroz,ovo",
-      "strYoutube": "https://www.youtube.com/embed/rwu4998Ad5o",
-      "strIngredient1": "arroz",
-      "strMeasure1": "3colher",
-      "strIngredient2": "ovo",
-      "strMeasure2": "2un",
-      "id": 1
+      "id": "0a4e470f-ed6d-48d8-80b7-cd9c1d3ff9ad",
+      "email": "testandonovo@hotmail.com",
+      "name": "teste",
+      "password": "1234567",
+      "photo": "",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "my": [],
+      "score": 0,
+      "createAt": "2023-08-03T21:08:24.534Z"
+    },
+    {
+      "id": "5e37282a-7b02-435f-9495-3f14fb99225e",
+      "email": "teste@teste.com",
+      "name": "teste",
+      "password": "1234567",
+      "photo": "",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "score": 0,
+      "createAt": "2023-08-04T17:25:48.017Z"
+    },
+    {
+      "id": "3a7d4bed-326a-4d2a-8a4d-f0bed23725e7",
+      "email": "teste2@teste.com",
+      "name": "teste2",
+      "password": "1234567",
+      "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBqlhL9Da6iYvFzHvMnmWySsIH2CTOWZNZPg&usqp=CAU",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "score": 0,
+      "createAt": "2023-08-04T17:48:15.958Z"
     }
   ],
+  "recipes": [],
   "comments": [
     {
       "id": "f1933f94-2034-4b4b-ba61-004e7a2343de",
@@ -129,6 +149,34 @@
       "liked": [],
       "disliked": [],
       "createAt": "2023-08-03T20:57:37.037Z"
+    },
+    {
+      "id": "c3014ac5-c48e-44c5-8187-4c8cad9905e4",
+      "recipeId": "52844",
+      "recipeName": "Lasagne",
+      "recipeType": "meal",
+      "userId": "5e37282a-7b02-435f-9495-3f14fb99225e",
+      "userName": "teste",
+      "userPhoto": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSBqlhL9Da6iYvFzHvMnmWySsIH2CTOWZNZPg&usqp=CAU",
+      "comment": "wasdwasd",
+      "rating": 3,
+      "liked": [],
+      "disliked": [],
+      "createAt": "2023-08-04T17:31:05.848Z"
+    },
+    {
+      "id": "568d9454-db60-42e8-a397-2a4b043e24af",
+      "recipeId": "52844",
+      "recipeName": "Lasagne",
+      "recipeType": "meal",
+      "userId": "3a7d4bed-326a-4d2a-8a4d-f0bed23725e7",
+      "userName": "teste2",
+      "userphoto": "https://images.unsplash.com/photo-1574217013471-c32c6846cef7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8Zm90b3xlbnwwfHwwfHx8MA%3D%3D&w=1000&q=80",
+      "comment": "teste 2",
+      "rating": 4,
+      "liked": [],
+      "disliked": [],
+      "createAt": "2023-08-04T17:48:37.023Z"
     }
   ]
 }
