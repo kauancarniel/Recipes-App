@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TfiClose } from 'react-icons/tfi';
 import { RiAddLine } from 'react-icons/ri';
+import { MdPublicOff, MdPublic } from 'react-icons/md';
 
 import RecipesContext from '../context/RecipesContext';
 import useRecipe from '../hooks/useRecipe';
@@ -15,15 +16,14 @@ const fifteen = 15;
 const twenty = 20;
 
 export default function FormCreateRecipe({ type, setNewRecipe }) {
-  const { categories, loading } = useContext(RecipesContext);
-  const { formatedRecipe, postMyRecipe } = useRecipe();
+  const { categories, loading, recipeEdit, setRecipeEdit } = useContext(RecipesContext);
+  const { formatedRecipe, postMyRecipe, patchRecipe } = useRecipe();
   const { fetchCategories } = useFetch();
-  const [infosRecipe, setInfosRecipe] = useState(() => formatedRecipe(type));
+  const [infosRecipe, setInfosRecipe] = useState(() => formatedRecipe(type, recipeEdit));
 
   useEffect(() => {
     (async () => {
       await fetchCategories(`/${type.toLowerCase()}s`);
-      setInfosRecipe({ ...infosRecipe, strCategory: categories[0] });
     })();
   }, []);
 
@@ -41,14 +41,28 @@ export default function FormCreateRecipe({ type, setNewRecipe }) {
       [`strMeasure${ingredients.length + 1}`]: '' });
   };
 
+  const newRecipe = async () => {
+    postMyRecipe(infosRecipe);
+    setNewRecipe(false);
+  };
+
+  const editRecipe = async () => {
+    await patchRecipe(infosRecipe);
+    setNewRecipe(false);
+    setRecipeEdit(null);
+  };
+
   return (
     <div className="form-new-recipe-container z-50">
       <form
         className="form-new-recipe"
         onSubmit={ (e) => {
           e.preventDefault();
-          postMyRecipe(infosRecipe);
-          setNewRecipe(false);
+          if (!recipeEdit) {
+            newRecipe();
+          } else {
+            editRecipe();
+          }
         } }
       >
         { loading ? (
@@ -58,7 +72,10 @@ export default function FormCreateRecipe({ type, setNewRecipe }) {
             <button
               className="reset-btn text-[var(--yellow)] absolute top-3 right-3"
               type="button"
-              onClick={ () => setNewRecipe(false) }
+              onClick={ () => {
+                setNewRecipe(false);
+                setRecipeEdit(null);
+              } }
             >
               <TfiClose size="35px" />
             </button>
@@ -105,11 +122,36 @@ export default function FormCreateRecipe({ type, setNewRecipe }) {
                 placeholder="Add a Instructions..."
               />
             </div>
-            <div className="flex-center gap-4 h-fit w-full">
+            <div className="flex-center gap-3 h-fit w-full text-white">
+              <label
+                htmlFor="strPublic"
+                className="flex gap-1 cursor-pointer font-bold"
+              >
+                <div className="flex-center gap-2">
+                  VISIBILITY:
+                  {' '}
+                  { infosRecipe.strPublic ? (
+                    <MdPublic size="30px" />
+                  ) : (
+                    <MdPublicOff size="30px" />
+                  )}
+                </div>
+                <input
+                  className="hidden"
+                  type="checkbox"
+                  name="strPublic"
+                  id="strPublic"
+                  checked={ infosRecipe.strPublic }
+                  onChange={
+                    ({ target: { name, checked } }) => setInfosRecipe({
+                      ...infosRecipe, [name]: checked })
+                  }
+                />
+              </label>
               <button
                 className="button"
               >
-                CREATE
+                {recipeEdit ? 'UPDATE' : 'CREATE'}
               </button>
             </div>
           </>

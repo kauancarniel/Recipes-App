@@ -162,7 +162,7 @@
   }
 
   .title-box {
-    @apply flex-col gap-y-2 py-6 mt-16 rounded-t-lg sm:mt-16
+    @apply flex-col gap-y-2 py-6 mt-20 rounded-t-lg sm:mt-16
   }
 
   .title {
@@ -170,7 +170,7 @@
   }
 
   .header {
-    @apply w-full min-h-[56px] flex flex-col items-center justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-20
+    @apply w-full min-h-[70px] flex flex-col items-center justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-20
   }
 
   .footer {

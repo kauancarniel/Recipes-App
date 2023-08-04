@@ -1,22 +1,26 @@
 import React, { useContext, useEffect, useState } from 'react';
 
+import RecipesContext from '../context/RecipesContext';
+import useUser from '../hooks/useUser';
+import useRecipe from '../hooks/useRecipe';
 import Header from '../components/Header';
 import Filter from '../components/Filter';
 import FormCreateRecipe from '../components/FormCreateRecipe';
-import RecipesContext from '../context/RecipesContext';
-import { fetchMyRecipes } from '../services/fetchAPI';
 import RecipeItem from '../components/RecipeItem';
+import { getCookie } from '../utils/functions';
 
 export default function MyRecipes() {
-  const { filter } = useContext(RecipesContext);
+  const { filter, recipes, recipeEdit } = useContext(RecipesContext);
+  const { validateCookie } = useUser();
+  const { getMyRecipes } = useRecipe();
   const [type, setType] = useState('Meal');
   const [newRecipe, setNewRecipe] = useState(false);
-  const [recipesData, setRecipesData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const recipesDataBase = await fetchMyRecipes();
-      setRecipesData(recipesDataBase);
+      const isLogged = await validateCookie();
+      if (!isLogged) return;
+      await getMyRecipes({ key: 'strUserId', value: getCookie('userLogged') });
     })();
   }, []);
 
@@ -24,8 +28,8 @@ export default function MyRecipes() {
     setNewRecipe(!newRecipe);
   };
 
-  const fiilteredRecipes = filter === 'all' ? recipesData
-    : recipesData.filter((recipe) => recipe.strType === filter);
+  const fiilteredRecipes = filter === 'all' ? recipes
+    : recipes.filter((recipe) => recipe.strType === filter);
 
   return (
     <>
@@ -48,7 +52,7 @@ export default function MyRecipes() {
           </button>
         </div>
         <Filter />
-        {!recipesData.length ? (
+        {!recipes.length ? (
           <div className="no-search">
             <h2 className="text-[var(--yellow)] text-2xl">Make Recipes</h2>
           </div>
@@ -56,12 +60,23 @@ export default function MyRecipes() {
           : (
             <section className="ready-recipe">
               {fiilteredRecipes.map((recipe, index) => (
-                <RecipeItem key={ index } recipe={ recipe } />
+                <RecipeItem
+                  key={ index }
+                  recipe={ recipe }
+                  setNewRecipe={ setNewRecipe }
+                />
               ))}
             </section>
           )}
       </main>
-      { newRecipe && <FormCreateRecipe type={ type } setNewRecipe={ setNewRecipe } /> }
+      { newRecipe && (
+        <FormCreateRecipe
+          type={ recipeEdit
+            ? `${recipeEdit.strType[0].toUpperCase()}${recipeEdit.strType.slice(1)}`
+            : type }
+          setNewRecipe={ setNewRecipe }
+        />
+      ) }
     </>
   );
 }

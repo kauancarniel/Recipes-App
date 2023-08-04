@@ -49,7 +49,7 @@ function Header({ title, iconeSearch = false }) {
               </Link>
             </div>
           )}
-          <nav className="flex gap-x-1">
+          <nav className="flex items-center gap-x-1">
             {iconeSearch && (
               <button
                 className="reset-btn w-10 h-10 overflow-hidden"
