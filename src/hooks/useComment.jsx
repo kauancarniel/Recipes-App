@@ -18,7 +18,7 @@ const useComment = () => {
       recipeType,
       userId: userLogged.id,
       userName: userLogged.name,
-      userPhoto: userLogged.photo,
+      userphoto: userLogged.photo,
       comment,
       rating,
       liked: [],
