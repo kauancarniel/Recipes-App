@@ -5,28 +5,27 @@ import Filter from '../components/Filter';
 import FormCreateRecipe from '../components/FormCreateRecipe';
 import RecipesContext from '../context/RecipesContext';
 import { fetchMyRecipes } from '../services/fetchAPI';
+import RecipeItem from '../components/RecipeItem';
 
 export default function MyRecipes() {
   const { filter } = useContext(RecipesContext);
   const [type, setType] = useState('Meal');
   const [newRecipe, setNewRecipe] = useState(false);
-  const [recipesMy, setRecipesMy] = useState([]);
+  const [recipesData, setRecipesData] = useState([]);
 
   useEffect(() => {
     (async () => {
-      const myRecipes = await fetchMyRecipes();
-      setRecipesMy(myRecipes);
+      const recipesDataBase = await fetchMyRecipes();
+      setRecipesData(recipesDataBase);
     })();
-  },[]);
+  }, []);
 
   const createRecipe = () => {
     setNewRecipe(!newRecipe);
-
   };
 
-  // const { filter } = useContext(RecipesContext);
-
-  console.log(recipesMy)
+  const fiilteredRecipes = filter === 'all' ? recipesData
+    : recipesData.filter((recipe) => recipe.strType === filter);
 
   return (
     <>
@@ -49,9 +48,18 @@ export default function MyRecipes() {
           </button>
         </div>
         <Filter />
-        <section>
-
-        </section>
+        {!recipesData.length ? (
+          <div className="no-search">
+            <h2 className="text-[var(--yellow)] text-2xl">Make Recipes</h2>
+          </div>
+        )
+          : (
+            <section className="ready-recipe">
+              {fiilteredRecipes.map((recipe, index) => (
+                <RecipeItem key={ index } recipe={ recipe } />
+              ))}
+            </section>
+          )}
       </main>
       { newRecipe && <FormCreateRecipe type={ type } setNewRecipe={ setNewRecipe } /> }
     </>
