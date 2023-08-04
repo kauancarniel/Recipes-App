@@ -1,21 +1,21 @@
 import { useContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from './useFetch';
-import { fetchPostRecipe, fetchUsersRecipes } from '../services/fetchAPI';
+import { fetchDeleteRecipe, fetchPostRecipe,
+  fetchUsersRecipes } from '../services/fetchAPI';
 
 const useRecipe = () => {
-  const { setError } = useContext(RecipesContext);
+  const { setError, userLogged, setRecipes, recipes } = useContext(RecipesContext);
   const { fireToast } = useFetch();
 
-  const formatedRecipe = (type) => {
+  const formatedRecipe = (type, recipe) => {
     if (type === 'Meal') {
-      return {
-        idMeal: uuidv4(),
+      return recipe || {
         strType: type.toLowerCase(),
         strMeal: '',
-        strCategory: '',
+        strUserId: userLogged.id,
+        strCategory: 'Beefs',
         strArea: '',
         strInstructions: '',
         strMealThumb: '',
@@ -26,15 +26,16 @@ const useRecipe = () => {
         strMeasure1: '',
       };
     }
-    return {
-      idDrink: uuidv4(),
+    return recipe || {
       strType: type.toLowerCase(),
       strDrink: '',
-      strCategory: '',
+      strUserId: userLogged.id,
+      strCategory: 'Ordinary Drink',
       strAlcoholic: 'Alcoholic',
       strInstructions: '',
       strDrinkThumb: '',
       strTags: '',
+      strPublic: false,
       strIngredient1: '',
       strMeasure1: '',
     };
@@ -42,8 +43,8 @@ const useRecipe = () => {
 
   const getAllUsersRecipe = async () => {
     try {
-      const recipes = await fetchUsersRecipes();
-      return recipes;
+      const recipesData = await fetchUsersRecipes();
+      return recipesData;
     } catch ({ message }) {
       setError(message);
       return [];
@@ -52,8 +53,8 @@ const useRecipe = () => {
 
   const getMyRecipes = async (obj) => {
     try {
-      const recipes = await fetchUsersRecipes(obj);
-      return recipes;
+      const recipesData = await fetchUsersRecipes(obj);
+      setRecipes(recipesData);
     } catch ({ message }) {
       setError(message);
       return [];
@@ -64,12 +65,39 @@ const useRecipe = () => {
     try {
       await fetchPostRecipe(obj);
       fireToast('Recipe successfully added!', 'success');
+      setRecipes((prev) => [...prev, obj]);
     } catch ({ message }) {
       setError(message);
     }
   };
 
-  return { getAllUsersRecipe, getMyRecipes, formatedRecipe, postMyRecipe };
+  const deleteRecipe = async (id) => {
+    try {
+      const newRecipes = recipes.filter((comment) => comment.id !== id);
+      await fetchDeleteRecipe(id);
+      setRecipes(newRecipes);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    }
+  };
+
+  const patchRecipe = async (obj) => {
+    try {
+      await fetchPostRecipe(obj);
+      fireToast('Recipe successfully edited!', 'success');
+      setRecipes((prev) => prev.map((recipe) => (recipe.id === obj.id ? obj : recipe)));
+    } catch ({ message }) {
+      setError(message);
+    }
+  };
+
+  return { getAllUsersRecipe,
+    getMyRecipes,
+    formatedRecipe,
+    postMyRecipe,
+    deleteRecipe,
+    patchRecipe };
 };
 
 export default useRecipe;

@@ -23,7 +23,8 @@ function IngredientsInputs({ ingredients, handleChange, infosRecipe, type }) {
             />
             <label
               className={
-                `label ${focus} ${infosRecipe[`str${type}`].length ? valid : ''}`
+                `label ${focus} ${infosRecipe[`strIngredient${index + 1}`].length
+                  ? valid : ''}`
               }
               htmlFor={ key }
             >
@@ -41,7 +42,8 @@ function IngredientsInputs({ ingredients, handleChange, infosRecipe, type }) {
             />
             <label
               className={
-                `label ${focus} ${infosRecipe[`str${type}`].length ? valid : ''}`
+                `label ${focus} ${infosRecipe[`strMeasure${index + 1}`].length
+                  ? valid : ''}`
               }
               htmlFor={ `strMeasure${index + 1}` }
             >
