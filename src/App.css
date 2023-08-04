@@ -13,6 +13,74 @@
 }
 
 @layer components {
+  .no-search {
+    @apply w-full flex justify-center items-center
+  }
+
+  .ready-recipe {
+    @apply flex flex-wrap w-[100%] justify-center md:justify-center gap-3
+  }
+
+  .content-ready{
+    @apply p-3 flex flex-col w-[100%]
+  }
+
+  .container-ready {
+    @apply w-[350px] flex md:w-[350px] lg:w-[430px] 
+  }
+
+  .detail-img {
+    @apply rounded-l-md max-w-[100px] sm:max-w-[150px] h-[100%] lg:w-[178px]
+  }
+
+  .title-done {
+    @apply text-[var(--yellow)] text-2xl font-bold
+  }
+
+  .tam-img {
+    @apply w-[100%] h-52 md:h-96 
+  }
+  .no-border {
+    @apply bg-inherit border-none
+  }
+  .title-category {
+    @apply text-xl text-white m-0
+  }
+  .title-recipe {
+    @apply w-full h-full absolute top-0 flex left-0 items-center p-[28px] text-white justify-center md:text-5xl
+  }
+  .tam-title {
+    @apply text-xl mb-4
+  }
+  .btn-design {
+    @apply text-[#F9EFBB] bg-inherit border-none text-[40px] flex
+  }
+  .border-div {
+    @apply border-solid border-2 rounded-lg
+  }
+  .caroussel-img {
+    @apply w-full h-56 md:h-96 border-2 border-black border-r-0 border-l-0  
+  }
+  .recommend-title {
+    @apply absolute text-white opacity-70 left-4 sm:left-[16.5%] lg:left-[19%] md:left-[19.5%]  md:text-2xl p-3  text-xl z-50
+  }
+  .button-back {
+    @apply btn-design text-[var(--yellow)]
+  }
+  .border-grey {
+    @apply border-div border-gray-300 border-[0.1px] p-3
+  }
+  .btn-recipe {
+    @apply w-[60%] max-w-[1000px] rounded-md text-white text-sm border-none bg-[#6e7909] py-3 font-bold uppercase tracking-widest
+  }
+  .btn-container {
+    @apply fixed bottom-0 z-50 flex items-center justify-center w-[100%]
+  }
+
+  .iframe-youtube {
+    @apply rounded-xl w-[100%] sm:w-[90%] h-60 sm:h-64 md:h-80 lg:h-96
+  }
+
   .flex-center {
     @apply flex justify-center items-center
   }

@@ -8,6 +8,9 @@ import { MdOutlineEditNote } from 'react-icons/md';
 import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
 
+import { Link } from 'react-router-dom';
+
+import { AiOutlineTeam } from 'react-icons/ai';
 import RecipesContext from '../context/RecipesContext';
 import MenuHamburguer from './MenuHamburguer';
 import SearchBar from './SearchBar';
@@ -27,6 +30,7 @@ const iconsTitle = {
   'Done Recipes': <FiCheckCircle className="w-14 h-14 text-[var(--green)]" />,
   'Favorite Recipes': <HiHeart className="icon-title" />,
   Ranking: <FaRankingStar className="icon-title" />,
+  About: <AiOutlineTeam className="icon-title" />,
 };
 
 function Header({ title, iconeSearch = false }) {
@@ -41,8 +45,10 @@ function Header({ title, iconeSearch = false }) {
             <SearchBar />
           ) : (
             <div className="flex-center">
-              <img src={ iconLogo } alt="icon logo" className="w-9" />
-              <img src={ nameLogo } alt="name logo" />
+              <Link to="/meals">
+                <img src={ iconLogo } alt="icon logo" className="w-9" />
+                <img src={ nameLogo } alt="name logo" />
+              </Link>
             </div>
           )}
           <nav className="flex gap-x-1">
