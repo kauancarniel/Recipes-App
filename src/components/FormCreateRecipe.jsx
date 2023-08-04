@@ -1,86 +1,125 @@
 import React, { useState, useContext, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { TfiClose } from 'react-icons/tfi';
+import { RiAddLine } from 'react-icons/ri';
+
+import RecipesContext from '../context/RecipesContext';
+import useRecipe from '../hooks/useRecipe';
+import useFetch from '../hooks/useFetch';
+import IngredientsInputs from './IngredientsInputs';
 import './FormCommentary.css';
 import '../Pages/Login.css';
+import InfosInputsRecipe from './InfosInputsRecipe';
 
-function FormCreateRecipe() {
-  const [inputsIngredients, setNewIngredients] = useState([{ id: 0 }]);
-  const [infosRecipe, setInfosRecipe] = useState({
-    nameRecipe: '',
-    categoryRecipe: '',
-    Ingredients: [{ id: 0 }],
-  });
+const fifteen = 15;
+const twenty = 20;
 
-  const focus = 'peer-focus:-top-5 peer-focus:text-xs';
-  const valid = 'peer-valid:-top-5 peer-valid:text-xs';
-  const classLabel = `label ${focus} ${valid}`;
+export default function FormCreateRecipe({ type, setNewRecipe }) {
+  const { categories, loading } = useContext(RecipesContext);
+  const { formatedRecipe, postMyRecipe } = useRecipe();
+  const { fetchCategories } = useFetch();
+  const [infosRecipe, setInfosRecipe] = useState(() => formatedRecipe(type));
 
-  const handleChange = ({ name: nameInput, value }) => {
-    setInfosRecipe({ ...infosRecipe, [nameInput]: value });
+  useEffect(() => {
+    (async () => {
+      await fetchCategories(`/${type.toLowerCase()}s`);
+      setInfosRecipe({ ...infosRecipe, strCategory: categories[0] });
+    })();
+  }, []);
+
+  const handleChange = ({ name, value }) => {
+    setInfosRecipe({ ...infosRecipe, [name]: value });
   };
 
-  const test = (event) => {
-    event.preventDefault();
-    console.log(infosRecipe.nameRecipe);
-  };
+  const ingredients = Object.entries(infosRecipe)
+    .filter(([key]) => key.includes('strIngredient'));
+  const MAX_INGREDIENTS = type === 'Drink' ? fifteen : twenty;
 
-  const astd = (event) => {
-    event.preventDefault();
-    setNewIngredients([...inputsIngredients, { id: inputsIngredients.length }]);
+  const addIngredient = () => {
+    setInfosRecipe({ ...infosRecipe,
+      [`strIngredient${ingredients.length + 1}`]: '',
+      [`strMeasure${ingredients.length + 1}`]: '' });
   };
 
   return (
-    <main>
+    <div className="form-new-recipe-container z-50">
       <form
-        className="flex-center flex-col gap-7 w-full max-w-sm mt-10"
+        className="form-new-recipe"
+        onSubmit={ (e) => {
+          e.preventDefault();
+          postMyRecipe(infosRecipe);
+          setNewRecipe(false);
+        } }
       >
-        <div className="user-box self-center">
-          <input
-            className="peer reset-input input"
-            id="nameRecipe"
-            value={ infosRecipe.nameRecipe }
-            type="text"
-            name="nameRecipe"
-            onChange={ ({ target }) => handleChange(target) }
-          />
-          <label
-            className={ classLabel }
-            htmlFor="nameRecipe"
-          >
-            Nome da Receita
-          </label>
-        </div>
-        <div className="user-box self-center">
-          <input
-            className="peer reset-input input"
-            id="categoryRecipe"
-            value={ infosRecipe.categoryRecipe }
-            type="text"
-            name="categoryRecipe"
-            onChange={ ({ target }) => handleChange(target) }
-          />
-          <label
-            className={ classLabel }
-            htmlFor="categoryRecipe"
-          >
-            Categoria da Receitaa
-          </label>
-        </div>
-        { inputsIngredients.map((input, index) => (
-          <div key={ input.id }>
-            <input
-              type="text"
-              placeholder={ `Ingrediente ${input.id + 1}` }
-              name={ `ingrediente${input.id + 1}` }
-              className="peer reset-input input"
-              id="categoryRecipe"
+        { loading ? (
+          <p className="font-bold text-[var(--yellow)]">Loading...</p>
+        ) : (
+          <>
+            <button
+              className="reset-btn text-[var(--yellow)] absolute top-3 right-3"
+              type="button"
+              onClick={ () => setNewRecipe(false) }
+            >
+              <TfiClose size="35px" />
+            </button>
+            <InfosInputsRecipe
+              infosRecipe={ infosRecipe }
+              handleChange={ handleChange }
+              type={ type }
+              categories={ categories }
             />
-          </div>
-        )) }
-        <button onClick={ astd }>New Ingrediente</button>
-        <button onClick={ test }>teste</button>
+            <div className="list-ingredients-container">
+              <div className="text-[var(--yellow)] flex gap-2 items-center">
+                <h3 className="mb-0">
+                  Ingredients
+                </h3>
+                <button
+                  className="reset-btn text-[var(--yellow)]"
+                  type="button"
+                  disabled={ ingredients.length >= MAX_INGREDIENTS }
+                  onClick={ addIngredient }
+                >
+                  <RiAddLine size="35px" />
+                </button>
+              </div>
+              <IngredientsInputs
+                ingredients={ ingredients }
+                handleChange={ handleChange }
+                infosRecipe={ infosRecipe }
+                type={ type }
+              />
+            </div>
+            <div className="flex flex-col gap-y-2 w-full">
+              <h3 className="text-[var(--yellow)] ml-2 mb-2">
+                Instructions
+              </h3>
+              <textarea
+                className="textarea"
+                maxLength="1000"
+                id="formComment"
+                name="strInstructions"
+                cols="50"
+                rows="5"
+                value={ infosRecipe.strInstructions }
+                onChange={ ({ target }) => handleChange(target) }
+                placeholder="Add a Instructions..."
+              />
+            </div>
+            <div className="flex-center gap-4 h-fit w-full">
+              <button
+                className="button"
+              >
+                CREATE
+              </button>
+            </div>
+          </>
+        )}
       </form>
-    </main>
+    </div>
   );
 }
 
-export default FormCreateRecipe;
+FormCreateRecipe.propTypes = {
+  type: PropTypes.string.isRequired,
+  setNewRecipe: PropTypes.func.isRequired,
+};

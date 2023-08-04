@@ -70,8 +70,7 @@ export default function FormCommentary({ recipe }) {
           </div>
           <div className="flex flex-col items-center gap-y-2">
             <textarea
-              className="resize-none block bg-transparent p-2.5 w-full text-sm text-white
-            rounded-lg border border-solid border-gray-300 outline-none"
+              className="textarea"
               maxLength="200"
               id="formComment"
               required

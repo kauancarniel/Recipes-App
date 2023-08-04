@@ -256,6 +256,28 @@
   .name-top-ranking {
     @apply text-white font-bold text-lg p-2 
   }
+
+  .editUser-container {
+    @apply w-full flex flex-col-reverse xs:flex-row gap-4 justify-center items-center
+  }
+
+  .form-new-recipe-container {
+    @apply fixed bg-[rgba(0,0,0,.6)] top-0 right-0 w-screen h-screen flex justify-center
+  }
+
+  .form-new-recipe {
+    @apply flex flex-wrap justify-center items-center recipe-box gap-5 bg-form glass p-6 mb-16 rounded-lg w-full max-w-xl mt-16 bg-[rgba(0,0,0,.8)]
+    h-fit
+  }
+
+  .textarea {
+    @apply resize-none block bg-transparent p-2.5 w-full text-sm text-white rounded-lg border border-solid border-gray-300 outline-none
+  }
+
+  .list-ingredients-container {
+    @apply flex flex-col w-full sm:w-[55%] min-h-[318.3px] mt-3 h-fit
+  }
+
 }
 
 * {
@@ -311,4 +333,66 @@ html {
 .swal-confirm:hover, .swal-cancel:hover {
   opacity: 0.8;
   transform: scale(1.1);
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: var(--yellow);
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--yellow);
+    border-radius: 8px;
+    border: none;
+  }
+
+.button {
+  background-color: var(--green);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 5px 15px;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  color: var(--yellow);
+}
+
+.button:disabled {
+  background-color: var(--orange);
+  color: var(--yellow);
+  cursor: not-allowed;
+}
+
+.button:focus {
+  outline: 2px solid rgba(0,0,0,0.1);
+  outline-offset: 2px;
+}
+
+.button:focus-visible {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

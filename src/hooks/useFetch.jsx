@@ -128,6 +128,19 @@ const useFetch = () => {
     }
   };
 
+  const fetchCategories = async (pathname) => {
+    try {
+      setLoading(true);
+      const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
+      setCategories(categoriesData);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return { fetchRecipes,
     initialFetch,
     fireToast,
@@ -138,6 +151,7 @@ const useFetch = () => {
     patchUser,
     fetchRecipeComments,
     sweetAlert,
+    fetchCategories,
   };
 };
 

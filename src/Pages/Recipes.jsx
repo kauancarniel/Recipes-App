@@ -47,7 +47,7 @@ function Recipes() {
         title={ pathname === '/meals' ? 'Meals' : 'Drinks' }
         iconeSearch
       />
-      <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
+      <main className="recipe-box flex flex-col bg-form glass box-bottom">
         <nav className="flex justify-between pb-9">
           <button
             className={

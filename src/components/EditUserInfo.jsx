@@ -30,7 +30,7 @@ export default function EditUserInfo({ setEmailRegister }) {
   };
 
   return (
-    <div className="w-full flex flex-col-reverse xs:flex-row gap-4 justify-center items-center">
+    <div className="editUser-container">
       <form
         className="flex-center flex-col gap-7 w-full max-w-[216px]"
         onSubmit={ (event) => {
