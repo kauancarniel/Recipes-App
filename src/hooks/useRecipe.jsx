@@ -20,6 +20,7 @@ const useRecipe = () => {
         strInstructions: '',
         strMealThumb: '',
         strTags: '',
+        strPublic: false,
         strYoutube: '',
         strIngredient1: '',
         strMeasure1: '',

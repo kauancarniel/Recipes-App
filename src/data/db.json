@@ -58,12 +58,11 @@
     {
       "idMeal": "",
       "strMeal": "RozCovo",
-      "strCategory": {
-        "strCategory": "Beef"
-      },
+      "strCategory": "Beef",
       "strArea": "Lavras",
       "strInstructions": "Esquenta o arroz no microondas, frita o ovo na frigideira. Põe sal.",
       "strMealThumb": "https://1.bp.blogspot.com/-NcoQTV0cOQ4/YMEzYMGIXnI/AAAAAAAA70E/GrXXM_cuecAM8OUbC1p9D_yz34nUjmWGgCLcBGAsYHQ/s2048/Roscovo%2B%25282%2529.jpg",
+      "strPublic": true,
       "strTags": "arroz,ovo",
       "strYoutube": "https://www.youtube.com/embed/rwu4998Ad5o",
       "strIngredient1": "arroz",

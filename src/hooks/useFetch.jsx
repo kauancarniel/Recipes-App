@@ -7,7 +7,7 @@ import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
 
 const useFetch = () => {
-  const { setRecipes, setCategories, setLoading,
+  const { setRecipes, setCategories, setLoading, infosRecipe, setInfosRecipe,
     setError, error } = useContext(RecipesContext);
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
@@ -133,6 +133,7 @@ const useFetch = () => {
       setLoading(true);
       const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
       setCategories(categoriesData);
+      setInfosRecipe({ ...infosRecipe, strCategory: categoriesData[0].strCategory });
     } catch ({ message }) {
       setError(message);
       return [];
