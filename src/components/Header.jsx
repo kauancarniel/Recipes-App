@@ -7,9 +7,7 @@ import { FiCheckCircle } from 'react-icons/fi';
 import { MdOutlineEditNote } from 'react-icons/md';
 import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
-
 import { Link } from 'react-router-dom';
-
 import { AiOutlineTeam } from 'react-icons/ai';
 import RecipesContext from '../context/RecipesContext';
 import MenuHamburguer from './MenuHamburguer';
