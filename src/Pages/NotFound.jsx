@@ -11,7 +11,7 @@ export default function NotFound() {
       <h1>Page Not Found</h1>
       <button
         className="cursor-pointer duration-200 hover:scale-125 active:scale-100"
-        title="Go To Home"
+        title="Go To Homee"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" viewBox="0 0 24 24" className="stroke-blue-300">
           <path
