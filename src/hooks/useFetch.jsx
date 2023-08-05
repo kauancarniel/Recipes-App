@@ -61,7 +61,6 @@ const useFetch = () => {
       : await fetchRecipes(pathname);
 
     const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
-    console.log(pathname)
     if (error) {
       fireToast(`${error}. Please, try again later.`);
       setRecipes([]);
