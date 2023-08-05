@@ -64,7 +64,7 @@ function InfosInputsRecipe({ infosRecipe, handleChange, categories, type }) {
           />
           <label
             className={
-              `label ${focus} ${infosRecipe[`str${type}`].length ? valid : ''}`
+              `label ${focus} ${infosRecipe.strArea.length ? valid : ''}`
             }
             htmlFor="areaRecipe"
           >
@@ -83,7 +83,7 @@ function InfosInputsRecipe({ infosRecipe, handleChange, categories, type }) {
             <option value="Alcoholic" className="text-black">
               Alcoholic
             </option>
-            <option value="Non_Alcoholic" className="text-black">
+            <option value="Non alcoholic" className="text-black">
               Non Alcoholic
             </option>
           </select>
@@ -146,7 +146,7 @@ function InfosInputsRecipe({ infosRecipe, handleChange, categories, type }) {
         />
         <label
           className={
-            `label ${focus} ${infosRecipe[`str${type}`].length ? valid : ''}`
+            `label ${focus} ${infosRecipe.strTags.length ? valid : ''}`
           }
           htmlFor="tagsRecipe"
         >

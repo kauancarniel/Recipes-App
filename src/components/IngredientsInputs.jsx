@@ -5,7 +5,6 @@ const focus = 'peer-focus:-top-5 peer-focus:text-xs';
 const valid = 'peer-valid:-top-5 peer-valid:text-xs';
 
 function IngredientsInputs({ ingredients, handleChange, infosRecipe, type }) {
-  console.log(ingredients);
   return (
     <div className="flex flex-col overflow-y-scroll h-[289px] gap-3 pt-3">
       {ingredients.map(([key, value], index) => (
@@ -24,7 +23,8 @@ function IngredientsInputs({ ingredients, handleChange, infosRecipe, type }) {
             />
             <label
               className={
-                `label ${focus} ${infosRecipe[`str${type}`].length ? valid : ''}`
+                `label ${focus} ${infosRecipe[`strIngredient${index + 1}`].length
+                  ? valid : ''}`
               }
               htmlFor={ key }
             >
@@ -42,7 +42,8 @@ function IngredientsInputs({ ingredients, handleChange, infosRecipe, type }) {
             />
             <label
               className={
-                `label ${focus} ${infosRecipe[`str${type}`].length ? valid : ''}`
+                `label ${focus} ${infosRecipe[`strMeasure${index + 1}`].length
+                  ? valid : ''}`
               }
               htmlFor={ `strMeasure${index + 1}` }
             >
@@ -57,7 +58,7 @@ function IngredientsInputs({ ingredients, handleChange, infosRecipe, type }) {
 IngredientsInputs.propTypes = {
   ingredients: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   handleChange: PropTypes.func.isRequired,
-  infosRecipe: PropTypes.objectOf(PropTypes.string).isRequired,
+  infosRecipe: PropTypes.instanceOf(Object).isRequired,
   type: PropTypes.string.isRequired,
 };
 

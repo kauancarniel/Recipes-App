@@ -17,6 +17,7 @@ const useFetch = () => {
       setLoading(true);
       return await fetchAPI(pathname, optSearch, textSearch);
     } catch ({ message }) {
+      console.error(message);
       setError(message);
       return [];
     } finally {
