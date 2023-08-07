@@ -7,7 +7,8 @@ import { FiCheckCircle } from 'react-icons/fi';
 import { MdOutlineEditNote } from 'react-icons/md';
 import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
-
+import { AiOutlineTeam } from 'react-icons/ai';
+import { BiWorld } from 'react-icons/bi';
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
 
@@ -19,7 +20,7 @@ export default function Menu({ showClose = false }) {
   const { setMenuOpen, userLogged } = useContext(RecipesContext);
   const date = new Date();
   const greeting = ['Good Morning', 'Good Afternoon', 'Good Evening'];
-  const { name } = userLogged || { name: '' };
+  const { name, photo } = userLogged || { name: '', photo: '' };
 
   const getGreeting = () => {
     if (date.getHours() < MIDDAY) return greeting[0];
@@ -29,9 +30,22 @@ export default function Menu({ showClose = false }) {
 
   return (
     <nav className={ `options-menu ${showClose ? 'top-0' : ''}` }>
-      <h4 className="pt-3 text-[var(--green)] font-normal">
-        { `${getGreeting()}, ${name}.`}
-      </h4>
+      <div className="flex gap-2 items-center py-3">
+        { photo ? (
+          <img
+            src={ photo }
+            alt="user"
+            className="rounded-[100px] w-[40px] h-[40px]  border-div"
+          />
+        ) : (
+          <CgProfile
+            className="rounded-[100px] w-[40px] h-[40px] bg-[var(--yellow)]"
+          />
+        )}
+        <h4 className="text-[var(--green)] font-normal m-0">
+          { `${getGreeting()}, ${name}.`}
+        </h4>
+      </div>
       <ul className="list-none flex justify-center flex-col p-0 m-0 pb-4 gap-y-3">
         <li>
           <Link
@@ -61,6 +75,16 @@ export default function Menu({ showClose = false }) {
           >
             <MdOutlineEditNote className="border-2 border-solid rounded-[100%]" />
             My Recipes
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="option-menu"
+            to="/meals/users"
+            onClick={ () => setMenuOpen(false) }
+          >
+            <BiWorld className="border-2 border-solid rounded-[100%]" />
+            Users Recipes
           </Link>
         </li>
         <li>
@@ -107,12 +131,23 @@ export default function Menu({ showClose = false }) {
           <Link
             className="option-menu"
             onClick={ logout }
+            to="/about"
+          >
+            <AiOutlineTeam className="border-2 border-solid rounded-[100%]" />
+            About
+          </Link>
+        </li>
+        <li>
+          <Link
+            className="option-menu"
+            onClick={ logout }
             to="/"
           >
             <HiLogout className="border-2 border-solid rounded-[100%]" />
             Logout
           </Link>
         </li>
+
       </ul>
     </nav>
   );

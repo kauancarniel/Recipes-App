@@ -10,7 +10,7 @@ function CommentBtn({ assessment }) {
       </div>
       <button
         id="button"
-        className="self-end"
+        className="button"
         disabled={ !(!!rating && !!comment.length) }
       >
         Comment

@@ -1,81 +1,123 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Header from '../components/Header';
-import EditUserInfo from '../components/EditUserInfo';
+import validator from 'validator';
+import { AiOutlineEdit } from 'react-icons/ai';
+
 import RecipesContext from '../context/RecipesContext';
 import useUser from '../hooks/useUser';
-
-import useUser from '../hooks/useUser';
+import useFetch from '../hooks/useFetch';
+import Header from '../components/Header';
+import EditUserInfo from '../components/EditUserInfo';
 import EditUserPass from '../components/EditUserPass';
+import Comments from '../components/Comments';
+import ProfileErrors from '../components/ProfileErrors';
+import { getCookie } from '../utils/functions';
 import './Login.css';
 import './Profile.css';
 
+const NAME_LENGTH = 3;
+const PASSWORD_LENGTH = 7;
+
 function Profile() {
-  const { userLogged } = useContext(RecipesContext);
-  const [editInfos, setEditUserInfo] = useState(false);
-  const [editPass, setEditUserPass] = useState(false);
+  const { userLogged, setComments } = useContext(RecipesContext);
+  const { fetchRecipeComments, fetchUser, patchUser, fireToast } = useFetch();
   const { validateCookie } = useUser();
-
-  useEffect(() => {
-    (async () => {
-      await validateCookie();
-    })();
-  }, []);
-
-  const { name, email } = userLogged || { name: '', email: '' };
-
-  useEffect(() => {
-    (async () => {
-      await validateCookie();
-    })();
-  }, []);
-
-  const infosUser = (
-    <div>
-      <div className="flex flex-row">
-        <button
-          className="button w-100"
-          onClick={ () => {
-            setEditUserInfo(true);
-            setEditUserPass(false);
-          } }
-        >
-          <svg className="svg-icon" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="white" strokeLinecap="round" strokeWidth="2">
-              <path d="m20 20h-16" />
-              <path clipRule="evenodd" d="m14.5858 4.41422c.781-.78105 2.0474-.78105 2.8284 0 .7811.78105.7811 2.04738 0 2.82843l-8.28322 8.28325-3.03046.202.20203-3.0304z" fillRule="evenodd" />
-            </g>
-          </svg>
-          <span className="lable">Edit Infos</span>
-        </button>
-        <button
-          className="button"
-          onClick={ () => {
-            setEditUserPass(true);
-            setEditUserInfo(false);
-          } }
-        >
-          <svg className="svg-icon" fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
-            <g stroke="white" strokeLinecap="round" strokeWidth="2">
-              <path d="m20 20h-16" />
-              <path clipRule="evenodd" d="m14.5858 4.41422c.781-.78105 2.0474-.78105 2.8284 0 .7811.78105.7811 2.04738 0 2.82843l-8.28322 8.28325-3.03046.202.20203-3.0304z" fillRule="evenodd" />
-            </g>
-          </svg>
-          <span className="lable">Edit Password</span>
-        </button>
-      </div>
-      <h4>{name}</h4>
-      <h4>{email}</h4>
-    </div>
+  const [passwords, setPasswords] = useState(
+    { lastPass: '', newPass: '', confirmPass: '', validLastPass: true },
   );
+  const [editPass, setEditPass] = useState(false);
+  const [emailRegister, setEmailRegister] = useState(false);
+  const [user, setUser] = useState({});
+
+  useEffect(() => {
+    (async () => {
+      const isLogged = await validateCookie();
+      if (!isLogged) return;
+      const id = getCookie('userLogged');
+      const dataUser = await fetchUser({ id });
+      setUser(dataUser);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      if (!userLogged) return;
+      const dataComments = await fetchRecipeComments('userId', user.id);
+      setComments(dataComments);
+    })();
+  }, [user]);
+
+  const { name, email, photo } = userLogged
+  || { name: '', email: '', photo: '' };
+  const { lastPass, newPass, confirmPass, validLastPass } = passwords
+    || { lastPass: '', newPass: '', confirmPass: '', validLastPass: true };
+
+  const handleSubmit = async () => {
+    patchUser(userLogged.id, { email, name, photo });
+    console.log(photo);
+    fireToast('Saved Changes!', 'success');
+  };
+
+  const verifyDisabled = () => {
+    if (editPass) {
+      return (
+        newPass === confirmPass
+        && newPass.length >= PASSWORD_LENGTH
+        && lastPass.length >= PASSWORD_LENGTH
+        && validLastPass
+        && newPass !== lastPass
+      );
+    }
+    return (
+      validator.isEmail(email)
+        && (validator.isURL(photo) || !photo.length)
+        && !emailRegister
+        && name.length >= NAME_LENGTH
+        && (user.name !== name || user.email !== email || user.photo !== photo)
+    );
+  };
 
   return (
     <>
       <Header title="Profile" iconeProfile />
       <main
-        className="text-white min-h-screeflex flex-col self-center whitespace-nowrap"
+        className="recipe-box flex flex-col items-center bg-form glass box-bottom gap-3"
       >
-        { editInfos ? <EditUserInfo setEditUserInfo={ setEditUserInfo } />
-          : editPass ? <EditUserPass setEditUserPass={ setEditUserPass } /> : infosUser }
+        <EditUserInfo setEmailRegister={ setEmailRegister } />
+        <div className="flex flex-row">
+          <button
+            className="button"
+            onClick={ () => {
+              setEditPass(!editPass);
+            } }
+          >
+            <AiOutlineEdit className="svg-icon" />
+            <span className="lable">{ editPass ? 'Cancel Edit Pass' : 'Edit Pass'}</span>
+          </button>
+        </div>
+        <div>
+          { editPass && (
+            <EditUserPass passwords={ passwords } setPasswords={ setPasswords } />
+          )}
+        </div>
+        <ProfileErrors
+          editPass={ editPass }
+          emailRegister={ emailRegister }
+          passwords={ passwords }
+        />
+        <div className="space-x-5">
+          <button
+            className="button"
+            type="submit"
+            disabled={ !(verifyDisabled()) }
+            onClick={ handleSubmit }
+          >
+            {editPass ? 'Save New Pass' : 'Save Changes Infos'}
+          </button>
+        </div>
+        <div className="w-full max-w-lg mt-2">
+          <h3 className="self-start text-white">Assessments: </h3>
+          <Comments />
+        </div>
       </main>
     </>
   );

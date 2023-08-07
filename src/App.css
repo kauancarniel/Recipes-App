@@ -13,6 +13,74 @@
 }
 
 @layer components {
+  .no-search {
+    @apply w-full flex justify-center items-center
+  }
+
+  .ready-recipe {
+    @apply flex flex-wrap w-[100%] justify-center md:justify-center gap-3
+  }
+
+  .content-ready{
+    @apply p-3 flex flex-col w-[100%]
+  }
+
+  .container-ready {
+    @apply w-[350px] flex md:w-[350px] lg:w-[430px] 
+  }
+
+  .detail-img {
+    @apply rounded-l-md max-w-[100px] sm:max-w-[150px] h-[100%] lg:w-[178px]
+  }
+
+  .title-done {
+    @apply text-[var(--yellow)] text-2xl font-bold
+  }
+
+  .tam-img {
+    @apply w-[100%] h-52 md:h-96 
+  }
+  .no-border {
+    @apply bg-inherit border-none
+  }
+  .title-category {
+    @apply text-xl text-white m-0
+  }
+  .title-recipe {
+    @apply w-full h-full absolute top-0 flex left-0 items-center p-[28px] text-white justify-center md:text-5xl
+  }
+  .tam-title {
+    @apply text-xl mb-4
+  }
+  .btn-design {
+    @apply text-[#F9EFBB] bg-inherit border-none text-[40px] flex
+  }
+  .border-div {
+    @apply border-solid border-2 rounded-lg
+  }
+  .caroussel-img {
+    @apply w-full h-56 md:h-96 border-2 border-black border-r-0 border-l-0  
+  }
+  .recommend-title {
+    @apply absolute text-white opacity-70 left-4 sm:left-[16.5%] lg:left-[19%] md:left-[19.5%]  md:text-2xl p-3  text-xl z-50
+  }
+  .button-back {
+    @apply btn-design text-[var(--yellow)]
+  }
+  .border-grey {
+    @apply border-div border-gray-300 border-[0.1px] p-3
+  }
+  .btn-recipe {
+    @apply fixed bottom-0 w-[100%] max-w-[1000px] rounded-md text-white text-sm border-none bg-[#6e7909] py-3 font-bold uppercase tracking-widest
+  }
+  .btn-container {
+    @apply  z-50 flex items-center justify-center w-[100%]
+  }
+
+  .iframe-youtube {
+    @apply rounded-xl w-[100%] sm:w-[90%] h-60 sm:h-64 md:h-80 lg:h-96
+  }
+
   .flex-center {
     @apply flex justify-center items-center
   }
@@ -41,6 +109,10 @@
 
   .bg-form {
     @apply bg-[rgba(0,0,0,.6)] border border-white border-opacity-10
+  }
+
+  .bg-notFounded {
+    @apply bg-[rgba(255,255,255,.2)] border border-white border-opacity-10
   }
 
   .user-box {
@@ -94,15 +166,15 @@
   }
 
   .title-box {
-    @apply flex-col gap-y-2 py-6 mt-16 rounded-t-lg sm:mt-16
+    @apply flex-col gap-y-2 py-6 mt-20 rounded-t-lg sm:mt-16
   }
 
   .title {
-    @apply uppercase text-center font-[900] text-2xl text-[var(--orange)] tracking-[4px]
+    @apply uppercase text-center font-bold text-4xl text-[var(--orange)] tracking-[4px]
   }
 
   .header {
-    @apply w-full min-h-[56px] flex flex-col items-center justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-20
+    @apply w-full min-h-[70px] flex flex-col items-center justify-center px-3 bg-[var(--yellow)] py-1 fixed top-0 shadow-[0_4px_6px_rgba(0,0,0,0.4)] z-20
   }
 
   .footer {
@@ -176,6 +248,40 @@
   .icon-design {
     @apply text-yellow-500 text-center m-0
   }
+
+  .title-recipe-in-progress {
+    @apply no-underline m-0 font-bold text-[var(--yellow)] text-3xl
+  }
+
+  .tag {
+    @apply py-1 px-3 rounded-[100px] bg-[var(--gray)] text-[var(--darkGray)] text-xs font-bold
+  }
+
+  .name-top-ranking {
+    @apply text-white font-bold text-lg p-2 
+  }
+
+  .editUser-container {
+    @apply w-full flex flex-col-reverse xs:flex-row gap-4 justify-center items-center
+  }
+
+  .form-new-recipe-container {
+    @apply fixed bg-[rgba(0,0,0,.6)] top-0 right-0 w-screen h-screen flex justify-center
+  }
+
+  .form-new-recipe {
+    @apply flex flex-wrap justify-center items-center recipe-box gap-5 bg-form glass p-6 mb-16 rounded-lg w-full max-w-xl mt-16 bg-[rgba(0,0,0,.8)]
+    h-fit
+  }
+
+  .textarea {
+    @apply resize-none block bg-transparent p-2.5 w-full text-sm text-white rounded-lg border border-solid border-gray-300 outline-none
+  }
+
+  .list-ingredients-container {
+    @apply flex flex-col w-full sm:w-[55%] min-h-[318.3px] mt-3 h-fit
+  }
+
 }
 
 * {
@@ -231,4 +337,66 @@ html {
 .swal-confirm:hover, .swal-cancel:hover {
   opacity: 0.8;
   transform: scale(1.1);
+}
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: var(--yellow);
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: var(--yellow);
+    border-radius: 8px;
+    border: none;
+  }
+
+.button {
+  background-color: var(--green);
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 5px 15px;
+  text-align: center;
+  -webkit-box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  color: var(--yellow);
+}
+
+.button:disabled {
+  background-color: var(--orange);
+  color: var(--yellow);
+  cursor: not-allowed;
+}
+
+.button:focus {
+  outline: 2px solid rgba(0,0,0,0.1);
+  outline-offset: 2px;
+}
+
+.button:focus-visible {
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }

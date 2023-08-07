@@ -8,10 +8,11 @@ const MAX_RECIPES = 12;
 const radiosOpt = ['Name', 'Ingredient', 'First-Letter'];
 
 function SearchBar() {
-  const [optSearch, setOptSearch] = useState('Name');
+  const [optSearch, setOptSearch] = useState('name');
   const [textSearch, setTextSearch] = useState('');
+  const [isSearch, setIsSearch] = useState(false);
   const { setRecipes, error } = useContext(RecipesContext);
-  const { fetchRecipes, fireToast } = useFetch();
+  const { fetchRecipes, fireToast, initialFetch } = useFetch();
   const history = useHistory();
 
   const { location: { pathname } } = history;
@@ -23,6 +24,13 @@ function SearchBar() {
 
   const fetchingApi = async (event) => {
     event.preventDefault();
+    if (isSearch) {
+      setOptSearch('name');
+      setTextSearch('');
+      setIsSearch(false);
+      await initialFetch(pathname);
+      return;
+    }
     if (!textSearch || !optSearch) {
       fireToast('Please, select an option and type in the search field to search!');
       return;
@@ -32,11 +40,12 @@ function SearchBar() {
       return;
     }
     const data = await fetchRecipes(pathname, optSearch, textSearch);
-    if (error) {
+    if (error || !data) {
       fireToast('Sorry, we haven\'t found any recipes for these filters.');
       return;
     }
     setRecipes(data.slice(0, MAX_RECIPES));
+    setIsSearch(true);
     if (data.length === 1) {
       history.push(`${pathname}/${pathname === '/meals'
         ? data[0].idMeal : data[0].idDrink}`);
@@ -51,6 +60,7 @@ function SearchBar() {
           type="text"
           onChange={ saveSearchOpt }
           name="textSearch"
+          value={ textSearch }
           data-testid="search-input"
           placeholder="Type Here"
         />
@@ -59,14 +69,14 @@ function SearchBar() {
           onClick={ fetchingApi }
           data-testid="exec-search-btn"
         >
-          Search
+          {isSearch ? 'Clear' : 'Search'}
         </button>
       </div>
       <div className="flex justify-evenly items-center w-full">
         { radiosOpt.map((radio) => (
           <label
             key={ radio }
-            className={ `${optSearch === radio
+            className={ `${optSearch === radio.toLowerCase()
               ? 'text-[var(--red)] font-bold' : 'text-[var(--green)]'} cursor-pointer` }
             htmlFor={ radio }
           >
@@ -74,7 +84,8 @@ function SearchBar() {
               className="hidden"
               id={ radio }
               type="radio"
-              value={ radio }
+              value={ radio.toLowerCase() }
+              checked={ optSearch === radio.toLowerCase() }
               name="search"
               data-testid={ `${radio.toLocaleLowerCase()}-search-radio` }
               onChange={ saveSearchOpt }

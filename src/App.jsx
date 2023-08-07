@@ -14,6 +14,7 @@ import Ranking from './Pages/Ranking';
 import RecipesInProgress from './Pages/RecipesInProgress';
 import MyRecipes from './Pages/MyRecipes';
 import './App.css';
+import About from './Pages/About';
 
 function App() {
   return (
@@ -21,6 +22,8 @@ function App() {
       <Route path="/" component={ Login } exact />
       <Route path="/meals" component={ Recipes } exact />
       <Route path="/drinks" component={ Recipes } exact />
+      <Route path="/meals/users" component={ Recipes } exact />
+      <Route path="/drinks/users" component={ Recipes } exact />
       <Route path="/meals/:id" component={ Recipe } exact />
       <Route path="/drinks/:id" component={ Recipe } exact />
       <Route path="/meals/:id/in-progress" component={ Recipe } />
@@ -33,6 +36,9 @@ function App() {
       <Route path="/ranking" component={ Ranking } />
       <Route path="/in-progress-recipes" component={ RecipesInProgress } />
       <Route path="/my-recipes" component={ MyRecipes } />
+      <Route path="/my-recipes/:id" component={ Recipe } />
+      <Route path="/my-recupes/:id/in-progress" component={ Recipe } />
+      <Route path="/about" component={ About } />
       <Route path="*" component={ NotFound } />
     </Switch>
   );

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { MdOutlineDelete } from 'react-icons/md';
 
 import { Link } from 'react-router-dom';
@@ -32,7 +32,7 @@ export default function RecipesInProgress() {
   return (
     <>
       <Header title="Recipes in Progress" />
-      <main className="recipe-box flex flex-col bg-form glass box-bottom min-h-screen">
+      <main className="recipe-box flex flex-col bg-form glass box-bottom">
         <Filter />
         { !filteredFavorites.length ? (
           <div className="no-search">
@@ -42,29 +42,37 @@ export default function RecipesInProgress() {
             </h2>
           </div>
         ) : (
-          <ul>
+          <ul className="ready-recipe">
             {filteredFavorites.map((recipe) => {
-              const { id, type, image, name,
+              const { id, type, image, name, startDate,
                 nationality, category, alcoholicOrNot, tags } = recipe;
               return (
-                <li key={ `${id}-${type}` }>
+                <li
+                  className="border-grey p-0 container-ready"
+                  key={ `${id}-${type}` }
+                >
                   <Link to={ `${type}s/${id}` }>
                     <img
-                      style={ { width: '100px' } }
+                      className="detail-img"
                       src={ image }
                       alt={ name }
                     />
                   </Link>
-                  <div>
-                    <div>
-                      <Link to={ `${type}s/${id}` }>
-                        <h3>{name}</h3>
-                      </Link>
-                      <ShareBtn
-                        type={ `/${type}s` }
-                        id={ id }
-                        testId={ `${id}-${type}-horizontal-share-btn` }
-                      />
+                  <div className="lg:p-3 p-[0.7rem] w-[100%]">
+                    <div className="flex justify-between w-full">
+                      <div className="flex gap-x-4 items-center">
+                        <Link
+                          className="no-underline title-done"
+                          to={ `${type}s/${id}` }
+                        >
+                          {name}
+                        </Link>
+                        <ShareBtn
+                          type={ `/${type}s` }
+                          id={ id }
+                          testId={ `${id}-${type}-horizontal-share-btn` }
+                        />
+                      </div>
                       <button
                         type="button"
                         className="reset-btn del-in-progress-btn"
@@ -78,20 +86,32 @@ export default function RecipesInProgress() {
                         <MdOutlineDelete size="40px" />
                       </button>
                     </div>
-                    <div>
-                      <p>
-                        { type === 'meal'
-                          ? `${nationality} - ${category}`
-                          : alcoholicOrNot }
+                    <p className="text-[var(--gray)] text-sm mb-1">
+                      { type === 'meal'
+                        ? `${nationality} - ${category}`
+                        : alcoholicOrNot }
+                    </p>
+                    <div className="justify-normal flex w-[100%]">
+                      <p className="text-[var(--darkYellow)] text-xs sm:text-sm mb-3">
+                        Start In:
+                        {' '}
+                        <span
+                          className="text-white"
+                        >
+                          { new Date(startDate).toLocaleDateString('en-US')}
+                        </span>
                       </p>
                     </div>
-                    {tags.map((tag) => (
-                      <div
-                        key={ tag }
-                      >
-                        {tag}
-                      </div>
-                    ))}
+                    <div className="flex w-full gap-2 flex-wrap">
+                      {tags.map((tag) => (
+                        <div
+                          className="tag"
+                          key={ tag }
+                        >
+                          {tag}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </li>
               );

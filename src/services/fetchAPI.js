@@ -16,9 +16,10 @@ const headers = {
 
 const URL_USERS = `${process.env.REACT_APP_BASE_URL}/users`;
 const URL_COMMENTS = `${process.env.REACT_APP_BASE_URL}/comments`;
+const URL_RECIPES = `${process.env.REACT_APP_BASE_URL}/recipes`;
 
 export const fetchAPI = async (pathname, optSearch, textSearch) => {
-  const BASE_URL = pathname === '/meals'
+  const BASE_URL = pathname.includes('/meals')
     ? 'https://www.themealdb.com/api/json/v1/1'
     : 'https://www.thecocktaildb.com/api/json/v1/1';
   const response = await fetch(
@@ -56,7 +57,6 @@ export const fetchNewUser = async (user) => {
       dones: [],
       favorites: [],
       inProgress: {},
-      my: [],
       score: 0,
       createAt: new Date().toISOString(),
     }),
@@ -108,6 +108,39 @@ export const fetchDeleteComment = async (id, data) => {
 
 export const fetchPatchComment = async (id, data) => {
   await fetch(`${URL_COMMENTS}/${id}`, {
+    headers,
+    method: 'PATCH',
+    body: JSON.stringify(data),
+  });
+};
+
+export const fetchUsersRecipes = async ({ id = null, key = null, value = null }) => {
+  let response;
+  if (!id && !key) response = await fetch(URL_RECIPES);
+  response = id
+    ? await fetch(`${URL_RECIPES}/${id}`)
+    : await fetch(`${URL_RECIPES}?${key}=${value}`);
+  const data = await response.json();
+  return data;
+};
+
+export const fetchPostRecipe = async (recipe) => {
+  await fetch(URL_RECIPES, {
+    headers,
+    method: 'POST',
+    body: JSON.stringify({ ...recipe, strCreateAt: new Date().toISOString() }),
+  });
+};
+
+export const fetchDeleteRecipe = async (id) => {
+  await fetch(`${URL_RECIPES}/${id}`, {
+    headers,
+    method: 'DELETE',
+  });
+};
+
+export const fetchPatchRecipe = async (id, data) => {
+  await fetch(`${URL_RECIPES}/${id}`, {
     headers,
     method: 'PATCH',
     body: JSON.stringify(data),
