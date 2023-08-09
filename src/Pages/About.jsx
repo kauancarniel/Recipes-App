@@ -19,7 +19,7 @@ function About() {
     {
       name: 'Kauan Carniel Peres',
       github: 'https://github.com/kauancarniel',
-      description: 'Tenho 20 anos, sou estudante de desenvolvimento web pela Trybe e apaixonado por tecnologia. Gosto muito de aprender e testar minhas habilidades. Sou adepto de metodologias ágeis e estou disponível para uma conversa.',
+      description: 'Tenho 20 anos, sou estudante de desenvolvimento web pela Trybe e apaixonado por tecnologia, gosto muito de aprender e colocar minhas habilidades em prática, sou adepto a metodologias ágeis e estou disponível para uma conversa.',
       linkedin: 'https://www.linkedin.com/in/kauancarniel/',
       image: kauanImg,
     },
