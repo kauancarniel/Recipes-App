@@ -1,6 +1,3 @@
-@tailwind components;
-@tailwind utilities;
-
 #root > main > section > div.border-grey.mt-10 > div > div > ul > li > label > div > span {
   background-color: inherit;
   border: none;
