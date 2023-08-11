@@ -6,7 +6,8 @@ import { fetchDeleteRecipe, fetchPostRecipe,
   fetchUsersRecipes } from '../services/fetchAPI';
 
 const useRecipe = () => {
-  const { setError, userLogged, setRecipes, recipes } = useContext(RecipesContext);
+  const { setError, userLogged, setRecipes,
+    recipes, setLoading } = useContext(RecipesContext);
   const { fireToast } = useFetch();
 
   const formatedRecipe = (type, recipe) => {
@@ -92,12 +93,25 @@ const useRecipe = () => {
     }
   };
 
+  const fetchRecipe = async (obj) => {
+    try {
+      setLoading(true);
+      return await fetchUsersRecipes(obj);
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return { getAllUsersRecipe,
     getMyRecipes,
     formatedRecipe,
     postMyRecipe,
     deleteRecipe,
-    patchRecipe };
+    patchRecipe,
+    fetchRecipe };
 };
 
 export default useRecipe;

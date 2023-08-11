@@ -111,6 +111,10 @@
     @apply bg-[rgba(0,0,0,.6)] border border-white border-opacity-10
   }
 
+  .bg-form-404 {
+    @apply bg-[rgba(255,255,255,.3)] border border-white border-opacity-10
+  }
+
   .user-box {
     @apply relative w-full
   }
