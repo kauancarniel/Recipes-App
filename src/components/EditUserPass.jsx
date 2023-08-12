@@ -38,7 +38,6 @@ export default function EditUserPass({ passwords, setPasswords }) {
     if (!checkPass.length === false) {
       patchUser(userLogged.id, { password: user.password });
       fireToast('Saved Changes!', 'success');
-      setEditUserPass(false);
     }
   };
 
