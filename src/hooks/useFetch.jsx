@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import Swal from 'sweetalert2';
 
 import { fetchAPI, fetchComments, fetchNewUser, fetchPatchUser,
-  fetchUserEmail, fetchUserId } from '../services/fetchAPI';
+  fetchUserEmail, fetchUserId, fetchUsersRecipes } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
 
@@ -57,7 +57,10 @@ const useFetch = () => {
   });
 
   const initialFetch = async (pathname) => {
-    const recipesData = await fetchRecipes(pathname);
+    const recipesData = pathname.includes('users')
+      ? await fetchUsersRecipes({ key: 'strPublic' })
+      : await fetchRecipes(pathname);
+
     const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
     if (error) {
       fireToast(`${error}. Please, try again later.`);

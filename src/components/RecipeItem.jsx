@@ -53,7 +53,7 @@ function RecipeItem({ recipe, setNewRecipe }) {
         </div>
       </div>
       <div className="flex flex-col p-1">
-        <ShareBtn type={ `/${strType}s` } id={ `${id}` } testId="share-btn" />
+        <ShareBtn type={ `/${strType}s` } id={ id } testId="share-btn" />
         <button
           className="reset-btn text-[var(--yellow)]"
           type="button"

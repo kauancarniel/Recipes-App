@@ -18,6 +18,7 @@ export default function Footer({ setCategorySelected = null }) {
     history.push(route);
   };
 
+
   return (
     <footer
       className="footer"
@@ -27,14 +28,16 @@ export default function Footer({ setCategorySelected = null }) {
         <button
           className="reset-btn"
           disabled={ pathname.includes('/drinks') }
-          onClick={ () => handleClick('/drinks') }
+          onClick={ () => handleClick(pathname.includes('users') ? '/drinks/users'
+            : '/drinks') }
         >
           <IconDrinks />
         </button>
         <button
           className="reset-btn"
           disabled={ pathname.includes('/meals') }
-          onClick={ () => handleClick('/meals') }
+          onClick={ () => handleClick(pathname.includes('users') ? '/meals/users'
+            : '/meals') }
         >
           <IconFood />
         </button>

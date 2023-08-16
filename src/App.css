@@ -71,10 +71,10 @@
     @apply border-div border-gray-300 border-[0.1px] p-3
   }
   .btn-recipe {
-    @apply w-[60%] max-w-[1000px] rounded-md text-white text-sm border-none bg-[#6e7909] py-3 font-bold uppercase tracking-widest
+    @apply fixed bottom-0 w-[100%] max-w-[1000px] rounded-md text-white text-sm border-none bg-[#6e7909] py-3 font-bold uppercase tracking-widest
   }
   .btn-container {
-    @apply fixed bottom-0 z-50 flex items-center justify-center w-[100%]
+    @apply  z-50 flex items-center justify-center w-[100%]
   }
 
   .iframe-youtube {
@@ -111,8 +111,8 @@
     @apply bg-[rgba(0,0,0,.6)] border border-white border-opacity-10
   }
 
-  .bg-form-404 {
-    @apply bg-[rgba(255,255,255,.3)] border border-white border-opacity-10
+  .bg-notFounded {
+    @apply bg-[rgba(255,255,255,.2)] border border-white border-opacity-10
   }
 
   .user-box {

@@ -22,6 +22,8 @@ function App() {
       <Route path="/" component={ Login } exact />
       <Route path="/meals" component={ Recipes } exact />
       <Route path="/drinks" component={ Recipes } exact />
+      <Route path="/meals/users" component={ Recipes } exact />
+      <Route path="/drinks/users" component={ Recipes } exact />
       <Route path="/meals/:id" component={ Recipe } exact />
       <Route path="/drinks/:id" component={ Recipe } exact />
       <Route path="/meals/users/:id" component={ Recipe } exact />

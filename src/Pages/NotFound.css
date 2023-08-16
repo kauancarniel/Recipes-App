@@ -1,0 +1,24 @@
+#buttonNotFound {
+  padding: 12.5px 30px;
+  border: 0;
+  border-radius: 100px;
+  background-color: #3c454b;
+  color: #ffffff;
+  font-weight: Bold;
+  transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+#buttonNotFound:hover {
+  background-color: #3c454b;
+  box-shadow: 0 0 20px #52697950;
+  transform: scale(1.1);
+}
+
+#buttonNotFound:active {
+  background-color: #3c454b;
+  transition: all 0.25s;
+  -webkit-transition: all 0.25s;
+  box-shadow: none;
+  transform: scale(0.98);
+}

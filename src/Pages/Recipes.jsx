@@ -10,6 +10,7 @@ import RecipeCard from '../components/RecipeCard';
 import IconFood from '../images/IconFood';
 import IconDrink from '../images/IconDrinks';
 import CategoryIcon from '../components/CategoryIcon';
+import { fetchUsersRecipes } from '../services/fetchAPI';
 
 const MAX_RECIPES = 12;
 
@@ -26,14 +27,25 @@ function Recipes() {
       if (!isLogged) return;
       initialFetch(pathname);
     })();
-  }, []);
+  }, [pathname]);
 
   const handleClickCategory = async (strCategory) => {
     const allCondition = (strCategory === 'All' && categorySelected !== 'All');
     if (allCondition || categorySelected === strCategory) {
+      if (pathname.includes('users')) {
+        const userRecipes = await fetchUsersRecipes({ key: 'strPublic' });
+        setRecipes(userRecipes.slice(0, MAX_RECIPES));
+        setCategorySelected('All');
+        return;
+      }
       const recipesDataAll = await fetchRecipes(pathname);
       setRecipes(recipesDataAll.slice(0, MAX_RECIPES));
       setCategorySelected('All');
+    } else if (pathname.includes('users')) {
+      const userRecipes = await fetchUsersRecipes({ key: 'strPublic' });
+      setRecipes(userRecipes.filter((recipe) => recipe.strCategory === strCategory)
+        .slice(0, MAX_RECIPES));
+      setCategorySelected(strCategory);
     } else {
       const recipesData = await fetchRecipes(pathname, 'category', strCategory);
       setRecipes(recipesData.slice(0, MAX_RECIPES));
@@ -44,7 +56,7 @@ function Recipes() {
   return (
     <>
       <Header
-        title={ pathname === '/meals' ? 'Meals' : 'Drinks' }
+        title={ pathname.includes('/meals') ? 'Meals' : 'Drinks' }
         iconeSearch
       />
       <main className="recipe-box flex flex-col bg-form glass box-bottom">
@@ -65,7 +77,7 @@ function Recipes() {
                   ? 'var(--green)' : 'var(--yellow)'}]`
               }
             >
-              { pathname === '/meals' ? (
+              { pathname.includes('/meals') ? (
                 <IconFood categorySelected={ categorySelected } strCategory="All" />
               ) : (
                 <IconDrink categorySelected={ categorySelected } strCategory="All" />

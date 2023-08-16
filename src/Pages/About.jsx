@@ -3,6 +3,7 @@ import Header from '../components/Header';
 import Host from '../components/Host';
 import lucasIMG from '../images/lucas.jpeg';
 import guilhermeIMG from '../images/guilherme.jpeg';
+import kauanImg from '../images/kauan.jpeg';
 import './About.css';
 
 function About() {
@@ -16,11 +17,11 @@ function About() {
       image: guilhermeIMG,
     },
     {
-      name: 'Kauan',
-      github: '',
-      description: 'Lorng elit. Incidunt quis rem eum totam fuga, ut soluta vel accusantium ficiis quos! Nemo, quae in?',
-      linkedin: '',
-      image: lucasIMG,
+      name: 'Kauan Carniel Peres',
+      github: 'https://github.com/kauancarniel',
+      description: 'Tenho 20 anos, sou estudante de desenvolvimento web pela Trybe e apaixonado por tecnologia, gosto muito de aprender e colocar minhas habilidades em prática, sou adepto a metodologias ágeis e estou disponível para uma conversa.',
+      linkedin: 'https://www.linkedin.com/in/kauancarniel/',
+      image: kauanImg,
     },
     {
       name: 'Lucas Diello',
