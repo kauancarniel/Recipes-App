@@ -37,6 +37,19 @@
       "inProgress": {},
       "score": 0,
       "createAt": "2023-08-26T21:16:03.940Z"
+    },
+    {
+      "id": "4cc8ca61-be7e-4688-a54c-bb64353716f5",
+      "name": "teste2",
+      "email": "teste2@teste.com",
+      "password": "fcea920f7412b5da7be0cf42b8c93759",
+      "acceptCookies": true,
+      "photo": "",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "score": 0,
+      "createAt": "2023-08-26T22:10:10.876Z"
     }
   ],
   "recipes": [],
