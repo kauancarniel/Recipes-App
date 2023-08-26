@@ -84,6 +84,7 @@ export default function FormCreateRecipe({ type, setNewRecipe }) {
               handleChange={ handleChange }
               type={ type }
               categories={ categories }
+              setInfosRecipe={ setInfosRecipe }
             />
             <div className="list-ingredients-container">
               <div className="text-[var(--yellow)] flex gap-2 items-center">

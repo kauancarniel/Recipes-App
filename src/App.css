@@ -282,6 +282,13 @@
     @apply flex flex-col w-full sm:w-[55%] min-h-[318.3px] mt-3 h-fit
   }
 
+  .file-btn {
+    @apply py-3 px-2 bg-[var(--orange)] text-white rounded-lg uppercase text-center my-2 cursor-pointer w-full font-bold
+  }
+
+  .select-file {
+    @apply bg-[var(--green)]
+  }
 }
 
 * {

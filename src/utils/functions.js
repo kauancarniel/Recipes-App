@@ -1,6 +1,6 @@
 import Swal from 'sweetalert2';
 
-const HOURS = 3;
+const HOURS = 6;
 
 export const initialIngredients = (ingredients) => ingredients
   .reduce((obj, [key]) => ({

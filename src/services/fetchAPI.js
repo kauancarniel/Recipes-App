@@ -1,4 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
+import md5 from 'md5';
+// import { serverTimestamp } from 'firebase/firestore';
+// import { postFirebase, uploadImage } from './firebase';
+import { uploadImage } from './firebase';
 
 const keys = {
   ingredient: ['filter', 'i'],
@@ -34,7 +38,7 @@ export const fetchUserEmail = async (email, password) => {
   if (!password) {
     response = await fetch(`${URL_USERS}?email=${email}`);
   } else {
-    response = await fetch(`${URL_USERS}?email=${email}&password=${password}`);
+    response = await fetch(`${URL_USERS}?email=${email}&password=${md5(password)}`);
   }
   const data = await response.json();
   return data;
@@ -48,12 +52,34 @@ export const fetchUserId = async (id) => {
 
 export const fetchNewUser = async (user) => {
   const id = uuidv4();
+  let photo = '';
+  if (user.photo) {
+    photo = await uploadImage(id, user.photo);
+  }
+
+  // const data = {
+  //   id,
+  //   name: user.name,
+  //   email: user.email,
+  //   password: md5(user.password),
+  //   photo,
+  //   dones: [],
+  //   favorites: [],
+  //   inProgress: {},
+  //   score: 0,
+  //   createAt: serverTimestamp(),
+  // };
+  // await postFirebase('users', id, data);
   await fetch(URL_USERS, {
     headers,
     method: 'POST',
     body: JSON.stringify({
       id,
-      ...user,
+      name: user.name,
+      email: user.email,
+      password: md5(user.password),
+      acceptCookies: user.acceptCookies,
+      photo,
       dones: [],
       favorites: [],
       inProgress: {},

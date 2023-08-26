@@ -1,5 +1,5 @@
-const jsonServer = require('json-server');
 const path = require('path');
+const jsonServer = require('json-server');
 
 const server = jsonServer.create();
 const router = jsonServer.router(path.resolve(__dirname, 'src', 'data', 'db.json'));

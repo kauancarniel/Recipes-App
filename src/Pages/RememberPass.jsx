@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import validator from 'validator';
 import { Link } from 'react-router-dom';
-import copy from 'clipboard-copy';
 import { IoChevronBackCircleSharp } from 'react-icons/io5';
 
 import InitialLayout from '../components/InitialLayout';
@@ -9,7 +8,7 @@ import useFetch from '../hooks/useFetch';
 import useUser from '../hooks/useUser';
 
 export default function RememberPass() {
-  const { fetchUser, fireToast } = useFetch();
+  const { fetchUser } = useFetch();
   const { validateCookie } = useUser();
   const [user, setUser] = useState({
     email: '',
@@ -35,17 +34,13 @@ export default function RememberPass() {
 
   const buttons = [
     '',
-    <button
-      key="copy"
-      type="button"
-      onClick={ () => {
-        copy(password);
-        fireToast('Password copied', 'success');
-      } }
-      className="reset-btn text-[var(--orange)] font-bold hover:text-[var(--red)]"
+    <Link
+      key="login"
+      className="go-login font-bold"
+      to="/"
     >
-      Copy
-    </button>,
+      Go to Login
+    </Link>,
     <Link
       key="register"
       to="/signup"
@@ -66,7 +61,7 @@ export default function RememberPass() {
         setPassword('Valid email, but name does not match registered. Please try again');
         setIndexBtn(0);
       } else {
-        setPassword(userResponse[0].password);
+        setPassword('Recovery email sent, check your inbox and');
         setIndexBtn(1);
       }
     } else {
@@ -137,18 +132,9 @@ export default function RememberPass() {
               className="password-remember"
             >
               {password}
-              {' '}
-              {buttons[indexBtn]}
-              { indexBtn === 1 && (
-                <p className="m-0">
-                  <Link
-                    className="go-login"
-                    to="/"
-                  >
-                    Go to Login
-                  </Link>
-                </p>
-              )}
+              <p className="m-1 font-bold">
+                {buttons[indexBtn]}
+              </p>
             </p>
           </div>
 

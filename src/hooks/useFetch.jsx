@@ -89,7 +89,11 @@ const useFetch = () => {
     try {
       setLoading(true);
       const id = await fetchNewUser(newUser);
-      setCookie('userLogged', id);
+      if (newUser.AcceptCookies) {
+        setCookie('userLogged', id);
+      } else {
+        sessionStorage.setItem('userLogged', id);
+      }
       return true;
     } catch ({ message }) {
       setError(message);

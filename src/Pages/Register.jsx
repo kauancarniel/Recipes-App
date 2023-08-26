@@ -15,6 +15,7 @@ export default function Register() {
     name: '',
     password: '',
     photo: '',
+    acceptCookies: false,
   });
   const [confirmPass, setConfirmPass] = useState('');
   const [emailRegister, setEmailRegister] = useState(false);

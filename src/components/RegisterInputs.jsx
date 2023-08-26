@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 
 import useFetch from '../hooks/useFetch';
+// import { getFirebase } from '../services/firebase';
+import './AcceptCookies.css';
 
 function RegisterInputs({
   setConfirmPass, setEmailRegister, setUser, user, confirmPass,
@@ -20,37 +23,48 @@ function RegisterInputs({
   };
 
   const checkEmail = async (email) => {
+    // await getFirebase(email);
     const emailExist = await checkUserExist(email);
     setEmailRegister(emailExist);
   };
 
   return (
     <>
-      <div className="flex flex-col items-center gap-3 w-full max-w-[216px]">
+      <div
+        className="flex flex-col items-center gap-3 w-full max-w-[216px]"
+      >
         { user.photo ? (
-          <img
-            src={ user.photo }
-            alt="user"
-            className="rounded-[100px] w-[148px] h-[148px]  border-div"
+          <div
+            style={ {
+              backgroundImage: `url(${user.photo && URL.createObjectURL(user.photo)})`,
+              backgroundSize: '100% 100%',
+              backgroundRepeat: 'no-repeat',
+              backgroundPosition: 'center',
+            } }
+            className="rounded-[100px] w-[150px] h-[150px]  border-div"
           />
         ) : (
           <CgProfile className="rounded-[100px] w-[148px] h-[148px] bg-[var(--yellow)]" />
         )}
         <div className="user-box">
           <input
-            className="peer reset-input input"
+            className="hidden"
             name="photo"
-            value={ user.photo }
-            type="url"
+            id="photo"
+            type="file"
             onChange={ ({ target }) => {
-              handleChange(target);
+              if (target.files[0]) {
+                setUser({ ...user, photo: target.files[0] });
+              } else {
+                setUser({ ...user, photo: '' });
+              }
             } }
           />
           <label
-            className={ `label ${focus} ${confirmPass.length ? valid : ''}` }
-            htmlFor="confirmPass"
+            className={ `file-btn ${user.photo ? ' select-file' : ''}` }
+            htmlFor="photo"
           >
-            Photo
+            Photo Upload
           </label>
         </div>
       </div>
@@ -136,7 +150,7 @@ function RegisterInputs({
               required
             />
             <label
-              className={ `label ${focus} ${user.photo.length ? valid : ''}` }
+              className={ `label ${focus} ${confirmPass.length ? valid : ''}` }
               htmlFor="confirmPass"
             >
               Confirm Password
@@ -155,6 +169,25 @@ function RegisterInputs({
           </button>
         </div>
       </div>
+      <div className="checkbox-wrapper-10 text-white flex items-center">
+        Do you agree to use cookies to keep you logged in for a certain time?
+        <div className="checkbox-wrapper-10">
+          <input
+            checked={ user.acceptCookies }
+            type="checkbox"
+            id="cb5"
+            className="tgl tgl-flip"
+            onClick={ () => setUser({ ...user, acceptCookies: !user.acceptCookies }) }
+          />
+          <label
+            htmlFor="cb5"
+            data-tg-on="Yes"
+            data-tg-off="No"
+            className="tgl-btn"
+          />
+        </div>
+
+      </div>
     </>
   );
 }
@@ -167,7 +200,8 @@ RegisterInputs.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     password: PropTypes.string,
-    photo: PropTypes.string,
+    photo: PropTypes.instanceOf(Object) || PropTypes.string,
+    acceptCookies: PropTypes.bool,
   }).isRequired,
   confirmPass: PropTypes.string.isRequired,
 };

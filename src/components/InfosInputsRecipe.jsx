@@ -5,7 +5,8 @@ const focus = 'peer-focus:-top-5 peer-focus:text-xs';
 const valid = 'peer-valid:-top-5 peer-valid:text-xs';
 const classLabel = `label ${focus} ${valid}`;
 
-function InfosInputsRecipe({ infosRecipe, handleChange, categories, type }) {
+function InfosInputsRecipe({ infosRecipe, handleChange,
+  categories, type, setInfosRecipe }) {
   return (
     <div className="flex flex-col mt-3 h-[324px]">
       <h3 className="text-[var(--yellow)] m-0">Infos</h3>
@@ -95,22 +96,26 @@ function InfosInputsRecipe({ infosRecipe, handleChange, categories, type }) {
           </label>
         </div>
       )}
-      <div className="user-box self-center mt-3">
+      <div className="user-box">
         <input
-          className="peer reset-input input"
-          id="imageRecipe"
-          value={ infosRecipe[`str${type}Thumb`] }
-          type="url"
-          name={ `str${type}Thumb` }
-          onChange={ ({ target }) => handleChange(target) }
+          className="hidden"
+          name="photo"
+          id="photo"
+          type="file"
+          onChange={ ({ target }) => {
+            if (target.files[0]) {
+              setInfosRecipe({ ...infosRecipe, [`str${type}Thumb`]: target.files[0] });
+            } else {
+              setInfosRecipe({ ...infosRecipe, [`str${type}Thumb`]: '' });
+            }
+          } }
         />
         <label
-          className={
-            `label ${focus} ${infosRecipe[`str${type}Thumb`].length ? valid : ''}`
-          }
-          htmlFor="imageRecipe"
+          className={ `file-btn ${infosRecipe[`str${type}Thumb`]
+            ? ' select-file' : ''} py-1` }
+          htmlFor="photo"
         >
-          Image URL
+          Photo Upload
         </label>
       </div>
       { type === 'Meal' && (
@@ -169,6 +174,7 @@ InfosInputsRecipe.propTypes = {
     strYoutube: PropTypes.string,
     strTags: PropTypes.string,
   }).isRequired,
+  setInfosRecipe: PropTypes.func.isRequired,
   handleChange: PropTypes.func.isRequired,
   categories: PropTypes.instanceOf(Array).isRequired,
   type: PropTypes.string.isRequired,

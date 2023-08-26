@@ -1,4 +1,6 @@
 import { useContext } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadImage } from '../services/firebase';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from './useFetch';
@@ -64,7 +66,13 @@ const useRecipe = () => {
 
   const postMyRecipe = async (obj) => {
     try {
-      await fetchPostRecipe(obj);
+      const type = obj.strType === 'meal' ? 'Meal' : 'Drink';
+      const id = uuidv4();
+      let photo = '';
+      if (user.photo) {
+        photo = await uploadImage(id, obj[`str${type}Thumb`]);
+      }
+      await fetchPostRecipe({ ...obj, [`str${type}Thumb`]: photo });
       fireToast('Recipe successfully added!', 'success');
       setRecipes((prev) => [...prev, obj]);
     } catch ({ message }) {
