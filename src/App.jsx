@@ -38,8 +38,6 @@ function App() {
       <Route path="/ranking" component={ Ranking } />
       <Route path="/in-progress-recipes" component={ RecipesInProgress } />
       <Route path="/my-recipes" component={ MyRecipes } />
-      <Route path="/my-recipes/:id" component={ Recipe } />
-      <Route path="/my-recupes/:id/in-progress" component={ Recipe } />
       <Route path="/about" component={ About } />
       <Route path="*" component={ NotFound } />
     </Switch>

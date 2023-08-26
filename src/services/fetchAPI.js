@@ -141,6 +141,7 @@ export const fetchPatchComment = async (id, data) => {
 };
 
 export const fetchUsersRecipes = async ({ id = null, key = null, value = null }) => {
+  console.log('entrei');
   let response;
   if (!id && !key) response = await fetch(URL_RECIPES);
   response = id

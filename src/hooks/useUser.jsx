@@ -14,8 +14,7 @@ const useUser = () => {
 
   const validateCookie = async () => {
     const unlogingPaths = ['/', '/remember-password', '/signup'];
-    let id = getCookie('userLogged');
-    if (!id) id = sessionStorage.getItem('userLogged');
+    const id = getCookie('userLogged') || sessionStorage.getItem('userLogged');
     if (id) {
       if (!userLogged) {
         const user = await fetchUser({ id });
@@ -31,6 +30,7 @@ const useUser = () => {
 
   const logout = () => {
     deleteCookie('userLogged');
+    sessionStorage.removeItem('userLogged');
     setUserLogged(null);
     setMenuOpen(false);
   };

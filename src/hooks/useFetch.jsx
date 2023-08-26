@@ -75,7 +75,7 @@ const useFetch = () => {
     try {
       setLoading(true);
       if (email) return await fetchUserEmail(email, password);
-      if (id !== null) return await fetchUserId(id);
+      if (id) return await fetchUserId(id);
       throw new Error('fetchUser needs at least one parameter (id or email');
     } catch ({ message }) {
       setError(message);
