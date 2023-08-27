@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import Header from '../components/Header';
 import Host from '../components/Host';
@@ -10,10 +11,11 @@ function About() {
   const hosts = [
     {
       name: 'Guilherme Fernandes',
-      github: '',
+      github: 'https://github.com/GuiiFernandes',
       description:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt quis rem eum totam fuga, ut soluta vel accusantium explicabo eius fugiat necessitatibus sed molestiae animi officiis quos! Nemo, quae in?',
-      linkedin: '',
+        'Desenvolvedor FullStack e Summer de Instrução FrontEnd pela Trybe. Além de gestor financeiro pelo IFMG-Formiga e sócio e gestor do Sweet Pet - Estética Animal. 31 anos e moro em Lavras-MG. Sou obcecado por melhorar a vida das pessoas. por meio da tecnologia Faminto por conhecimento, além da tecnologia, interesso em negócios, processos, economia, finanças e investimentos. Busco criar soluções que permitam às pessoas terem mais tempo para desfrutar de uma vida plena e gratificante. Acredito que a tecnologia pode ajudar a gerar renda e liberar tempo valioso, para que todos possam viver plenamente e aproveitar as coisas que mais importam.',
+      linkedin: 'https://www.linkedin.com/in/guifernandesdev/',
+      port: 'https://guiifernandes.github.io/',
       image: guilhermeIMG,
     },
     {
@@ -27,8 +29,9 @@ function About() {
       name: 'Lucas Diello',
       github: 'https://github.com/LucasDiello',
       description:
-        'Sempre admirei a tecnologia, pois vivenciei minha infância e minha adolescência em frente a um computador, sou obcecado por desafios e hoje estou aprendendo sobre o mundo do desenvolvimento web, caso interesse entre em contato!  🚀',
+        'Olá, tenho 21 anos e sempre admirei a tecnologia, pois vivenciei minha infância e minha adolescência em frente a um computador, sou obcecado por desafios e hoje estou aprendendo sobre o mundo do desenvolvimento web, caso interesse entre em contato!  🚀',
       linkedin: 'https://www.linkedin.com/in/lucas-diello-5b5440265/',
+      port: 'https://lucasdiello.netlify.app/',
       image: lucasIMG,
     },
   ];
@@ -38,25 +41,25 @@ function About() {
       <Header title="About" />
       <main
         className="recipe-box
-      flex bg-form glass box-bottom gap-3 p-10 flex-wrap justify-center"
+      flex bg-form glass box-bottom gap-3 p-10 flex-wrap justify-center
+      "
       >
         <section className="p-2">
           <h1 className="text-start text-white mb-6">Aplicação</h1>
           <p className="text-[var(--gray)]">
-            Lorem ipsum dolor
-            sit amet consectetur adipisicing elit.
-            Odio, mollitia! Inventore quae ab recusandae lau
-            dantium, temporibus dicta quibusdam nulla labore o
-            dio aut odit in. Ex voluptatem quis adipisci enim quidem.
-            Lorem ipsum dolor sit amet consectetur a
-            ipisicing elit. Explicabo consequatur non deserunt i
-            psa nihil cupiditate optio ab id animi distinctio, velit
-            laboriosam ipsum fugit quia placeat ullam provident earum consectet
-            ur!
-            Lorem ipsum, dolor sit amet consectetur adipisicing eli
-            t. Architecto hic quod, voluptas accusantium beatae conseq
-            uuntur nam nostrum debitis magni sed, iure consectetur?
-            Repudiandae optio distinctio facilis aut numquam maxime amet?
+            O app de receitas foi projetado para simplificar sua vida na cozinha,
+            oferecendo uma plataforma intuitiva e abrangente para todas as suas necessidades culinárias.
+            Desde o início, nosso projeto tinha apenas um propósito simples:
+            simplificar a culinária e inspirar os amantes da comida.
+            No entanto, à medida que trabalhávamos no projeto, descobrimos que poderíamos
+            criar algo além. O que começou como uma ideia singular evoluiu para uma
+            comunidade dinâmica e interativa. Ao longo do projeto, era essencial permitir
+            que os usuários participassem ativamente. Não queríamos apenas fornecer
+            receitas e dicas, queríamos criar um espaço onde todos pudessem contribuir,
+            aprender e crescer juntos. Em resumo,
+            nosso aplicativo de receitas é mais do que uma simples coleção de instruções
+            culinárias. É uma janela para apreciadores da gastronomia, uma escola de técnicas e
+            um ponto de encontro para amantes da comida.
           </p>
         </section>
         <div className="w-[100%] p-2">
