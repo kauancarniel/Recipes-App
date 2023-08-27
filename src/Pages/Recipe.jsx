@@ -35,12 +35,13 @@ export default function Recipe() {
 
   const NAME_URL = `/${pathname.split('/')[1]}`;
   const KEY_BASE = pathname.split('/')[1] === 'meals' ? 'Meal' : 'Drink';
+  const inUsersRecipe = pathname.includes('users');
 
   useEffect(() => {
     (async () => {
       const isLogged = await validateCookie();
       if (!isLogged) return;
-      const [recipeData] = pathname.includes('users')
+      const [recipeData] = inUsersRecipe
         ? await fetchRecipe({ key: 'id', value: id })
         : await fetchRecipes(NAME_URL, 'details', id);
       setRecipe(recipeData);
@@ -134,7 +135,7 @@ export default function Recipe() {
                 >
                   <iframe
                     className="iframe-youtube"
-                    src={ `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
+                    src={ inUsersRecipe ? recipe.strYoutube : `https://www.youtube.com/embed/${recipe.strYoutube.split('=')[1]}` }
                     title="Recipe Video"
                   />
                 </div>

@@ -50,6 +50,15 @@ export const fetchUserId = async (id) => {
   return data;
 };
 
+export const fetchUsers = async () => {
+  const response = await fetch(URL_USERS);
+  const data = await response.json();
+  return data.map((user) => {
+    delete user.password;
+    return user;
+  });
+};
+
 export const fetchNewUser = async (user) => {
   const id = uuidv4();
   let photo = '';

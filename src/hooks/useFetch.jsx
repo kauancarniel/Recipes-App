@@ -3,7 +3,7 @@ import Swal from 'sweetalert2';
 
 import { fetchAPI, fetchComments, fetchNewUser, fetchPatchUser,
   fetchPublicRecipes,
-  fetchUserEmail, fetchUserId } from '../services/fetchAPI';
+  fetchUserEmail, fetchUserId, fetchUsers } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
 import { uploadImage } from '../services/firebase';
@@ -91,6 +91,15 @@ const useFetch = () => {
     }
   };
 
+  const fetchAllUsers = async () => {
+    try {
+      return await fetchUsers();
+    } catch ({ message }) {
+      setError(message);
+      return [];
+    }
+  };
+
   const postNewUser = async (newUser) => {
     try {
       setLoading(true);
@@ -175,6 +184,7 @@ const useFetch = () => {
     fetchRecipeComments,
     sweetAlert,
     fetchCategories,
+    fetchAllUsers,
   };
 };
 
