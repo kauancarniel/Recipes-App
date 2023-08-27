@@ -10,7 +10,7 @@ import EditUserInfo from '../components/EditUserInfo';
 import EditUserPass from '../components/EditUserPass';
 import Comments from '../components/Comments';
 import ProfileErrors from '../components/ProfileErrors';
-import { getCookie } from '../utils/functions';
+import { getId } from '../utils/functions';
 import './Login.css';
 import './Profile.css';
 
@@ -26,15 +26,20 @@ function Profile() {
   );
   const [editPass, setEditPass] = useState(false);
   const [emailRegister, setEmailRegister] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState({
+    email: '',
+    name: '',
+    photo: '',
+    acceptCookies: false,
+  });
 
   useEffect(() => {
     (async () => {
       const isLogged = await validateCookie();
       if (!isLogged) return;
-      const id = getCookie('userLogged');
-      const dataUser = await fetchUser({ id });
-      setUser(dataUser);
+      const id = getId('userLogged');
+      const { email, name, photo, acceptCookies } = await fetchUser({ id });
+      setUser({ email, name, photo, acceptCookies });
     })();
   }, []);
 
@@ -46,14 +51,14 @@ function Profile() {
     })();
   }, [user]);
 
-  const { name, email, photo } = userLogged
-  || { name: '', email: '', photo: '' };
+  const { name, email, photo, acceptCookies } = userLogged
+  || { name: '', email: '', photo: '', acceptCookies: false };
+
   const { lastPass, newPass, confirmPass, validLastPass } = passwords
     || { lastPass: '', newPass: '', confirmPass: '', validLastPass: true };
 
   const handleSubmit = async () => {
-    patchUser(userLogged.id, { email, name, photo });
-    console.log(photo);
+    patchUser(userLogged.id, user, photo);
     fireToast('Saved Changes!', 'success');
   };
 
@@ -69,10 +74,10 @@ function Profile() {
     }
     return (
       validator.isEmail(email)
-        && (validator.isURL(photo) || !photo.length)
         && !emailRegister
         && name.length >= NAME_LENGTH
-        && (user.name !== name || user.email !== email || user.photo !== photo)
+        && (user.name !== name || user.email !== email
+          || user.photo !== photo || user.acceptCookies !== acceptCookies)
     );
   };
 
@@ -82,7 +87,11 @@ function Profile() {
       <main
         className="recipe-box flex flex-col items-center bg-form glass box-bottom gap-3"
       >
-        <EditUserInfo setEmailRegister={ setEmailRegister } />
+        <EditUserInfo
+          user={ user }
+          setUser={ setUser }
+          setEmailRegister={ setEmailRegister }
+        />
         <div className="flex flex-row">
           <button
             className="button"

@@ -28,7 +28,10 @@ function RecipeItem({ recipe, setNewRecipe }) {
       </Link>
       <div className="lg:p-3 p-[0.7rem] w-[100%]">
         <div className="flex justify-between items-center">
-          <Link to={ `/${strType}s/users/${id}` }>
+          <Link
+            to={ `/${strType}s/users/${id}` }
+            className="no-underline"
+          >
             <h4 className="title-done">{recipe[`str${type}`]}</h4>
           </Link>
         </div>

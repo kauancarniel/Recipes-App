@@ -5,7 +5,8 @@
       "name": "Guilherme Fernandes",
       "email": "guifjj92@gmail.com",
       "password": "fcea920f7412b5da7be0cf42b8c93759",
-      "photo": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2F127edb03-929c-429f-96ab-c4e8949aff5d?alt=media&token=b5502972-acf0-4bf2-b254-4ac97392944e",
+      "acceptCookies": true,
+      "photo": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2F127edb03-929c-429f-96ab-c4e8949aff5d?alt=media&token=93806cce-2004-4d3d-98be-6c9dd30f7fb7",
       "dones": [],
       "favorites": [],
       "inProgress": {},
@@ -50,8 +51,71 @@
       "inProgress": {},
       "score": 0,
       "createAt": "2023-08-26T22:10:10.876Z"
+    },
+    {
+      "id": "e8eef598-d8c6-4064-ab89-49013ba95765",
+      "name": "teste3",
+      "email": "teste3@teste.com",
+      "password": "fcea920f7412b5da7be0cf42b8c93759",
+      "acceptCookies": true,
+      "photo": "",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "score": 0,
+      "createAt": "2023-08-26T22:16:35.041Z"
+    },
+    {
+      "id": "94acb081-6f4e-4b86-99c8-66eb0c0b8297",
+      "name": "teste4",
+      "email": "teste4@teste.com",
+      "password": "fcea920f7412b5da7be0cf42b8c93759",
+      "acceptCookies": false,
+      "photo": "",
+      "dones": [],
+      "favorites": [],
+      "inProgress": {},
+      "score": 0,
+      "createAt": "2023-08-26T22:56:28.356Z"
     }
   ],
-  "recipes": [],
+  "recipes": [
+    {
+      "strType": "meal",
+      "strMeal": "RozCovo",
+      "strUserId": "127edb03-929c-429f-96ab-c4e8949aff5d",
+      "strCategory": "Beefs",
+      "strArea": "Lavras",
+      "strInstructions": "Faz na panela",
+      "strMealThumb": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2Fd2de4cf7-8cd6-4956-a5bd-9d50bb7c4558?alt=media&token=8c0fb8eb-ae77-4d96-95d9-758e75335961",
+      "strTags": "arroz,ovo",
+      "strPublic": true,
+      "strYoutube": "https://www.youtube.com/embed/rwu4998Ad5o",
+      "strIngredient1": "arroz",
+      "strMeasure1": "3colher",
+      "strIngredient2": "ovo",
+      "strMeasure2": "2un",
+      "strCreateAt": "2023-08-26T22:28:25.335Z",
+      "id": 1
+    },
+    {
+      "strType": "meal",
+      "strMeal": "RozCovo",
+      "strUserId": "94acb081-6f4e-4b86-99c8-66eb0c0b8297",
+      "strCategory": "Beefs",
+      "strArea": "Lavras",
+      "strInstructions": "dsfsdfsdfsdfsdfdsf",
+      "strMealThumb": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2Fff0dc38e-9f7a-450c-9189-52c2c6c5cff4?alt=media&token=ab9295f5-6fb0-48dd-a29b-a25f73dc351b",
+      "strTags": "arroz,ovo",
+      "strPublic": false,
+      "strYoutube": "https://www.youtube.com/embed/rwu4998Ad5o",
+      "strIngredient1": "arroz",
+      "strMeasure1": "3colher",
+      "strIngredient2": "ovo",
+      "strMeasure2": "2un",
+      "strCreateAt": "2023-08-26T22:58:45.093Z",
+      "id": 2
+    }
+  ],
   "comments": []
 }

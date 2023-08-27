@@ -7,10 +7,9 @@ import Header from '../components/Header';
 import Filter from '../components/Filter';
 import FormCreateRecipe from '../components/FormCreateRecipe';
 import RecipeItem from '../components/RecipeItem';
-import { getCookie } from '../utils/functions';
 
 export default function MyRecipes() {
-  const { filter, recipes, recipeEdit } = useContext(RecipesContext);
+  const { filter, recipes, recipeEdit, userLogged } = useContext(RecipesContext);
   const { validateCookie } = useUser();
   const { getMyRecipes } = useRecipe();
   const [type, setType] = useState('Meal');
@@ -20,7 +19,7 @@ export default function MyRecipes() {
     (async () => {
       const isLogged = await validateCookie();
       if (!isLogged) return;
-      await getMyRecipes({ key: 'strUserId', value: getCookie('userLogged') });
+      await getMyRecipes({ key: 'strUserId', value: userLogged.id });
     })();
   }, []);
 

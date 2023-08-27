@@ -44,7 +44,7 @@ function RegisterInputs({
             className="rounded-[100px] w-[150px] h-[150px]  border-div"
           />
         ) : (
-          <CgProfile className="rounded-[100px] w-[148px] h-[148px] bg-[var(--yellow)]" />
+          <CgProfile className="rounded-[100px] w-[150px] h-[150px] bg-[var(--yellow)]" />
         )}
         <div className="user-box">
           <input
@@ -177,7 +177,7 @@ function RegisterInputs({
             type="checkbox"
             id="cb5"
             className="tgl tgl-flip"
-            onClick={ () => setUser({ ...user, acceptCookies: !user.acceptCookies }) }
+            onChange={ () => setUser({ ...user, acceptCookies: !user.acceptCookies }) }
           />
           <label
             htmlFor="cb5"
@@ -186,7 +186,6 @@ function RegisterInputs({
             className="tgl-btn"
           />
         </div>
-
       </div>
     </>
   );
@@ -200,7 +199,10 @@ RegisterInputs.propTypes = {
     email: PropTypes.string,
     name: PropTypes.string,
     password: PropTypes.string,
-    photo: PropTypes.instanceOf(Object) || PropTypes.string,
+    photo: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]).isRequired,
     acceptCookies: PropTypes.bool,
   }).isRequired,
   confirmPass: PropTypes.string.isRequired,

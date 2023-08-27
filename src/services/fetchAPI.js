@@ -62,6 +62,7 @@ export const fetchNewUser = async (user) => {
   //   name: user.name,
   //   email: user.email,
   //   password: md5(user.password),
+  //   acceptCookies: user.acceptCookies,
   //   photo,
   //   dones: [],
   //   favorites: [],

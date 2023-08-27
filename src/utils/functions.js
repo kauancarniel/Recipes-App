@@ -25,8 +25,11 @@ export const setCookie = (key, id) => {
   document.cookie = `${key}=${(id)};expires=${date.toGMTString()};path=/`;
 };
 
-export const getCookie = (key) => {
+export const getId = (key) => {
   const cookies = document.cookie.split(';');
+  if (!cookies[0]) {
+    return sessionStorage.getItem(key);
+  }
   const cookie = cookies.find((c) => c.includes(key));
   return cookie ? cookie.split('=')[1] : null;
 };

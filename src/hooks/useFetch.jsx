@@ -5,6 +5,7 @@ import { fetchAPI, fetchComments, fetchNewUser, fetchPatchUser,
   fetchUserEmail, fetchUserId, fetchUsersRecipes } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
+import { uploadImage } from '../services/firebase';
 
 const useFetch = () => {
   const { setRecipes, setCategories, setLoading,
@@ -111,7 +112,11 @@ const useFetch = () => {
   const loginUser = async ({ email, password }) => {
     const userResponse = await fetchUserEmail(email, password);
     if (userResponse.length) {
-      setCookie('userLogged', userResponse[0].id);
+      if (userResponse[0].acceptCookies) {
+        setCookie('userLogged', userResponse[0].id);
+      } else {
+        sessionStorage.setItem('userLogged', userResponse[0].id);
+      }
       return true;
     }
     fireToast('Invalid email or password');
@@ -120,7 +125,11 @@ const useFetch = () => {
 
   const patchUser = async (id, data) => {
     try {
-      await fetchPatchUser(id, data);
+      const newData = { ...data };
+      if (data.photo instanceof Object) {
+        newData.photo = await uploadImage(id, data.photo);
+      }
+      await fetchPatchUser(id, newData);
     } catch ({ message }) {
       setError(message);
       return [];

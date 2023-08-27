@@ -69,7 +69,7 @@ const useRecipe = () => {
       const type = obj.strType === 'meal' ? 'Meal' : 'Drink';
       const id = uuidv4();
       let photo = '';
-      if (user.photo) {
+      if (obj[`str${type}Thumb`]) {
         photo = await uploadImage(id, obj[`str${type}Thumb`]);
       }
       await fetchPostRecipe({ ...obj, [`str${type}Thumb`]: photo });
