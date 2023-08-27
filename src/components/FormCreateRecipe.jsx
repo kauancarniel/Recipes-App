@@ -113,7 +113,7 @@ export default function FormCreateRecipe({ type, setNewRecipe }) {
               </h3>
               <textarea
                 className="textarea"
-                maxLength="1000"
+                maxLength="1200"
                 id="formComment"
                 name="strInstructions"
                 cols="50"

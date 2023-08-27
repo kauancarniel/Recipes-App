@@ -132,6 +132,14 @@ function Login() {
               Sign up!
             </Link>
           </p>
+          <p className="my-1">
+            <Link
+              className="no-underline text-[#fff] hover:text-[#aaa]"
+              to="/about"
+            >
+              About this project
+            </Link>
+          </p>
         </div>
       </form>
     </InitialLayout>

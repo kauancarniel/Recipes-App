@@ -130,7 +130,7 @@ export default function Menu({ showClose = false }) {
         <li>
           <Link
             className="option-menu"
-            onClick={ logout }
+            onClick={ () => setMenuOpen(false) }
             to="/about"
           >
             <AiOutlineTeam className="border-2 border-solid rounded-[100%]" />

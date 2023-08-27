@@ -17,6 +17,7 @@ import iconLogo from '../images/icon-recipes-app.svg';
 import nameLogo from '../images/name-recipes-app.svg';
 import iconFoods from '../images/icon-foods.svg';
 import iconDrinks from '../images/icon-drinks.svg';
+import { getId } from '../utils/functions';
 import './Header.css';
 
 const iconsTitle = {
@@ -66,10 +67,12 @@ function Header({ title, iconeSearch = false }) {
                 )}
               </button>
             )}
-            <MenuHamburguer
-              showSearchBar={ showSearchBar }
-              setShowSearchBar={ setShowSearchBar }
-            />
+            { getId('userLogged') && (
+              <MenuHamburguer
+                showSearchBar={ showSearchBar }
+                setShowSearchBar={ setShowSearchBar }
+              />
+            ) }
           </nav>
         </div>
         {menuOpen && (<Menu />)}
