@@ -34,7 +34,7 @@
   }
 
   .title-done {
-    @apply text-[var(--yellow)] text-2xl font-bold
+    @apply text-[var(--yellow)] text-2xl font-bold mb-0
   }
 
   .tam-img {

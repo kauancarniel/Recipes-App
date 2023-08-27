@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { TfiClose } from 'react-icons/tfi';
 import { RiAddLine } from 'react-icons/ri';
@@ -21,7 +21,7 @@ export default function FormCreateRecipe({ type, setNewRecipe }) {
   const { fetchCategories } = useFetch();
   const [infosRecipe, setInfosRecipe] = useState(() => formatedRecipe(type, recipeEdit));
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     (async () => {
       await fetchCategories(`/${type.toLowerCase()}s`);
     })();

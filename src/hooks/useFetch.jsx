@@ -2,7 +2,8 @@ import { useContext } from 'react';
 import Swal from 'sweetalert2';
 
 import { fetchAPI, fetchComments, fetchNewUser, fetchPatchUser,
-  fetchUserEmail, fetchUserId, fetchUsersRecipes } from '../services/fetchAPI';
+  fetchPublicRecipes,
+  fetchUserEmail, fetchUserId } from '../services/fetchAPI';
 import RecipesContext from '../context/RecipesContext';
 import { Toast, setCookie } from '../utils/functions';
 import { uploadImage } from '../services/firebase';
@@ -58,8 +59,12 @@ const useFetch = () => {
   });
 
   const initialFetch = async (pathname) => {
+    const type = pathname.includes('/meals') ? 'meal' : 'drink';
     const recipesData = pathname.includes('users')
-      ? await fetchUsersRecipes({ key: 'strPublic', value: 'true' })
+      ? await fetchPublicRecipes(
+        ['strType', '_sort', '_order'],
+        [type, 'strCreateAt', 'desc'],
+      )
       : await fetchRecipes(pathname);
 
     const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');

@@ -151,6 +151,22 @@ export const fetchUsersRecipes = async ({ id = null, key = null, value = null })
   return data;
 };
 
+const getQueryString = (params, values) => {
+  return params.reduce((query, param, index) => {
+    if (values[index]) {
+      return `${query}&${param}=${values[index]}`;
+    }
+    return query;
+  }, '');
+};
+
+export const fetchPublicRecipes = async (params, values) => {
+  const query = (params && values) ? getQueryString(params, values) : '';
+  const response = await fetch(`${URL_RECIPES}?strPublic=true${query}`);
+  const data = await response.json();
+  return data;
+};
+
 export const fetchPostRecipe = async (recipe) => {
   await fetch(URL_RECIPES, {
     headers,

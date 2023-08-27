@@ -5,6 +5,7 @@ import { uploadImage } from '../services/firebase';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from './useFetch';
 import { fetchDeleteRecipe, fetchPatchRecipe, fetchPostRecipe,
+  fetchPublicRecipes,
   fetchUsersRecipes } from '../services/fetchAPI';
 
 const useRecipe = () => {
@@ -18,7 +19,7 @@ const useRecipe = () => {
         strType: type.toLowerCase(),
         strMeal: '',
         strUserId: userLogged.id,
-        strCategory: 'Beefs',
+        strCategory: 'Beef',
         strArea: '',
         strInstructions: '',
         strMealThumb: '',
@@ -46,9 +47,9 @@ const useRecipe = () => {
     };
   };
 
-  const getAllUsersRecipe = async () => {
+  const getAllUsersRecipe = async (params = null, values = null) => {
     try {
-      const recipesData = await fetchUsersRecipes();
+      const recipesData = await fetchPublicRecipes(params, values);
       return recipesData;
     } catch ({ message }) {
       setError(message);

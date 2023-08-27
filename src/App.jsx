@@ -15,6 +15,7 @@ import RecipesInProgress from './Pages/RecipesInProgress';
 import MyRecipes from './Pages/MyRecipes';
 import './App.css';
 import About from './Pages/About';
+import RecipesUsers from './Pages/RecipesUsers';
 
 function App() {
   return (
@@ -22,8 +23,8 @@ function App() {
       <Route path="/" component={ Login } exact />
       <Route path="/meals" component={ Recipes } exact />
       <Route path="/drinks" component={ Recipes } exact />
-      <Route path="/meals/users" component={ Recipes } exact />
-      <Route path="/drinks/users" component={ Recipes } exact />
+      <Route path="/meals/users" component={ RecipesUsers } exact />
+      <Route path="/drinks/users" component={ RecipesUsers } exact />
       <Route path="/meals/:id" component={ Recipe } exact />
       <Route path="/drinks/:id" component={ Recipe } exact />
       <Route path="/meals/users/:id" component={ Recipe } exact />

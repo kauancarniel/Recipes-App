@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 import useUser from '../hooks/useUser';
+import useRecipe from '../hooks/useRecipe';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import RecipeCard from '../components/RecipeCard';
@@ -13,10 +14,11 @@ import CategoryIcon from '../components/CategoryIcon';
 
 const MAX_RECIPES = 12;
 
-function Recipes() {
+function RecipesUsers() {
   const [categorySelected, setCategorySelected] = useState('All');
   const { setRecipes, categories, loading, error } = useContext(RecipesContext);
-  const { fetchRecipes, initialFetch } = useFetch();
+  const { initialFetch } = useFetch();
+  const { getAllUsersRecipe } = useRecipe();
   const { validateCookie } = useUser();
   const { location: { pathname } } = useHistory();
 
@@ -29,13 +31,20 @@ function Recipes() {
   }, []);
 
   const handleCategory = async (strCategory) => {
+    const type = pathname.includes('/meals') ? 'meal' : 'drink';
     const allCondition = (strCategory === 'All' && categorySelected !== 'All');
     if (allCondition || categorySelected === strCategory) {
-      const recipesDataAll = await fetchRecipes(pathname);
+      const recipesDataAll = await getAllUsersRecipe(
+        ['strType', '_sort', '_order'],
+        [type, 'strCreateAt', 'desc'],
+      );
       setRecipes(recipesDataAll.slice(0, MAX_RECIPES));
       setCategorySelected('All');
     } else {
-      const recipesData = await fetchRecipes(pathname, 'category', strCategory);
+      const recipesData = await getAllUsersRecipe(
+        ['strType', 'strCategory', '_sort', '_order'],
+        [type, `${strCategory}`, 'strCreateAt', 'desc'],
+      );
       setRecipes(recipesData.slice(0, MAX_RECIPES));
       setCategorySelected(strCategory);
     }
@@ -114,4 +123,4 @@ function Recipes() {
   );
 }
 
-export default Recipes;
+export default RecipesUsers;

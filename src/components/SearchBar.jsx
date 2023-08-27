@@ -3,11 +3,13 @@ import { useHistory } from 'react-router-dom';
 
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
+import useRecipe from '../hooks/useRecipe';
 
 const MAX_RECIPES = 12;
 const radiosOpt = ['Name', 'Ingredient', 'First-Letter'];
 
 function SearchBar() {
+  const { getAllUsersRecipe } = useRecipe();
   const [optSearch, setOptSearch] = useState('name');
   const [textSearch, setTextSearch] = useState('');
   const [isSearch, setIsSearch] = useState(false);
@@ -39,7 +41,14 @@ function SearchBar() {
       fireToast('Your search must have only 1 (one) character!');
       return;
     }
-    const data = await fetchRecipes(pathname, optSearch, textSearch);
+    const type = pathname.includes('/meals') ? 'Meal' : 'Drink';
+    const isUserRecipe = pathname.includes('users');
+    const data = isUserRecipe
+      ? await getAllUsersRecipe(
+        ['strType', optSearch, '_sort', '_order'],
+        [type.toLowerCase(), textSearch, 'strCreateAt', 'desc'],
+      )
+      : await fetchRecipes(pathname, optSearch, textSearch);
     if (error || !data) {
       fireToast('Sorry, we haven\'t found any recipes for these filters.');
       return;
@@ -47,8 +56,7 @@ function SearchBar() {
     setRecipes(data.slice(0, MAX_RECIPES));
     setIsSearch(true);
     if (data.length === 1) {
-      history.push(`${pathname}/${pathname === '/meals'
-        ? data[0].idMeal : data[0].idDrink}`);
+      history.push(`${pathname}/${isUserRecipe ? data[0].id : data[0][`id${type}`]}`);
     }
   };
 
