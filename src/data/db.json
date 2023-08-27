@@ -1031,7 +1031,9 @@
       "userphoto": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2F4b0639f9-609f-485f-bff0-6672f050216b?alt=media&token=deae0910-57c8-4327-b800-5d2d8c505b07",
       "comment": "My mouth watered when I read the recipe.",
       "rating": 5,
-      "liked": [],
+      "liked": [
+        "781f4081-8e5e-4f27-9f8c-abc8abf4b9f0"
+      ],
       "disliked": [],
       "createAt": "2023-08-27T18:10:14.854Z"
     },
