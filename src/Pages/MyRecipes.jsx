@@ -15,13 +15,19 @@ export default function MyRecipes() {
   const [type, setType] = useState('Meal');
   const [newRecipe, setNewRecipe] = useState(false);
 
+  const { id } = userLogged || { id: 0 };
+
   useEffect(() => {
     (async () => {
-      const isLogged = await validateCookie();
-      if (!isLogged) return;
-      await getMyRecipes({ key: 'strUserId', value: userLogged.id });
+      await validateCookie();
     })();
   }, []);
+
+  useEffect(() => {
+    (async () => {
+      await getMyRecipes({ key: 'strUserId', value: id });
+    })();
+  }, [userLogged]);
 
   const createRecipe = () => {
     setNewRecipe(!newRecipe);

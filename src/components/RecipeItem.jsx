@@ -86,7 +86,10 @@ function RecipeItem({ recipe, setNewRecipe }) {
 
 RecipeItem.propTypes = {
   recipe: PropTypes.shape({
-    strMealThumb: PropTypes.string,
+    strMealThumb: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]).isRequired,
     strMeal: PropTypes.string,
     strDrink: PropTypes.string,
     strType: PropTypes.string.isRequired,

@@ -29,6 +29,9 @@ export default function ShareBtn({ type, id, testId }) {
 
 ShareBtn.propTypes = {
   type: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]).isRequired,
   testId: PropTypes.string.isRequired,
 };

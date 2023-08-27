@@ -20,10 +20,10 @@ const app = initializeApp(firebaseConfig);
 // export const db = getFirestore(app);
 export const storage = getStorage(app);
 
-export const uploadImage = async (id, photo) => {
+export const uploadImage = async (id, photo, dir = 'profile') => {
   try {
     const name = id;
-    const storageRef = ref(storage, `profile/${name}`);
+    const storageRef = ref(storage, `${dir}/${name}`);
     await uploadBytes(storageRef, photo);
     const url = await getDownloadURL(storageRef);
     return url;

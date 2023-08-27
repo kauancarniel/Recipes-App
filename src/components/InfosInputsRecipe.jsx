@@ -169,8 +169,14 @@ InfosInputsRecipe.propTypes = {
     strCategory: PropTypes.string,
     strArea: PropTypes.string,
     strAlcoholic: PropTypes.string,
-    strMealThumb: PropTypes.string,
-    strDrinkThumb: PropTypes.string,
+    strMealThumb: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
+    strDrinkThumb: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.object,
+    ]),
     strYoutube: PropTypes.string,
     strTags: PropTypes.string,
   }).isRequired,

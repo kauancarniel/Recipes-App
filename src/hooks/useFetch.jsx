@@ -8,8 +8,8 @@ import { Toast, setCookie } from '../utils/functions';
 import { uploadImage } from '../services/firebase';
 
 const useFetch = () => {
-  const { setRecipes, setCategories, setLoading,
-    setError, error } = useContext(RecipesContext);
+  const { setRecipes, setCategories, setLoading, userLogged,
+    setError, error, setUserLogged } = useContext(RecipesContext);
   const MAX_RECIPES = 12;
   const MAX_CATEGORIES = 5;
 
@@ -59,7 +59,7 @@ const useFetch = () => {
 
   const initialFetch = async (pathname) => {
     const recipesData = pathname.includes('users')
-      ? await fetchUsersRecipes({ key: 'strPublic' })
+      ? await fetchUsersRecipes({ key: 'strPublic', value: 'true' })
       : await fetchRecipes(pathname);
 
     const categoriesData = await fetchRecipes(pathname, 'categoriesList', 'list');
@@ -128,6 +128,7 @@ const useFetch = () => {
       const newData = { ...data };
       if (data.photo instanceof Object) {
         newData.photo = await uploadImage(id, data.photo);
+        setUserLogged({ ...userLogged, photo: newData.photo });
       }
       await fetchPatchUser(id, newData);
     } catch ({ message }) {
