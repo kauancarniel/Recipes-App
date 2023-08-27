@@ -114,6 +114,12 @@ export const fetchRanking = async () => {
   return data;
 };
 
+export const fetchAllComments = async () => {
+  const response = await fetch(URL_COMMENTS);
+  const data = await response.json();
+  return data;
+};
+
 export const fetchComments = async (key, value) => {
   const response = await fetch(`${URL_COMMENTS}?${key}=${value}`);
   const data = await response.json();

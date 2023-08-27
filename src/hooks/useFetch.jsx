@@ -52,6 +52,7 @@ const useFetch = () => {
       cancelButton: 'swal-cancel',
     },
   }).then((result) => {
+    console.log(params);
     if (result.isConfirmed) {
       fn(...params);
       fireToast('Deleted!', 'success');

@@ -9,6 +9,7 @@ import { LuChefHat } from 'react-icons/lu';
 import { FaRankingStar } from 'react-icons/fa6';
 import { Link } from 'react-router-dom';
 import { AiOutlineTeam } from 'react-icons/ai';
+
 import RecipesContext from '../context/RecipesContext';
 import MenuHamburguer from './MenuHamburguer';
 import SearchBar from './SearchBar';
@@ -19,7 +20,6 @@ import iconFoods from '../images/icon-foods.svg';
 import iconDrinks from '../images/icon-drinks.svg';
 import { getId } from '../utils/functions';
 import './Header.css';
-import { getId } from '../utils/functions';
 
 const iconsTitle = {
   Meals: (<img src={ iconFoods } alt="food icon" className="h-12" />),

@@ -1,9 +1,8 @@
 import { useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 import RecipesContext from '../context/RecipesContext';
-import { fetchDeleteComment, fetchPatchComment,
+import { fetchAllComments, fetchDeleteComment, fetchPatchComment,
   fetchPostComment } from '../services/fetchAPI';
 
 const useComment = () => {
@@ -12,7 +11,6 @@ const useComment = () => {
 
   const addComment = async ({ comment, rating }, { recipeName, recipeType }) => {
     const formatedComment = {
-      id: uuidv4(),
       recipeId: idUrl,
       recipeName,
       recipeType,
@@ -29,8 +27,10 @@ const useComment = () => {
 
   const deleteComment = async (id) => {
     try {
+      const allComments = await fetchAllComments();
+      const newAllComments = allComments.filter((comment) => comment.id !== id);
       const newComments = comments.filter((comment) => comment.id !== id);
-      await fetchDeleteComment(id, newComments);
+      await fetchDeleteComment(id, newAllComments);
       setComments(newComments);
     } catch ({ message }) {
       setError(message);
