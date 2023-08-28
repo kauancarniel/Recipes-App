@@ -6,11 +6,12 @@ import { CgProfile } from 'react-icons/cg';
 import RecipesContext from '../context/RecipesContext';
 import useFetch from '../hooks/useFetch';
 import CommentLikedBtn from './CommentLikedBtn';
+import { getId } from '../utils/functions';
 
 const TEEN = 10;
 
 function Comments({ inRecipe = false }) {
-  const { comments, setComments, userLogged } = useContext(RecipesContext);
+  const { comments, setComments } = useContext(RecipesContext);
   const { fetchRecipeComments } = useFetch();
   const { fetchAllUsers } = useFetch();
   const [users, setUsers] = useState([]);
@@ -20,7 +21,7 @@ function Comments({ inRecipe = false }) {
       const data = await fetchAllUsers();
       setUsers(data);
       if (!inRecipe) {
-        const dataComments = await fetchRecipeComments('userId', userLogged.id);
+        const dataComments = await fetchRecipeComments('userId', getId('userLogged'));
         setComments(dataComments);
       }
     })();
