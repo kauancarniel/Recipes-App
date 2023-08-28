@@ -19,6 +19,7 @@ function RecipeItem({ recipe, setNewRecipe }) {
   const type = strType === 'meal' ? 'Meal' : 'Drink';
   const tags = strTags ? strTags.split(',').splice(0, 2) : [];
 
+  console.log(recipe);
   return (
     <div className="border-grey container-ready p-0">
       <Link to={ `/${strType}s/users/${id}` }>

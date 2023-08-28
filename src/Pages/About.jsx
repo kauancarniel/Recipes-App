@@ -13,7 +13,7 @@ function About() {
       name: 'Guilherme Fernandes',
       github: 'https://github.com/GuiiFernandes',
       description:
-        'Desenvolvedor FullStack e Summer de Instrução FrontEnd pela Trybe. Além de gestor financeiro pelo IFMG-Formiga e sócio e gestor do Sweet Pet - Estética Animal. 31 anos e moro em Lavras-MG. Sou obcecado por melhorar a vida das pessoas. por meio da tecnologia Faminto por conhecimento, além da tecnologia, interesso em negócios, processos, economia, finanças e investimentos. Busco criar soluções que permitam às pessoas terem mais tempo para desfrutar de uma vida plena e gratificante. Acredito que a tecnologia pode ajudar a gerar renda e liberar tempo valioso, para que todos possam viver plenamente e aproveitar as coisas que mais importam.',
+        'Desenvolvedor FullStack e Summer de Instrução FrontEnd pela Trybe. Além de gestor financeiro e sócio/gestor do Sweet Pet - Estética Animal. 31 anos e moro em Lavras-MG. Busco melhorar a vida das pessoas atráves da tecnologia e interesso em negócios, processos, economia, finanças e investimentos.',
       linkedin: 'https://www.linkedin.com/in/guifernandesdev/',
       port: 'https://guiifernandes.github.io/',
       image: guilhermeIMG,
@@ -41,11 +41,11 @@ function About() {
       <Header title="About" />
       <main
         className="recipe-box
-      flex bg-form glass box-bottom gap-3 p-10 flex-wrap justify-center
+      flex bg-form glass box-bottom p-4 pt-0 flex-wrap justify-center mb-2
       "
       >
-        <section className="p-2">
-          <h1 className="text-start text-white mb-6">Aplicação</h1>
+        <section>
+          <h1 className="text-start text-white mb-2">Aplicação</h1>
           <p className="text-[var(--gray)]">
             O app de receitas foi projetado para simplificar sua vida na cozinha,
             oferecendo uma plataforma intuitiva e abrangente para todas as suas necessidades culinárias.
@@ -62,10 +62,10 @@ function About() {
             um ponto de encontro para amantes da comida.
           </p>
         </section>
-        <div className="w-[100%] p-2">
-          <h2 className="text-white md:text-start text-center">Desenvolvedores</h2>
+        <div className="w-[100%]">
+          <h2 className="text-white m-0 md:text-start text-center">Desenvolvedores</h2>
         </div>
-        <div className="flex flex-wrap justify-center">
+        <div className="flex flex-wrap justify-evenly w-full">
           {hosts.map((host, index) => (
             <Host key={ index } { ...host } />
           ))}

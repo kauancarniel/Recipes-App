@@ -900,7 +900,7 @@
       "strInstructions": "To prepare feijoada, start by desalting the dried beef, soaking it in water for at least 12 hours and changing the water several times. After desalting, drain and cut the beef into pieces. Next, boil the meats (dried beef, pork, and sausages) for a few minutes to reduce the salt content. Drain and set aside. Wash the black beans thoroughly and cook them in a pressure cooker with water, bringing it to pressure for about 15 minutes, and then turning off the heat to release the pressure naturally. In a separate large pot, sauté chopped onions and garlic in oil until they are golden brown. Add the prepared meats and sauté for a few more minutes. Transfer this mixture to the pot of cooked beans, add bay leaves, and simmer over medium-low heat for 1 to 2 hours, stirring occasionally and adding hot water as needed, until the meats are tender and the beans have thickened the broth. Season with salt and black pepper to taste, remove the bay leaves, and serve the feijoada hot, accompanied by cooked rice, sautéed collard greens, cassava flour, and, if desired, pork cracklings (torresmo) and chopped cilantro and green onions.",
       "strMealThumb": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2Fa1de1764-019d-4bdf-856f-4adab3c4cc41?alt=media&token=c9fb5486-fd09-48fc-bcb7-0636a928cdc7",
       "strTags": "",
-      "strPublic": false,
+      "strPublic": true,
       "strYoutube": "https://www.youtube.com/watch?v=auzJ4qLftBw&ab_channel=FoodWishes",
       "strIngredient1": "black beans",
       "strMeasure1": "500g",
@@ -942,7 +942,7 @@
       "strInstructions": "To make simple vanilla ice cream, combine 2 cups of heavy cream and 1 cup of whole milk in a bowl, ensuring they're well mixed. Add 3/4 cup of granulated sugar and stir until fully dissolved. Incorporate 2 teaspoons of vanilla extract, adjusting to taste. Transfer the mixture into an ice cream maker and follow the manufacturer's guidelines to churn it for around 20-25 minutes until it's soft and creamy. You can include extras like chocolate chips or fruit pieces during the last minutes of churning. After achieving the desired consistency, either enjoy the ice cream as soft serve or transfer it to a container for a firmer texture. For a firmer consistency, place the container in the freezer for a few hours. If you lack an ice cream maker, freeze the mixture in a lidded container, stirring every 30 minutes to break up ice crystals and attain a smoother texture.",
       "strMealThumb": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/recipe%2Fb35cb102-0fbc-4ef0-b0b1-450623efdb88?alt=media&token=20f9ad9a-a154-4269-93f9-a42ec11e2a5d",
       "strTags": "",
-      "strPublic": false,
+      "strPublic": true,
       "strYoutube": "https://www.youtube.com/watch?v=OTYpUwB6qjs&ab_channel=FoodWishes",
       "strIngredient1": "cups heavy cream",
       "strMeasure1": "2",
@@ -1698,6 +1698,18 @@
       "disliked": [],
       "createAt": "2023-08-26T21:58:55.635Z",
       "id": 40
+    },
+    {
+      "recipeId": "53065",
+      "recipeName": "Sushi",
+      "recipeType": "meal",
+      "userId": "127edb03-929c-429f-96ab-c4e8949aff5d",
+      "comment": "Japa é muito bom!",
+      "rating": 5,
+      "liked": [],
+      "disliked": [],
+      "createAt": "2023-08-28T23:01:32.267Z",
+      "id": 41
     }
   ]
 }

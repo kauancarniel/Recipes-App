@@ -9,6 +9,7 @@ export default function RecipeCard() {
   const { recipes } = useContext(RecipesContext);
 
   const KEY_BASE = pathname.includes('/meals') ? 'Meal' : 'Drink';
+  const id = pathname.includes('/users') ? 'id' : `id${KEY_BASE}`;
 
   return recipes.map((item, index) => (
     <Link
@@ -16,7 +17,7 @@ export default function RecipeCard() {
       className="relative card"
       type="button"
       data-testid={ `${index}-recipe-card` }
-      to={ `${pathname}/${item[`id${KEY_BASE}`]}` }
+      to={ `${pathname}/${item[id]}` }
     >
       <img
         className="rounded-md w-full h-full border-0"
