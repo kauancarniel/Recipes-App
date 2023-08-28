@@ -480,19 +480,6 @@
       "createAt": "2023-08-26T22:38:52.585Z"
     },
     {
-      "id": "c5ab65ac-5c11-4916-aef7-25a1dce17003",
-      "name": "Eduardo Bilanda",
-      "email": "brkzedu@hotmail.com",
-      "password": "fcea920f7412b5da7be0cf42b8c93759",
-      "acceptCookies": false,
-      "photo": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2Fc5ab65ac-5c11-4916-aef7-25a1dce17003?alt=media&token=33d2889d-6bc3-43a4-b218-e783cfadfe5b",
-      "dones": [],
-      "favorites": [],
-      "inProgress": {},
-      "score": 0,
-      "createAt": "2023-08-26T22:38:54.032Z"
-    },
-    {
       "id": "cb2a571d-96e4-4334-a0bb-6a86c4adbc1a",
       "name": "Emilio Castello",
       "email": "milo@hotmail.com",
