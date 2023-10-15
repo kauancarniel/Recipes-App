@@ -2,8 +2,8 @@
 
 ## Descrição
 
-O Recipes App foi um projeto de finalização do módulo de front end do curso da trybe.
-Foi realizado em um grupo de 3 pessoas.
+O Recipes App foi um projeto de finalização do módulo de front end do curso da trybe.<br>
+Foi realizado em um grupo de 3 pessoas.<br>
 O inuito da aplicação era ser um rede de gastronomia, um lugar com diversas receitas tanto de comidas quanto de bebidas onde os usuários pudessem interagir entre si e até mesmo criar suas próprias receitas.
 
 ## Conteúdo
@@ -13,7 +13,7 @@ O inuito da aplicação era ser um rede de gastronomia, um lugar com diversas re
 
 ## Instruções de Instalação
 
-Clone o projeto em sua máquina.
+Clone o projeto em sua máquina.<br>
 Execute o comando "npm install" no terminal.
 
 ## Como Usar
