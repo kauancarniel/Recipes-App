@@ -1,8 +1,10 @@
-# Título do Projeto
+# Recipes App
 
 ## Descrição
 
-Este repositório está em construção. Aqui você encontrará [breve resumo do projeto ou curso] e seus componentes.
+O Recipes App foi um projeto de finalização do módulo de front end do curso da trybe.
+Foi realizado em um grupo de 3 pessoas.
+O inuito da aplicação era ser um rede de gastronomia, um lugar com diversas receitas tanto de comidas quanto de bebidas onde os usuários pudessem interagir entre si e até mesmo criar suas próprias receitas.
 
 ## Conteúdo
 
@@ -11,11 +13,12 @@ Este repositório está em construção. Aqui você encontrará [breve resumo do
 
 ## Instruções de Instalação
 
-Descreva aqui as instruções necessárias para configurar o ambiente de desenvolvimento e instalar quaisquer dependências.
+Clone o projeto em sua máquina.
+Execute o comando "npm install" no terminal.
 
 ## Como Usar
 
-Explique como usar. Forneça exemplos de código, capturas de tela ou demonstrações.
+Execute o comando "npm run dev" no terminal.
 
 ## Contribuição
 
@@ -28,6 +31,3 @@ Se você deseja contribuir para este projeto, siga estas etapas para contribuir:
 5. Abra um pull request neste repositório e aguarde o feedback.
 
 Lembre-se de que todas as contribuições são valorizadas e ajudam a tornar este projeto melhor para todos!
-
-## Continue como desejar este Readme.md
-**Observação:** Este repositório está em construção e será atualizado regularmente. Sinta-se à vontade para adicionar mais seções conforme necessário para o seu projeto.
