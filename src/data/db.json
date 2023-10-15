@@ -72,7 +72,17 @@
           "doneDate": "2023-08-27T20:37:24.672Z"
         }
       ],
-      "favorites": [],
+      "favorites": [
+        {
+          "id": "52977",
+          "type": "meal",
+          "nationality": "Turkish",
+          "category": "Side",
+          "alcoholicOrNot": "",
+          "name": "Corba",
+          "image": "https://www.themealdb.com/images/media/meals/58oia61564916529.jpg"
+        }
+      ],
       "inProgress": {},
       "score": 10,
       "createAt": "2023-08-26T17:21:11.861Z"
@@ -1697,6 +1707,23 @@
       "disliked": [],
       "createAt": "2023-08-28T23:01:32.267Z",
       "id": 41
+    },
+    {
+      "recipeId": "52977",
+      "recipeName": "Corba",
+      "recipeType": "meal",
+      "userId": "6bb37289-2fa9-482a-9746-871255e9b427",
+      "userName": "Bárbara Lima",
+      "userphoto": "https://firebasestorage.googleapis.com/v0/b/recipe-app-g6-799a4.appspot.com/o/profile%2F6bb37289-2fa9-482a-9746-871255e9b427?alt=media&token=e62ac625-d883-4d7a-82a8-dedcd7589873",
+      "comment": "Blending for desired texture is key. Serving with crackers or bread adds a satisfying touch. A versatile recipe that's perfect for weeknight meals or leftovers.",
+      "rating": 4,
+      "liked": [
+        "db264c76-9c3e-4724-94ea-7dff49210916",
+        "7d30a4c1-5310-4f6f-8052-07448fa983ee"
+      ],
+      "disliked": [],
+      "createAt": "2023-08-26T21:58:55.635Z",
+      "id": 42
     }
   ]
 }
